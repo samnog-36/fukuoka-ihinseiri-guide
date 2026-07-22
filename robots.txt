@@ -1,0 +1,28 @@
+# robots.txt for fukuoka-ihinseiri-guide.com
+User-agent: *
+Allow: /
+Disallow: /css/
+Disallow: /js/
+
+# Search engine specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+# AI Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+Sitemap: https://fukuoka-ihinseiri-guide.com/sitemap.xml

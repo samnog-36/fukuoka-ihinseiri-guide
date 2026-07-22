@@ -1,0 +1,37 @@
+# 福岡遺品整理ガイド
+
+> 福岡県（福岡市・北九州市・久留米市など）の遺品整理・特殊清掃・生前整理・遺品供養に関する総合情報サイト。地域密着型の専門知識と実践的なガイドを提供し、ご遺族の負担を軽減するための情報を発信しています。
+
+福岡遺品整理ガイドは、遺品整理業界の正確な情報を公的機関のデータや法令に基づいて提供する日本語の情報サイトです。福岡県内の各地域に特化した遺品整理の費用相場、業者選びのポイント、法的手続き、供養の方法などを網羅的に解説しています。
+
+## サイト構成
+
+- [トップページ](https://fukuoka-ihinseiri-guide.com/): サイト全体の概要と最新記事
+- [ブログ記事一覧](https://fukuoka-ihinseiri-guide.com/blog/): 全記事の検索・一覧ページ
+- [遺品整理カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/): 遺品整理の基礎知識・手順・業者選びガイド
+- [特殊清掃カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/): 特殊清掃の流れ・費用・対応事例
+- [生前整理カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/): 生前整理・断捨離・エンディングノートの書き方
+- [遺品供養カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/kuyo/): 遺品供養・仏壇処分・お焚き上げの方法
+- [費用カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/cost/): 遺品整理の費用相場・見積もり・節約術
+- [地域別カテゴリ](https://fukuoka-ihinseiri-guide.com/blog/area/): 福岡県内各地域の遺品整理情報
+
+## 主要コンテンツ
+
+- [遺品整理の進め方完全ガイド](https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260706-hajimete-guide.html): 初めての遺品整理で知っておくべき全手順
+- [福岡市の遺品整理費用相場](https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260706-fukuoka-cost.html): 間取り別の費用目安と見積もりのポイント
+- [遺品整理業者の選び方](https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260707-gyosha-erabi.html): 悪徳業者を避けるためのチェックポイント
+- [生前整理の始め方](https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260706-hajimekata.html): 元気なうちに始める生前整理の手順
+- [特殊清掃の費用と流れ](https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260706-tokushu-seisou-guide.html): 特殊清掃が必要なケースと対応の流れ
+
+## サイト情報
+
+- [サイトマップ](https://fukuoka-ihinseiri-guide.com/sitemap.xml): 全ページのURL一覧（XML形式）
+- [RSSフィード](https://fukuoka-ihinseiri-guide.com/feed.xml): 最新記事の配信フィード
+
+## Optional
+
+- [北九州市の遺品整理ガイド](https://fukuoka-ihinseiri-guide.com/blog/area/article-20260706-kitakyushu-guide.html): 北九州市での遺品整理の特徴と業者情報
+- [久留米市の遺品整理](https://fukuoka-ihinseiri-guide.com/blog/area/article-20260706-kurume.html): 久留米市エリアの遺品整理事情
+- [遺品の買取・リサイクル](https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260707-kaitori-recycle.html): 遺品を売却して費用を抑える方法
+- [エンディングノートの書き方](https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260707-ending-note.html): エンディングノートに書くべき項目と注意点
+- [お焚き上げの方法と費用](https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260706-otakiage.html): 遺品のお焚き上げ供養の手順
