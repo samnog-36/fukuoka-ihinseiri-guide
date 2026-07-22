@@ -271,5 +271,235 @@
       document.getElementById('headerNav').classList.toggle('active');
     });
   </script>
+
+<script>
+// エリアと記事のマッピング
+const areaArticles = {
+  "博多区": [
+    { title: "福岡市博多区の遺品整理ガイド｜費用相場・地域特性・業者選びのコツ", url: "/blog/area/article-20260708-hakata-ku-guide.html" }
+  ],
+  "中央区": [
+    { title: "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場", url: "/blog/area/article-20260710-chuo-jonan-ku-guide.html" }
+  ],
+  "南区": [
+    { title: "福岡市南区の遺品整理事情｜対応業者と費用の目安", url: "/blog/area/article-20260706-minami-ku.html" },
+    { title: "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場", url: "/blog/area/article-20260719-minami-jonan-ku-guide.html" }
+  ],
+  "城南区": [
+    { title: "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場", url: "/blog/area/article-20260710-chuo-jonan-ku-guide.html" },
+    { title: "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場", url: "/blog/area/article-20260719-minami-jonan-ku-guide.html" }
+  ],
+  "早良区": [
+    { title: "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント", url: "/blog/area/article-20260709-nishi-sawara-ku-guide.html" }
+  ],
+  "西区": [
+    { title: "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント", url: "/blog/area/article-20260709-nishi-sawara-ku-guide.html" }
+  ],
+  "東区": [
+    { title: "福岡市東区の遺品整理事情｜高齢化率・費用相場・地域の特徴を解説", url: "/blog/area/article-20260707-higashi-ku-guide.html" }
+  ],
+  "小倉北区": [
+    { title: "北九州市の遺品整理完全ガイド｜小倉・八幡エリアの業者と相場", url: "/blog/area/article-20260706-kitakyushu-guide.html" },
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "小倉南区": [
+    { title: "北九州市の遺品整理完全ガイド｜小倉・八幡エリアの業者と相場", url: "/blog/area/article-20260706-kitakyushu-guide.html" },
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "八幡東区": [
+    { title: "北九州市の遺品整理完全ガイド｜小倉・八幡エリアの業者と相場", url: "/blog/area/article-20260706-kitakyushu-guide.html" },
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "八幡西区": [
+    { title: "北九州市の遺品整理完全ガイド｜小倉・八幡エリアの業者と相場", url: "/blog/area/article-20260706-kitakyushu-guide.html" },
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "戸畑区": [
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "若松区": [
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "門司区": [
+    { title: "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法", url: "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html" }
+  ],
+  "久留米市": [
+    { title: "久留米市の遺品整理｜地域密着型業者の選び方と費用相場", url: "/blog/area/article-20260706-kurume.html" },
+    { title: "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260713-kurume-ogori-tosu.html" }
+  ],
+  "飯塚市": [
+    { title: "福岡県の地域別 遺品整理情報（全エリア記事一覧）", url: "/blog/area/" }
+  ],
+  "大牟田市": [
+    { title: "福岡県の地域別 遺品整理情報（全エリア記事一覧）", url: "/blog/area/" }
+  ],
+  "筑紫野市": [
+    { title: "筑紫野市・大野城市・春日市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260711-chikushino-onojo-kasuga.html" },
+    { title: "筑紫野市・大野城市・春日市の遺品整理完全ガイド｜費用相場と業者選び", url: "/blog/area/article-20260722-chikushino-onojo-kasuga-guide.html" }
+  ],
+  "春日市": [
+    { title: "筑紫野市・大野城市・春日市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260711-chikushino-onojo-kasuga.html" },
+    { title: "筑紫野市・大野城市・春日市の遺品整理完全ガイド｜費用相場と業者選び", url: "/blog/area/article-20260722-chikushino-onojo-kasuga-guide.html" }
+  ],
+  "大野城市": [
+    { title: "筑紫野市・大野城市・春日市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260711-chikushino-onojo-kasuga.html" },
+    { title: "粕屋町・大野城市の遺品整理ガイド｜粗大ごみ処分方法と地域の特徴", url: "/blog/area/article-20260718-kasuya-onojo-ihinseiri.html" },
+    { title: "筑紫野市・大野城市・春日市の遺品整理完全ガイド｜費用相場と業者選び", url: "/blog/area/article-20260722-chikushino-onojo-kasuga-guide.html" }
+  ],
+  "太宰府市": [
+    { title: "太宰府市・那珂川市の遺品整理ガイド｜粗大ごみ処分・費用相場・地域の特徴", url: "/blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html" }
+  ],
+  "糸島市": [
+    { title: "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260712-itoshima-fukutsu-munakata.html" }
+  ],
+  "宗像市": [
+    { title: "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260712-itoshima-fukutsu-munakata.html" }
+  ],
+  "福津市": [
+    { title: "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方", url: "/blog/area/article-20260712-itoshima-fukutsu-munakata.html" }
+  ]
+};
+
+// エリアタグクリック処理
+document.addEventListener('DOMContentLoaded', function() {
+  const tags = document.querySelectorAll('.area-tag');
+  let activePopup = null;
+
+  tags.forEach(tag => {
+    tag.style.cursor = 'pointer';
+    tag.setAttribute('role', 'button');
+    tag.setAttribute('tabindex', '0');
+
+    function showArticles(e) {
+      e.stopPropagation();
+      const areaName = tag.textContent.trim();
+      const articles = areaArticles[areaName];
+
+      // 既存のポップアップを閉じる
+      if (activePopup) {
+        activePopup.remove();
+        activePopup = null;
+      }
+
+      // アクティブ状態をリセット
+      tags.forEach(t => t.classList.remove('area-tag-active'));
+      tag.classList.add('area-tag-active');
+
+      if (!articles || articles.length === 0) {
+        return;
+      }
+
+      // ポップアップを作成
+      const popup = document.createElement('div');
+      popup.className = 'area-articles-popup';
+      popup.innerHTML = '<p class="area-popup-title"><strong>' + areaName + '</strong> の関連記事</p>' +
+        '<ul class="area-popup-list">' +
+        articles.map(a => '<li><a href="' + a.url + '">' + a.title + '</a></li>').join('') +
+        '</ul>';
+
+      // タグの親セクションの説明文の後に挿入
+      const parentSection = tag.closest('section');
+      const infoBox = parentSection.querySelector('[style*="background"]');
+      if (infoBox) {
+        infoBox.after(popup);
+      } else {
+        parentSection.appendChild(popup);
+      }
+
+      activePopup = popup;
+
+      // アニメーション
+      requestAnimationFrame(() => {
+        popup.classList.add('area-popup-visible');
+      });
+    }
+
+    tag.addEventListener('click', showArticles);
+    tag.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showArticles(e);
+      }
+    });
+  });
+
+  // ページクリックでポップアップを閉じる
+  document.addEventListener('click', function(e) {
+    if (activePopup && !e.target.closest('.area-articles-popup') && !e.target.closest('.area-tag')) {
+      activePopup.remove();
+      activePopup = null;
+      tags.forEach(t => t.classList.remove('area-tag-active'));
+    }
+  });
+});
+</script>
+
+<style>
+.area-tag {
+  transition: background 0.18s cubic-bezier(0.23,1,0.32,1), color 0.18s cubic-bezier(0.23,1,0.32,1), transform 0.16s cubic-bezier(0.23,1,0.32,1);
+}
+.area-tag:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
+}
+.area-tag:active {
+  transform: scale(0.97);
+}
+.area-tag-active {
+  background: var(--primary) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.area-articles-popup {
+  margin-top: 16px;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.25s cubic-bezier(0.23,1,0.32,1), transform 0.25s cubic-bezier(0.23,1,0.32,1);
+}
+.area-popup-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.area-popup-title {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.area-popup-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.area-popup-list li {
+  margin-bottom: 8px;
+}
+.area-popup-list li:last-child {
+  margin-bottom: 0;
+}
+.area-popup-list a {
+  display: block;
+  padding: 10px 14px;
+  background: var(--bg-section);
+  border-radius: 6px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background 0.15s, transform 0.15s;
+}
+.area-popup-list a:hover {
+  background: var(--primary-light);
+  transform: translateX(4px);
+}
+</style>
+
 </body>
 </html>
