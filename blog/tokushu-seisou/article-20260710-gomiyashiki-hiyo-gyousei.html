@@ -106,25 +106,6 @@
       </button>
     </div>
   </header>
-  <header>
-    <div class="header-inner">
-      <div class="logo">
-        <a href="/"><img src="/images/logo.png" alt="福岡遺品整理ガイド"></a>
-      </div>
-      <nav class="global-nav">
-        <ul>
-          <li><a href="/">ホーム</a></li>
-          <li><a href="/blog/ihinseiri/">遺品整理</a></li>
-          <li><a href="/blog/tokushu-seisou/">特殊清掃</a></li>
-          <li><a href="/blog/seizenseiri/">生前整理</a></li>
-          <li><a href="/blog/kuyo/">供養</a></li>
-        </ul>
-      </nav>
-      <div class="mobile-menu-btn">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </header>
 
   <main class="article-page">
     <div class="container">
@@ -261,5 +242,10 @@
   </footer>
 
   <script src="https://fukuokaguide-afgvbgyb.manus.space/ad-widget.js" defer></script>
+    <script>
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('headerNav').classList.toggle('active');
+    });
+    </script>
 </body>
 </html>

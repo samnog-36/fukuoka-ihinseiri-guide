@@ -1226,7 +1226,7 @@ img {
    Empathy Section
    =================================== */
 .empathy-section {
-  padding: 80px 0;
+  padding: 80px 24px;
   background: var(--bg-white);
 }
 
@@ -1317,6 +1317,7 @@ img {
 
 @media (max-width: 768px) {
   .empathy-section {
+  padding: 80px 24px;
     padding: 56px 0;
   }
 

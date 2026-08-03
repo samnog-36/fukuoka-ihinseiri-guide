@@ -113,24 +113,6 @@
       </button>
     </div>
   </header>
-    <header>
-        <div class="header-inner">
-            <div class="logo">
-                <a href="/"><img src="/images/logo.png" alt="福岡遺品整理ガイド"></a>
-            </div>
-            <nav class="global-nav">
-                <ul>
-                    <li><a href="/">ホーム</a></li>
-                    <li><a href="/">当サイトについて</a></li>
-                    <li><a href="/blog/">ブログ</a></li>
-                    <li><a href="/contact/">お問い合わせ</a></li>
-                </ul>
-            </nav>
-            <button class="mobile-menu-btn" aria-label="メニューを開く">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
 
     <main class="article-page">
         <div class="container">
@@ -310,17 +292,9 @@
 
     <!-- モバイルメニューJS -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const globalNav = document.querySelector('.global-nav');
-            
-            if(menuBtn && globalNav) {
-                menuBtn.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    globalNav.classList.toggle('active');
-                });
-            }
-        });
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('headerNav').classList.toggle('active');
+    });
     </script>
     
     <!-- 広告スクリプト -->
