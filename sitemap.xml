@@ -708,4 +708,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260803-chintai-ihinseiri.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260803-tokushu-seisou-hoken.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260803-jikka-kataduke-settoku.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260803-mitsumorisho-mikata.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260803-iizuka-tagawa-nogata.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
