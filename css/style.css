@@ -430,6 +430,14 @@ img {
   display: block;
   border-radius: var(--radius-sm);
 }
+.article-card > img {
+  width: 120px;
+  height: 120px;
+  min-width: 120px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
 
 .article-card-body {
   padding: 0 0 0 20px;
@@ -1133,6 +1141,14 @@ img {
     width: 90px;
     height: 90px;
     min-width: 90px;
+  }
+  .article-card > img {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
   }
   
   .article-card-body {
