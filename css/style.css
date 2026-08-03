@@ -113,7 +113,7 @@ img {
 .header-nav a {
   color: var(--text-main);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400;
   position: relative;
   padding: 4px 0;
 }
@@ -143,7 +143,7 @@ img {
   padding: 10px 20px;
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -243,7 +243,7 @@ img {
   padding: 16px 36px;
   border-radius: var(--radius-sm);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 12px rgba(196,80,0,0.3);
 }
@@ -453,7 +453,7 @@ img {
   background: var(--primary-light);
   color: var(--primary);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 10px;
   border-radius: 4px;
   margin-bottom: 6px;
@@ -482,7 +482,7 @@ img {
 
 .article-card h3 {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5;
   margin-bottom: 8px;
   overflow: hidden;
@@ -529,7 +529,7 @@ img {
 
 .area-group h3 {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 12px;
   padding-left: 12px;
   border-left: 3px solid var(--primary);
@@ -589,7 +589,7 @@ img {
   padding: 16px 40px;
   border-radius: var(--radius-sm);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: background 0.2s ease, transform 0.2s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
@@ -632,7 +632,7 @@ img {
 
 .footer-col h3 {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   margin-bottom: 16px;
 }
@@ -731,7 +731,7 @@ img {
 
 .article-content h3 {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 32px 0 16px;
   padding-left: 12px;
   border-left: 3px solid var(--primary);
@@ -769,7 +769,7 @@ img {
 
 .article-content table th {
   background: var(--bg-section);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .article-content table tr:hover td {
@@ -872,7 +872,7 @@ img {
 .form-group label {
   display: block;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 8px;
   color: var(--text-main);
 }
@@ -915,7 +915,7 @@ img {
   padding: 16px 48px;
   border-radius: var(--radius-sm);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
   width: 100%;
@@ -961,7 +961,7 @@ img {
   background: var(--primary);
   color: #fff;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 16px;
   border-radius: 12px;
 }
@@ -1300,7 +1300,7 @@ img {
 
 .empathy-feature h3 {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 12px;
   color: var(--text-main);
 }
@@ -1370,7 +1370,7 @@ img {
 
 .blog-more-link {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--primary);
   text-decoration: none;
   padding: 8px 16px;
@@ -1405,7 +1405,7 @@ img {
   display: inline-block;
   padding: 8px 16px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-sub);
   background: var(--bg-section);
   border: 1px solid var(--border);
@@ -1430,7 +1430,7 @@ img {
   display: inline-block;
   padding: 14px 32px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--primary);
   background: transparent;
   border: 2px solid var(--primary);
@@ -1469,7 +1469,7 @@ img {
 
 .genre-lp-hero-sub {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--primary);
 }
 
@@ -1748,7 +1748,7 @@ article h3 {
   padding-left: 12px;
   border-left: 3px solid var(--primary);
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ===================================
@@ -1838,7 +1838,7 @@ article h3 {
   color: var(--primary);
   border-radius: 50px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
   max-width: 240px;
