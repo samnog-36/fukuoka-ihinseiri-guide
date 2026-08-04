@@ -1188,11 +1188,18 @@ img {
 
 @media (max-width: 480px) {
   .hero {
-    height: 380px;
+    height: auto;
+    min-height: 380px;
+    padding: 40px 0;
   }
   
   .hero-content h1 {
     font-size: 1.4rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+    max-width: 100%;
   }
   
   .hero-cta {
@@ -1317,8 +1324,7 @@ img {
 
 @media (max-width: 768px) {
   .empathy-section {
-  padding: 80px 24px;
-    padding: 56px 0;
+    padding: 56px 20px;
   }
 
   .empathy-content h2 {
@@ -1327,6 +1333,8 @@ img {
 
   .empathy-lead {
     font-size: 0.9rem;
+    padding: 0 4px;
+    word-break: break-word;
   }
 
   .empathy-lead br {
