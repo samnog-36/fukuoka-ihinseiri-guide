@@ -46,6 +46,11 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 a {
@@ -1077,15 +1082,16 @@ img {
   }
   
   .hero {
-    height: 440px;
+    height: auto;
+    min-height: 440px;
+    padding: 60px 0;
   }
-  
   .hero-content h1 {
     font-size: 1.7rem;
   }
-  
   .hero-content p {
     font-size: 0.95rem;
+    max-width: 100%;
   }
   
   .hero-badges {
