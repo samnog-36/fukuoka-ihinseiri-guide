@@ -744,4 +744,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260804-nioi-taisaku-kanzen.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260804-yarukoto-list-70dai.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260804-jitaku-kuyo-houhou.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260804-omuta-yanagawa-miyama.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
