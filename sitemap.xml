@@ -780,4 +780,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260805-kichouhin-genkin-toriatsukai.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260805-kodokushi-hiyou-dare-ga-harau.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260805-ikkenya-hiyou-souba.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
