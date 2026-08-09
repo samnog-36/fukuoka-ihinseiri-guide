@@ -84,6 +84,13 @@
   ]
 }
 </script>
+<script>
+    // ページ遷移時に必ずトップから表示
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    </script>
 </head>
 <body>
 

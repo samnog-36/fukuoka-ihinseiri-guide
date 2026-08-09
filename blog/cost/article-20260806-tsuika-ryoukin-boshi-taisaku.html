@@ -71,6 +71,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4944616437202027" crossorigin="anonymous"></script>
+<script>
+    // ページ遷移時に必ずトップから表示
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    </script>
 </head>
 <body>
   <header class="header">
@@ -80,7 +87,7 @@
         <a href="/area/">地域別情報</a>
         <a href="/cost/">費用相場</a>
         <a href="/guide/">お役立ちガイド</a>
-        <a href="/blog/#blog-search-input">記事を検索</a>
+        <a href="/blog/">記事を検索</a>
         <a href="/for-business/">業者様向け</a>
         <a href="/contact/" class="header-cta">無料相談する</a>
       </nav>
@@ -183,7 +190,7 @@
                     <ul>
                         <li><a href="/blog/">お役立ちガイド一覧へ戻る</a></li>
                         <li><a href="/blog/cost/">費用の記事一覧</a></li>
-                        <li><a href="/blog/#blog-search-input">記事を検索する</a></li>
+                        <li><a href="/blog/">記事を検索する</a></li>
                     </ul>
                 </div>
             </article>
