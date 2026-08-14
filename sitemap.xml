@@ -864,4 +864,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- 編集方針・運営情報 -->
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/about.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

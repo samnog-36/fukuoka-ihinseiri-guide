@@ -32,8 +32,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="/css/style.css?v=20260807a" as="style">
-  <link rel="stylesheet" href="/css/style.css?v=20260807a">
+    <link rel="preload" href="/css/style.css?v=20260814a" as="style">
+  <link rel="stylesheet" href="/css/style.css?v=20260814a">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@fukuoka_ihin">
   <script type="application/ld+json">
@@ -309,6 +309,7 @@
         <h3>サイト情報</h3>
         <ul>
           <li><a href="/contact/">お問い合わせ</a></li>
+          <li><a href="/about.html">編集方針・運営情報</a></li>
           <li><a href="/privacy-policy.html">プライバシーポリシー</a></li>
         </ul>
       </div>
@@ -335,10 +336,10 @@
       // チェックボックスの値を収集してカンマ区切りに
       const serviceAreaChecked = Array.from(document.querySelectorAll('input[name="serviceArea"]:checked')).map(el => el.value);
       const serviceContentChecked = Array.from(document.querySelectorAll('input[name="serviceContent"]:checked')).map(el => el.value);
-      
+
       if (serviceAreaChecked.length === 0) { alert('対応エリアを選択してください'); btn.disabled = false; btn.textContent = '掲載申込を送信する'; btn.style.opacity = '1'; return; }
       if (serviceContentChecked.length === 0) { alert('サービス内容を選択してください'); btn.disabled = false; btn.textContent = '掲載申込を送信する'; btn.style.opacity = '1'; return; }
-      
+
       const data = {
         companyName: formData.get('companyName'),
         contactPerson: formData.get('contactPerson'),
