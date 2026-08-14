@@ -49,7 +49,12 @@ def main() -> int:
         issues.append("sitemap.xmlのabout.html URLが1件ではありません")
 
     every_html = list(ROOT.rglob("*.html"))
-    missing_footer_link = [str(p.relative_to(ROOT)) for p in every_html if 'href="/about.html"' not in p.read_text(encoding="utf-8")]
+    missing_footer_link = []
+    for page in every_html:
+        page_content = page.read_text(encoding="utf-8")
+        footer_start = page_content.rfind("<footer")
+        if footer_start != -1 and 'href="/about.html"' not in page_content[footer_start:]:
+            missing_footer_link.append(str(page.relative_to(ROOT)))
     if missing_footer_link:
         issues.append("編集方針リンクのないHTML: " + ", ".join(missing_footer_link))
 

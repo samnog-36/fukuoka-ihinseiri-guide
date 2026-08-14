@@ -197,16 +197,61 @@ ABOUT_PAGE = f'''<!DOCTYPE html>
 '''
 
 
+STANDARD_FOOTER = '''<footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">福岡遺品整理ガイド</div>
+        <p class="footer-desc">福岡県の遺品整理・特殊清掃・生前整理に特化した情報サイトです。</p>
+      </div>
+      <div class="footer-col">
+        <h3>カテゴリ</h3>
+        <ul>
+          <li><a href="/guide/">遺品整理ガイド</a></li>
+          <li><a href="/guide/seizenseiri.html">生前整理</a></li>
+          <li><a href="/guide/tokushu-seisou.html">特殊清掃</a></li>
+          <li><a href="/guide/kuyo.html">遺品供養</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>お役立ち情報</h3>
+        <ul>
+          <li><a href="/cost/">費用相場</a></li>
+          <li><a href="/area/">地域別情報</a></li>
+          <li><a href="/blog/">ブログ記事一覧</a></li>
+          <li><a href="/for-business/">業者様向け</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>サイト情報</h3>
+        <ul>
+          <li><a href="/about.html">編集方針・運営情報</a></li>
+          <li><a href="/contact/">お問い合わせ</a></li>
+          <li><a href="/privacy-policy.html">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 福岡遺品整理ガイド All Rights Reserved.</div>
+  </footer>'''
+
+
 def update_css_version(content: str) -> str:
     return re.sub(r"/css/style\.css\?v=[^\"']+", f"/css/style.css?v={CSS_VERSION}", content)
 
 
 def update_footer(content: str) -> str:
-    if 'href="/about.html"' in content:
+    footer_start = content.rfind("<footer")
+    if footer_start == -1:
+        return content
+    footer = content[footer_start:]
+    footer_end = footer.find("</footer>")
+    if footer_end != -1 and 'class="footer"' not in footer[: footer_end + len("</footer>")]:
+        return content[:footer_start] + STANDARD_FOOTER + footer[footer_end + len("</footer>"):]
+    if 'href="/about.html"' in footer:
         return content
     target = '<li><a href="/privacy-policy.html">プライバシーポリシー</a></li>'
-    if target in content:
-        return content.replace(target, '<li><a href="/about.html">編集方針・運営情報</a></li>\n          ' + target, 1)
+    if target in footer:
+        updated_footer = footer.replace(target, '<li><a href="/about.html">編集方針・運営情報</a></li>\n          ' + target, 1)
+        return content[:footer_start] + updated_footer
     return content
 
 
