@@ -129,12 +129,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260706-mitsumori-point.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260706-jibun-vs-gyousha.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -169,12 +163,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260706-ending-note.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260706-digital-isan.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -182,12 +170,6 @@
   </url>
 
   <!-- ブログ記事：遺品供養 -->
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260706-otakiage-hikaku.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260706-suterarenai-taisho.html</loc>
     <lastmod>2026-07-06</lastmod>
@@ -202,26 +184,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260706-mitsumori-hikaku.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <!-- ブログ記事：地域別 -->
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260706-minami-ku.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260706-kurume.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260707-chintai-taijo.html</loc>
     <lastmod>2026-07-07</lastmod>
@@ -241,19 +205,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/kuyo/article-20260707-shashin-kuyo.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260707-cost-yasuku-suru.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260707-higashi-ku-guide.html</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -277,25 +229,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260708-hakata-ku-guide.html</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260709-katamiwake-manner.html</loc>
-    <lastmod>2026-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260709-kodokushi-hakken-taiou.html</loc>
-    <lastmod>2026-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260709-ending-note-kakikata.html</loc>
     <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -392,12 +326,6 @@
   </url>
   <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/seizenseiri/article-20260712-oya-mono-suterarenai.html</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/cost/article-20260712-ihinseiri-hiyo-yasuku.html</loc>
     <lastmod>2026-07-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -501,12 +429,6 @@
   <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html</loc>
     <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html</loc>
-    <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -698,12 +620,6 @@
   </url>
   <url>
     <loc>https://fukuoka-ihinseiri-guide.com/blog/ihinseiri/article-20260805-kichouhin-genkin-toriatsukai.html</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fukuoka-ihinseiri-guide.com/blog/tokushu-seisou/article-20260805-kodokushi-hiyou-dare-ga-harau.html</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
