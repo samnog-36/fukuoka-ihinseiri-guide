@@ -1,2 +1,12 @@
 # 旧URLからのリダイレクト（301永続リダイレクト）
 # Cloudflare Pagesは自動的にカスタムドメインへリダイレクトするが念のため
+
+# AdSense quality consolidation 2026-09-04
+/blog/area/article-20260706-kitakyushu-guide.html /blog/area/article-20260714-kitakyushu-ihinseiri-guide.html 301
+/blog/area/article-20260711-chikushino-onojo-kasuga.html /blog/area/article-20260722-chikushino-onojo-kasuga-guide.html 301
+/blog/cost/article-20260706-cost-saving-tips.html /blog/cost/article-20260707-cost-yasuku-suru.html 301
+/blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html /blog/cost/article-20260707-cost-yasuku-suru.html 301
+/blog/kuyo/article-20260706-butsudan-shobun.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260708-butsudan-shobun-houhou.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260712-butsudan-shobun-houhou.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260718-butsudan-shobun-heigan.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301

@@ -10,7 +10,7 @@
     "seizenseiri": 19,
     "tokushu-seisou": 19
   },
-  "noindex_articles": 0,
+  "noindex_articles": 5,
   "articles_without_public_source_hint": 0,
   "articles_without_editorial_info": 0,
   "articles_without_reference_links": 0,
@@ -41,7 +41,7 @@
       "category": "area",
       "left": "blog/area/article-20260708-hakata-ku-guide.html",
       "right": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
-      "content_similarity": 0.113,
+      "content_similarity": 0.114,
       "title_similarity": 0.545
     },
     {
@@ -49,31 +49,17 @@
       "left": "blog/kuyo/article-20260708-butsudan-shobun-houhou.html",
       "right": "blog/kuyo/article-20260712-butsudan-shobun-houhou.html",
       "content_similarity": 0.082,
-      "title_similarity": 0.5
+      "title_similarity": 0.479
     },
     {
       "category": "kuyo",
       "left": "blog/kuyo/article-20260706-butsudan-shobun.html",
       "right": "blog/kuyo/article-20260708-butsudan-shobun-houhou.html",
       "content_similarity": 0.08,
-      "title_similarity": 0.46
+      "title_similarity": 0.479
     }
   ],
   "risk_files": [
-    {
-      "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
-      "title": "遺品整理の見積書の見方｜適正価格の判断基準と悪徳業者を見抜くチェックリスト【2026年版】",
-      "risk_total": 27,
-      "risk_counts": {
-        "監修・専門家表示": 0,
-        "絶対・必ず等の断定": 10,
-        "出典確認が必要な割合": 0,
-        "調査によると": 0,
-        "正確・適正の断定": 17,
-        "おすすめ断定": 0
-      },
-      "public_source_hints": 6
-    },
     {
       "path": "blog/cost/article-20260706-cost-saving-tips.html",
       "title": "遺品整理の費用を安く抑える7つのコツ｜自分でできる節約術 - 福岡遺品整理ガイド",
@@ -90,7 +76,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260708-pet-tokushu-seisou.html",
-      "title": "ペットの臭い・汚れの特殊清掃｜福岡の費用相場と消臭方法を徹底解説 - 福岡遺品整理ガイド",
+      "title": "ペットの臭い・汚れの特殊清掃｜福岡の費用相場と消臭方法を解説 - 福岡遺品整理ガイド",
       "risk_total": 18,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -101,6 +87,20 @@
         "おすすめ断定": 0
       },
       "public_source_hints": 5
+    },
+    {
+      "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
+      "title": "遺品整理の見積書の見方｜見積もりを確認するポイントと契約トラブルを避けるチェックリスト【2026年版】",
+      "risk_total": 18,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 10,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 8,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
     },
     {
       "path": "blog/ihinseiri/article-20260706-mitsumori-point.html",
@@ -132,7 +132,7 @@
     },
     {
       "path": "blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
-      "title": "遺品整理の見積もり比較チェックリスト｜悪徳業者を見抜く7つのポイント｜福岡遺品整理ガイド",
+      "title": "遺品整理の見積もり比較チェックリスト｜契約トラブルを避ける7つのポイント｜福岡遺品整理ガイド",
       "risk_total": 14,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -160,7 +160,7 @@
     },
     {
       "path": "blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html",
-      "title": "遺品整理の費用を安くする7つの方法｜相場より3割節約できる具体的テクニック【2026年版】",
+      "title": "遺品整理の費用を安くする7つの方法｜費用を抑えるための具体的な方法【2026年版】",
       "risk_total": 12,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -300,7 +300,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
-      "title": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないための完全ガイド - 福岡遺品整理ガイド",
+      "title": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないためのガイド - 福岡遺品整理ガイド",
       "risk_total": 9,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -342,7 +342,7 @@
     },
     {
       "path": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
-      "title": "遺品整理の形見分け完全ガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド",
+      "title": "遺品整理の形見分けガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド",
       "risk_total": 8,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -383,20 +383,6 @@
       "public_source_hints": 7
     },
     {
-      "path": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
-      "title": "遺品整理を自分でやる方法と業者に頼むべきケースの判断基準 - 福岡遺品整理ガイド",
-      "risk_total": 8,
-      "risk_counts": {
-        "監修・専門家表示": 0,
-        "絶対・必ず等の断定": 4,
-        "出典確認が必要な割合": 3,
-        "調査によると": 1,
-        "正確・適正の断定": 0,
-        "おすすめ断定": 0
-      },
-      "public_source_hints": 8
-    },
-    {
       "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
       "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】",
       "risk_total": 8,
@@ -412,7 +398,7 @@
     },
     {
       "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
-      "title": "筑紫野市・大野城市・春日市の遺品整理完全ガイド｜費用相場と業者選び｜福岡遺品整理ガイド",
+      "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び｜福岡遺品整理ガイド",
       "risk_total": 8,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -524,7 +510,7 @@
     },
     {
       "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
-      "title": "遠方からの遺品整理の進め方｜立ち会いなしで依頼する方法と費用を徹底解説【2026年版】｜福岡遺品整理ガイド",
+      "title": "遠方からの遺品整理の進め方｜立ち会いなしで依頼する方法と費用を解説【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 7,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -538,7 +524,7 @@
     },
     {
       "path": "blog/seizenseiri/article-20260719-digital-ending-note.html",
-      "title": "デジタルエンディングノートの作り方｜スマホ・クラウドで安全に残す完全ガイド｜福岡遺品整理ガイド",
+      "title": "デジタルエンディングノートの作り方｜スマホ・クラウドで安全に残すガイド｜福岡遺品整理ガイド",
       "risk_total": 7,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -577,20 +563,6 @@
         "おすすめ断定": 0
       },
       "public_source_hints": 10
-    },
-    {
-      "path": "blog/area/article-20260706-kitakyushu-guide.html",
-      "title": "北九州市の遺品整理完全ガイド｜小倉・八幡エリアの業者と相場 - 福岡遺品整理ガイド",
-      "risk_total": 6,
-      "risk_counts": {
-        "監修・専門家表示": 0,
-        "絶対・必ず等の断定": 3,
-        "出典確認が必要な割合": 2,
-        "調査によると": 0,
-        "正確・適正の断定": 0,
-        "おすすめ断定": 1
-      },
-      "public_source_hints": 5
     },
     {
       "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
@@ -636,7 +608,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260713-ozone-dasshuu-shikumi.html",
-      "title": "特殊清掃のオゾン脱臭とは？仕組み・効果・費用相場を徹底解説【2026年版】｜福岡遺品整理ガイド",
+      "title": "特殊清掃のオゾン脱臭とは？仕組み・効果・費用相場を解説【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 6,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -747,6 +719,20 @@
       "public_source_hints": 12
     },
     {
+      "path": "blog/area/article-20260706-kitakyushu-guide.html",
+      "title": "北九州市の遺品整理ガイド｜小倉・八幡エリアの業者と相場 - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
       "path": "blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html",
       "title": "孤独死を防ぐために家族ができる5つの対策｜福岡の見守りサービス紹介 - 福岡遺品整理ガイド",
       "risk_total": 5,
@@ -762,7 +748,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260707-tokushu-seisou-cost.html",
-      "title": "福岡で特殊清掃が必要になったら｜費用相場・作業内容・業者選びの完全ガイド - 福岡遺品整理ガイド",
+      "title": "福岡で特殊清掃が必要になったら｜費用相場・作業内容・業者選びのガイド - 福岡遺品整理ガイド",
       "risk_total": 5,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -773,6 +759,20 @@
         "おすすめ断定": 0
       },
       "public_source_hints": 5
+    },
+    {
+      "path": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+      "title": "遺品整理を自分でやる方法と業者に頼むべきケースの判断基準 - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
     },
     {
       "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
@@ -860,7 +860,7 @@
     },
     {
       "path": "blog/seizenseiri/article-20260714-digital-shukatsu-hajimekata.html",
-      "title": "デジタル終活の始め方｜パスワード管理・SNS・サブスク整理の完全ガイド【2026年版】｜福岡遺品整理ガイド",
+      "title": "デジタル終活の始め方｜パスワード管理・SNS・サブスク整理のガイド【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 5,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -930,7 +930,7 @@
     },
     {
       "path": "blog/kuyo/article-20260719-shashin-album-kuyo.html",
-      "title": "故人の写真・アルバムの整理と供養方法｜デジタル化から処分まで完全ガイド｜福岡遺品整理ガイド",
+      "title": "故人の写真・アルバムの整理と供養方法｜デジタル化から処分までガイド｜福岡遺品整理ガイド",
       "risk_total": 4,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -958,7 +958,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260710-gomiyashiki-hiyo-gyousei.html",
-      "title": "ゴミ屋敷の片付け費用と行政代執行について徹底解説 | 福岡遺品整理ガイド",
+      "title": "ゴミ屋敷の片付け費用と行政代執行について解説 | 福岡遺品整理ガイド",
       "risk_total": 4,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1000,7 +1000,7 @@
     },
     {
       "path": "blog/ihinseiri/article-20260713-kuruma-bike-shobun.html",
-      "title": "遺品整理で出てきた車・バイクの処分方法｜名義変更から廃車手続きまで完全ガイド【2026年版】｜福岡遺品整理ガイド",
+      "title": "遺品整理で出てきた車・バイクの処分方法｜名義変更から廃車手続きまでガイド【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 4,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1056,7 +1056,7 @@
     },
     {
       "path": "blog/seizenseiri/article-20260709-ending-note-kakikata.html",
-      "title": "エンディングノートの書き方完全ガイド｜必須11項目と福岡の無料配布・相談窓口 - 福岡遺品整理ガイド",
+      "title": "エンディングノートの書き方ガイド｜必須11項目と福岡の無料配布・相談窓口 - 福岡遺品整理ガイド",
       "risk_total": 4,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1070,7 +1070,7 @@
     },
     {
       "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
-      "title": "北九州市の遺品整理完全ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】｜福岡遺品整理ガイド",
+      "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 4,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1168,7 +1168,7 @@
     },
     {
       "path": "blog/kuyo/article-20260708-butsudan-shobun-houhou.html",
-      "title": "仏壇の処分方法と費用｜福岡で魂抜き供養から引き取りまで完全ガイド - 福岡遺品整理ガイド",
+      "title": "仏壇の処分方法と費用｜福岡で魂抜き供養から引き取りまでガイド - 福岡遺品整理ガイド",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1280,7 +1280,7 @@
     },
     {
       "path": "blog/kuyo/article-20260715-omamori-ofuda-shobun.html",
-      "title": "御守り・お札の正しい処分方法｜返納先・どんど焼き・郵送対応まで完全ガイド【2026年版】｜福岡遺品整理ガイド",
+      "title": "御守り・お札の正しい処分方法｜返納先・どんど焼き・郵送対応までガイド【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1294,7 +1294,7 @@
     },
     {
       "path": "blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html",
-      "title": "エンディングノートの書き方完全ガイド｜家族に伝えるべき10項目と保管方法【2026年版】",
+      "title": "エンディングノートの書き方ガイド｜家族に伝えるべき10項目と保管方法【2026年版】",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1350,7 +1350,7 @@
     },
     {
       "path": "blog/cost/article-20260722-ihinseiri-kakuteishinkoku-zeimu.html",
-      "title": "遺品整理の費用は確定申告で控除できる？税務処理の完全ガイド｜福岡遺品整理ガイド",
+      "title": "遺品整理の費用は確定申告で控除できる？税務処理のガイド｜福岡遺品整理ガイド",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1420,7 +1420,7 @@
     },
     {
       "path": "blog/tokushu-seisou/article-20260719-pet-tatougai-seisou.html",
-      "title": "ペット多頭飼育崩壊の特殊清掃｜費用相場・原状回復の流れ・行政支援を徹底解説｜福岡遺品整理ガイド",
+      "title": "ペット多頭飼育崩壊の特殊清掃｜費用相場・原状回復の流れ・行政支援を解説｜福岡遺品整理ガイド",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
@@ -1448,7 +1448,7 @@
     },
     {
       "path": "blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku.html",
-      "title": "賃貸物件の遺品整理と退去手続き｜原状回復の費用負担と期限を徹底解説【2026年版】｜福岡遺品整理ガイド",
+      "title": "賃貸物件の遺品整理と退去手続き｜原状回復の費用負担と期限を解説【2026年版】｜福岡遺品整理ガイド",
       "risk_total": 3,
       "risk_counts": {
         "監修・専門家表示": 0,
