@@ -42,20 +42,6 @@
       "public_source_hints": 5
     },
     {
-      "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
-      "title": "遺品整理の見積書の見方｜見積もりを確認するポイントと契約トラブルを避けるチェックリスト【2026年版】",
-      "risk_total": 18,
-      "risk_counts": {
-        "監修・専門家表示": 0,
-        "絶対・必ず等の断定": 10,
-        "出典確認が必要な割合": 0,
-        "調査によると": 0,
-        "正確・適正の断定": 8,
-        "おすすめ断定": 0
-      },
-      "public_source_hints": 6
-    },
-    {
       "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
       "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド",
       "risk_total": 11,
@@ -460,20 +446,6 @@
         "おすすめ断定": 0
       },
       "public_source_hints": 7
-    },
-    {
-      "path": "blog/ihinseiri/article-20260706-trouble-avoid.html",
-      "title": "遺品整理でよくあるトラブル7選と回避方法｜福岡の事例から学ぶ - 福岡遺品整理ガイド",
-      "risk_total": 6,
-      "risk_counts": {
-        "監修・専門家表示": 0,
-        "絶対・必ず等の断定": 4,
-        "出典確認が必要な割合": 1,
-        "調査によると": 1,
-        "正確・適正の断定": 0,
-        "おすすめ断定": 0
-      },
-      "public_source_hints": 12
     },
     {
       "path": "blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html",
@@ -1104,6 +1076,20 @@
         "おすすめ断定": 0
       },
       "public_source_hints": 12
+    },
+    {
+      "path": "blog/ihinseiri/article-20260706-trouble-avoid.html",
+      "title": "遺品整理の契約トラブルを避けるチェックリスト｜福岡で確認したい7項目",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 13
     },
     {
       "path": "blog/kuyo/article-20260714-ningyo-nuigurumi-kuyo.html",

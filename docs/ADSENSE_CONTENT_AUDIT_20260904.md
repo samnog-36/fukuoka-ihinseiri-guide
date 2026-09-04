@@ -42,7 +42,6 @@
 | 指摘数 | 公的リンクヒント | ページ | タイトル |
 |---:|---:|---|---|
 | 18 | 5 | `blog/tokushu-seisou/article-20260708-pet-tokushu-seisou.html` | ペットの臭い・汚れの特殊清掃｜福岡の費用相場と消臭方法を解説 - 福岡遺品整理ガイド |
-| 18 | 6 | `blog/cost/article-20260803-mitsumorisho-mikata.html` | 遺品整理の見積書の見方｜見積もりを確認するポイントと契約トラブルを避けるチェックリスト【2026年版】 |
 | 11 | 5 | `blog/area/article-20260709-nishi-sawara-ku-guide.html` | 福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド |
 | 11 | 6 | `blog/seizenseiri/article-20260715-oya-seizenseiri-tetsudau.html` | 親の生前整理を手伝う方法｜嫌がる親を説得するコツと家族の役割分担【2026年版】｜福岡遺品整理ガイド |
 | 10 | 6 | `blog/seizenseiri/article-20260708-50dai-hajimekata.html` | 50代から始める生前整理と断捨離｜後悔しない進め方5ステップ - 福岡遺品整理ガイド |
@@ -72,7 +71,6 @@
 | 6 | 6 | `blog/cost/article-20260707-cost-yasuku-suru.html` | 遺品整理の費用を安くする7つの方法｜福岡の自治体サービスと節約術 - 福岡遺品整理ガイド |
 | 6 | 6 | `blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku.html` | 遺品整理の追加料金が発生するケースと防止策｜見積もり時に確認すべき5つのポイント【2026年版】 |
 | 6 | 7 | `blog/kuyo/article-20260722-otakiage-houhou-hiyo.html` | お焚き上げの方法と費用｜福岡で供養できる神社・寺院と郵送対応｜福岡遺品整理ガイド |
-| 6 | 12 | `blog/ihinseiri/article-20260706-trouble-avoid.html` | 遺品整理でよくあるトラブル7選と回避方法｜福岡の事例から学ぶ - 福岡遺品整理ガイド |
 | 5 | 5 | `blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html` | 孤独死を防ぐために家族ができる5つの対策｜福岡の見守りサービス紹介 - 福岡遺品整理ガイド |
 | 5 | 5 | `blog/tokushu-seisou/article-20260707-tokushu-seisou-cost.html` | 福岡で特殊清掃が必要になったら｜費用相場・作業内容・業者選びのガイド - 福岡遺品整理ガイド |
 | 5 | 6 | `blog/ihinseiri/article-20260706-jibun-vs-gyousha.html` | 遺品整理を自分でやる方法と業者に頼むべきケースの判断基準 - 福岡遺品整理ガイド |
@@ -101,6 +99,8 @@
 | 3 | 5 | `blog/area/article-20260806-itoshima-munakata-koga-guide.html` | 糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】 |
 | 3 | 5 | `blog/kuyo/article-20260710-kamidana-shobun.html` | 神棚の処分方法と費用相場｜福岡の神社でのお祓い・神上げ手順 ｜ 福岡遺品整理ガイド |
 | 3 | 5 | `blog/kuyo/article-20260711-ihai-shobun-kuyo.html` | 位牌の処分方法と費用相場｜閉眼供養から永代供養まで正しい手順を解説｜福岡遺品整理ガイド |
+| 3 | 5 | `blog/kuyo/article-20260809-49nichi-houyo-kuyo.html` | 遺品整理は49日前にしてもいい？四十九日法要と供養の正しいタイミングを解説 |
+| 3 | 5 | `blog/tokushu-seisou/article-20260711-kasai-fukkyuu-seisou.html` | 火災現場の復旧・特殊清掃｜煤除去から消臭・リフォームまでの流れと費用相場｜福岡遺品整理ガイド |
 
 ## 方針
 
