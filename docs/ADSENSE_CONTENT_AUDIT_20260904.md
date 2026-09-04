@@ -23,30 +23,7 @@ Google AdSense の『有用性の低いコンテンツ』再審査に向け、�
 
 ## この実行で安全に自動修正したページ
 
-- `blog/area/article-20260804-omuta-yanagawa-miyama.html`
-- `blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html`
-- `blog/area/article-20260806-itoshima-munakata-koga-guide.html`
-- `blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html`
-- `blog/cost/article-20260805-ikkenya-hiyou-souba.html`
-- `blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku.html`
-- `blog/ihinseiri/article-20260719-souzoku-houki-ihinseiri.html`
-- `blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu.html`
-- `blog/ihinseiri/article-20260805-kichouhin-genkin-toriatsukai.html`
-- `blog/ihinseiri/article-20260806-shashin-album-seiri-houhou.html`
-- `blog/kuyo/article-20260804-jitaku-kuyo-houhou.html`
-- `blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html`
-- `blog/kuyo/article-20260806-shashin-tegami-omoide-kuyo.html`
-- `blog/kuyo/article-20260809-49nichi-houyo-kuyo.html`
-- `blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html`
-- `blog/seizenseiri/article-20260804-yarukoto-list-70dai.html`
-- `blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html`
-- `blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html`
-- `blog/tokushu-seisou/article-20260804-nioi-taisaku-kanzen.html`
-- `blog/tokushu-seisou/article-20260805-kodokushi-hiyou-dare-ga-harau.html`
-- `blog/tokushu-seisou/article-20260806-gaichuu-kujyo-ujimushi-hae.html`
-- `contact/index.html`
-- `for-business/index.html`
-- `index.html`
+- なし
 
 ## 重複・検索意図競合の候補
 
