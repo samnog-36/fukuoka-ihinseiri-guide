@@ -1,6 +1,6 @@
 name: AdSense quality audit
 
-# Triggered only on the isolated AdSense cleanup branch.
+# Triggered only on the isolated AdSense cleanup branch. Consolidation pass enabled.
 on:
   workflow_dispatch:
   push:
