@@ -1,0 +1,41 @@
+name: AdSense quality audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - fix/adsense-low-value-20260904
+    paths:
+      - 'scripts/adsense_quality_audit.py'
+      - '.github/workflows/adsense-quality-audit.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/adsense-low-value-20260904
+          fetch-depth: 0
+
+      - name: Run quality audit and safe fixes
+        run: python3 scripts/adsense_quality_audit.py
+
+      - name: Verify whitespace
+        run: git diff --check
+
+      - name: Commit generated audit and safe fixes
+        run: |
+          if git diff --quiet && git status --porcelain | grep -q '^$'; then
+            echo 'No changes'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Run AdSense quality audit and safe cleanup'
+          git push origin HEAD:fix/adsense-low-value-20260904
