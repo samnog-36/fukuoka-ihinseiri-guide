@@ -1,5 +1,6 @@
 name: AdSense quality audit
 
+# Triggered only on the isolated AdSense cleanup branch.
 on:
   workflow_dispatch:
   push:
