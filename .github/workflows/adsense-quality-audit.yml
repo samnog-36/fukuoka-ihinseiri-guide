@@ -1,6 +1,6 @@
 name: AdSense quality audit
 
-# Triggered only on the isolated AdSense cleanup branch. Two consolidation passes and active-inventory audit enabled.
+# Triggered only on the isolated AdSense cleanup branch. Consolidation, rewritten-article sync and active-inventory audit enabled.
 on:
   workflow_dispatch:
   push:
@@ -10,6 +10,10 @@ on:
       - 'scripts/adsense_quality_audit.py'
       - 'scripts/apply_adsense_content_consolidation.py'
       - 'scripts/apply_adsense_consolidation_phase2.py'
+      - 'scripts/sync_adsense_rewritten_articles.py'
+      - 'blog/**/*.html'
+      - 'guide/*.html'
+      - 'index.html'
       - '.github/workflows/adsense-quality-audit.yml'
 
 permissions:
@@ -30,6 +34,9 @@ jobs:
 
       - name: Consolidate remaining clusters and clean hub trust signals
         run: python3 scripts/apply_adsense_consolidation_phase2.py
+
+      - name: Sync rewritten article titles and search data
+        run: python3 scripts/sync_adsense_rewritten_articles.py
 
       - name: Run quality audit and safe fixes
         run: python3 scripts/adsense_quality_audit.py
