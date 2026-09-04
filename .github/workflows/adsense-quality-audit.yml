@@ -8,6 +8,7 @@ on:
       - fix/adsense-low-value-20260904
     paths:
       - 'scripts/adsense_quality_audit.py'
+      - 'scripts/apply_adsense_content_consolidation.py'
       - '.github/workflows/adsense-quality-audit.yml'
 
 permissions:
@@ -23,20 +24,26 @@ jobs:
           ref: fix/adsense-low-value-20260904
           fetch-depth: 0
 
+      - name: Consolidate duplicates and hold high-risk pages
+        run: python3 scripts/apply_adsense_content_consolidation.py
+
       - name: Run quality audit and safe fixes
         run: python3 scripts/adsense_quality_audit.py
+
+      - name: Verify AdSense trust conditions
+        run: python3 scripts/verify_adsense_trust_updates.py
 
       - name: Verify whitespace
         run: git diff --check
 
-      - name: Commit generated audit and safe fixes
+      - name: Commit generated audit and content cleanup
         run: |
-          if git diff --quiet && git status --porcelain | grep -q '^$'; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo 'No changes'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
-          git commit -m 'Run AdSense quality audit and safe cleanup'
+          git commit -m 'Consolidate low-value content for AdSense review'
           git push origin HEAD:fix/adsense-low-value-20260904
