@@ -1,125 +1,130 @@
-# 福岡遺品整理ガイド - デプロイ手順書
+# 福岡遺品整理ガイド - デプロイ・運用手順
 
-このドキュメントでは、本サイトを公開するための手順を説明します。
-
----
-
-## 前提条件
-
-- GitHubアカウント（作成済み）
-- 独自ドメイン（例：fukuoka-ihinseiri-guide.com）
+このドキュメントは、`fukuoka-ihinseiri-guide.com` の公開と記事更新を安全に行うための手順です。
 
 ---
 
-## 方法1：Cloudflare Pages（推奨・無料）
+## 公開環境
 
-### ステップ1：GitHubにリポジトリを作成
+- リポジトリ: `samnog-36/fukuoka-ihinseiri-guide`
+- 公開方式: Cloudflare Pages（GitHub連携）
+- 独自ドメイン: `fukuoka-ihinseiri-guide.com`
+- Framework preset: None
+- Build command: なし
+- Build output directory: `/`
 
-1. GitHubにログイン
-2. 右上の「+」ボタン → 「New repository」をクリック
-3. Repository name: `fukuoka-ihinseiri-guide`
-4. Public を選択
-5. 「Create repository」をクリック
-
-### ステップ2：ファイルをアップロード
-
-GitHubのリポジトリページで：
-1. 「uploading an existing file」リンクをクリック
-2. サイトのファイル一式をドラッグ＆ドロップ
-3. 「Commit changes」をクリック
-
-### ステップ3：Cloudflare Pagesに接続
-
-1. [Cloudflare](https://dash.cloudflare.com/) にアカウント作成・ログイン
-2. 左メニューの「Pages」をクリック
-3. 「Create a project」→「Connect to Git」
-4. GitHubアカウントを連携し、`fukuoka-ihinseiri-guide` リポジトリを選択
-5. ビルド設定：
-   - Framework preset: `None`
-   - Build command: （空欄のまま）
-   - Build output directory: `/`（ルート）
-6. 「Save and Deploy」をクリック
-
-### ステップ4：独自ドメインを設定
-
-1. Cloudflare Pagesのプロジェクト設定 → 「Custom domains」
-2. 「Set up a custom domain」をクリック
-3. ドメイン名を入力（例：fukuoka-ihinseiri-guide.com）
-4. 表示されるDNS設定をドメイン管理画面（ムームードメイン等）で設定
+`main` への反映は公開サイトへ影響するため、大きなSEO・広告・リダイレクト変更は作業ブランチとPull Requestで確認してから反映します。
 
 ---
 
-## 方法2：Netlify（代替・無料）
+## 記事を追加・更新する前の原則
 
-1. [Netlify](https://www.netlify.com/) にアカウント作成
-2. 「Add new site」→「Import an existing project」
-3. GitHubリポジトリを選択
-4. デプロイ設定はデフォルトのままでOK
-5. カスタムドメインを設定
+### 記事数や文字数を目的にしない
 
----
+「毎日1本」「各カテゴリ20本」「3,000字以上」のような数量目標だけを理由に記事を作成しません。既存記事と検索意図が重なる場合は、新規URLを増やさず既存記事を更新・統合します。
 
-## 記事を追加する方法
+### AIを使う場合も一次情報を確認する
 
-### Manusに依頼する場合
+AIは構成・下書き・表現整理に使用できますが、次の情報は公開前に一次情報まで確認します。
 
-「○○のテーマで3000字以上の記事を書いて、サイトに追加して」と依頼するだけ。ManusがHTMLファイルを生成し、GitHubにpushします。
+- 国・自治体の制度、手続き、料金、期限
+- 相続・税務・契約上の責任
+- 健康・衛生・消毒・感染症に関する判断
+- 統計、割合、調査結果
+- 事業者の料金、許認可、サービス内容
 
-### 手動で追加する場合
+出典は「省庁のトップページ」ではなく、本文の主張を直接確認できるページを優先します。
 
-1. 既存の記事HTMLファイル（例：`/guide/tokushu-seisou.html`）をコピー
-2. ファイル名を変更（例：`/guide/new-article.html`）
-3. `<h1>`タグ内のタイトルを変更
-4. `<div class="article-body">` 内の本文を書き換え
-5. `<meta name="description">` を更新
-6. GitHubにアップロード → 自動デプロイ
+### 実態のない権威付けをしない
 
----
+実際に監修を受けていない場合、次のような表現を使いません。
 
-## サイト売却時の引き継ぎ
+- 専門家が解説
+- 弁護士監修レベル
+- プロが教える
+- 専門家が実例を紹介
 
-買い手に渡すもの：
-1. **GitHubリポジトリのオーナー権限**（Settings → Transfer ownership）
-2. **ドメインの名義変更**（ドメイン管理会社の移管手続き）
-3. **Cloudflare Pagesのプロジェクト**（買い手が自分のアカウントで再接続）
-4. **このREADME**（運用方法の説明として）
+また、確認できない「優良業者のみ」「正確な相場」「必ず」「絶対」などの断定を避けます。
 
 ---
 
-## ファイル構成
+## 新規記事を作る前のチェック
 
-```
-fukuoka-ihinseiri-guide/
-├── index.html              ← トップページ
-├── css/
-│   └── style.css           ← デザイン（全ページ共通）
-├── area/
-│   └── index.html          ← 地域別一覧
-├── cost/
-│   ├── index.html          ← 費用相場一覧
-│   └── 3ldk.html           ← 3LDK費用記事
-├── guide/
-│   ├── index.html          ← ガイド一覧
-│   ├── how-to-choose.html  ← 業者選びガイド
-│   ├── tokushu-seisou.html ← 特殊清掃記事
-│   └── seizenseiri.html    ← 生前整理記事
-├── contact/
-│   └── index.html          ← 問い合わせページ
-├── for-business/
-│   └── index.html          ← 業者向けページ
-├── sitemap.xml             ← サイトマップ
-├── robots.txt              ← クローラー設定
-├── system_design.md        ← 業者機能の設計図
-└── DEPLOY_GUIDE.md         ← この手順書
+1. `blog/` とサイト内検索で同じ検索意図の記事がないか確認する。
+2. 既存記事に追記すれば解決するテーマなら新規URLを作らない。
+3. 福岡固有の一次情報や、読者が実際に判断に使える独自要素があるか確認する。
+4. 法律・税務・衛生など個別判断リスクが高いテーマは、十分な確認ができない場合は公開しないか `noindex` とする。
+5. 公開後に `sitemap.xml`、カテゴリ一覧、検索データ、内部リンクを更新する。
+
+詳細は `docs/ARTICLE_PUBLICATION_STANDARD.md` を参照してください。
+
+---
+
+## AdSense品質チェック
+
+AdSense関連の大幅更新時は、作業ブランチで以下を実行します。
+
+```bash
+python3 scripts/apply_adsense_content_consolidation.py
+python3 scripts/apply_adsense_consolidation_phase2.py
+python3 scripts/adsense_quality_audit.py
+python3 scripts/verify_adsense_trust_updates.py
+git diff --check
 ```
 
+監査結果は以下へ保存されます。
+
+- `docs/ADSENSE_CONTENT_AUDIT_20260904.md`
+- `docs/ADSENSE_CONSOLIDATION_DECISIONS_20260904.md`
+- `docs/ADSENSE_CONSOLIDATION_PHASE2_20260904.md`
+
+`fix/adsense-low-value-20260904` ブランチではGitHub Actionsでも同じ監査を実行します。
+
 ---
 
-## 月額費用
+## 301統合・noindexの考え方
 
-| 項目 | 費用 |
-|------|------|
-| ホスティング（Cloudflare Pages） | 無料 |
-| ドメイン | 年間1,000〜1,500円 |
-| SSL証明書 | 無料（Cloudflareが自動提供） |
-| **合計** | **年間約1,500円のみ** |
+### 301リダイレクト
+
+同じ検索意図のページが複数ある場合、内容・更新状況・一次情報が優れた代表ページへ301で統合します。統合元は `sitemap.xml`、サイト内検索、記事一覧から外します。
+
+### noindex
+
+法律・税務・契約責任・感染症など、内容を残す必要はあるものの検索流入を受ける状態で公開するには確認不足のページは、一時的に `noindex, follow` とし、広告も停止します。確認後に再公開を判断します。
+
+---
+
+## 非コンテンツページの広告
+
+次のページではAdSense広告を読み込みません。
+
+- 編集方針・運営情報
+- プライバシーポリシー
+- お問い合わせフォーム
+- 業者向け掲載案内
+
+広告より本文が主となるページだけを広告対象にします。
+
+---
+
+## 公開後の確認
+
+1. トップページ、代表記事、統合先URLが200で表示されること。
+2. 301統合元URLが正しい代表ページへ移動すること。
+3. `ads.txt` がルートで取得できること。
+4. `robots.txt` と `sitemap.xml` が取得できること。
+5. `noindex` 保留ページがサイトマップに含まれていないこと。
+6. モバイルでナビゲーション・本文・フォームが崩れていないこと。
+7. Search Consoleでは、統合元の減少と代表URLのインデックス状況を確認すること。
+
+---
+
+## サイト売却・引き継ぎ時
+
+買い手へ必要に応じて以下を引き継ぎます。
+
+1. GitHubリポジトリ
+2. ドメイン管理
+3. Cloudflare Pagesプロジェクト
+4. Google Analytics / Search Console / AdSense の適切な権限
+5. 本運用手順と編集方針

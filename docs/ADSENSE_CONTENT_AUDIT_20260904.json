@@ -1,0 +1,1123 @@
+{
+  "generated": "2026-09-05",
+  "html_pages": 136,
+  "article_files": 116,
+  "redirected_article_sources": 22,
+  "noindex_articles": 15,
+  "active_indexable_articles": 79,
+  "active_categories": {
+    "area": 13,
+    "cost": 12,
+    "ihinseiri": 13,
+    "kuyo": 15,
+    "seizenseiri": 17,
+    "tokushu-seisou": 9
+  },
+  "active_without_public_source_hint": 0,
+  "active_without_editorial_info": 0,
+  "active_without_reference_links": 0,
+  "non_content_ads_remaining": [],
+  "duplicate_candidates": [
+    {
+      "category": "area",
+      "left": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+      "right": "blog/area/article-20260713-kurume-ogori-tosu.html",
+      "content_similarity": 0.095,
+      "title_similarity": 0.614
+    }
+  ],
+  "risk_files": [
+    {
+      "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+      "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド",
+      "risk_total": 11,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 6,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/seizenseiri/article-20260715-oya-seizenseiri-tetsudau.html",
+      "title": "親の生前整理を手伝う方法｜嫌がる親を説得するコツと家族の役割分担【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 11,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 11,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260708-50dai-hajimekata.html",
+      "title": "50代から始める生前整理と断捨離｜後悔しない進め方5ステップ - 福岡遺品整理ガイド",
+      "risk_total": 10,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 9,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/kuyo/article-20260706-suterarenai-taisho.html",
+      "title": "遺品で捨てられないものの対処法｜心の整理と供養の選択肢 - 福岡遺品整理ガイド",
+      "risk_total": 10,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 7,
+        "出典確認が必要な割合": 3,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/seizenseiri/article-20260722-kichouhin-list-hokan.html",
+      "title": "生前整理で見つけておくべき貴重品リストと保管場所｜福岡遺品整理ガイド",
+      "risk_total": 10,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 9,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+      "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】",
+      "risk_total": 9,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
+      "title": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないためのガイド - 福岡遺品整理ガイド",
+      "risk_total": 9,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 9,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+      "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 5,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260713-accessory-kikinzoku-kaitori.html",
+      "title": "遺品のアクセサリー・貴金属の買取と供養｜形見分けの判断基準と高く売るコツ【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 5,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
+      "title": "遺品整理の形見分けガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 7,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260707-oya-seizenseiri.html",
+      "title": "親に生前整理を切り出す方法｜嫌がられない伝え方と福岡での進め方 - 福岡遺品整理ガイド",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 7,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
+      "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 3,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+      "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び｜福岡遺品整理ガイド",
+      "risk_total": 8,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 3,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 11
+    },
+    {
+      "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
+      "title": "人形・ぬいぐるみの供養方法｜福岡で依頼できる神社・お寺と料金まとめ - 福岡遺品整理ガイド",
+      "risk_total": 7,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html",
+      "title": "お焚き上げの料金比較｜神社・寺院・郵送サービスの費用相場と選び方【2026年版】",
+      "risk_total": 7,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 7,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
+      "title": "遠方からの遺品整理の進め方｜立ち会いなしで依頼する方法と費用を解説【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 7,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260719-digital-ending-note.html",
+      "title": "デジタルエンディングノートの作り方｜スマホ・クラウドで安全に残すガイド｜福岡遺品整理ガイド",
+      "risk_total": 7,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+      "title": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+      "risk_total": 7,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 6,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 10
+    },
+    {
+      "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+      "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260706-reform-genjokaifuku.html",
+      "title": "特殊清掃後のリフォーム費用と原状回復の流れ｜福岡の事例 - 福岡遺品整理ガイド",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/cost/article-20260706-1k-cost.html",
+      "title": "1K・ワンルームの遺品整理費用相場｜福岡の料金比較と注意点 - 福岡遺品整理ガイド",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/cost/article-20260707-cost-yasuku-suru.html",
+      "title": "遺品整理の費用を安くする7つの方法｜福岡の自治体サービスと節約術 - 福岡遺品整理ガイド",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku.html",
+      "title": "遺品整理の追加料金が発生するケースと防止策｜見積もり時に確認すべき5つのポイント【2026年版】",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/kuyo/article-20260722-otakiage-houhou-hiyo.html",
+      "title": "お焚き上げの方法と費用｜福岡で供養できる神社・寺院と郵送対応｜福岡遺品整理ガイド",
+      "risk_total": 6,
+      "risk_counts": {
+        "監修・専門家表示": 2,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html",
+      "title": "孤独死を防ぐために家族ができる5つの対策｜福岡の見守りサービス紹介 - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 1,
+        "調査によると": 1,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260707-tokushu-seisou-cost.html",
+      "title": "福岡で特殊清掃が必要になったら｜費用相場・作業内容・業者選びのガイド - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+      "title": "遺品整理を自分でやる方法と業者に頼むべきケースの判断基準 - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
+      "title": "遺品整理はいつから始める？49日前後のベストタイミングと手続き期限を解説 - 福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html",
+      "title": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 5,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+      "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 3,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/seizenseiri/article-20260714-digital-shukatsu-hajimekata.html",
+      "title": "デジタル終活の始め方｜パスワード管理・SNS・サブスク整理のガイド【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/seizenseiri/article-20260718-50dai-60dai-danshari.html",
+      "title": "50代60代から始める断捨離と生前整理｜無理なく進める具体的な手順｜福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+      "title": "遺品整理の費用を安く抑える7つの方法｜見積もり比較のコツと注意点｜福岡遺品整理ガイド",
+      "risk_total": 5,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 3,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 16
+    },
+    {
+      "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+      "title": "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260719-shashin-album-kuyo.html",
+      "title": "故人の写真・アルバムの整理と供養方法｜デジタル化から処分までガイド｜福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 1,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260804-jitaku-kuyo-houhou.html",
+      "title": "遺品供養を自宅でする方法｜お清め塩・読経・お焚き上げの手順と費用【2026年版】",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260710-gomiyashiki-hiyo-gyousei.html",
+      "title": "ゴミ屋敷の片付け費用と行政代執行について解説 | 福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260803-tokushu-seisou-hoken.html",
+      "title": "特殊清掃の費用は保険で払える？火災保険・孤独死保険の適用条件と請求方法【2026年版】 | 福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/cost/article-20260709-kuruma-shobun-hiyo.html",
+      "title": "故人の車・バイクの処分方法と費用｜名義変更から廃車手続きまで福岡の窓口情報付き - 福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/ihinseiri/article-20260713-kuruma-bike-shobun.html",
+      "title": "遺品整理で出てきた車・バイクの処分方法｜名義変更から廃車手続きまでガイド【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260803-jikka-kataduke-settoku.html",
+      "title": "実家の片付けを親に切り出す方法｜説得のコツと生前整理の進め方【2026年版】",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/ihinseiri/article-20260722-akutoku-gyousha-trouble.html",
+      "title": "遺品整理業者の悪徳トラブル事例と見分け方｜福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+      "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 3,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
+      "title": "遺品整理の追加料金トラブルを防ぐ！見積書の正しい見方と対策 | 福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 1,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 10
+    },
+    {
+      "path": "blog/seizenseiri/article-20260706-yarukoto-list.html",
+      "title": "生前整理のやることリスト完全版｜70代から始める物・心・情報の整理 - 福岡遺品整理ガイド",
+      "risk_total": 4,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 4,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 14
+    },
+    {
+      "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+      "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+      "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260710-kamidana-shobun.html",
+      "title": "神棚の処分方法と費用相場｜福岡の神社でのお祓い・神上げ手順 | 福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
+      "title": "位牌の処分方法と費用相場｜閉眼供養から永代供養まで正しい手順を解説｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260809-49nichi-houyo-kuyo.html",
+      "title": "遺品整理は49日前にしてもいい？四十九日法要と供養の正しいタイミングを解説",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
+      "title": "一軒家の遺品整理費用相場｜間取り別料金と見積もり比較のポイント【2026年版】",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 2,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu.html",
+      "title": "遺品整理で親族間トラブルを防ぐ方法｜もめないための事前準備と法的知識【2026年版】",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/kuyo/article-20260715-omamori-ofuda-shobun.html",
+      "title": "御守り・お札の正しい処分方法｜返納先・どんど焼き・郵送対応までガイド【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html",
+      "title": "エンディングノートの書き方ガイド｜家族に伝えるべき10項目と保管方法【2026年版】",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+      "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/seizenseiri/article-20260712-oya-mono-suterarenai.html",
+      "title": "親が物を捨てられない時の生前整理｜説得のコツと家族で進める片付け術【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 1,
+        "調査によると": 1,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 7
+    },
+    {
+      "path": "blog/cost/article-20260722-ihinseiri-kakuteishinkoku-zeimu.html",
+      "title": "遺品整理の費用は確定申告で控除できる？税務処理のガイド｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/ihinseiri/article-20260711-digital-ihin-smartphone.html",
+      "title": "デジタル遺品の整理方法｜故人のスマホ・PC・SNSアカウントの対処法【2026年最新】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri.html",
+      "title": "空き家になった実家の遺品整理｜放置リスクと実家じまいの進め方【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/seizenseiri/article-20260713-danshari-hajimekata.html",
+      "title": "生前整理の断捨離｜始め方と挫折しないコツを年代別に解説【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 8
+    },
+    {
+      "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
+      "title": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260719-pet-tatougai-seisou.html",
+      "title": "ペット多頭飼育崩壊の特殊清掃｜費用相場・原状回復の流れ・行政支援を解説｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 1,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 10
+    },
+    {
+      "path": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+      "title": "太宰府市・那珂川市の遺品整理ガイド｜粗大ごみ処分・費用相場・地域の特徴【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 2,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 11
+    },
+    {
+      "path": "blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku.html",
+      "title": "賃貸物件の遺品整理と退去手続き｜原状回復の費用負担と期限を解説【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 12
+    },
+    {
+      "path": "blog/seizenseiri/article-20260706-digital-isan.html",
+      "title": "デジタル遺品の整理方法｜スマホ・SNS・サブスクの生前対策 - 福岡遺品整理ガイド",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 3,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 12
+    },
+    {
+      "path": "blog/ihinseiri/article-20260706-trouble-avoid.html",
+      "title": "遺品整理の契約トラブルを避けるチェックリスト｜福岡で確認したい7項目",
+      "risk_total": 3,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 1,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 13
+    },
+    {
+      "path": "blog/kuyo/article-20260714-ningyo-nuigurumi-kuyo.html",
+      "title": "人形・ぬいぐるみの供養方法と費用｜捨てられない遺品を正しく手放す方法【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou.html",
+      "title": "遺品供養の方法と費用相場｜お焚き上げ・合同供養・個別供養の違いを解説【2026年版】",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html",
+      "title": "仏壇の処分方法と供養の手順｜罰当たりにならない正しいやり方と費用【2026年版】",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/ihinseiri/article-20260806-shashin-album-seiri-houhou.html",
+      "title": "遺品整理で出てきた写真・アルバムの整理方法｜デジタル化・供養・処分の判断基準【2026年版】",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260804-yarukoto-list-70dai.html",
+      "title": "生前整理やることリスト完全版｜70代からでも間に合う具体的な進め方【2026年版】",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html",
+      "title": "一人暮らしの親が亡くなった時の遺品整理｜遠方からの手順と業者活用法【2026年版】｜福岡遺品整理ガイド",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260718-kodokushi-hakken-taiou.html",
+      "title": "孤独死を発見したときの対応手順｜警察連絡から特殊清掃までの流れ｜福岡遺品整理ガイド",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 2,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    },
+    {
+      "path": "blog/cost/article-20260719-ihinseiri-hiyo-darega-harau.html",
+      "title": "遺品整理費用は誰が払う？兄弟間の費用分担ルールと相続税控除の真実｜福岡遺品整理ガイド",
+      "risk_total": 2,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 1,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 10
+    },
+    {
+      "path": "blog/kuyo/article-20260806-shashin-tegami-omoide-kuyo.html",
+      "title": "故人の写真・手紙・思い出の品の供養方法｜捨てられない遺品との向き合い方【2026年版】",
+      "risk_total": 1,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 5
+    },
+    {
+      "path": "blog/seizenseiri/article-20260710-shashin-digital.html",
+      "title": "生前整理で写真・アルバムを整理する方法｜デジタル化のコツと福岡のサービス | 福岡遺品整理ガイド",
+      "risk_total": 1,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/seizenseiri/article-20260711-rouzen-seiri-60dai.html",
+      "title": "60代からの老前整理入門｜ミニマリストに学ぶ暮らしの軽量化と実践ステップ｜福岡遺品整理ガイド",
+      "risk_total": 1,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 6
+    },
+    {
+      "path": "blog/tokushu-seisou/article-20260722-gomiyashiki-gyousei-daishikkou.html",
+      "title": "ゴミ屋敷の行政代執行と特殊清掃｜福岡県の条例と対策｜福岡遺品整理ガイド",
+      "risk_total": 1,
+      "risk_counts": {
+        "監修・専門家表示": 0,
+        "絶対・必ず等の断定": 1,
+        "出典確認が必要な割合": 0,
+        "調査によると": 0,
+        "正確・適正の断定": 0,
+        "おすすめ断定": 0
+      },
+      "public_source_hints": 9
+    }
+  ]
+}

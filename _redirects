@@ -1,2 +1,30 @@
 # 旧URLからのリダイレクト（301永続リダイレクト）
 # Cloudflare Pagesは自動的にカスタムドメインへリダイレクトするが念のため
+
+# AdSense quality consolidation 2026-09-04
+/blog/area/article-20260706-kitakyushu-guide.html /blog/area/article-20260714-kitakyushu-ihinseiri-guide.html 301
+/blog/area/article-20260711-chikushino-onojo-kasuga.html /blog/area/article-20260722-chikushino-onojo-kasuga-guide.html 301
+/blog/cost/article-20260706-cost-saving-tips.html /blog/cost/article-20260707-cost-yasuku-suru.html 301
+/blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html /blog/cost/article-20260707-cost-yasuku-suru.html 301
+/blog/kuyo/article-20260706-butsudan-shobun.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260708-butsudan-shobun-houhou.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260712-butsudan-shobun-houhou.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+/blog/kuyo/article-20260718-butsudan-shobun-heigan.html /blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html 301
+
+# AdSense quality consolidation phase 2 2026-09-04
+/blog/area/article-20260706-kurume.html /blog/area/article-20260713-kurume-ogori-tosu.html 301
+/blog/area/article-20260706-minami-ku.html /blog/area/article-20260719-minami-jonan-ku-guide.html 301
+/blog/area/article-20260707-higashi-ku-guide.html /blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html 301
+/blog/area/article-20260708-hakata-ku-guide.html /blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html 301
+/blog/cost/article-20260706-mitsumori-hikaku.html /blog/cost/article-20260803-mitsumorisho-mikata.html 301
+/blog/cost/article-20260712-ihinseiri-hiyo-yasuku.html /blog/cost/article-20260707-cost-yasuku-suru.html 301
+/blog/ihinseiri/article-20260706-mitsumori-point.html /blog/cost/article-20260803-mitsumorisho-mikata.html 301
+/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html /blog/cost/article-20260803-mitsumorisho-mikata.html 301
+/blog/kuyo/article-20260706-otakiage-hikaku.html /blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html 301
+/blog/kuyo/article-20260707-shashin-kuyo.html /blog/kuyo/article-20260806-shashin-tegami-omoide-kuyo.html 301
+/blog/seizenseiri/article-20260706-ending-note.html /blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html 301
+/blog/seizenseiri/article-20260709-ending-note-kakikata.html /blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html 301
+/blog/tokushu-seisou/article-20260709-kodokushi-hakken-taiou.html /blog/tokushu-seisou/article-20260718-kodokushi-hakken-taiou.html 301
+
+# AdSense risk hold phase 3 2026-09-04
+/blog/ihinseiri/article-20260707-chintai-taijo.html /blog/ihinseiri/article-20260803-chintai-ihinseiri.html 301
