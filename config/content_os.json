@@ -1,0 +1,33 @@
+{
+  "site_url": "https://fukuoka-ihinseiri-guide.com",
+  "site_name": "福岡遺品整理ガイド",
+  "language": "ja",
+  "timezone": "Asia/Tokyo",
+  "content_glob": "blog/*/article-*.html",
+  "max_articles_per_run": 1,
+  "min_impressions_for_gsc_priority": 30,
+  "position_opportunity_min": 4.0,
+  "position_opportunity_max": 20.0,
+  "minimum_quality_score": 78,
+  "new_article_minimum_score": 90,
+  "allow_scheduled_new_articles": false,
+  "require_primary_sources_for_claims": true,
+  "require_inline_source_context": true,
+  "prohibited_behaviors": [
+    "検索順位操作だけを目的とした大量ページ生成",
+    "存在しない体験談・口コミ・専門家・監修者・実績の作成",
+    "一次情報で確認できない統計・料金・割合・制度の断定",
+    "AI利用を隠すためだけの文章偽装・検出回避",
+    "既存記事の地名だけを差し替えた量産"
+  ],
+  "preferred_source_domains": [
+    "go.jp",
+    "lg.jp",
+    "city.fukuoka.lg.jp",
+    "city.kitakyushu.lg.jp",
+    "pref.fukuoka.lg.jp",
+    "kokusen.go.jp",
+    "courts.go.jp",
+    "e-gov.go.jp"
+  ]
+}
