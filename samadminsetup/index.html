@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <title>SAM Admin | 福岡遺品整理ガイド</title>
+  <style>
+    :root{color-scheme:dark;--bg:#071018;--panel:#0d1822;--panel2:#101f2b;--line:#203443;--text:#eef5f8;--muted:#8ea3af;--good:#63d39b;--warn:#f7c96f;--bad:#ff7a8a;--accent:#67b7ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#112a3b 0,#071018 38%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
+    a{color:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:230px 1fr}.side{border-right:1px solid var(--line);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(6,14,21,.88);backdrop-filter:blur(16px)}
+    .brand{font-weight:800;font-size:17px;letter-spacing:.02em}.brand small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:5px}
+    .nav{margin-top:30px;display:grid;gap:8px}.nav button{border:0;background:transparent;color:var(--muted);padding:11px 12px;border-radius:10px;text-align:left;cursor:pointer;font-size:13px}.nav button.active,.nav button:hover{background:#142633;color:#fff}
+    .sidefoot{position:absolute;bottom:22px;left:18px;right:18px;color:var(--muted);font-size:11px;line-height:1.7}.main{padding:28px 32px 60px;min-width:0}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.top h1{font-size:23px;margin:0}.status{font-size:12px;color:var(--muted);display:flex;gap:10px;align-items:center}.dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 16px var(--good)}
+    .tab{display:none}.tab.active{display:block}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(180deg,rgba(17,32,44,.95),rgba(11,24,34,.96));border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 12px 35px rgba(0,0,0,.18)}.label{font-size:12px;color:var(--muted)}.value{font-size:28px;font-weight:800;margin-top:7px}.delta{font-size:11px;margin-top:5px}.up{color:var(--good)}.down{color:var(--bad)}.neutral{color:var(--muted)}
+    .two{grid-template-columns:1.4fr 1fr;margin-top:14px}.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.section-title h2{font-size:15px;margin:0}.pill{font-size:10px;padding:4px 8px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #172a38;vertical-align:top}th{color:var(--muted);font-weight:600}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}.muted{color:var(--muted)}.score{font-weight:800;color:var(--good)}.tag{display:inline-block;padding:3px 7px;border-radius:8px;font-size:10px;background:#142b3a;color:#9ed1f6;margin-right:4px;margin-bottom:3px}
+    #trend{width:100%;height:250px}.empty{color:var(--muted);padding:26px 0;text-align:center}.health{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.health div{padding:13px;border:1px solid var(--line);border-radius:11px;background:#0a1720}.ok{color:var(--good)}.ng{color:var(--warn)}
+    .activity{display:grid;gap:10px}.activity-item{border:1px solid var(--line);border-radius:12px;padding:14px;background:#0a1720}.activity-item b{font-size:13px}.activity-item .meta{color:var(--muted);font-size:10px;margin:5px 0 8px}.activity-item ul{margin:7px 0 0;padding-left:18px;color:#bed0da;font-size:11px;line-height:1.65}
+    .notice{padding:13px 15px;border:1px solid #51472b;border-radius:11px;background:#251f10;color:#f1d88f;font-size:12px;line-height:1.6;margin-bottom:14px}
+    @media(max-width:980px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{grid-template-columns:repeat(5,1fr);margin-top:16px}.sidefoot{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.main{padding:22px 16px}.health{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">SAM ADMIN<small>福岡遺品整理ガイド Control Center</small></div>
+    <div class="nav">
+      <button class="active" data-tab="overview">Overview</button>
+      <button data-tab="seo">SEO / Search</button>
+      <button data-tab="ai">AI Operations</button>
+      <button data-tab="inquiries">お問い合わせ</button>
+      <button data-tab="system">System</button>
+    </div>
+    <div class="sidefoot">Private admin only<br>Cloudflare Access protected<br><span id="updatedSide">Loading...</span></div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <h1 id="pageTitle">Overview</h1>
+      <div class="status"><span class="dot"></span><span id="liveStatus">データ取得中</span></div>
+    </div>
+
+    <section class="tab active" id="overview">
+      <div class="grid kpis">
+        <div class="card"><div class="label">28日クリック</div><div class="value" id="clicks">-</div><div class="delta" id="clicksDelta">-</div></div>
+        <div class="card"><div class="label">28日表示回数</div><div class="value" id="impressions">-</div><div class="delta" id="impDelta">-</div></div>
+        <div class="card"><div class="label">CTR</div><div class="value" id="ctr">-</div><div class="delta" id="ctrDelta">-</div></div>
+        <div class="card"><div class="label">平均掲載順位</div><div class="value" id="position">-</div><div class="delta" id="posDelta">-</div></div>
+      </div>
+      <div class="grid two">
+        <div class="card"><div class="section-title"><h2>90日 検索推移</h2><span class="pill">Search Console</span></div><svg id="trend" viewBox="0 0 800 250" preserveAspectRatio="none"></svg></div>
+        <div class="card"><div class="section-title"><h2>AI自動運転</h2><span class="pill">毎日 05:10 JST</span></div><div id="latestAi" class="empty">読み込み中</div></div>
+      </div>
+      <div class="card" style="margin-top:14px"><div class="section-title"><h2>直近の本番反映</h2><span class="pill">main</span></div><div id="commits"></div></div>
+    </section>
+
+    <section class="tab" id="seo">
+      <div class="grid two">
+        <div class="card"><div class="section-title"><h2>上位ページ</h2><span class="pill">直近28日</span></div><div id="topPages"></div></div>
+        <div class="card"><div class="section-title"><h2>検索クエリ</h2><span class="pill">Private</span></div><div id="topQueries"></div></div>
+      </div>
+    </section>
+
+    <section class="tab" id="ai">
+      <div class="card"><div class="section-title"><h2>AI改善履歴</h2><span class="pill">Editor → Reviewer → Gate → main</span></div><div id="activity" class="activity"></div></div>
+      <div class="card" style="margin-top:14px"><div class="section-title"><h2>Workflow履歴</h2><span class="pill">GitHub Actions</span></div><div id="runs"></div></div>
+    </section>
+
+    <section class="tab" id="inquiries">
+      <div id="inquiryNotice"></div>
+      <div class="card"><div class="section-title"><h2>お問い合わせ一覧</h2><span class="pill" id="inquirySource">Loading</span></div><div id="inquiryList"></div></div>
+    </section>
+
+    <section class="tab" id="system">
+      <div class="card"><div class="section-title"><h2>連携状態</h2><span class="pill">Health</span></div><div class="health" id="health"></div></div>
+      <div class="card" style="margin-top:14px"><div class="section-title"><h2>自動運転ルール</h2></div>
+        <table><tbody>
+          <tr><th>実行</th><td>毎日 05:10 JST</td></tr>
+          <tr><th>改善件数</th><td>最大1ページ / run</td></tr>
+          <tr><th>編集対象</th><td>title / description / OGP / H1 / 本文 / 内部リンク / 構造化データ / 画像 / alt / sitemap</td></tr>
+          <tr><th>検査</th><td>独立Reviewer AI + AdSense trust + SEO/HTML quality gate</td></tr>
+          <tr><th>本番</th><td>全検査PASS時のみPRを作成し、自動でmainへsquash merge</td></tr>
+          <tr><th>新規記事</th><td>現在は定期量産OFF。既存記事改善を優先</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+const state={overview:null,inquiries:null};
+const fmt=n=>Number(n||0).toLocaleString("ja-JP");
+const pct=n=>(Number(n||0)*100).toFixed(2)+"%";
+const shortDate=s=>s?new Date(s).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"-";
+function delta(current,previous,invert=false){
+  current=Number(current||0);previous=Number(previous||0);
+  if(!previous)return '<span class="neutral">比較データなし</span>';
+  const d=((current-previous)/Math.abs(previous))*100;
+  const good=invert?d<0:d>0;
+  return '<span class="'+(Math.abs(d)<.01?'neutral':good?'up':'down')+'">'+(d>0?"+":"")+d.toFixed(1)+'% vs 前28日</span>';
+}
+function renderTrend(rows){
+  const svg=document.getElementById("trend"); if(!rows?.length){svg.innerHTML='<text x="20" y="30" fill="#8ea3af">データなし</text>';return}
+  const W=800,H=250,p=24,max=Math.max(...rows.map(r=>r.clicks),1);
+  const pts=rows.map((r,i)=>[(p+(W-p*2)*(i/Math.max(rows.length-1,1))),H-p-(H-p*2)*(r.clicks/max)]);
+  const path=pts.map((v,i)=>(i?"L":"M")+v[0].toFixed(1)+" "+v[1].toFixed(1)).join(" ");
+  svg.innerHTML='<line x1="'+p+'" y1="'+(H-p)+'" x2="'+(W-p)+'" y2="'+(H-p)+'" stroke="#203443"/><path d="'+path+'" fill="none" stroke="#67b7ff" stroke-width="3" vector-effect="non-scaling-stroke"/><text x="'+p+'" y="18" fill="#8ea3af" font-size="12">Clicks / day</text><text x="'+(W-p-55)+'" y="18" fill="#8ea3af" font-size="11">max '+fmt(max)+'</text>';
+}
+function table(el,heads,rows){
+  document.getElementById(el).innerHTML=rows?.length?'<table><thead><tr>'+heads.map(h=>'<th>'+h[0]+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+heads.map(h=>'<td>'+h[1](r)+'</td>').join('')+'</tr>').join('')+'</tbody></table>':'<div class="empty">データなし</div>';
+}
+function renderOverview(o){
+  const g=o.gsc||{},c=g.current||{},p=g.previous||{};
+  clicks.textContent=fmt(c.clicks);impressions.textContent=fmt(c.impressions);ctr.textContent=pct(c.ctr);position.textContent=Number(c.position||0).toFixed(1);
+  clicksDelta.innerHTML=delta(c.clicks,p.clicks);impDelta.innerHTML=delta(c.impressions,p.impressions);ctrDelta.innerHTML=delta(c.ctr,p.ctr);posDelta.innerHTML=delta(c.position,p.position,true);
+  renderTrend(g.trend||[]);
+  const a=o.activity||[];
+  latestAi.innerHTML=a.length?'<div><div class="score">Reviewer '+(a[0].review_score||"-")+'/100</div><b>'+escapeHtml(a[0].title_after||a[0].path)+'</b><div class="muted" style="font-size:11px;margin-top:7px">'+shortDate(a[0].timestamp)+' · '+(a[0].image_generated?'画像更新あり':'画像維持')+'</div><div style="margin-top:9px">'+(a[0].changes||[]).slice(0,3).map(x=>'<span class="tag">'+escapeHtml(x)+'</span>').join('')+'</div></div>':'<div class="empty">次回の自動改善後に表示</div>';
+  table("commits",[["日時",r=>shortDate(r.date)],["内容",r=>escapeHtml((r.message||"").split("\n")[0])],["SHA",r=>'<span class="mono">'+r.sha.slice(0,8)+'</span>']],(o.github?.commits||[]).slice(0,8));
+  table("topPages",[["ページ",r=>'<span class="mono">'+escapeHtml(r.page.replace("https://fukuoka-ihinseiri-guide.com/","/"))+'</span>'],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["CTR",r=>pct(r.ctr)],["順位",r=>Number(r.position).toFixed(1)]],g.topPages||[]);
+  table("topQueries",[["Query",r=>escapeHtml(r.query)],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["CTR",r=>pct(r.ctr)],["順位",r=>Number(r.position).toFixed(1)]],g.topQueries||[]);
+  renderActivity(a);
+  table("runs",[["開始",r=>shortDate(r.createdAt)],["結果",r=>'<span class="'+(r.conclusion==="success"?"ok":r.conclusion?"ng":"muted")+'">'+escapeHtml(r.conclusion||r.status)+'</span>'],["種別",r=>escapeHtml(r.event)],["Run",r=>'<a href="'+r.url+'" target="_blank" class="mono">#'+r.id+'</a>']],o.github?.runs||[]);
+  const h=o.health||{};health.innerHTML=Object.entries(h).map(([k,v])=>'<div><span class="'+(v?'ok':'ng')+'">●</span> '+escapeHtml(k)+'<br><small class="muted">'+(v?'READY':'NOT SET')+'</small></div>').join("");
+}
+function renderActivity(rows){
+  activity.innerHTML=rows?.length?rows.slice(0,30).map(a=>'<div class="activity-item"><b>'+escapeHtml(a.title_after||a.path)+'</b><div class="meta">'+shortDate(a.timestamp)+' · Reviewer '+(a.review_score||"-")+' · '+escapeHtml(a.status||"")+'</div><div>'+(a.image_generated?'<span class="tag">IMAGE</span>':'')+(a.internal_links||[]).slice(0,3).map(x=>'<span class="tag">LINK '+escapeHtml(x)+'</span>').join('')+'</div><ul>'+(a.changes||[]).map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul></div>').join(''):'<div class="empty">履歴なし</div>';
+}
+function renderInquiries(d){
+  inquirySource.textContent=d.source||"not connected";
+  if(!d.connected){inquiryNotice.innerHTML='<div class="notice">'+escapeHtml(d.message||"問い合わせDB接続設定待ち")+'</div>'}else inquiryNotice.innerHTML='';
+  const rows=Array.isArray(d.inquiries)?d.inquiries:[];
+  table("inquiryList",[["日時",r=>shortDate(r.receivedAt||r.created_at)],["名前",r=>escapeHtml(r.name||r.user_name||"")],["連絡",r=>escapeHtml((r.phone||r.user_phone||"")+" "+(r.email||r.user_email||""))],["地域",r=>escapeHtml(r.region||r.target_area||"")],["内容",r=>escapeHtml((r.details||r.message||"").slice(0,180))],["状態",r=>escapeHtml(r.status||"")]],rows);
+}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+async function load(){
+  try{
+    const [o,i]=await Promise.all([fetch("/samadminsetup/api/overview",{cache:"no-store"}),fetch("/samadminsetup/api/inquiries",{cache:"no-store"})]);
+    if(!o.ok)throw new Error("overview "+o.status);state.overview=await o.json();state.inquiries=await i.json();renderOverview(state.overview);renderInquiries(state.inquiries);
+    liveStatus.textContent="LIVE · "+new Date().toLocaleTimeString("ja-JP",{timeZone:"Asia/Tokyo",hour:"2-digit",minute:"2-digit"});updatedSide.textContent="Updated "+shortDate(state.overview.generatedAt);
+  }catch(e){liveStatus.textContent="ERROR";document.querySelector(".dot").style.background="var(--bad)";console.error(e)}
+}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.tab).classList.add("active");pageTitle.textContent=b.textContent});
+load();setInterval(load,120000);
+</script>
+</body>
+</html>
