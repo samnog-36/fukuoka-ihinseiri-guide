@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "policy": "制度・法律・税・統計・自治体ルール・処分方法・安全情報は一次情報を優先する。料金相場など民間市場データは、調査日・対象・サンプル条件を明示できる場合だけ使用する。",
+  "sources": [
+    {"name":"福岡県","base_url":"https://www.pref.fukuoka.lg.jp/","type":"local_government","priority":100},
+    {"name":"福岡市","base_url":"https://www.city.fukuoka.lg.jp/","type":"local_government","priority":100},
+    {"name":"北九州市","base_url":"https://www.city.kitakyushu.lg.jp/","type":"local_government","priority":100},
+    {"name":"環境省","base_url":"https://www.env.go.jp/","type":"national_government","priority":100},
+    {"name":"e-Gov法令検索","base_url":"https://elaws.e-gov.go.jp/","type":"law","priority":100},
+    {"name":"国税庁","base_url":"https://www.nta.go.jp/","type":"national_government","priority":100},
+    {"name":"裁判所","base_url":"https://www.courts.go.jp/","type":"judiciary","priority":100},
+    {"name":"国民生活センター","base_url":"https://www.kokusen.go.jp/","type":"public_agency","priority":95},
+    {"name":"総務省統計局","base_url":"https://www.stat.go.jp/","type":"official_statistics","priority":100}
+  ]
+}
