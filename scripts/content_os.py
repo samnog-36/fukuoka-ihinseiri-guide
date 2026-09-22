@@ -19,22 +19,22 @@ SOURCES = json.loads((ROOT / "data/source_registry.json").read_text(encoding="ut
 PRIVATE_DIR = ROOT / os.getenv("CONTENT_OS_PRIVATE_DIR", ".content-os-private")
 ACTIVITY_LOG = ROOT / "data/ai-activity-log.json"
 
-TAG_RE = re.compile(r"<script\\b.*?</script>|<style\\b.*?</style>|<[^>]+>", re.I | re.S)
+TAG_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>", re.I | re.S)
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
-H1_RE = re.compile(r"<h1\\b[^>]*>(.*?)</h1>", re.I | re.S)
-NOINDEX_RE = re.compile(r'<meta[^>]+name=["\\']robots["\\'][^>]+content=["\\'][^"\\']*noindex', re.I)
-ARTICLE_RE = re.compile(r'(<article\\s+class=["\\']article-content["\\'][^>]*>.*?</article>)', re.I | re.S)
-URL_RE = re.compile(r'https?://[^"\\'<>\\s]+')
-DESC_RE = re.compile(r'<meta[^>]+name=["\\']description["\\'][^>]*>', re.I)
-CANONICAL_RE = re.compile(r'<link[^>]+rel=["\\']canonical["\\'][^>]+href=["\\']([^"\\']+)', re.I)
-JSONLD_RE = re.compile(r'(<script[^>]+type=["\\']application/ld\\+json["\\'][^>]*>)(.*?)(</script>)', re.I | re.S)
-IMG_RE = re.compile(r'<img\\b[^>]*>', re.I)
-SRC_RE = re.compile(r'\\bsrc=["\\']([^"\\']+)["\\']', re.I)
-ALT_RE = re.compile(r'\\balt=["\\']([^"\\']*)["\\']', re.I)
+H1_RE = re.compile(r"<h1\b[^>]*>(.*?)</h1>", re.I | re.S)
+NOINDEX_RE = re.compile(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex', re.I)
+ARTICLE_RE = re.compile(r'(<article\s+class=["\']article-content["\'][^>]*>.*?</article>)', re.I | re.S)
+URL_RE = re.compile(r'https?://[^"\'<>\s]+')
+DESC_RE = re.compile(r'<meta[^>]+name=["\']description["\'][^>]*>', re.I)
+CANONICAL_RE = re.compile(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', re.I)
+JSONLD_RE = re.compile(r'(<script[^>]+type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)', re.I | re.S)
+IMG_RE = re.compile(r'<img\b[^>]*>', re.I)
+SRC_RE = re.compile(r'\bsrc=["\']([^"\']+)["\']', re.I)
+ALT_RE = re.compile(r'\balt=["\']([^"\']*)["\']', re.I)
 
 
 def visible(html: str) -> str:
-    return re.sub(r"\\s+", " ", unescape(TAG_RE.sub(" ", html))).strip()
+    return re.sub(r"\s+", " ", unescape(TAG_RE.sub(" ", html))).strip()
 
 
 def redirects() -> set[str]:
@@ -76,7 +76,7 @@ def article_records() -> list[dict]:
             quality -= 12
         if re.search(r"(?:必ず|絶対|100%|最も多い|専門家監修|弁護士監修)", text):
             quality -= 8
-        if len(re.findall(r"\\d[\\d,]*(?:%|％|円|万円|件|人|世帯)", text)) >= 5 and official < 2:
+        if len(re.findall(r"\d[\d,]*(?:%|％|円|万円|件|人|世帯)", text)) >= 5 and official < 2:
             quality -= 10
         rows.append({
             "path": rel,
@@ -150,7 +150,7 @@ def strip_json_fence(raw: str) -> str:
     raw = raw.strip()
     fence = chr(96) * 3
     if raw.startswith(fence):
-        raw = re.sub("^" + re.escape(fence) + r"(?:json)?\\s*|\\s*" + re.escape(fence) + "$", "", raw, flags=re.S)
+        raw = re.sub("^" + re.escape(fence) + r"(?:json)?\s*|\s*" + re.escape(fence) + "$", "", raw, flags=re.S)
     return raw.strip()
 
 
@@ -158,7 +158,7 @@ def replace_title(html: str, title: str) -> str:
     safe = escape(title, quote=False)
     if TITLE_RE.search(html):
         return TITLE_RE.sub(f"<title>{safe}</title>", html, count=1)
-    return html.replace("</head>", f"  <title>{safe}</title>\\n</head>", 1)
+    return html.replace("</head>", f"  <title>{safe}</title>\n</head>", 1)
 
 
 def replace_meta(html: str, *, name: str | None = None, prop: str | None = None, content: str) -> str:
@@ -167,13 +167,13 @@ def replace_meta(html: str, *, name: str | None = None, prop: str | None = None,
     key = "name" if name else "property"
     value = name or prop or ""
     pattern = re.compile(
-        rf'<meta\\b(?=[^>]*\\b{key}=["\\']{re.escape(value)}["\\'])[^>]*>',
+        rf'<meta\b(?=[^>]*\b{key}=["\']{re.escape(value)}["\'])[^>]*>',
         re.I,
     )
     tag = f'<meta {key}="{escape(value, quote=True)}" content="{escape(content, quote=True)}">'
     if pattern.search(html):
         return pattern.sub(tag, html, count=1)
-    return html.replace("</head>", f"  {tag}\\n</head>", 1)
+    return html.replace("</head>", f"  {tag}\n</head>", 1)
 
 
 def canonical_url_for(path: str) -> str:
@@ -206,7 +206,7 @@ def sync_structured_data(html: str, title: str, description: str, image_url: str
         except Exception:
             return match.group(0)
         walk(data)
-        return match.group(1) + "\\n" + json.dumps(data, ensure_ascii=False, indent=2) + "\\n" + match.group(3)
+        return match.group(1) + "\n" + json.dumps(data, ensure_ascii=False, indent=2) + "\n" + match.group(3)
 
     return JSONLD_RE.sub(repl, html)
 
@@ -235,11 +235,11 @@ def update_sitemap(path: str) -> None:
     today = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
     xml = p.read_text(encoding="utf-8")
     block_re = re.compile(
-        rf"(<url>\\s*<loc>{re.escape(url)}</loc>.*?<lastmod>)([^<]+)(</lastmod>.*?</url>)",
+        rf"(<url>\s*<loc>{re.escape(url)}</loc>.*?<lastmod>)([^<]+)(</lastmod>.*?</url>)",
         re.S,
     )
     if block_re.search(xml):
-        xml = block_re.sub(rf"\\g<1>{today}\\g<3>", xml, count=1)
+        xml = block_re.sub(rf"\g<1>{today}\g<3>", xml, count=1)
         p.write_text(xml, encoding="utf-8")
 
 
@@ -273,7 +273,7 @@ def update_search_data(path: str, title: str, description: str) -> None:
 
     walk(data)
     if changed:
-        p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def inventory_for_internal_links(rows: list[dict], current_path: str) -> list[dict]:
@@ -297,7 +297,7 @@ def call_editor(candidate: dict, rows: list[dict]) -> dict:
         raise RuntimeError("article-content not found: " + candidate["path"])
 
     current_title = unescape(TITLE_RE.search(html).group(1)).strip() if TITLE_RE.search(html) else candidate["title"]
-    desc_match = re.search(r'<meta[^>]+name=["\\']description["\\'][^>]+content=["\\']([^"\\']*)', html, re.I)
+    desc_match = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']*)', html, re.I)
     current_desc = unescape(desc_match.group(1)).strip() if desc_match else ""
     canonical_match = CANONICAL_RE.search(html)
     current_canonical = canonical_match.group(1).strip() if canonical_match else canonical_url_for(candidate["path"])
@@ -349,7 +349,7 @@ canonical: {current_canonical}
     "og_title": "OG title",
     "og_description": "OG description"
   }},
-  "article_html": "<article class=\\\"article-content\\\">...</article>",
+  "article_html": "<article class=\\"article-content\\">...</article>",
   "change_summary": ["変更点"],
   "primary_sources": [{{"name":"機関名","url":"https://..."}}],
   "internal_links": ["/blog/..."],
@@ -546,7 +546,7 @@ def append_activity(candidate: dict, data: dict, review: dict, image_path: str |
     }
     log.insert(0, item)
     ACTIVITY_LOG.parent.mkdir(parents=True, exist_ok=True)
-    ACTIVITY_LOG.write_text(json.dumps(log[:180], ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    ACTIVITY_LOG.write_text(json.dumps(log[:180], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def improve(candidate: dict, rows: list[dict]) -> dict:
