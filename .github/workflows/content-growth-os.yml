@@ -31,6 +31,7 @@ jobs:
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-terra' }}
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'https://fukuoka-ihinseiri-guide.com/' }}
+      CONTENT_OS_PRIVATE_DIR: .content-os-private
       GH_TOKEN: ${{ github.token }}
 
     steps:
@@ -71,18 +72,26 @@ jobs:
           git diff --check
 
       - name: Create improvement pull request
+        if: steps.mode.outputs.mode == 'improve'
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No repository changes."
+          if [ -z "$(git status --porcelain -- blog sitemap.xml js/search-data.json data)" ]; then
+            echo "No publishable content changes."
             exit 0
           fi
           BRANCH="ai/content-growth-${GITHUB_RUN_ID}"
           git config user.name "content-growth-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$BRANCH"
-          git add docs/growth blog data sitemap.xml js/search-data.json 2>/dev/null || true
-          git add -A
+          git add blog sitemap.xml js/search-data.json data 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No staged publishable changes."
+            exit 0
+          fi
           git commit -m "AI: improve highest-priority content with verified sources"
           git push -u origin "$BRANCH"
-          gh pr create             --base main             --head "$BRANCH"             --title "Content Growth OS: verified content improvement"             --body "Automated research/update run. Search Console signals are used when configured. Quality gates passed before this PR was created. Review the factual changes and sources before merging."
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Content Growth OS: verified content improvement" \
+            --body "Automated research/update run. Search Console signals are used when configured. Raw Search Console data remains private in the runner and is not committed. Quality gates passed before this PR was created."
