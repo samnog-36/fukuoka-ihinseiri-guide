@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><title>掲載情報入力｜福岡遺品整理ガイド</title>
+<style>
+body{margin:0;background:#f6f8fa;color:#17202a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}.wrap{max-width:760px;margin:40px auto;padding:0 18px}.card{background:#fff;border:1px solid #dde4ea;border-radius:16px;padding:26px;box-shadow:0 10px 35px rgba(0,0,0,.06)}h1{font-size:24px;margin:0 0 8px}.muted{color:#667784;font-size:13px;line-height:1.7}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{margin-top:16px}.field label{font-size:13px;font-weight:700;display:block;margin-bottom:7px}.field input,.field textarea{width:100%;padding:12px;border:1px solid #cdd8e0;border-radius:9px;font:inherit}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.checks label{padding:9px;border:1px solid #dbe4ea;border-radius:9px;font-weight:500}.btn{margin-top:22px;width:100%;border:0;border-radius:10px;background:#1d6f50;color:white;padding:14px;font-weight:800;font-size:15px;cursor:pointer}.msg{margin-top:14px;padding:12px;border-radius:9px;display:none}.ok{background:#eaf8f1;color:#176943}.bad{background:#fff0f1;color:#a12a38}@media(max-width:650px){.grid,.checks{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>掲載情報の入力</h1><div class="muted" id="company">承認情報を確認しています…</div>
+<form id="f" style="display:none">
+<div class="field"><label>キャッチコピー</label><input name="catchphrase" maxlength="200"></div>
+<div class="field"><label>紹介文</label><textarea name="description" rows="5"></textarea></div>
+<div class="grid">
+<div class="field"><label>掲載用電話番号</label><input name="phone"></div>
+<div class="field"><label>掲載用メール</label><input name="email" type="email"></div>
+<div class="field"><label>料金目安</label><input name="priceRange"></div>
+<div class="field"><label>営業時間</label><input name="businessHours"></div>
+</div>
+<div class="field"><label>実績・資格</label><textarea name="qualifications" rows="3"></textarea></div>
+<div class="field"><label>掲載用対応エリア</label><textarea name="serviceArea" rows="2"></textarea></div>
+<div class="field"><label>サービスジャンル（1つ以上）</label><div class="checks" id="genres"></div></div>
+<button class="btn" type="submit">掲載情報を保存する</button>
+</form><div id="msg" class="msg"></div></div></div>
+<script>
+const genres=["遺品整理","特殊清掃","生前整理","ゴミ屋敷清掃","不用品回収","供養","ハウスクリーニング","リフォーム"];
+const token=location.pathname.split("/").filter(Boolean).pop();
+genresEl=document.getElementById("genres");genresEl.innerHTML=genres.map(g=>'<label><input type="checkbox" value="'+g+'"> '+g+'</label>').join("");
+async function load(){
+ const r=await fetch("/api/business/setup/"+encodeURIComponent(token),{cache:"no-store"});const d=await r.json();
+ if(!r.ok){company.textContent="無効または期限切れのリンクです。";return}
+ company.textContent=d.business.companyName+" 様の掲載情報を入力してください。";
+ f.style.display="block";const a=d.advertisement||{};
+ for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","qualifications","serviceArea"]){if(f.elements[k])f.elements[k].value=a[k]||""}
+ (a.serviceGenres||[]).forEach(g=>{const x=[...genresEl.querySelectorAll("input")].find(i=>i.value===g);if(x)x.checked=true});
+}
+f.onsubmit=async e=>{e.preventDefault();const fd=new FormData(f),serviceGenres=[...genresEl.querySelectorAll("input:checked")].map(x=>x.value);
+ const body={};for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","qualifications","serviceArea"])body[k]=fd.get(k)||"";body.serviceGenres=serviceGenres;
+ const r=await fetch("/api/business/setup/"+encodeURIComponent(token),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});const d=await r.json();
+ msg.style.display="block";msg.className="msg "+(r.ok?"ok":"bad");msg.textContent=r.ok?"保存しました。管理者が配信を開始するとサイトに表示されます。":"保存できませんでした。入力内容またはリンクを確認してください。";
+};load();
+</script></body></html>

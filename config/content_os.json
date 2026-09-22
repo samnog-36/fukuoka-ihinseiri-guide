@@ -6,8 +6,8 @@
   "content_glob": "blog/*/article-*.html",
   "max_articles_per_run": 1,
   "min_impressions_for_gsc_priority": 30,
-  "position_opportunity_min": 4.0,
-  "position_opportunity_max": 20.0,
+  "position_opportunity_min": 4,
+  "position_opportunity_max": 20,
   "minimum_quality_score": 78,
   "new_article_minimum_score": 90,
   "allow_scheduled_new_articles": false,
@@ -29,5 +29,26 @@
     "kokusen.go.jp",
     "courts.go.jp",
     "e-gov.go.jp"
+  ],
+  "allow_full_page_optimization": true,
+  "allow_image_generation": true,
+  "auto_publish_after_review": true,
+  "minimum_reviewer_score": 88,
+  "max_publications_per_run": 1,
+  "protect_canonical_path": true,
+  "protect_form_endpoints": true,
+  "managed_seo_fields": [
+    "title",
+    "meta_description",
+    "og_title",
+    "og_description",
+    "og_image",
+    "twitter_card",
+    "structured_data",
+    "h1",
+    "internal_links",
+    "image_alt",
+    "hero_image",
+    "sitemap_lastmod"
   ]
 }

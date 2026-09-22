@@ -29,8 +29,10 @@ jobs:
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-terra' }}
+      OPENAI_REVIEW_MODEL: ${{ vars.OPENAI_REVIEW_MODEL || 'gpt-5.6-sol' }}
+      OPENAI_IMAGE_MODEL: ${{ vars.OPENAI_IMAGE_MODEL || 'gpt-image-2.5-sunburst' }}
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-      SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'https://fukuoka-ihinseiri-guide.com/' }}
+      SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'sc-domain:fukuoka-ihinseiri-guide.com' }}
       CONTENT_OS_PRIVATE_DIR: .content-os-private
       GH_TOKEN: ${{ github.token }}
 
@@ -62,36 +64,66 @@ jobs:
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 
-      - name: Analyze and improve highest-value page
+      - name: Analyze, research, edit and independently review
         run: python3 scripts/content_os.py --mode "${{ steps.mode.outputs.mode }}"
 
       - name: Run safety and quality gates
         run: |
           python3 scripts/verify_adsense_trust_updates.py
           python3 scripts/content_quality_gate.py --strict
+          python3 -m py_compile scripts/content_os.py scripts/search_console_pull.py scripts/content_quality_gate.py
           git diff --check
 
-      - name: Create improvement pull request
+      - name: Auto-publish validated improvement
         if: steps.mode.outputs.mode == 'improve'
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- blog sitemap.xml js/search-data.json data)" ]; then
-            echo "No publishable content changes."
+          PUBLISHABLE="$(git status --porcelain -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
+          if [ -z "$PUBLISHABLE" ]; then
+            echo "No validated publishable change. Reviewer may have rejected the proposal."
             exit 0
           fi
+
           BRANCH="ai/content-growth-${GITHUB_RUN_ID}"
           git config user.name "content-growth-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git switch -c "$BRANCH"
-          git add blog sitemap.xml js/search-data.json data 2>/dev/null || true
+          git add blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json 2>/dev/null || true
+
           if git diff --cached --quiet; then
             echo "No staged publishable changes."
             exit 0
           fi
-          git commit -m "AI: improve highest-priority content with verified sources"
+
+          git commit -m "AI: autonomously optimize highest-priority page"
+
+          git fetch origin main
+          git rebase origin/main
           git push -u origin "$BRANCH"
-          gh pr create \
+
+          PR_URL="$(gh pr create \
             --base main \
             --head "$BRANCH" \
-            --title "Content Growth OS: verified content improvement" \
-            --body "Automated research/update run. Search Console signals are used when configured. Raw Search Console data remains private in the runner and is not committed. Quality gates passed before this PR was created."
+            --title "Content Growth OS: autonomous verified optimization" \
+            --body "Autonomous production update. Search Console selected the page; the editor researched primary sources; a separate reviewer model approved it at the configured threshold; static AdSense/SEO/HTML gates also passed. Raw Search Console query data remains private.")"
+
+          PR_NUMBER="$(gh pr view "$PR_URL" --json number --jq '.number')"
+          echo "Created PR #$PR_NUMBER: $PR_URL"
+
+          MERGE_RESULT="$(gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/merge" \
+            -f merge_method=squash)"
+
+          echo "$MERGE_RESULT"
+
+          MERGED="$(printf '%s' "$MERGE_RESULT" | python3 -c 'import json,sys; print(str(json.load(sys.stdin).get("merged",False)).lower())')"
+          if [ "$MERGED" != "true" ]; then
+            echo "Automatic merge was not accepted by GitHub."
+            exit 1
+          fi
+
+          git push origin --delete "$BRANCH" || true
+          echo "Validated update was merged to main and is ready for Cloudflare Pages deployment."
