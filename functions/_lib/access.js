@@ -16,11 +16,11 @@ function normalizeDomain(value) {
 }
 
 export async function verifyAdminRequest(request, env) {
-  const expectedEmail = String(env.ADMIN_EMAIL || "").toLowerCase();
+  const expectedEmail = "samkojinmail@gmail.com";
   const teamDomain = normalizeDomain(env.CF_ACCESS_TEAM_DOMAIN);
   const expectedAud = String(env.CF_ACCESS_AUD || "");
 
-  if (!expectedEmail || !teamDomain || !expectedAud) {
+  if (!teamDomain || !expectedAud) {
     return { ok: false, status: 503, reason: "admin_auth_not_configured" };
   }
 
