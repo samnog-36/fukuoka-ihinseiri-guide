@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fukuoka Iihinseiri Vendor",
+  "type": "object",
+  "required": ["id","company_name","areas","services","verification_status"],
+  "properties": {
+    "id":{"type":"string"},
+    "company_name":{"type":"string"},
+    "website_url":{"type":["string","null"]},
+    "address":{"type":["string","null"]},
+    "areas":{"type":"array","items":{"type":"string"}},
+    "services":{"type":"array","items":{"type":"string"}},
+    "licenses":{"type":"array","items":{"type":"object","properties":{"type":{"type":"string"},"number":{"type":["string","null"]},"verified_at":{"type":["string","null"]},"source_url":{"type":["string","null"]}}}},
+    "pricing_disclosure":{"type":"string","enum":["full","partial","none","unknown"]},
+    "verification_status":{"type":"string","enum":["unverified","reviewing","verified","suspended"]},
+    "sponsored":{"type":"boolean","default":false},
+    "last_verified":{"type":["string","null"]}
+  }
+}
