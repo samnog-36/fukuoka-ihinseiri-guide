@@ -91,9 +91,9 @@ export async function onRequestGet(context) {
     googleCredentialConfigured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON),
     searchConsoleSiteConfigured: Boolean(env.SEARCH_CONSOLE_SITE_URL),
     githubTokenConfigured: Boolean(env.GITHUB_DASHBOARD_TOKEN),
-    inquiryKvConfigured: Boolean(env.INQUIRIES_KV),
-    legacyInquiryListConfigured: Boolean(env.MANUS_INQUIRIES_LIST_URL),
-    accessConfigured: Boolean(env.CF_ACCESS_TEAM_DOMAIN && env.CF_ACCESS_AUD && env.ADMIN_EMAIL)
+    databaseConfigured: Boolean(env.DB),
+    accessConfigured: Boolean(env.CF_ACCESS_TEAM_DOMAIN && env.CF_ACCESS_AUD),
+    ownerEmailLocked: true
   };
 
   return new Response(JSON.stringify(output), {
