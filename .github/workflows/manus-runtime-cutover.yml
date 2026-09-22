@@ -1,0 +1,40 @@
+name: One-time Manus runtime cutover
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cutover:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Replace legacy Manus runtime URLs
+        run: python3 scripts/cutover_manus_runtime.py
+      - name: Verify site quality
+        run: |
+          python3 scripts/verify_adsense_trust_updates.py
+          python3 scripts/content_quality_gate.py --strict
+          git diff --check
+      - name: Commit cutover if needed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Already cut over."
+            exit 0
+          fi
+          git config user.name "migration-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Cut over public runtime from Manus to Cloudflare"
+          git push origin main
