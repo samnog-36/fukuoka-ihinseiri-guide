@@ -1,0 +1,88 @@
+name: Autonomous content growth OS
+
+on:
+  schedule:
+    - cron: "10 20 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "audit / discover / improve"
+        required: true
+        default: "improve"
+        type: choice
+        options:
+          - audit
+          - discover
+          - improve
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: autonomous-content-growth
+  cancel-in-progress: false
+
+jobs:
+  grow:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-terra' }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'https://fukuoka-ihinseiri-guide.com/' }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install content OS dependencies
+        run: pip install -r requirements-content-os.txt
+
+      - name: Pull Search Console performance when configured
+        run: python3 scripts/search_console_pull.py
+
+      - name: Resolve mode
+        id: mode
+        shell: bash
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then MODE="improve"; fi
+          if [ "$MODE" = "improve" ] && [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY is not configured; falling back to audit."
+            MODE="audit"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+      - name: Analyze and improve highest-value page
+        run: python3 scripts/content_os.py --mode "${{ steps.mode.outputs.mode }}"
+
+      - name: Run safety and quality gates
+        run: |
+          python3 scripts/verify_adsense_trust_updates.py
+          python3 scripts/content_quality_gate.py --strict
+          git diff --check
+
+      - name: Create improvement pull request
+        shell: bash
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No repository changes."
+            exit 0
+          fi
+          BRANCH="ai/content-growth-${GITHUB_RUN_ID}"
+          git config user.name "content-growth-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add docs/growth blog data sitemap.xml js/search-data.json 2>/dev/null || true
+          git add -A
+          git commit -m "AI: improve highest-priority content with verified sources"
+          git push -u origin "$BRANCH"
+          gh pr create             --base main             --head "$BRANCH"             --title "Content Growth OS: verified content improvement"             --body "Automated research/update run. Search Console signals are used when configured. Quality gates passed before this PR was created. Review the factual changes and sources before merging."

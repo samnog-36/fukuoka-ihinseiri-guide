@@ -154,3 +154,41 @@
     *   サイトのアクセス数（SEO順位）が上がれば、「月額3万円」などに値上げしていくことが可能です。
 
 以上が、業者マッチング機能を含む全体設計図です。
+
+
+---
+
+## 6. フェーズ3：自律コンテンツ・SEO運営OS
+
+2026年9月から、静的SEOサイトと将来の業者ポータルの間に「自律コンテンツ・SEO運営OS」を置く。
+
+### 6.1. 役割
+
+- Search Consoleの検索実績を自動取得
+- indexable記事を品質採点
+- 順位4〜20位、表示回数、CTR、記事品質から改善優先度を算出
+- 一次情報をWeb調査して既存記事を改善
+- 重複・断定・根拠不足・HTML崩れを自動検査
+- 合格した変更だけPull Request化
+- 自治体一次情報DBと業者DBを継続的に蓄積
+
+### 6.2. main一本化
+
+mainを本番の唯一の正とする。旧AdSense cleanup branchは履歴・手動復旧用途に限定し、通常の品質検査とAI改善はmain基準で行う。
+
+### 6.3. 公開安全性
+
+AIはmainへ直接書き込まない。専用branchに変更を作成し、品質Gate合格後にPull Requestを作る。定期実行での新規記事量産は無効とし、既存記事の改善を優先する。
+
+### 6.4. データ資産
+
+- config/content_os.json
+- data/source_registry.json
+- data/municipalities.json
+- data/vendors.schema.json
+- docs/growth/
+- scripts/content_os.py
+- scripts/search_console_pull.py
+- scripts/content_quality_gate.py
+
+これらを、SEO流入だけではなくM&A時に引き継げる「運営資産」として管理する。

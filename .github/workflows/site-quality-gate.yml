@@ -1,0 +1,32 @@
+name: Site quality gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify trust pages and AdSense rules
+        run: python3 scripts/verify_adsense_trust_updates.py
+
+      - name: Run content quality gate
+        run: python3 scripts/content_quality_gate.py --strict
+
+      - name: Verify whitespace
+        run: git diff --check
