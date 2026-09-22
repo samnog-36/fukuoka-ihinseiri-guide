@@ -1,145 +1,35 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-  <title>SAM Admin | 福岡遺品整理ガイド</title>
-  <style>
-    :root{color-scheme:dark;--bg:#071018;--panel:#0d1822;--panel2:#101f2b;--line:#203443;--text:#eef5f8;--muted:#8ea3af;--good:#63d39b;--warn:#f7c96f;--bad:#ff7a8a;--accent:#67b7ff}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#112a3b 0,#071018 38%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
-    a{color:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:230px 1fr}.side{border-right:1px solid var(--line);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(6,14,21,.88);backdrop-filter:blur(16px)}
-    .brand{font-weight:800;font-size:17px;letter-spacing:.02em}.brand small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:5px}
-    .nav{margin-top:30px;display:grid;gap:8px}.nav button{border:0;background:transparent;color:var(--muted);padding:11px 12px;border-radius:10px;text-align:left;cursor:pointer;font-size:13px}.nav button.active,.nav button:hover{background:#142633;color:#fff}
-    .sidefoot{position:absolute;bottom:22px;left:18px;right:18px;color:var(--muted);font-size:11px;line-height:1.7}.main{padding:28px 32px 60px;min-width:0}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.top h1{font-size:23px;margin:0}.status{font-size:12px;color:var(--muted);display:flex;gap:10px;align-items:center}.dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 16px var(--good)}
-    .tab{display:none}.tab.active{display:block}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(180deg,rgba(17,32,44,.95),rgba(11,24,34,.96));border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 12px 35px rgba(0,0,0,.18)}.label{font-size:12px;color:var(--muted)}.value{font-size:28px;font-weight:800;margin-top:7px}.delta{font-size:11px;margin-top:5px}.up{color:var(--good)}.down{color:var(--bad)}.neutral{color:var(--muted)}
-    .two{grid-template-columns:1.4fr 1fr;margin-top:14px}.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.section-title h2{font-size:15px;margin:0}.pill{font-size:10px;padding:4px 8px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #172a38;vertical-align:top}th{color:var(--muted);font-weight:600}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}.muted{color:var(--muted)}.score{font-weight:800;color:var(--good)}.tag{display:inline-block;padding:3px 7px;border-radius:8px;font-size:10px;background:#142b3a;color:#9ed1f6;margin-right:4px;margin-bottom:3px}
-    #trend{width:100%;height:250px}.empty{color:var(--muted);padding:26px 0;text-align:center}.health{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.health div{padding:13px;border:1px solid var(--line);border-radius:11px;background:#0a1720}.ok{color:var(--good)}.ng{color:var(--warn)}
-    .activity{display:grid;gap:10px}.activity-item{border:1px solid var(--line);border-radius:12px;padding:14px;background:#0a1720}.activity-item b{font-size:13px}.activity-item .meta{color:var(--muted);font-size:10px;margin:5px 0 8px}.activity-item ul{margin:7px 0 0;padding-left:18px;color:#bed0da;font-size:11px;line-height:1.65}
-    .notice{padding:13px 15px;border:1px solid #51472b;border-radius:11px;background:#251f10;color:#f1d88f;font-size:12px;line-height:1.6;margin-bottom:14px}
-    @media(max-width:980px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{grid-template-columns:repeat(5,1fr);margin-top:16px}.sidefoot{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.main{padding:22px 16px}.health{grid-template-columns:1fr 1fr}}
-  </style>
-</head>
-<body>
-<div class="shell">
-  <aside class="side">
-    <div class="brand">SAM ADMIN<small>福岡遺品整理ガイド Control Center</small></div>
-    <div class="nav">
-      <button class="active" data-tab="overview">Overview</button>
-      <button data-tab="seo">SEO / Search</button>
-      <button data-tab="ai">AI Operations</button>
-      <button data-tab="inquiries">お問い合わせ</button>
-      <button data-tab="system">System</button>
-    </div>
-    <div class="sidefoot">Private admin only<br>Cloudflare Access protected<br><span id="updatedSide">Loading...</span></div>
-  </aside>
-  <main class="main">
-    <div class="top">
-      <h1 id="pageTitle">Overview</h1>
-      <div class="status"><span class="dot"></span><span id="liveStatus">データ取得中</span></div>
-    </div>
-
-    <section class="tab active" id="overview">
-      <div class="grid kpis">
-        <div class="card"><div class="label">28日クリック</div><div class="value" id="clicks">-</div><div class="delta" id="clicksDelta">-</div></div>
-        <div class="card"><div class="label">28日表示回数</div><div class="value" id="impressions">-</div><div class="delta" id="impDelta">-</div></div>
-        <div class="card"><div class="label">CTR</div><div class="value" id="ctr">-</div><div class="delta" id="ctrDelta">-</div></div>
-        <div class="card"><div class="label">平均掲載順位</div><div class="value" id="position">-</div><div class="delta" id="posDelta">-</div></div>
-      </div>
-      <div class="grid two">
-        <div class="card"><div class="section-title"><h2>90日 検索推移</h2><span class="pill">Search Console</span></div><svg id="trend" viewBox="0 0 800 250" preserveAspectRatio="none"></svg></div>
-        <div class="card"><div class="section-title"><h2>AI自動運転</h2><span class="pill">毎日 05:10 JST</span></div><div id="latestAi" class="empty">読み込み中</div></div>
-      </div>
-      <div class="card" style="margin-top:14px"><div class="section-title"><h2>直近の本番反映</h2><span class="pill">main</span></div><div id="commits"></div></div>
-    </section>
-
-    <section class="tab" id="seo">
-      <div class="grid two">
-        <div class="card"><div class="section-title"><h2>上位ページ</h2><span class="pill">直近28日</span></div><div id="topPages"></div></div>
-        <div class="card"><div class="section-title"><h2>検索クエリ</h2><span class="pill">Private</span></div><div id="topQueries"></div></div>
-      </div>
-    </section>
-
-    <section class="tab" id="ai">
-      <div class="card"><div class="section-title"><h2>AI改善履歴</h2><span class="pill">Editor → Reviewer → Gate → main</span></div><div id="activity" class="activity"></div></div>
-      <div class="card" style="margin-top:14px"><div class="section-title"><h2>Workflow履歴</h2><span class="pill">GitHub Actions</span></div><div id="runs"></div></div>
-    </section>
-
-    <section class="tab" id="inquiries">
-      <div id="inquiryNotice"></div>
-      <div class="card"><div class="section-title"><h2>お問い合わせ一覧</h2><span class="pill" id="inquirySource">Loading</span></div><div id="inquiryList"></div></div>
-    </section>
-
-    <section class="tab" id="system">
-      <div class="card"><div class="section-title"><h2>連携状態</h2><span class="pill">Health</span></div><div class="health" id="health"></div></div>
-      <div class="card" style="margin-top:14px"><div class="section-title"><h2>自動運転ルール</h2></div>
-        <table><tbody>
-          <tr><th>実行</th><td>毎日 05:10 JST</td></tr>
-          <tr><th>改善件数</th><td>最大1ページ / run</td></tr>
-          <tr><th>編集対象</th><td>title / description / OGP / H1 / 本文 / 内部リンク / 構造化データ / 画像 / alt / sitemap</td></tr>
-          <tr><th>検査</th><td>独立Reviewer AI + AdSense trust + SEO/HTML quality gate</td></tr>
-          <tr><th>本番</th><td>全検査PASS時のみPRを作成し、自動でmainへsquash merge</td></tr>
-          <tr><th>新規記事</th><td>現在は定期量産OFF。既存記事改善を優先</td></tr>
-        </tbody></table>
-      </div>
-    </section>
-  </main>
-</div>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>SAM Admin</title>
+<style>
+:root{color-scheme:dark;--bg:#071018;--p:#0d1822;--p2:#101f2b;--line:#203443;--text:#eef5f8;--muted:#8ea3af;--good:#63d39b;--warn:#f7c96f;--bad:#ff7a8a;--accent:#67b7ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0,#112a3b,#071018 38%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}button,input,textarea,select{font:inherit}.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:24px 18px;background:#08121a;position:sticky;top:0;height:100vh}.brand{font-weight:900}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:5px}.nav{display:grid;gap:7px;margin-top:25px}.nav button{background:none;border:0;color:var(--muted);text-align:left;padding:11px;border-radius:9px;cursor:pointer}.nav button.active,.nav button:hover{background:#142633;color:#fff}.main{padding:28px 32px 60px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.top h1{font-size:23px;margin:0}.live{color:var(--muted);font-size:12px}.tab{display:none}.tab.active{display:block}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.two{grid-template-columns:1.4fr 1fr}.card{background:linear-gradient(180deg,#10202c,#0a1720);border:1px solid var(--line);border-radius:14px;padding:17px;margin-bottom:14px}.label{font-size:11px;color:var(--muted)}.value{font-size:27px;font-weight:900;margin-top:6px}.delta{font-size:11px;margin-top:4px}.good{color:var(--good)}.bad{color:var(--bad)}.muted{color:var(--muted)}.pill{font-size:10px;border:1px solid var(--line);border-radius:20px;padding:4px 8px;color:var(--muted)}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.head h2{font-size:15px;margin:0}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 7px;border-bottom:1px solid #172a38;vertical-align:top}th{color:var(--muted)}.mono{font-family:ui-monospace,Menlo,monospace;font-size:10px}.tag{display:inline-block;padding:3px 7px;border-radius:8px;background:#153044;color:#a8d7f8;font-size:10px;margin:2px}.btn{border:1px solid #35505f;background:#142633;color:#fff;padding:7px 10px;border-radius:8px;cursor:pointer}.btn.primary{background:#1f7555;border-color:#1f7555}.btn.danger{background:#692c36;border-color:#692c36}.empty{text-align:center;color:var(--muted);padding:25px}.drawer{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10}.drawer.open{display:block}.drawer .panel{position:absolute;right:0;top:0;height:100%;width:min(650px,94vw);overflow:auto;background:#0b1720;padding:24px;border-left:1px solid var(--line)}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.field input,.field textarea,.field select{width:100%;background:#071018;color:#fff;border:1px solid #29404e;border-radius:8px;padding:10px}.activity{display:grid;gap:9px}.activity>div{padding:13px;border:1px solid var(--line);border-radius:10px;background:#09151e}#trend{height:240px;width:100%}@media(max-width:950px){.shell{grid-template-columns:1fr}.side{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--line)}.nav{grid-template-columns:repeat(4,1fr)}.main{padding:18px}.kpis,.two{grid-template-columns:1fr 1fr}}@media(max-width:650px){.kpis,.two{grid-template-columns:1fr}.nav{grid-template-columns:repeat(2,1fr)}}
+</style></head><body><div class="shell"><aside class="side"><div class="brand">SAM ADMIN<small>福岡遺品整理ガイド</small></div><div class="nav">
+<button class="active" data-tab="overview">Overview</button><button data-tab="inquiries">お問い合わせ</button><button data-tab="businesses">業者申込</button><button data-tab="ads">広告管理</button><button data-tab="seo">SEO</button><button data-tab="ai">AI運用</button><button data-tab="system">System</button>
+</div></aside><main class="main"><div class="top"><h1 id="title">Overview</h1><div class="live" id="live">Loading...</div></div>
+<section id="overview" class="tab active"><div class="grid kpis"><div class="card"><div class="label">28日クリック</div><div id="clicks" class="value">-</div><div id="clickDelta" class="delta"></div></div><div class="card"><div class="label">表示回数</div><div id="imps" class="value">-</div><div id="impDelta" class="delta"></div></div><div class="card"><div class="label">CTR</div><div id="ctr" class="value">-</div><div id="ctrDelta" class="delta"></div></div><div class="card"><div class="label">平均順位</div><div id="pos" class="value">-</div><div id="posDelta" class="delta"></div></div></div><div class="grid two"><div class="card"><div class="head"><h2>90日推移</h2><span class="pill">Search Console</span></div><svg id="trend" viewBox="0 0 800 240" preserveAspectRatio="none"></svg></div><div class="card"><div class="head"><h2>最新AI改善</h2><span class="pill">毎日 05:10</span></div><div id="latestAi"></div></div></div><div class="card"><div class="head"><h2>本番反映履歴</h2></div><div id="commits"></div></div></section>
+<section id="inquiries" class="tab"><div class="card"><div class="head"><h2>問い合わせ</h2><span id="inqCounts" class="pill"></span></div><div id="inqTable"></div></div></section>
+<section id="businesses" class="tab"><div class="card"><div class="head"><h2>業者掲載申込</h2><span id="bizCounts" class="pill"></span></div><div id="bizTable"></div></div></section>
+<section id="ads" class="tab"><div class="grid kpis"><div class="card"><div class="label">30日表示</div><div id="adImps" class="value">-</div></div><div class="card"><div class="label">クリック</div><div id="adClicks" class="value">-</div></div><div class="card"><div class="label">電話表示</div><div id="adPhones" class="value">-</div></div><div class="card"><div class="label">配信中</div><div id="adActive" class="value">-</div></div></div><div class="card"><div class="head"><h2>広告一覧</h2></div><div id="adTable"></div></div></section>
+<section id="seo" class="tab"><div class="grid two"><div class="card"><div class="head"><h2>上位ページ</h2></div><div id="pages"></div></div><div class="card"><div class="head"><h2>上位検索語</h2></div><div id="queries"></div></div></section>
+<section id="ai" class="tab"><div class="card"><div class="head"><h2>AI改善履歴</h2><span class="pill">Editor → Reviewer → Gate → main</span></div><div id="activity" class="activity"></div></div><div class="card"><div class="head"><h2>Workflow</h2></div><div id="runs"></div></div></section>
+<section id="system" class="tab"><div class="card"><div class="head"><h2>接続状態</h2></div><div id="health" class="grid two"></div></div><div class="card"><div class="head"><h2>移行/バックアップ</h2></div><p class="muted">旧Manus DBのエクスポートJSONは管理APIからD1へインポートできます。D1全データのJSONバックアップも取得できます。</p><a class="btn" href="/samadminsetup/api/export" target="_blank">D1バックアップを取得</a></div></section>
+</main></div><div id="drawer" class="drawer"><div class="panel"><button class="btn" onclick="closeDrawer()">閉じる</button><div id="drawerBody"></div></div></div>
 <script>
-const state={overview:null,inquiries:null};
-const fmt=n=>Number(n||0).toLocaleString("ja-JP");
-const pct=n=>(Number(n||0)*100).toFixed(2)+"%";
-const shortDate=s=>s?new Date(s).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"-";
-function delta(current,previous,invert=false){
-  current=Number(current||0);previous=Number(previous||0);
-  if(!previous)return '<span class="neutral">比較データなし</span>';
-  const d=((current-previous)/Math.abs(previous))*100;
-  const good=invert?d<0:d>0;
-  return '<span class="'+(Math.abs(d)<.01?'neutral':good?'up':'down')+'">'+(d>0?"+":"")+d.toFixed(1)+'% vs 前28日</span>';
-}
-function renderTrend(rows){
-  const svg=document.getElementById("trend"); if(!rows?.length){svg.innerHTML='<text x="20" y="30" fill="#8ea3af">データなし</text>';return}
-  const W=800,H=250,p=24,max=Math.max(...rows.map(r=>r.clicks),1);
-  const pts=rows.map((r,i)=>[(p+(W-p*2)*(i/Math.max(rows.length-1,1))),H-p-(H-p*2)*(r.clicks/max)]);
-  const path=pts.map((v,i)=>(i?"L":"M")+v[0].toFixed(1)+" "+v[1].toFixed(1)).join(" ");
-  svg.innerHTML='<line x1="'+p+'" y1="'+(H-p)+'" x2="'+(W-p)+'" y2="'+(H-p)+'" stroke="#203443"/><path d="'+path+'" fill="none" stroke="#67b7ff" stroke-width="3" vector-effect="non-scaling-stroke"/><text x="'+p+'" y="18" fill="#8ea3af" font-size="12">Clicks / day</text><text x="'+(W-p-55)+'" y="18" fill="#8ea3af" font-size="11">max '+fmt(max)+'</text>';
-}
-function table(el,heads,rows){
-  document.getElementById(el).innerHTML=rows?.length?'<table><thead><tr>'+heads.map(h=>'<th>'+h[0]+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+heads.map(h=>'<td>'+h[1](r)+'</td>').join('')+'</tr>').join('')+'</tbody></table>':'<div class="empty">データなし</div>';
-}
-function renderOverview(o){
-  const g=o.gsc||{},c=g.current||{},p=g.previous||{};
-  clicks.textContent=fmt(c.clicks);impressions.textContent=fmt(c.impressions);ctr.textContent=pct(c.ctr);position.textContent=Number(c.position||0).toFixed(1);
-  clicksDelta.innerHTML=delta(c.clicks,p.clicks);impDelta.innerHTML=delta(c.impressions,p.impressions);ctrDelta.innerHTML=delta(c.ctr,p.ctr);posDelta.innerHTML=delta(c.position,p.position,true);
-  renderTrend(g.trend||[]);
-  const a=o.activity||[];
-  latestAi.innerHTML=a.length?'<div><div class="score">Reviewer '+(a[0].review_score||"-")+'/100</div><b>'+escapeHtml(a[0].title_after||a[0].path)+'</b><div class="muted" style="font-size:11px;margin-top:7px">'+shortDate(a[0].timestamp)+' · '+(a[0].image_generated?'画像更新あり':'画像維持')+'</div><div style="margin-top:9px">'+(a[0].changes||[]).slice(0,3).map(x=>'<span class="tag">'+escapeHtml(x)+'</span>').join('')+'</div></div>':'<div class="empty">次回の自動改善後に表示</div>';
-  table("commits",[["日時",r=>shortDate(r.date)],["内容",r=>escapeHtml((r.message||"").split("\n")[0])],["SHA",r=>'<span class="mono">'+r.sha.slice(0,8)+'</span>']],(o.github?.commits||[]).slice(0,8));
-  table("topPages",[["ページ",r=>'<span class="mono">'+escapeHtml(r.page.replace("https://fukuoka-ihinseiri-guide.com/","/"))+'</span>'],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["CTR",r=>pct(r.ctr)],["順位",r=>Number(r.position).toFixed(1)]],g.topPages||[]);
-  table("topQueries",[["Query",r=>escapeHtml(r.query)],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["CTR",r=>pct(r.ctr)],["順位",r=>Number(r.position).toFixed(1)]],g.topQueries||[]);
-  renderActivity(a);
-  table("runs",[["開始",r=>shortDate(r.createdAt)],["結果",r=>'<span class="'+(r.conclusion==="success"?"ok":r.conclusion?"ng":"muted")+'">'+escapeHtml(r.conclusion||r.status)+'</span>'],["種別",r=>escapeHtml(r.event)],["Run",r=>'<a href="'+r.url+'" target="_blank" class="mono">#'+r.id+'</a>']],o.github?.runs||[]);
-  const h=o.health||{};health.innerHTML=Object.entries(h).map(([k,v])=>'<div><span class="'+(v?'ok':'ng')+'">●</span> '+escapeHtml(k)+'<br><small class="muted">'+(v?'READY':'NOT SET')+'</small></div>').join("");
-}
-function renderActivity(rows){
-  activity.innerHTML=rows?.length?rows.slice(0,30).map(a=>'<div class="activity-item"><b>'+escapeHtml(a.title_after||a.path)+'</b><div class="meta">'+shortDate(a.timestamp)+' · Reviewer '+(a.review_score||"-")+' · '+escapeHtml(a.status||"")+'</div><div>'+(a.image_generated?'<span class="tag">IMAGE</span>':'')+(a.internal_links||[]).slice(0,3).map(x=>'<span class="tag">LINK '+escapeHtml(x)+'</span>').join('')+'</div><ul>'+(a.changes||[]).map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul></div>').join(''):'<div class="empty">履歴なし</div>';
-}
-function renderInquiries(d){
-  inquirySource.textContent=d.source||"not connected";
-  if(!d.connected){inquiryNotice.innerHTML='<div class="notice">'+escapeHtml(d.message||"問い合わせDB接続設定待ち")+'</div>'}else inquiryNotice.innerHTML='';
-  const rows=Array.isArray(d.inquiries)?d.inquiries:[];
-  table("inquiryList",[["日時",r=>shortDate(r.receivedAt||r.created_at)],["名前",r=>escapeHtml(r.name||r.user_name||"")],["連絡",r=>escapeHtml((r.phone||r.user_phone||"")+" "+(r.email||r.user_email||""))],["地域",r=>escapeHtml(r.region||r.target_area||"")],["内容",r=>escapeHtml((r.details||r.message||"").slice(0,180))],["状態",r=>escapeHtml(r.status||"")]],rows);
-}
-function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-async function load(){
-  try{
-    const [o,i]=await Promise.all([fetch("/samadminsetup/api/overview",{cache:"no-store"}),fetch("/samadminsetup/api/inquiries",{cache:"no-store"})]);
-    if(!o.ok)throw new Error("overview "+o.status);state.overview=await o.json();state.inquiries=await i.json();renderOverview(state.overview);renderInquiries(state.inquiries);
-    liveStatus.textContent="LIVE · "+new Date().toLocaleTimeString("ja-JP",{timeZone:"Asia/Tokyo",hour:"2-digit",minute:"2-digit"});updatedSide.textContent="Updated "+shortDate(state.overview.generatedAt);
-  }catch(e){liveStatus.textContent="ERROR";document.querySelector(".dot").style.background="var(--bad)";console.error(e)}
-}
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.tab).classList.add("active");pageTitle.textContent=b.textContent});
-load();setInterval(load,120000);
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id),fmt=n=>Number(n||0).toLocaleString("ja-JP"),pct=n=>(Number(n||0)*100).toFixed(2)+"%",esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),dt=v=>v?new Date(Number(v)||v).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"}):"-";
+function table(id,heads,rows){$(id).innerHTML=rows?.length?'<table><thead><tr>'+heads.map(h=>'<th>'+h[0]+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+heads.map(h=>'<td>'+h[1](r)+'</td>').join('')+'</tr>').join('')+'</tbody></table>':'<div class="empty">データなし</div>'}
+function delta(c,p,invert=false){if(!Number(p))return "";let d=(Number(c)-Number(p))/Math.abs(Number(p))*100,good=invert?d<0:d>0;return '<span class="'+(good?'good':'bad')+'">'+(d>0?"+":"")+d.toFixed(1)+'% vs 前28日</span>'}
+function trend(rows){if(!rows?.length)return;const W=800,H=240,p=20,m=Math.max(...rows.map(r=>r.clicks),1),pts=rows.map((r,i)=>[p+(W-2*p)*i/Math.max(1,rows.length-1),H-p-(H-2*p)*r.clicks/m]);$("trend").innerHTML='<path d="'+pts.map((v,i)=>(i?"L":"M")+v[0]+" "+v[1]).join(" ")+'" fill="none" stroke="#67b7ff" stroke-width="3" vector-effect="non-scaling-stroke"/>'}
+async function api(url,opt){const r=await fetch(url,{cache:"no-store",...opt});const d=await r.json();if(!r.ok)throw new Error(d.error||r.status);return d}
+async function loadOverview(){const o=await api("/samadminsetup/api/overview"),g=o.gsc||{},c=g.current||{},p=g.previous||{};$("clicks").textContent=fmt(c.clicks);$("imps").textContent=fmt(c.impressions);$("ctr").textContent=pct(c.ctr);$("pos").textContent=Number(c.position||0).toFixed(1);$("clickDelta").innerHTML=delta(c.clicks,p.clicks);$("impDelta").innerHTML=delta(c.impressions,p.impressions);$("ctrDelta").innerHTML=delta(c.ctr,p.ctr);$("posDelta").innerHTML=delta(c.position,p.position,true);trend(g.trend||[]);let a=o.activity||[];$("latestAi").innerHTML=a.length?'<b>'+esc(a[0].title_after||a[0].path)+'</b><div class="muted">'+dt(a[0].timestamp)+' · Reviewer '+esc(a[0].review_score||"-")+'</div>':'<div class="empty">履歴なし</div>';table("commits",[["日時",r=>dt(r.date)],["内容",r=>esc((r.message||"").split("\n")[0])]],o.github?.commits||[]);table("pages",[["ページ",r=>'<span class="mono">'+esc(r.page.replace("https://fukuoka-ihinseiri-guide.com/","/"))+'</span>'],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["CTR",r=>pct(r.ctr)],["順位",r=>Number(r.position).toFixed(1)]],g.topPages||[]);table("queries",[["検索語",r=>esc(r.query)],["Click",r=>fmt(r.clicks)],["表示",r=>fmt(r.impressions)],["順位",r=>Number(r.position).toFixed(1)]],g.topQueries||[]);$("activity").innerHTML=a.length?a.map(x=>'<div><b>'+esc(x.title_after||x.path)+'</b><div class="muted">'+dt(x.timestamp)+' · score '+esc(x.review_score||"-")+'</div>'+(x.changes||[]).map(y=>'<span class="tag">'+esc(y)+'</span>').join("")+'</div>').join(""):'<div class="empty">履歴なし</div>';table("runs",[["開始",r=>dt(r.createdAt)],["結果",r=>esc(r.conclusion||r.status)],["Run",r=>'<a href="'+r.url+'" target="_blank">#'+r.id+'</a>']],o.github?.runs||[]);$("health").innerHTML=Object.entries(o.health||{}).map(([k,v])=>'<div class="card"><span class="'+(v?'good':'bad')+'">●</span> '+esc(k)+'<br><small class="muted">'+(v?'READY':'NOT SET')+'</small></div>').join("")}
+async function loadInquiries(){const d=await api("/samadminsetup/api/inquiries");let c=d.counts||{};$("inqCounts").textContent='全'+fmt(c.total)+' / 未対応'+fmt(c.pending)+' / 対応中'+fmt(c.working)+' / 完了'+fmt(c.done);table("inqTable",[["日時",r=>dt(r.created_at)],["氏名",r=>'<button class="btn" onclick="openInquiry(\''+r.id+'\')">'+esc(r.name)+'</button>'],["地域",r=>esc(r.region)],["サービス",r=>esc(r.service_type)],["状態",r=>esc(r.status)]],d.inquiries||[])}
+async function openInquiry(id){const d=await api("/samadminsetup/api/inquiries/"+id),r=d.inquiry;openDrawer('<h2>'+esc(r.name)+'</h2><div class="muted">'+esc(r.phone)+' · '+esc(r.email)+'</div><p>'+esc(r.region)+' / '+esc(r.service_type)+' / '+esc(r.floor_plan||"")+' / '+esc(r.budget||"")+'</p><p>'+esc(r.details||"")+'</p><div class="field"><label>状態</label><select id="inqStatus"><option>未対応</option><option>対応中</option><option>完了</option></select></div><button class="btn primary" onclick="saveInqStatus(\''+id+'\')">状態保存</button><div class="field"><label>対応メモ</label><textarea id="memo"></textarea></div><button class="btn" onclick="addMemo(\''+id+'\')">メモ追加</button><h3>メモ</h3>'+(r.memos||[]).map(m=>'<div class="card">'+esc(m.content)+'<div class="muted">'+dt(m.created_at)+'</div></div>').join(""));$("inqStatus").value=r.status}
+async function saveInqStatus(id){await api("/samadminsetup/api/inquiries/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"status",status:$("inqStatus").value})});await loadInquiries();closeDrawer()}
+async function addMemo(id){await api("/samadminsetup/api/inquiries/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"memo",content:$("memo").value})});openInquiry(id)}
+async function loadBusinesses(){const d=await api("/samadminsetup/api/businesses"),c=d.counts||{};$("bizCounts").textContent='全'+fmt(c.total)+' / 未対応'+fmt(c.pending)+' / 承認'+fmt(c.approved)+' / 却下'+fmt(c.rejected);table("bizTable",[["日時",r=>dt(r.created_at)],["会社",r=>'<button class="btn" onclick="openBiz(\''+r.id+'\')">'+esc(r.company_name)+'</button>'],["担当",r=>esc(r.contact_person)],["エリア",r=>esc(r.service_area)],["状態",r=>esc(r.status)],["広告",r=>r.ad_id?(r.ad_is_active?'配信中':'停止'):'未入力']],d.businesses||[])}
+async function openBiz(id){const d=await api("/samadminsetup/api/businesses/"+id),b=d.business;openDrawer('<h2>'+esc(b.company_name)+'</h2><p>'+esc(b.contact_person)+' · '+esc(b.phone)+' · '+esc(b.email)+'</p><p>'+esc(b.service_area)+'</p><p>'+esc(b.service_content)+'</p><button class="btn primary" onclick="bizStatus(\''+id+'\',\'承認\')">承認・URL発行</button> <button class="btn danger" onclick="bizStatus(\''+id+'\',\'却下\')">却下</button><div id="setupUrl"></div>')}
+async function bizStatus(id,status){const d=await api("/samadminsetup/api/businesses/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"status",status})});if(d.setupUrl)$("setupUrl").innerHTML='<div class="card"><b>業者入力URL</b><br><input value="'+esc(d.setupUrl)+'" readonly onclick="this.select()"></div>';await loadBusinesses()}
+async function loadAds(){const d=await api("/samadminsetup/api/ads"),s=d.summary||{};$("adImps").textContent=fmt(s.impressions);$("adClicks").textContent=fmt(s.clicks);$("adPhones").textContent=fmt(s.phoneReveals);$("adActive").textContent=fmt(s.active);table("adTable",[["会社",r=>esc(r.company_name)],["ジャンル",r=>(r.serviceGenres||[]).map(x=>'<span class="tag">'+esc(x)+'</span>').join("")],["表示",r=>fmt(r.impressions)],["Click",r=>fmt(r.clicks)],["CTR",r=>pct(r.ctr)],["配信",r=>'<button class="btn '+(r.is_active?'danger':'primary')+'" onclick="toggleAd(\''+r.id+'\','+(r.is_active?'false':'true')+')">'+(r.is_active?'停止':'開始')+'</button>']],d.ads||[])}
+async function toggleAd(id,active){await api("/samadminsetup/api/ads/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"toggle",active})});loadAds()}
+function openDrawer(html){$("drawerBody").innerHTML=html;$("drawer").classList.add("open")}function closeDrawer(){$("drawer").classList.remove("open")}
+async function load(){try{await Promise.all([loadOverview(),loadInquiries(),loadBusinesses(),loadAds()]);$("live").textContent="LIVE · "+new Date().toLocaleTimeString("ja-JP")}catch(e){$("live").textContent="ERROR: "+e.message}}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.tab).classList.add("active");$("title").textContent=b.textContent});load();setInterval(load,120000);
+</script></body></html>
