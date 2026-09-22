@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=json.loads((ROOT/"config/content_os.json").read_text(encoding="utf-8"))
 SOURCES=json.loads((ROOT/"data/source_registry.json").read_text(encoding="utf-8"))
-GROWTH_DIR=ROOT/"docs/growth"
+PRIVATE_DIR=ROOT/os.getenv("CONTENT_OS_PRIVATE_DIR",".content-os-private")
 TAG_RE=re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>",re.I|re.S)
 TITLE_RE=re.compile(r"<title>(.*?)</title>",re.I|re.S)
 NOINDEX_RE=re.compile(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex',re.I)
@@ -46,7 +46,7 @@ def article_records():
     return rows
 
 def load_gsc():
-    p=GROWTH_DIR/"search_console_latest.json"
+    p=PRIVATE_DIR/"search_console_latest.json"
     if not p.exists(): return {}
     try: data=json.loads(p.read_text(encoding="utf-8"))
     except Exception: return {}
@@ -143,22 +143,22 @@ Search Console: {json.dumps(candidate.get("gsc") or {},ensure_ascii=False)}
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--mode",choices=["audit","improve","discover"],default="audit"); args=ap.parse_args()
-    GROWTH_DIR.mkdir(parents=True,exist_ok=True)
+    PRIVATE_DIR.mkdir(parents=True,exist_ok=True)
     rows=article_records(); gsc=load_gsc(); rep=make_report(rows,gsc)
-    (GROWTH_DIR/"content-os-latest.json").write_text(json.dumps(rep,ensure_ascii=False,indent=2),encoding="utf-8")
+    (PRIVATE_DIR/"content-os-latest.json").write_text(json.dumps(rep,ensure_ascii=False,indent=2),encoding="utf-8")
     lines=["# Content Growth OS レポート","",f"生成: {rep['generated_at']}","","## 改善優先候補","","|score|quality|記事|impressions|position|","|---:|---:|---|---:|---:|"]
     for r in rep["top_improvement_candidates"][:15]:
         g=r.get("gsc") or {}; lines.append(f"|{r['priority_score']}|{r['quality']}|{r['path']}|{g.get('impressions','-')}|{g.get('position','-')}|")
     lines+=["","## 重複タイトル候補",""]
     for d in rep["duplicate_title_hints"][:15]: lines.append(f"- {d['a']} ↔ {d['b']} ({d['title_similarity']})")
-    (GROWTH_DIR/"content-os-latest.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
+    (PRIVATE_DIR/"content-os-latest.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
     if args.mode!="improve":
         print("Analysis complete; no article modified."); return 0
     if not rep["top_improvement_candidates"]: print("No candidates."); return 0
     c=rep["top_improvement_candidates"][0]
     if c["priority_score"]<=0: print("No positive-priority candidate."); return 0
     result=improve(c)
-    (GROWTH_DIR/"last-ai-change.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+    (PRIVATE_DIR/"last-ai-change.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
     print("Improved",c["path"]); return 0
 
 if __name__=="__main__":
