@@ -1,65 +1,37 @@
-const DEFAULT_MANUS_SUBMIT = "https://fukuokaguide-afgvbgyb.manus.space/api/trpc/inquiry.submit";
+import { requireDb, rowId, nowMs } from "../_lib/db.js";
+import { json, clean, validEmail, corsHeaders, options, rateLimit } from "../_lib/public.js";
 
-function clean(value, max = 2000) {
-  return String(value ?? "").trim().slice(0, max);
-}
+export function onRequestOptions(context){ return options(context.request); }
 
-function validEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+export async function onRequestPost(context){
+  const cors=corsHeaders(context.request);
+  if(!(await rateLimit(context,"inquiry",8,15*60*1000))) return json({ok:false,error:"rate_limited"},429,cors);
 
-export async function onRequestPost(context) {
   let input;
-  try {
-    input = await context.request.json();
-  } catch {
-    return Response.json({ ok: false, error: "invalid_json" }, { status: 400 });
-  }
+  try{ input=await context.request.json(); }catch{ return json({ok:false,error:"invalid_json"},400,cors); }
+  if(input?.json) input=input.json;
 
-  const data = {
-    name: clean(input.name, 120),
-    phone: clean(input.phone, 80),
-    email: clean(input.email, 240),
-    region: clean(input.region, 120),
-    serviceType: clean(input.serviceType, 120),
-    floorPlan: clean(input.floorPlan, 120) || undefined,
-    budget: clean(input.budget, 120) || undefined,
-    preferredTiming: clean(input.preferredTiming, 120) || undefined,
-    details: clean(input.details, 5000)
+  const data={
+    name:clean(input.name,120),
+    phone:clean(input.phone,80),
+    email:clean(input.email,240),
+    region:clean(input.region,120),
+    serviceType:clean(input.serviceType,120),
+    floorPlan:clean(input.floorPlan,120)||null,
+    budget:clean(input.budget,120)||null,
+    preferredTiming:clean(input.preferredTiming,120)||null,
+    details:clean(input.details,5000)||null
   };
-
-  if (!data.name || !data.phone || !validEmail(data.email) || !data.region || !data.serviceType || !data.details) {
-    return Response.json({ ok: false, error: "validation_failed" }, { status: 400 });
+  if(!data.name||!data.phone||!validEmail(data.email)||!data.region||!data.serviceType){
+    return json({ok:false,error:"validation_failed"},400,cors);
   }
 
-  const receivedAt = new Date().toISOString();
-  const id = crypto.randomUUID();
-  let stored = false;
-  let forwarded = false;
+  const db=requireDb(context.env);
+  const id=rowId("inq"), now=nowMs();
+  await db.prepare(`INSERT INTO inquiries
+    (id,name,phone,email,region,service_type,floor_plan,budget,preferred_timing,details,status,created_at,updated_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,'未対応',?,?)`)
+    .bind(id,data.name,data.phone,data.email,data.region,data.serviceType,data.floorPlan,data.budget,data.preferredTiming,data.details,now,now).run();
 
-  if (context.env.INQUIRIES_KV) {
-    await context.env.INQUIRIES_KV.put(
-      "inquiry:" + receivedAt + ":" + id,
-      JSON.stringify({ id, receivedAt, status: "未対応", ...data })
-    );
-    stored = true;
-  }
-
-  const submitUrl = context.env.MANUS_SUBMIT_URL || DEFAULT_MANUS_SUBMIT;
-  try {
-    const res = await fetch(submitUrl, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ json: data })
-    });
-    forwarded = res.ok;
-  } catch {
-    forwarded = false;
-  }
-
-  if (!stored && !forwarded) {
-    return Response.json({ ok: false, error: "delivery_failed" }, { status: 502 });
-  }
-
-  return Response.json({ ok: true, stored, forwarded, id });
+  return json({ok:true,id},200,cors);
 }
