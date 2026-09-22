@@ -15,7 +15,7 @@
 | 画像 | 実際に表示される画像を使用し、内容が分かるalt属性、width・heightを設定する。装飾だけの大量画像は避ける |
 | 編集情報 | 記事末尾に「福岡遺品整理ガイド編集部」の編集情報を表示する |
 | 公式確認先 | 記事のジャンルに合う公的機関・自治体・公式団体への確認先を表示する |
-| 問い合わせ | 内容の訂正依頼・お問い合わせとして既存フォーム（`/contact/`）へ案内する |
+| 問い合わせ | 内容の訂正依頼・お問い合わせとして既存フォーム（/contact/）へ案内する |
 
 ## 公開前の品質判定
 
@@ -36,9 +36,23 @@
 | canonical | 正式URLを指定する |
 | OGP | title・description・image・URLを設定する |
 | 構造化データ | Article・BreadcrumbListを設定し、実態に合わないOrganization/ProfessionalService等を付与しない |
-| 更新日 | 内容を実際に確認・更新した日だけを表示し、`dateModified`・sitemapの`lastmod`と整合させる |
+| 更新日 | 内容を実際に確認・更新した日だけを表示し、dateModified・sitemapのlastmodと整合させる |
 | AdSense | 広告を表示する本文ページのみで読み込み、プライバシーポリシー等の情報ページでは不要な広告読み込みを避ける |
 | サイトマップ | インデックスさせる価値がある正規URLだけを掲載する |
+
+## AI調査・自動更新ルール
+
+AIは「人間が書いたように見せること」や検出回避を目的に使わない。目的は調査、根拠確認、比較、構造化、継続更新の効率化とする。
+
+- Search Consoleの表示回数・順位・CTRと、記事品質スコアを組み合わせて改善対象を決める
+- 定期実行では1回につき最大1記事だけを変更する
+- 新規記事の定期量産は行わない
+- 統計・制度・法律・自治体ルールは一次情報で確認する
+- 重要な事実は本文近くに出典リンクを置く
+- 架空の人物、業者、口コミ、実績、監修者、体験談を生成しない
+- AI更新後は content_quality_gate.py と verify_adsense_trust_updates.py を必ず通す
+- 自動更新はmainへ直接反映せず、Pull Requestを作成する
+- AIが一次情報を取得できない場合は、断定して公開せず保留する
 
 ## 公開前の確認手順
 
@@ -47,7 +61,7 @@
 3. 根拠不明の数値、過度な断定、誤解を招く専門家表現を削除します。
 4. title、description、canonical、OGP、構造化データを確認します。
 5. 記事内リンク・公式外部リンク・画像・モバイル表示を確認します。
-6. `python3 scripts/verify_adsense_trust_updates.py` と `git diff --check` を実行します。
+6. python3 scripts/verify_adsense_trust_updates.py と python3 scripts/content_quality_gate.py --strict と git diff --check を実行します。
 7. 公開後、Search Consoleでインデックス状況・検索流入を確認し、価値の低いページは統合・noindex・削除を検討します。
 
 ## 情報源の考え方
