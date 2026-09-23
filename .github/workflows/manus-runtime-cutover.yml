@@ -1,4 +1,5 @@
 name: One-time Manus runtime cutover
+# retry after legacy URL fix
 
 on:
   workflow_dispatch:
