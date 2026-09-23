@@ -17,6 +17,7 @@ body{margin:0;background:#f6f8fa;color:#17202a;font-family:-apple-system,BlinkMa
 <div class="field"><label>掲載用メール</label><input name="email" type="email"></div>
 <div class="field"><label>料金目安</label><input name="priceRange"></div>
 <div class="field"><label>営業時間</label><input name="businessHours"></div>
+<div class="field"><label>公式サイトURL</label><input name="websiteUrl" type="url" placeholder="https://..."></div>
 </div>
 <div class="field"><label>実績・資格</label><textarea name="qualifications" rows="3"></textarea></div>
 <div class="field"><label>掲載用対応エリア</label><textarea name="serviceArea" rows="2"></textarea></div>
@@ -32,11 +33,11 @@ async function load(){
  if(!r.ok){company.textContent="無効または期限切れのリンクです。";return}
  company.textContent=d.business.companyName+" 様の掲載情報を入力してください。";
  f.style.display="block";const a=d.advertisement||{};
- for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","qualifications","serviceArea"]){if(f.elements[k])f.elements[k].value=a[k]||""}
+ for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","websiteUrl","qualifications","serviceArea"]){if(f.elements[k])f.elements[k].value=a[k]||""}
  (a.serviceGenres||[]).forEach(g=>{const x=[...genresEl.querySelectorAll("input")].find(i=>i.value===g);if(x)x.checked=true});
 }
 f.onsubmit=async e=>{e.preventDefault();const fd=new FormData(f),serviceGenres=[...genresEl.querySelectorAll("input:checked")].map(x=>x.value);
- const body={};for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","qualifications","serviceArea"])body[k]=fd.get(k)||"";body.serviceGenres=serviceGenres;
+ const body={};for(const k of ["catchphrase","description","phone","email","priceRange","businessHours","websiteUrl","qualifications","serviceArea"])body[k]=fd.get(k)||"";body.serviceGenres=serviceGenres;
  const r=await fetch("/api/business/setup/"+encodeURIComponent(token),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});const d=await r.json();
  msg.style.display="block";msg.className="msg "+(r.ok?"ok":"bad");msg.textContent=r.ok?"保存しました。管理者が配信を開始するとサイトに表示されます。":"保存できませんでした。入力内容またはリンクを確認してください。";
 };load();
