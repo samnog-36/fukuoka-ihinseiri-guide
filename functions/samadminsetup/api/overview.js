@@ -54,6 +54,84 @@ function nextDailyJst(hour = 5, minute = 10) {
   return target.toISOString();
 }
 
+async function getSystemProgress(env) {
+  let importState = null;
+  try {
+    if (env.DB) {
+      const row = await env.DB.prepare(
+        "SELECT value_json, updated_at FROM migration_state WHERE key='last_import' LIMIT 1"
+      ).first();
+      if (row) {
+        let parsed = {};
+        try { parsed = JSON.parse(row.value_json || "{}"); } catch {}
+        importState = { ...parsed, updatedAt: Number(row.updated_at || 0) };
+      }
+    }
+  } catch {}
+
+  let runtime = { checked: false, cutover: false };
+  try {
+    const [contact, business] = await Promise.all([
+      fetch("https://fukuoka-ihinseiri-guide.com/contact/", { cf: { cacheTtl: 60 } }),
+      fetch("https://fukuoka-ihinseiri-guide.com/for-business/", { cf: { cacheTtl: 60 } })
+    ]);
+    const [contactHtml, businessHtml] = await Promise.all([
+      contact.ok ? contact.text() : Promise.resolve(""),
+      business.ok ? business.text() : Promise.resolve("")
+    ]);
+    const oldHost = "fukuokaguide-afgvbgyb.manus.space";
+    runtime = {
+      checked: contact.ok || business.ok,
+      cutover: Boolean((contact.ok || business.ok) && !contactHtml.includes(oldHost) && !businessHtml.includes(oldHost))
+    };
+  } catch {}
+
+  const stages = [
+    {
+      key: "access",
+      label: "管理画面認証",
+      done: Boolean(env.CF_ACCESS_TEAM_DOMAIN && env.CF_ACCESS_AUD),
+      detail: "Cloudflare Accessで管理画面を保護"
+    },
+    {
+      key: "database",
+      label: "新DB準備",
+      done: Boolean(env.DB),
+      detail: "Cloudflare D1の管理DB"
+    },
+    {
+      key: "search_console",
+      label: "SEOデータ接続",
+      done: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON && env.SEARCH_CONSOLE_SITE_URL),
+      detail: "Google Search Console"
+    },
+    {
+      key: "legacy_import",
+      label: "旧Manusデータ移行",
+      done: Boolean(importState),
+      detail: importState ? "D1へインポート済み" : "問い合わせ・業者・広告の移行待ち"
+    },
+    {
+      key: "runtime_cutover",
+      label: "公開サイト切替",
+      done: Boolean(runtime.cutover),
+      detail: runtime.cutover ? "公開フォーム/APIはCloudflareへ切替済み" : "現在は旧Manusを維持"
+    }
+  ];
+
+  const currentIndex = stages.findIndex(s => !s.done);
+  return {
+    stages,
+    completed: stages.filter(s => s.done).length,
+    total: stages.length,
+    currentKey: currentIndex >= 0 ? stages[currentIndex].key : "complete",
+    currentLabel: currentIndex >= 0 ? stages[currentIndex].label : "移行完了",
+    nextAction: currentIndex >= 0 ? stages[currentIndex].detail : "通常運用",
+    lastImport: importState,
+    runtime
+  };
+}
+
 export async function onRequestGet(context) {
   const { env } = context;
   const output = {
@@ -115,6 +193,8 @@ export async function onRequestGet(context) {
   output.gsc = gscResult.status === "fulfilled"
     ? gscResult.value
     : { configured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON), error: String(gscResult.reason || "unknown") };
+
+  output.systemProgress = await getSystemProgress(env);
 
   const runs = output.github.runs || [];
   const latestRun = runs[0] || null;
