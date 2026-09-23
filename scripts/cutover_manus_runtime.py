@@ -2,6 +2,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 OLD="https://fukuokaguide-afgvbgyb.manus.space"
+NEW="https://fukuoka-ihinseiri-guide.com"
 changed=[]
 
 for p in ROOT.rglob("*.html"):
@@ -13,6 +14,11 @@ for p in ROOT.rglob("*.html"):
     if p.as_posix().endswith("/for-business/index.html"):
         n=n.replace(OLD+"/api/trpc/business.submit","/api/business")
         n=n.replace("body: JSON.stringify({ json: data })","body: JSON.stringify(data)")
+
+    # Remove every remaining legacy Manus hostname from public HTML.
+    # This also fixes stale OGP, JSON-LD, image URLs and old author/breadcrumb URLs.
+    n=n.replace(OLD,NEW)
+
     if n!=s:
         p.write_text(n,encoding="utf-8")
         changed.append(p.relative_to(ROOT).as_posix())
