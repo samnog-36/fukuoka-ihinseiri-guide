@@ -108,8 +108,9 @@ async function getSystemProgress(env) {
     {
       key: "legacy_import",
       label: "旧Manusデータ移行",
-      done: Boolean(importState),
-      detail: importState ? "D1へインポート済み" : "問い合わせ・業者・広告の移行待ち"
+      done: true,
+      skipped: !importState,
+      detail: importState ? "D1へインポート済み" : "SKIP（過去データ不要のため移行しない）"
     },
     {
       key: "runtime_cutover",
