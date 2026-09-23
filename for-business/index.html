@@ -346,10 +346,10 @@
       };
 
       try {
-        const res = await fetch('https://fukuokaguide-afgvbgyb.manus.space/api/trpc/business.submit', {
+        const res = await fetch('/api/business', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ json: data })
+          body: JSON.stringify(data)
         });
         if (!res.ok) throw new Error('送信に失敗しました');
         document.getElementById('businessForm').style.display = 'none';

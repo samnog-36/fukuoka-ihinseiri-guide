@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT_MD = ROOT / "docs/ADSENSE_CONTENT_AUDIT_20260904.md"
 REPORT_JSON = ROOT / "docs/ADSENSE_CONTENT_AUDIT_20260904.json"
 ADSENSE = "pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-AD_WIDGET = "fukuokaguide-afgvbgyb.manus.space/ad-widget.js"
+AD_WIDGET = "/ad-widget.js"
 
 NON_CONTENT = {
     "about.html",
