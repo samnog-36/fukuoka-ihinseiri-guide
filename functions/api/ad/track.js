@@ -1,8 +1,9 @@
 import { requireDb, rowId, nowMs } from "../../_lib/db.js";
-import { json, clean, corsHeaders, options, rateLimit } from "../../_lib/public.js";
+import { json, clean, corsHeaders, options, rateLimit, originAllowed } from "../../_lib/public.js";
 
 export function onRequestOptions(context){return options(context.request);}
 export async function onRequestPost(context){
+  if(!originAllowed(context.request)) return json({ok:false,error:"origin_not_allowed"},403);
   const cors=corsHeaders(context.request);
   if(!(await rateLimit(context,"ad_event",120,15*60*1000))) return json({ok:false,error:"rate_limited"},429,cors);
   let d;try{d=await context.request.json();}catch{return json({ok:false,error:"invalid_json"},400,cors);}
