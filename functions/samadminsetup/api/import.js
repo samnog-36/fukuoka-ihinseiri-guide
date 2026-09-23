@@ -4,8 +4,9 @@ const allowed={
   inquiries:["id","name","phone","email","region","service_type","floor_plan","budget","preferred_timing","details","status","created_at","updated_at"],
   inquiry_memos:["id","inquiry_id","content","created_at"],
   business_applications:["id","company_name","contact_person","phone","email","service_area","service_content","status","setup_token_hash","setup_token_created_at","setup_token_expires_at","created_at","updated_at"],
-  advertisements:["id","business_id","company_name","catchphrase","description","phone","email","price_range","business_hours","qualifications","logo_url","photo_url","service_genres_json","service_area","banner_url","is_active","created_at","updated_at"],
-  ad_events:["id","ad_id","event_type","placement","page_url","page_genre","created_at"]
+  advertisements:["id","business_id","company_name","catchphrase","description","phone","email","price_range","business_hours","qualifications","logo_url","photo_url","service_genres_json","service_area","banner_url","is_active","placements_json","starts_at","ends_at","contract_price_monthly","billing_note","website_url","created_at","updated_at"],
+  ad_events:["id","ad_id","event_type","placement","page_url","page_genre","created_at"],
+  ad_placements:["key","label","description","monthly_price","is_active","sort_order","updated_at"]
 };
 export async function onRequestPost(context){
   const db=requireDb(context.env);
