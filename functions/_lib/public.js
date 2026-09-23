@@ -19,13 +19,19 @@ export function validEmail(value){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value||""));
 }
 
+const ALLOWED_ORIGINS=new Set([
+  "https://fukuoka-ihinseiri-guide.com",
+  "https://www.fukuoka-ihinseiri-guide.com"
+]);
+
+export function originAllowed(request){
+  const origin=request.headers.get("Origin")||"";
+  return !origin || ALLOWED_ORIGINS.has(origin);
+}
+
 export function corsHeaders(request){
   const origin=request.headers.get("Origin")||"";
-  const allowed=new Set([
-    "https://fukuoka-ihinseiri-guide.com",
-    "https://www.fukuoka-ihinseiri-guide.com"
-  ]);
-  return allowed.has(origin)?{
+  return ALLOWED_ORIGINS.has(origin)?{
     "Access-Control-Allow-Origin":origin,
     "Vary":"Origin",
     "Access-Control-Allow-Methods":"GET,POST,OPTIONS",
@@ -35,6 +41,7 @@ export function corsHeaders(request){
 }
 
 export function options(request){
+  if(!originAllowed(request)) return json({ok:false,error:"origin_not_allowed"},403);
   return new Response(null,{status:204,headers:corsHeaders(request)});
 }
 
