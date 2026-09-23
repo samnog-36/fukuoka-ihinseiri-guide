@@ -2,6 +2,9 @@ name: One-time Manus runtime cutover
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/manus-runtime-cutover.yml"
 
 permissions:
   contents: write
