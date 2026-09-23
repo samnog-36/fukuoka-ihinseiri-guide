@@ -96,13 +96,30 @@ export async function getSearchConsoleDashboard(env) {
   const currentBody = { startDate: fmtDate(currentStart), endDate: fmtDate(end), dataState: "final" };
   const previousBody = { startDate: fmtDate(previousStart), endDate: fmtDate(previousEnd), dataState: "final" };
 
-  const [current, previous, trend, pages, queries] = await Promise.all([
+  const [current, previous, trend, pages, previousPages, queries, previousQueries, queryPages] = await Promise.all([
     query(token, env.SEARCH_CONSOLE_SITE_URL, currentBody),
     query(token, env.SEARCH_CONSOLE_SITE_URL, previousBody),
     query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, startDate: fmtDate(trendStart), dimensions: ["date"], rowLimit: 1000 }),
-    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, dimensions: ["page"], rowLimit: 15 }),
-    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, dimensions: ["query"], rowLimit: 20 })
+    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, dimensions: ["page"], rowLimit: 20 }),
+    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...previousBody, dimensions: ["page"], rowLimit: 250 }),
+    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, dimensions: ["query"], rowLimit: 30 }),
+    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...previousBody, dimensions: ["query"], rowLimit: 250 }),
+    query(token, env.SEARCH_CONSOLE_SITE_URL, { ...currentBody, dimensions: ["query", "page"], rowLimit: 250 })
   ]);
+
+  const metric = r => ({
+    clicks: Number(r?.clicks || 0),
+    impressions: Number(r?.impressions || 0),
+    ctr: Number(r?.ctr || 0),
+    position: Number(r?.position || 0)
+  });
+  const previousPageMap = new Map((previousPages.rows || []).map(r => [r.keys?.[0] || "", metric(r)]));
+  const previousQueryMap = new Map((previousQueries.rows || []).map(r => [r.keys?.[0] || "", metric(r)]));
+  const queryPageMap = new Map();
+  for (const r of queryPages.rows || []) {
+    const q = r.keys?.[0] || "";
+    if (q && !queryPageMap.has(q)) queryPageMap.set(q, r.keys?.[1] || "");
+  }
 
   return {
     configured: true,
@@ -119,19 +136,22 @@ export async function getSearchConsoleDashboard(env) {
       ctr: Number(r.ctr || 0),
       position: Number(r.position || 0)
     })),
-    topPages: (pages.rows || []).map(r => ({
-      page: r.keys?.[0] || "",
-      clicks: Number(r.clicks || 0),
-      impressions: Number(r.impressions || 0),
-      ctr: Number(r.ctr || 0),
-      position: Number(r.position || 0)
-    })),
-    topQueries: (queries.rows || []).map(r => ({
-      query: r.keys?.[0] || "",
-      clicks: Number(r.clicks || 0),
-      impressions: Number(r.impressions || 0),
-      ctr: Number(r.ctr || 0),
-      position: Number(r.position || 0)
-    }))
+    topPages: (pages.rows || []).map(r => {
+      const page = r.keys?.[0] || "";
+      return {
+        page,
+        ...metric(r),
+        previous: previousPageMap.get(page) || { clicks: 0, impressions: 0, ctr: 0, position: 0 }
+      };
+    }),
+    topQueries: (queries.rows || []).map(r => {
+      const queryText = r.keys?.[0] || "";
+      return {
+        query: queryText,
+        page: queryPageMap.get(queryText) || "",
+        ...metric(r),
+        previous: previousQueryMap.get(queryText) || { clicks: 0, impressions: 0, ctr: 0, position: 0 }
+      };
+    })
   };
 }
