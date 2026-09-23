@@ -4,6 +4,7 @@ export async function onRequestGet(context){
   const ad=await db.prepare("SELECT * FROM advertisements WHERE id=?").bind(id).first();
   if(!ad)return Response.json({ok:false,error:"not_found"},{status:404});
   ad.serviceGenres=safeJson(ad.service_genres_json,[]);
+  ad.placements=safeJson(ad.placements_json,[]);
   const daily=(await db.prepare(`SELECT date(created_at/1000,'unixepoch') day,event_type,COUNT(*) count
     FROM ad_events WHERE ad_id=? AND created_at>=? GROUP BY day,event_type ORDER BY day`).bind(id,since).all()).results||[];
   const placements=(await db.prepare(`SELECT placement,event_type,COUNT(*) count
@@ -22,6 +23,28 @@ export async function onRequestPost(context){
   if(d.action==="banner"){
     await db.prepare("UPDATE advertisements SET banner_url=?,updated_at=? WHERE id=?").bind(String(d.bannerUrl||"").trim()||null,nowMs(),id).run();
     await audit(context.env,"ad.banner","advertisement",id,{});
+    return Response.json({ok:true});
+  }
+  if(d.action==="settings"){
+    const allowedPlacements=new Set(["article_top","article_middle","article_bottom","sidebar"]);
+    const placements=Array.isArray(d.placements)?d.placements.map(String).filter(x=>allowedPlacements.has(x)):[];
+    if(!placements.length) return Response.json({ok:false,error:"placement_required"},{status:400});
+    const toMs=v=>{
+      if(!v) return null;
+      const n=Date.parse(String(v));
+      return Number.isFinite(n)?n:null;
+    };
+    const startsAt=toMs(d.startsAt),endsAt=toMs(d.endsAt);
+    if(startsAt&&endsAt&&endsAt<startsAt) return Response.json({ok:false,error:"invalid_period"},{status:400});
+    const contractPrice=Math.max(0,Math.round(Number(d.contractPriceMonthly||0)))||null;
+    const billingNote=String(d.billingNote||"").trim().slice(0,1000)||null;
+    const websiteUrl=String(d.websiteUrl||"").trim().slice(0,1000)||null;
+    if(websiteUrl && !/^https?:\/\//i.test(websiteUrl)) return Response.json({ok:false,error:"invalid_website_url"},{status:400});
+    await db.prepare(`UPDATE advertisements SET
+      placements_json=?,starts_at=?,ends_at=?,contract_price_monthly=?,billing_note=?,website_url=?,updated_at=?
+      WHERE id=?`)
+      .bind(JSON.stringify(placements),startsAt,endsAt,contractPrice,billingNote,websiteUrl,nowMs(),id).run();
+    await audit(context.env,"ad.settings","advertisement",id,{placements,startsAt,endsAt,contractPriceMonthly:contractPrice});
     return Response.json({ok:true});
   }
   return Response.json({ok:false,error:"invalid_action"},{status:400});
