@@ -9,7 +9,18 @@ export async function onRequestGet(context){
     FROM advertisements a LEFT JOIN ad_events e ON e.ad_id=a.id
     GROUP BY a.id ORDER BY a.created_at DESC`)
     .bind(since,since,since,since).all()).results||[];
-  for(const a of ads){a.serviceGenres=safeJson(a.service_genres_json,[]);a.ctr=Number(a.impressions||0)?Number(a.clicks||0)/Number(a.impressions||0):0;}
-  const summary=ads.reduce((s,a)=>({impressions:s.impressions+Number(a.impressions||0),clicks:s.clicks+Number(a.clicks||0),phoneReveals:s.phoneReveals+Number(a.phone_reveals||0),emailReveals:s.emailReveals+Number(a.email_reveals||0),active:s.active+(a.is_active?1:0)}),{impressions:0,clicks:0,phoneReveals:0,emailReveals:0,active:0});
+  for(const a of ads){
+    a.serviceGenres=safeJson(a.service_genres_json,[]);
+    a.placements=safeJson(a.placements_json,[]);
+    a.ctr=Number(a.impressions||0)?Number(a.clicks||0)/Number(a.impressions||0):0;
+  }
+  const summary=ads.reduce((s,a)=>({
+    impressions:s.impressions+Number(a.impressions||0),
+    clicks:s.clicks+Number(a.clicks||0),
+    phoneReveals:s.phoneReveals+Number(a.phone_reveals||0),
+    emailReveals:s.emailReveals+Number(a.email_reveals||0),
+    active:s.active+(a.is_active?1:0),
+    monthlyContractValue:s.monthlyContractValue+(a.is_active?Number(a.contract_price_monthly||0):0)
+  }),{impressions:0,clicks:0,phoneReveals:0,emailReveals:0,active:0,monthlyContractValue:0});
   return Response.json({ok:true,summary,ads});
 }
