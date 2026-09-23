@@ -266,14 +266,59 @@ async function addMemo(id){await api("/samadminsetup/api/inquiries/"+id,{method:
 async function loadBusinesses(){const d=await api("/samadminsetup/api/businesses"),c=d.counts||{};$("bizCounts").textContent='全'+fmt(c.total)+' / 未対応'+fmt(c.pending)+' / 承認'+fmt(c.approved)+' / 却下'+fmt(c.rejected);table("bizTable",[["日時",r=>dt(r.created_at)],["会社",r=>'<button class="btn" onclick="openBiz(\''+r.id+'\')">'+esc(r.company_name)+'</button>'],["担当",r=>esc(r.contact_person)],["エリア",r=>esc(r.service_area)],["状態",r=>esc(r.status)],["広告",r=>r.ad_id?(r.ad_is_active?'配信中':'停止'):'未入力']],d.businesses||[])}
 async function openBiz(id){const d=await api("/samadminsetup/api/businesses/"+id),b=d.business;openDrawer('<h2>'+esc(b.company_name)+'</h2><p>'+esc(b.contact_person)+' · '+esc(b.phone)+' · '+esc(b.email)+'</p><p>'+esc(b.service_area)+'</p><p>'+esc(b.service_content)+'</p><button class="btn primary" onclick="bizStatus(\''+id+'\',\'承認\')">承認・URL発行</button> <button class="btn danger" onclick="bizStatus(\''+id+'\',\'却下\')">却下</button><div id="setupUrl"></div>')}
 async function bizStatus(id,status){const d=await api("/samadminsetup/api/businesses/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"status",status})});if(d.setupUrl)$("setupUrl").innerHTML='<div class="card"><b>業者入力URL</b><br><input value="'+esc(d.setupUrl)+'" readonly onclick="this.select()"></div>';await loadBusinesses()}
+function yen(v){return "¥"+fmt(Math.round(Number(v||0)))}
+function dateInput(v){if(!v)return "";const d=new Date(Number(v));return d.toISOString().slice(0,10)}
+async function loadAdSettings(){
+  const d=await api("/samadminsetup/api/ad-settings");
+  adPlacementCache=d.placements||[];
+  if(!d.schemaReady){
+    $("adPlacements").innerHTML='<div class="empty-rich" style="grid-column:1/-1"><b>広告販売機能のDB更新待ち</b><p>コードは準備済みです。D1へ広告料金・掲載位置の追加マイグレーションを適用すると、この画面から料金設定できるようになります。</p></div>';
+    return d;
+  }
+  $("adPlacements").innerHTML=adPlacementCache.map(p=>'<div class="placement-card '+(p.is_active?"":"off")+'"><h3>'+esc(p.label)+'</h3><p>'+esc(p.description||"")+'</p><div class="placement-price"><span>¥</span><input id="price_'+esc(p.key)+'" type="number" min="0" step="1000" value="'+Number(p.monthly_price||0)+'"><span>/月</span></div><div class="placement-toggle"><span>'+(p.is_active?"販売可能":"販売停止")+'</span><button class="toggle-mini" onclick="savePlacement(\''+esc(p.key)+'\','+(p.is_active?"false":"true")+')">'+(p.is_active?"停止":"再開")+'</button></div><button class="btn" style="width:100%;margin-top:8px" onclick="savePlacementPrice(\''+esc(p.key)+'\')">料金を保存</button></div>').join("");
+  return d;
+}
+async function savePlacementPrice(key){
+  const p=adPlacementCache.find(x=>x.key===key);if(!p)return;
+  await api("/samadminsetup/api/ad-settings",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"update_placement",key,monthlyPrice:Number($("price_"+key).value||0),active:Boolean(p.is_active),description:p.description||""})});
+  await loadAdSettings();
+}
+async function savePlacement(key,active){
+  const p=adPlacementCache.find(x=>x.key===key);if(!p)return;
+  await api("/samadminsetup/api/ad-settings",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"update_placement",key,monthlyPrice:Number(p.monthly_price||0),active,description:p.description||""})});
+  await loadAdSettings();
+}
 async function loadAds(){
-  const d=await api("/samadminsetup/api/ads"),s=d.summary||{};
-  $("adImps").textContent=fmt(s.impressions);$("adClicks").textContent=fmt(s.clicks);$("adPhones").textContent=fmt(s.phoneReveals);$("adActive").textContent=fmt(s.active);
+  const [d]=await Promise.all([api("/samadminsetup/api/ads"),loadAdSettings()]);
+  const sm=d.summary||{};
+  $("adImps").textContent=fmt(sm.impressions);$("adClicks").textContent=fmt(sm.clicks);$("adPhones").textContent=fmt(sm.phoneReveals);$("adActive").textContent=fmt(sm.active);$("adMrr").textContent=yen(sm.monthlyContractValue);
   if(!(d.ads||[]).length){
-    $("adTable").innerHTML='<div class="empty-rich"><b>D1上の掲載業者広告は現在0件です</b><p>この機能はGoogle AdSenseではなく、サイトへ直接掲載する業者広告用です。旧Manus側に広告データがある場合は、データ移行後にここへ表示されます。</p></div>';
+    $("adTable").innerHTML='<div class="empty-rich"><b>掲載広告はまだ0件です（正常）</b><p>まだ広告販売を開始していないため実績はありません。業者申込を承認し、掲載位置・契約金額・期間を設定して配信ONにすると、ここへ実績が蓄積されます。</p></div>';
     return;
   }
-  table("adTable",[["会社",r=>esc(r.company_name)],["ジャンル",r=>(r.serviceGenres||[]).map(x=>'<span class="tag">'+esc(x)+'</span>').join("")],["表示",r=>fmt(r.impressions)],["Click",r=>fmt(r.clicks)],["CTR",r=>pct(r.ctr)],["配信",r=>'<button class="btn '+(r.is_active?'danger':'primary')+'" onclick="toggleAd(\''+r.id+'\','+(r.is_active?'false':'true')+')">'+(r.is_active?'停止':'開始')+'</button>']],d.ads||[]);
+  table("adTable",[
+    ["会社",r=>'<button class="btn" onclick="openAd(\''+r.id+'\')">'+esc(r.company_name)+'</button>'],
+    ["掲載枠",r=>(r.placements||[]).map(x=>'<span class="tag">'+esc((adPlacementCache.find(p=>p.key===x)||{}).label||x)+'</span>').join("")||'<span class="muted">未設定</span>'],
+    ["契約/月",r=>r.contract_price_monthly?'<span class="money">'+yen(r.contract_price_monthly)+'</span>':'<span class="muted">未設定</span>'],
+    ["期間",r=>(r.starts_at||r.ends_at)?esc((r.starts_at?dateInput(r.starts_at):"開始未設定")+" ～ "+(r.ends_at?dateInput(r.ends_at):"終了未設定")):'<span class="muted">未設定</span>'],
+    ["表示",r=>fmt(r.impressions)],["Click",r=>fmt(r.clicks)],["CTR",r=>pct(r.ctr)],
+    ["配信",r=>'<button class="btn '+(r.is_active?'danger':'primary')+'" onclick="toggleAd(\''+r.id+'\','+(r.is_active?'false':'true')+')">'+(r.is_active?'停止':'開始')+'</button>']
+  ],d.ads||[]);
+}
+async function openAd(id){
+  const d=await api("/samadminsetup/api/ads/"+id),a=d.ad||{};
+  const imps=(d.daily||[]).filter(x=>x.event_type==="impression").reduce((n,x)=>n+Number(x.count||0),0);
+  const clicks=(d.daily||[]).filter(x=>x.event_type==="click").reduce((n,x)=>n+Number(x.count||0),0);
+  const phones=(d.daily||[]).filter(x=>x.event_type==="phone_reveal").reduce((n,x)=>n+Number(x.count||0),0);
+  const emails=(d.daily||[]).filter(x=>x.event_type==="email_reveal").reduce((n,x)=>n+Number(x.count||0),0);
+  const checks=adPlacementCache.length?adPlacementCache.map(p=>'<label class="placement-check"><input type="checkbox" name="adpl" value="'+esc(p.key)+'" '+((a.placements||[]).includes(p.key)?"checked":"")+'> '+esc(p.label)+'<small>標準 '+(Number(p.monthly_price||0)?yen(p.monthly_price)+"/月":"料金未設定")+'</small></label>').join(""):'<div class="muted">広告料金DBの更新後に掲載枠を設定できます。</div>';
+  openDrawer('<h2>'+esc(a.company_name)+'</h2><p class="muted">広告契約・掲載設定</p><div class="ad-stats-mini"><div><small>30日表示</small><b>'+fmt(imps)+'</b></div><div><small>30日Click</small><b>'+fmt(clicks)+'</b></div><div><small>電話表示</small><b>'+fmt(phones)+'</b></div><div><small>メール表示</small><b>'+fmt(emails)+'</b></div></div><div class="field"><label>掲載位置</label><div class="placement-checks">'+checks+'</div></div><div class="ad-settings-grid"><div class="field"><label>契約月額</label><input id="adContract" type="number" min="0" step="1000" value="'+Number(a.contract_price_monthly||0)+'"></div><div class="field"><label>公式サイトURL</label><input id="adWebsite" type="url" value="'+esc(a.website_url||"")+'"></div><div class="field"><label>掲載開始日</label><input id="adStart" type="date" value="'+dateInput(a.starts_at)+'"></div><div class="field"><label>掲載終了日</label><input id="adEnd" type="date" value="'+dateInput(a.ends_at)+'"></div></div><div class="field"><label>請求・契約メモ</label><textarea id="adBilling" rows="3">'+esc(a.billing_note||"")+'</textarea></div><button class="btn primary" onclick="saveAdSettings(\''+id+'\')">契約・掲載設定を保存</button>');
+}
+async function saveAdSettings(id){
+  const placements=[...document.querySelectorAll('input[name="adpl"]:checked')].map(x=>x.value);
+  const body={action:"settings",placements,contractPriceMonthly:Number($("adContract").value||0),websiteUrl:$("adWebsite").value||"",startsAt:$("adStart").value?$("adStart").value+"T00:00:00+09:00":null,endsAt:$("adEnd").value?$("adEnd").value+"T23:59:59+09:00":null,billingNote:$("adBilling").value||""};
+  await api("/samadminsetup/api/ads/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
+  closeDrawer();await loadAds();
 }
 async function toggleAd(id,active){await api("/samadminsetup/api/ads/"+id,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"toggle",active})});loadAds()}
 function openDrawer(html){$("drawerBody").innerHTML=html;$("drawer").classList.add("open")}function closeDrawer(){$("drawer").classList.remove("open")}
