@@ -1,0 +1,50 @@
+name: Temporary post-cutover verification
+
+on:
+  push:
+    paths:
+      - ".github/workflows/post-cutover-verify-temp.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify live Cloudflare cutover
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          BASE="https://fukuoka-ihinseiri-guide.com"
+          for i in $(seq 1 24); do
+            echo "Attempt $i"
+            CONTACT="$(curl -fsSL "$BASE/contact/" || true)"
+            BUSINESS="$(curl -fsSL "$BASE/for-business/" || true)"
+            ARTICLE="$(curl -fsSL "$BASE/blog/ihinseiri/article-20260710-kichouhin-sagashi.html" || true)"
+            PRICING="$(curl -fsSL "$BASE/api/ad/placements" || true)"
+
+            ok=1
+            grep -Fq "fetch('/api/inquiry'" <<<"$CONTACT" || ok=0
+            grep -Fq "fetch('/api/business'" <<<"$BUSINESS" || ok=0
+            grep -Fq "広告掲載枠・料金" <<<"$BUSINESS" || ok=0
+            grep -Fq 'script src="/ad-widget.js"' <<<"$ARTICLE" || ok=0
+            grep -Fq '"ok":true' <<<"$PRICING" || ok=0
+
+            if grep -Fq "fukuokaguide-afgvbgyb.manus.space" <<<"$CONTACT$BUSINESS$ARTICLE"; then ok=0; fi
+            if grep -Fq "成果報酬型" <<<"$BUSINESS"; then ok=0; fi
+            if grep -Fq "問い合わせの自動通知" <<<"$BUSINESS"; then ok=0; fi
+
+            if [ "$ok" = "1" ]; then
+              echo "POST_CUTOVER_VERIFY=PASS"
+              echo "$PRICING"
+              exit 0
+            fi
+
+            echo "Not current yet"
+            sleep 10
+          done
+
+          echo "POST_CUTOVER_VERIFY=FAIL"
+          exit 1
