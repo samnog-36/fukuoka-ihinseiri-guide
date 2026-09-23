@@ -1,9 +1,10 @@
 import { requireDb, rowId, nowMs } from "../_lib/db.js";
-import { json, clean, validEmail, corsHeaders, options, rateLimit } from "../_lib/public.js";
+import { json, clean, validEmail, corsHeaders, options, rateLimit, originAllowed } from "../_lib/public.js";
 
 export function onRequestOptions(context){ return options(context.request); }
 
 export async function onRequestPost(context){
+  if(!originAllowed(context.request)) return json({ok:false,error:"origin_not_allowed"},403);
   const cors=corsHeaders(context.request);
   if(!(await rateLimit(context,"business",6,30*60*1000))) return json({ok:false,error:"rate_limited"},429,cors);
   let input;
