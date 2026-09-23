@@ -11,10 +11,10 @@ CREATE TABLE IF NOT EXISTS ad_placements (
 );
 
 INSERT OR IGNORE INTO ad_placements (key,label,description,monthly_price,is_active,sort_order,updated_at) VALUES
-  ('article_top','記事上部','記事の冒頭付近。最も早く読者の目に入る掲載枠。',0,1,10,0),
-  ('article_middle','記事中部','本文を読み進めた読者に表示する掲載枠。',0,1,20,0),
-  ('article_bottom','記事下部','記事を読み終えた関心度の高い読者向け掲載枠。',0,1,30,0),
-  ('sidebar','サイドバー/CTA付近','ガイドページ等の補助導線に表示する掲載枠。',0,1,40,0);
+  ('article_top','記事上部','記事の冒頭付近。最も早く読者の目に入る掲載枠。',0,0,10,0),
+  ('article_middle','記事中部','本文を読み進めた読者に表示する掲載枠。',0,0,20,0),
+  ('article_bottom','記事下部','記事を読み終えた関心度の高い読者向け掲載枠。',0,0,30,0),
+  ('sidebar','サイドバー/CTA付近','ガイドページ等の補助導線に表示する掲載枠。',0,0,40,0);
 
 ALTER TABLE advertisements ADD COLUMN placements_json TEXT NOT NULL DEFAULT '[]';
 ALTER TABLE advertisements ADD COLUMN starts_at INTEGER;
