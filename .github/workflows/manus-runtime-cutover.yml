@@ -1,11 +1,7 @@
 name: One-time Manus runtime cutover
-# retry after legacy URL fix
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/manus-runtime-cutover.yml"
 
 permissions:
   contents: write
