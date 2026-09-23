@@ -30,11 +30,40 @@ async function activity() {
   return Array.isArray(data) ? data : [];
 }
 
+function nextDailyJst(hour = 5, minute = 10) {
+  const now = new Date();
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  let target = new Date(Date.UTC(
+    jst.getUTCFullYear(),
+    jst.getUTCMonth(),
+    jst.getUTCDate(),
+    hour - 9,
+    minute,
+    0
+  ));
+  if (target <= now) {
+    target = new Date(Date.UTC(
+      jst.getUTCFullYear(),
+      jst.getUTCMonth(),
+      jst.getUTCDate() + 1,
+      hour - 9,
+      minute,
+      0
+    ));
+  }
+  return target.toISOString();
+}
+
 export async function onRequestGet(context) {
   const { env } = context;
   const output = {
     generatedAt: new Date().toISOString(),
-    schedule: { timezone: "Asia/Tokyo", localTime: "05:10", cadence: "daily" }
+    schedule: {
+      timezone: "Asia/Tokyo",
+      localTime: "05:10",
+      cadence: "daily",
+      nextRunAt: nextDailyJst(5, 10)
+    }
   };
 
   const [runsResult, pullsResult, commitsResult, activityResult, gscResult] = await Promise.allSettled([
@@ -87,13 +116,45 @@ export async function onRequestGet(context) {
     ? gscResult.value
     : { configured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON), error: String(gscResult.reason || "unknown") };
 
+  const runs = output.github.runs || [];
+  const latestRun = runs[0] || null;
+  const activities = output.activity || [];
+  const latestPublished = activities[0] || null;
+  const latestRunActivity = latestRun
+    ? activities.find(a => String(a.run_id || "") === String(latestRun.id))
+    : null;
+
+  output.automation = {
+    status: latestRun && latestRun.status !== "completed" ? latestRun.status : "waiting",
+    mode: "improve",
+    nextRunAt: output.schedule.nextRunAt,
+    latestRun,
+    latestPublished,
+    latestRunActivity,
+    maxPublicationsPerRun: 1,
+    minimumReviewerScore: 88,
+    pipeline: [
+      "Search Console取得",
+      "改善候補を選定",
+      "Editor AIが一次情報を調査・編集",
+      "独立Reviewer AIが再検証",
+      "品質・AdSense・HTML Gate",
+      "合格時のみmainへ自動反映"
+    ]
+  };
+
   output.health = {
     googleCredentialConfigured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON),
     searchConsoleSiteConfigured: Boolean(env.SEARCH_CONSOLE_SITE_URL),
-    githubTokenConfigured: Boolean(env.GITHUB_DASHBOARD_TOKEN),
+    githubApiReachable: runsResult.status === "fulfilled" || commitsResult.status === "fulfilled",
     databaseConfigured: Boolean(env.DB),
     accessConfigured: Boolean(env.CF_ACCESS_TEAM_DOMAIN && env.CF_ACCESS_AUD),
     ownerEmailLocked: true
+  };
+
+  output.optional = {
+    githubDashboardTokenConfigured: Boolean(env.GITHUB_DASHBOARD_TOKEN),
+    githubDashboardTokenNote: "公開リポジトリのため未設定でも現在のダッシュボード取得は動作します。APIレート上限を増やしたい場合のみ設定します。"
   };
 
   return new Response(JSON.stringify(output), {
