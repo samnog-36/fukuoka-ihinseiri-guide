@@ -40,6 +40,16 @@ async function aiRunHistory() {
   return Array.isArray(data) ? data : [];
 }
 
+async function siteCoverage() {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/" + REPO + "/main/data/site-coverage.json",
+    { cf: { cacheTtl: 30 } }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data && typeof data === "object" ? data : null;
+}
+
 function scheduledForRun(createdAt) {
   if (!createdAt) return null;
   const actual = new Date(createdAt);
@@ -171,12 +181,13 @@ export async function onRequestGet(context) {
     }
   };
 
-  const [runsResult, pullsResult, commitsResult, activityResult, aiRunsResult, gscResult] = await Promise.allSettled([
+  const [runsResult, pullsResult, commitsResult, activityResult, aiRunsResult, coverageResult, gscResult] = await Promise.allSettled([
     gh("/actions/workflows/content-growth-os.yml/runs?per_page=20", env),
     gh("/pulls?state=all&sort=updated&direction=desc&per_page=20", env),
     gh("/commits?sha=main&per_page=12", env),
     activity(),
     aiRunHistory(),
+    siteCoverage(),
     getSearchConsoleDashboard(env)
   ]);
 
@@ -223,6 +234,7 @@ export async function onRequestGet(context) {
 
   output.activity = activityResult.status === "fulfilled" ? activityResult.value : [];
   output.aiRuns = aiRunsResult.status === "fulfilled" ? aiRunsResult.value : [];
+  output.coverage = coverageResult.status === "fulfilled" ? coverageResult.value : null;
   output.gsc = gscResult.status === "fulfilled"
     ? gscResult.value
     : { configured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON), error: String(gscResult.reason || "unknown") };
@@ -248,12 +260,12 @@ export async function onRequestGet(context) {
     maxPublicationsPerRun: 1,
     minimumReviewerScore: 88,
     pipeline: [
-      "Search Console取得",
-      "改善候補を選定",
-      "Editor AIが一次情報を調査・編集",
-      "独立Reviewer AIが再検証",
-      "品質・AdSense・HTML Gate",
-      "合格時のみmainへ自動反映"
+      "サイト構造・地域カバレッジを棚卸し",
+      "Search Console＋Web＋一次情報をリサーチ",
+      "新規記事か既存改善かを判断",
+      "Editor AIが執筆・編集",
+      "Reviewer指摘なら同じRun内で再修正",
+      "品質Gate合格時のみmainへ自動反映"
     ]
   };
 
