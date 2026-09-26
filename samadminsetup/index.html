@@ -176,13 +176,14 @@ function runResultText(run){
 function renderGlobalProgress(o){
   const p=o.systemProgress||{},stages=p.stages||[],a=o.automation||{},ast=automationState(a);
   const stageHtml=stages.map(x=>'<div class="global-stage '+(x.done?"done":x.key===p.currentKey?"current":"")+'"><div class="global-stage-line"><i></i></div><div class="global-stage-name">'+esc(x.label)+(x.skipped?" · SKIP":"")+'</div></div>').join("");
-  $("globalOps").innerHTML='<div class="global-ops-card"><div class="global-ops-title"><small>SYSTEM PROGRESS</small><b>'+fmt(p.completed||0)+' / '+fmt(p.total||0)+' 完了 · 現在 '+esc(p.currentLabel||"-")+'</b></div><div class="global-progress">'+stageHtml+'</div><div class="global-next"><small>AI自動運転</small><b>'+esc(ast.label)+' · 次回 '+dtShort(a.nextRunAt)+'</b><div class="countdown">'+until(a.nextRunAt)+'</div></div></div>';
+  $("globalOps").innerHTML='<div class="global-ops-card"><div class="global-ops-title"><small>SYSTEM PROGRESS</small><b>'+fmt(p.completed||0)+' / '+fmt(p.total||0)+' 完了 · 現在 '+esc(p.currentLabel||"-")+'</b></div><div class="global-progress">'+stageHtml+'</div><div class="global-next"><small>AI自動運転</small><b>'+esc(ast.label)+(a.liveJob?.currentStep?' · '+esc(a.liveJob.currentStep):' · 次回 '+dtShort(a.nextRunAt))+'</b><div class="countdown">'+(a.liveJob?.currentStep?(fmt(a.liveJob.completedSteps)+' / '+fmt(a.liveJob.totalSteps)+' steps 完了'):until(a.nextRunAt))+'</div></div></div>';
 }
 function renderAutomation(o){
-  const a=o.automation||{},st=automationState(a),run=a.latestRun||{},published=a.latestRunActivity;
+  const a=o.automation||{},st=automationState(a),run=a.latestRun||{},published=a.latestRunActivity,live=a.liveJob||null;
   $("overviewAiBadge").textContent=st.label;
   $("overviewAiBadge").className="pill "+st.cls;
-  $("overviewAutomation").innerHTML='<div class="hero-status"><b>'+esc(st.label)+'</b><p>毎日05:10 JSTにSearch Consoleを取得し、改善候補をAIが分析・編集・独立レビューします。合格した場合だけ自動公開します。</p><div class="countdown">次回 '+dtShort(a.nextRunAt)+' · '+until(a.nextRunAt)+'</div></div><div class="runtime-grid" style="margin-top:10px"><div class="runtime-item"><small>前回実行</small><b>'+dtShort(run.createdAt)+'</b></div><div class="runtime-item"><small>結果</small><b>'+esc(runResultText(run))+'</b></div><div class="runtime-item"><small>公開変更</small><b>'+(published?"あり":"なし")+'</b></div></div>';
+  const liveHtml=live?'<div class="runtime-item" style="grid-column:1/-1"><small>いま実行している工程</small><b>'+esc(live.currentStep||live.name||"処理中")+'</b><div class="health-desc">'+fmt(live.completedSteps)+' / '+fmt(live.totalSteps)+' steps 完了</div></div>':'';
+  $("overviewAutomation").innerHTML='<div class="hero-status"><b>'+esc(st.label)+'</b><p>サイト構造棚卸し → Search Console/Webリサーチ → 新規記事か既存改善を判断 → Editor → Reviewer再修正 → Gate → 公開、まで自動で回します。</p><div class="countdown">'+(live?'現在 '+esc(live.currentStep||"処理中"):'次回 '+dtShort(a.nextRunAt)+' · '+until(a.nextRunAt))+'</div></div><div class="runtime-grid" style="margin-top:10px">'+liveHtml+'<div class="runtime-item"><small>前回/今回開始</small><b>'+dtShort(run.createdAt)+'</b></div><div class="runtime-item"><small>結果</small><b>'+esc(runResultText(run))+'</b></div><div class="runtime-item"><small>公開変更</small><b>'+(published?"あり":"なし")+'</b></div></div>';
 }
 function renderPeriodCompare(c,p){
   const defs=[
@@ -273,7 +274,7 @@ function renderCoverage(o){
 function renderAi(o){
   const a=o.automation||{},run=a.latestRun||{},st=automationState(a),decision=a.latestDecision||(o.aiRuns||[])[0]||null,pub=a.latestRunActivity;
   $("aiState").textContent=st.label;
-  $("aiStateSub").textContent=run.status==="in_progress"?"AI処理を実行しています":"スケジュール待機";
+  $("aiStateSub").textContent=run.status==="in_progress"?(a.liveJob?.currentStep||"AI処理を実行しています"):"スケジュール待機";
   $("aiNextRun").textContent=dtShort(a.nextRunAt);
   $("aiNextRunSub").textContent=until(a.nextRunAt);
   $("aiLastRun").textContent=dtShort(run.createdAt||decision?.started_at);
