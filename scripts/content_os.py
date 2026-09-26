@@ -1945,7 +1945,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     dest = ROOT / path
     dest.parent.mkdir(parents=True, exist_ok=True)
     proposed = normalize_generated_text(proposed)
-    proposed = normalize_generated_text(proposed)\n    dest.write_text(proposed, encoding="utf-8")
+    dest.write_text(proposed, encoding="utf-8")
     add_sitemap_url(path)
     thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
     add_search_entry(topic, data, path, thumbnail)
@@ -2339,7 +2339,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
 
     path = ROOT / candidate["path"]
     proposed = normalize_generated_text(proposed)
-    proposed = normalize_generated_text(proposed)\n    path.write_text(proposed, encoding="utf-8")
+    path.write_text(proposed, encoding="utf-8")
     update_sitemap(candidate["path"])
     update_search_data(candidate["path"], seo["title"], seo["description"])
     append_activity(candidate, data, review, image_path)
