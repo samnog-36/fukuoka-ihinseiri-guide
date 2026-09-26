@@ -1,5 +1,5 @@
 name: Autonomous content growth OS
-# final verification latest-run-wins
+# verify system-managed ads and legal revision loop
 
 on:
   schedule:
