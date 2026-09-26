@@ -9,8 +9,8 @@
   "position_opportunity_min": 4,
   "position_opportunity_max": 20,
   "minimum_quality_score": 78,
-  "new_article_minimum_score": 90,
-  "allow_scheduled_new_articles": false,
+  "new_article_minimum_score": 88,
+  "allow_scheduled_new_articles": true,
   "require_primary_sources_for_claims": true,
   "require_inline_source_context": true,
   "prohibited_behaviors": [
@@ -50,5 +50,15 @@
     "image_alt",
     "hero_image",
     "sitemap_lastmod"
-  ]
+  ],
+  "max_revision_attempts": 2,
+  "research_new_topics_every_run": true,
+  "new_article_categories": {
+    "ihinseiri": "遺品整理",
+    "tokushu-seisou": "特殊清掃",
+    "seizenseiri": "生前整理",
+    "kuyo": "遺品供養",
+    "cost": "費用",
+    "area": "地域別"
+  }
 }
