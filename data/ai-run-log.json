@@ -1,0 +1,239 @@
+[
+  {
+    "timestamp": "2026-09-25T23:19:43Z",
+    "started_at": "2026-09-25T23:17:00Z",
+    "finished_at": "2026-09-25T23:19:43Z",
+    "run_id": "36200392049",
+    "trigger": "schedule",
+    "mode": "improve",
+    "legacy_backfill": true,
+    "status": "rejected",
+    "outcome": "公開見送り",
+    "outcome_reason": "Reviewer 72点で公開基準88点に未達",
+    "candidate": {
+      "path": "blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html",
+      "title": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】",
+      "priority_score": null,
+      "quality": null,
+      "gsc": null,
+      "selection_reasons": [
+        "Search Consoleと記事品質の優先度計算で最上位候補として選定（当時の詳細数値は公開ログに未保存）"
+      ]
+    },
+    "editor": {
+      "status": "done",
+      "decision_reason": "旧運用ではEditorの判断理由を公開ログへ保存していなかったため詳細復元不可",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null
+    },
+    "reviewer": {
+      "status": "rejected",
+      "approve": false,
+      "score": 72,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "21ページのデータを取得"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】 を選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "done",
+        "detail": "修正案を作成（旧ログのため詳細未保存）"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "rejected",
+        "detail": "72点 / 基準88点"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "Reviewer基準未達のため公開対象なし"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "公開見送り"
+      }
+    ],
+    "published": false
+  },
+  {
+    "timestamp": "2026-09-24T23:14:44Z",
+    "started_at": "2026-09-24T23:11:30Z",
+    "finished_at": "2026-09-24T23:14:44Z",
+    "run_id": "36071470701",
+    "trigger": "schedule",
+    "mode": "improve",
+    "legacy_backfill": true,
+    "status": "rejected",
+    "outcome": "公開見送り",
+    "outcome_reason": "Reviewer 82点で公開基準88点に未達",
+    "candidate": {
+      "path": "blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html",
+      "title": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】",
+      "priority_score": null,
+      "quality": null,
+      "gsc": null,
+      "selection_reasons": [
+        "Search Consoleと記事品質の優先度計算で最上位候補として選定（当時の詳細数値は公開ログに未保存）"
+      ]
+    },
+    "editor": {
+      "status": "done",
+      "decision_reason": "旧運用ではEditorの判断理由を公開ログへ保存していなかったため詳細復元不可",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null
+    },
+    "reviewer": {
+      "status": "rejected",
+      "approve": false,
+      "score": 82,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "21ページのデータを取得"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】 を選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "done",
+        "detail": "修正案を作成（旧ログのため詳細未保存）"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "rejected",
+        "detail": "82点 / 基準88点"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "Reviewer基準未達のため公開対象なし"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "公開見送り"
+      }
+    ],
+    "published": false
+  },
+  {
+    "timestamp": "2026-09-23T22:58:10Z",
+    "started_at": "2026-09-23T22:55:29Z",
+    "finished_at": "2026-09-23T22:58:10Z",
+    "run_id": "35930951563",
+    "trigger": "schedule",
+    "mode": "improve",
+    "legacy_backfill": true,
+    "status": "rejected",
+    "outcome": "公開見送り",
+    "outcome_reason": "Reviewer 78点で公開基準88点に未達",
+    "candidate": {
+      "path": "blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html",
+      "title": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】",
+      "priority_score": null,
+      "quality": null,
+      "gsc": null,
+      "selection_reasons": [
+        "Search Consoleと記事品質の優先度計算で最上位候補として選定（当時の詳細数値は公開ログに未保存）"
+      ]
+    },
+    "editor": {
+      "status": "done",
+      "decision_reason": "旧運用ではEditorの判断理由を公開ログへ保存していなかったため詳細復元不可",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null
+    },
+    "reviewer": {
+      "status": "rejected",
+      "approve": false,
+      "score": 78,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "21ページのデータを取得"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】 を選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "done",
+        "detail": "修正案を作成（旧ログのため詳細未保存）"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "rejected",
+        "detail": "78点 / 基準88点"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "Reviewer基準未達のため公開対象なし"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "公開見送り"
+      }
+    ],
+    "published": false
+  }
+]
