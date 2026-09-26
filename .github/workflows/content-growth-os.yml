@@ -131,7 +131,7 @@ jobs:
           fi
 
           ARTICLE_CHANGE="$(git status --porcelain -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
-          LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json)"
+          LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json data/site-coverage.json)"
 
           if [ -z "$ARTICLE_CHANGE" ] && [ -z "$LOG_CHANGE" ]; then
             echo "No persistent changes for this run."
