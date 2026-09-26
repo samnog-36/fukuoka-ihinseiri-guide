@@ -195,8 +195,29 @@ def build_site_coverage(rows: list[dict]) -> dict:
         }
 
     dupes = duplicate_hints(rows)
+    hub_paths = [
+        "area/index.html",
+        "cost/index.html",
+        "guide/index.html",
+        "guide/how-to-choose.html",
+        "guide/seizenseiri.html",
+        "guide/tokushu-seisou.html",
+        "guide/kuyo.html",
+        "blog/index.html",
+    ] + [f"blog/{slug}/index.html" for slug in CONFIG.get("new_article_categories", {})]
+    hubs = [p for p in hub_paths if (ROOT / p).exists()]
+    area_duplicates = [
+        {
+            "area": x["area"],
+            "article_count": x["article_count"],
+            "articles": x["articles"],
+        }
+        for x in area_coverage if x["article_count"] >= 2
+    ]
+    area_duplicates.sort(key=lambda x: x["article_count"], reverse=True)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "hubs": hubs,
         "category_counts": {
             slug: len(items) for slug, items in sorted(by_category.items())
         },
@@ -207,8 +228,17 @@ def build_site_coverage(rows: list[dict]) -> dict:
         "fukuoka_area_tags": area_tags,
         "fukuoka_area_coverage": area_coverage,
         "fukuoka_area_gaps": [x["area"] for x in area_coverage if x["status"] == "gap"],
+        "fukuoka_area_duplicates": area_duplicates[:20],
         "kyushu_prefecture_coverage": kyushu,
         "duplicate_title_hints": dupes[:20],
+        "strategy_rules": [
+            "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
+            "地域別は未カバー地域を優先し、同一地域の重複記事は原則増やさない",
+            "同じ検索意図が既存にあれば新規記事ではなく統合・改善を優先する",
+            "新規記事は全記事一覧・カテゴリ一覧・サイト内検索・サイトマップへ必ず接続する",
+            "福岡の主要地域カバレッジを厚くした上で、九州7県へ段階的に広げる",
+            "九州展開は地名差替えではなく制度差・広域比較・遠方実家整理など独自価値を優先する",
+        ],
     }
 
 
@@ -487,6 +517,15 @@ canonical: {current_canonical}
 - 画像に文字を焼き込まない。誤解を招くBefore/Afterや架空の人物・事業者・証拠写真風表現は避ける。
 - article_html内にscriptタグやJSON-LDを入れない。canonical、OG URL、構造化データはシステム側で最終URLへ同期する。
 - 内部リンクは可能な限りリダイレクト元の.htmlではなく、最終到達する拡張子なしURLを使う。
+
+現在のサイト構造・地域カバレッジ:
+{json.dumps(build_site_coverage(rows), ensure_ascii=False)}
+
+既存構造を守る判断:
+- このページが属するカテゴリ/地域クラスターの役割を理解してから編集する
+- 既存の親ハブ・兄弟記事との内部リンクを必要に応じて強化する
+- 地域別記事では、地域固有情報を増やし、別地域の一般論コピーにしない
+- 重複している地域・検索意図は、新規ページ追加ではなく既存ページの役割整理を優先する
 
 サイト内リンク候補:
 {json.dumps(inventory_for_internal_links(rows, candidate["path"]), ensure_ascii=False)}
@@ -859,6 +898,7 @@ opportunity_score は需要、独自性、一次情報の強さ、既存記事�
     data = json.loads(strip_json_fence(resp.output_text))
     if not isinstance(data, dict):
         return None
+    data["site_coverage"] = coverage
     if not data.get("create"):
         return data
 
@@ -938,6 +978,17 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 
 テーマ:
 {json.dumps(topic, ensure_ascii=False)}
+
+現在のサイト構造・地域カバレッジ:
+{json.dumps(build_site_coverage(rows), ensure_ascii=False)}
+
+新規記事の構造ルール:
+- どの親ハブ・カテゴリクラスターの子ページになるかを明確にする
+- area記事なら未カバー地域または明確に別検索意図のテーマだけ作る
+- 既存地域記事と重なる場合は作らない
+- 親ハブと関連する兄弟記事への内部リンクを本文内に入れる
+- 地域固有の自治体ルール・搬出条件・相談窓口などを中心にする
+- 福岡県外は九州広域で意味があるテーマを優先し、地名だけ変えた記事は禁止
 
 公開予定パス: {path}
 カテゴリ: {category_name}
@@ -1747,6 +1798,10 @@ def main() -> int:
 
     PRIVATE_DIR.mkdir(parents=True, exist_ok=True)
     rows = article_records()
+    coverage = build_site_coverage(rows)
+    (PRIVATE_DIR / "site-coverage-latest.json").write_text(
+        json.dumps(coverage, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     gsc = load_gsc()
     rep = make_report(rows, gsc)
     (PRIVATE_DIR / "content-os-latest.json").write_text(
