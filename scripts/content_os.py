@@ -307,14 +307,31 @@ def build_site_coverage(rows: list[dict]) -> dict:
 
 
 def make_report(rows: list[dict], gsc_map: dict) -> dict:
+    coverage = build_site_coverage(rows)
+
+    duplicate_pressure: dict[str, list[str]] = {}
+    for group in coverage.get("fukuoka_area_duplicates", []):
+        area = group.get("area")
+        for item in group.get("articles", []):
+            path = item.get("path")
+            if path:
+                duplicate_pressure.setdefault(path, []).append(area)
+
     ranked = []
     for r in rows:
         x = dict(r)
         x["gsc"] = gsc_map.get(r["path"])
-        x["priority_score"] = candidate_score(r, x["gsc"])
+        base = candidate_score(r, x["gsc"])
+        areas = duplicate_pressure.get(r["path"], [])
+        structure_bonus = min(24, 8 * len(areas))
+        x["structure_signals"] = {
+            "duplicate_areas": areas,
+            "duplicate_pressure_bonus": structure_bonus,
+        }
+        x["priority_score"] = round(base + structure_bonus, 2)
         ranked.append(x)
+
     ranked.sort(key=lambda x: x["priority_score"], reverse=True)
-    coverage = build_site_coverage(rows)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "site": CONFIG["site_url"],
@@ -415,23 +432,6 @@ def sanitize_article_html(article_html: str) -> str:
     article_html = re.sub(r"<script\b.*?</script>", "", article_html, flags=re.I | re.S)
     article_html = re.sub(r'href=["\']/about["\']', 'href="/about.html"', article_html, flags=re.I)
     return normalize_generated_text(article_html).strip()
-
-
-def normalize_generated_text(text: str) -> str:
-    # Keep AI-authored HTML deterministic and compatible with git diff --check.
-    lines = [line.rstrip() for line in str(text).replace("\r\n", "\n").replace("\r", "\n").split("\n")]
-    # Collapse runs of 3+ blank lines to at most 2.
-    out = []
-    blank = 0
-    for line in lines:
-        if line == "":
-            blank += 1
-            if blank > 2:
-                continue
-        else:
-            blank = 0
-        out.append(line)
-    return "\n".join(out).rstrip() + "\n"
 
 
 def sync_structured_data(html: str, title: str, description: str, image_url: str | None) -> str:
@@ -2018,6 +2018,15 @@ def candidate_selection_reasons(candidate: dict) -> list[str]:
     quality = int(candidate.get("quality", 100))
     if quality < 100:
         reasons.append(f"記事品質スコアが {quality}/100 で改善余地あり")
+    structure = candidate.get("structure_signals") or {}
+    duplicate_areas = structure.get("duplicate_areas") or []
+    if duplicate_areas:
+        reasons.append(
+            "地域クラスター内で重複があるため、"
+            + "・".join(duplicate_areas)
+            + " の既存記事整理・役割分担を優先"
+        )
+
     gsc = candidate.get("gsc") or {}
     if gsc:
         imp = float(gsc.get("impressions", 0) or 0)
