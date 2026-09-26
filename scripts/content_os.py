@@ -427,10 +427,21 @@ def normalize_generated_text(text: str) -> str:
     return "\n".join(out).rstrip() + "\n"
 
 
+AD_SLOT_RE = re.compile(
+    r'<div\s+class=["\'][^"\']*\bfkg-ad\b[^"\']*["\'][^>]*>\s*</div>',
+    re.I | re.S,
+)
+
+
+def strip_managed_ad_slots(article_html: str) -> str:
+    return AD_SLOT_RE.sub("", article_html)
+
+
 def sanitize_article_html(article_html: str) -> str:
-    # JSON-LD/head metadata are controlled by the system, never by free-form article output.
+    # JSON-LD/head metadata and sponsored ad slots are system-managed.
     article_html = re.sub(r"<script\b.*?</script>", "", article_html, flags=re.I | re.S)
     article_html = re.sub(r'href=["\']/about["\']', 'href="/about.html"', article_html, flags=re.I)
+    article_html = strip_managed_ad_slots(article_html)
     return normalize_generated_text(article_html).strip()
 
 
@@ -1425,7 +1436,7 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 - 参考情報は本文近くにもリンクし、末尾にもまとめる
 - H1は1つだけ
 - 既存記事と同じく、パンくず・article-meta・article-hero-image・見出し階層を自然に構成する
-- 記事内に広告コードは書かない（システム側で挿入する）
+- 記事内に広告コードは書かない。class="fkg-ad" は絶対に出力しない（広告はシステム側だけが挿入する）
 - hero画像は最初のfigure内に /images/ogp-default.png を仮指定する
 - about.htmlへの編集方針リンクをeditorial-info内に入れる
 - internal_linksには、既存サイト内から本当に関連する記事を2〜3本選ぶ
@@ -1463,6 +1474,8 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 
 def validate_new_article_output(topic: dict, data: dict) -> None:
     article_html = str(data.get("article_html", ""))
+    if "fkg-ad" in article_html:
+        raise RuntimeError("AI article_html must not contain system-managed ad slots")
     if not article_html.startswith("<article") or "</article>" not in article_html:
         raise RuntimeError("new article missing complete article element")
     if re.search(r"<script\b", article_html, re.I):
@@ -1492,10 +1505,15 @@ def validate_new_article_output(topic: dict, data: dict) -> None:
 
 
 def inject_middle_ad(article_html: str, genre: str) -> str:
+    # Ads are system-managed. Remove any AI-authored slot first, then add exactly one middle slot.
+    article_html = strip_managed_ad_slots(article_html)
     closes = [m.end() for m in re.finditer(r"</section>", article_html, re.I)]
     if not closes:
-        return article_html
-    pos = closes[len(closes) // 2]
+        pos = article_html.rfind("</article>")
+        if pos < 0:
+            return article_html
+    else:
+        pos = closes[len(closes) // 2]
     slot = f'\n<div class="fkg-ad" data-genre="{escape(genre, quote=True)}" data-placement="article_middle"></div>\n'
     return article_html[:pos] + slot + article_html[pos:]
 
@@ -1513,7 +1531,7 @@ def build_new_article_page(topic: dict, data: dict) -> str:
     article_html = ensure_new_article_links(article_html, topic, data)
     article_html = inject_middle_ad(article_html, category_name)
 
-    return f"""<!DOCTYPE html>
+    page = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -1576,6 +1594,10 @@ def build_new_article_page(topic: dict, data: dict) -> str:
 </body>
 </html>
 """
+    middle_count = len(re.findall(r'data-placement=["\']article_middle["\']', page, re.I))
+    if middle_count != 1:
+        raise RuntimeError(f"system ad invariant failed: article_middle={middle_count}")
+    return page
 
 
 def call_revision_editor(candidate: dict, current_html: str, prior_editor: dict, review: dict, rows: list[dict], attempt: int) -> dict:
@@ -1604,8 +1626,12 @@ Reviewer:
 ---END ARTICLE---
 
 必須:
-- Reviewerのissuesを1件ずつ解消する
+- Reviewerのissuesを番号順に1件ずつ解消し、返答前に「実HTMLが本当に直っているか」を自己点検する
 - web検索で一次情報を再確認する
+- 広告枠はシステム管理。article_htmlに class="fkg-ad" を絶対に含めない。広告を追加・削除・維持したと申告もしない
+- Reviewerが法律の条文・項号・時系列を指摘した場合、放棄前/放棄後などの局面を明確に分け、該当する条・号・ただし書を一次情報で再確認して説明する
+- 法律上の効果を一括表現せず、要件が異なる行為を別々に説明する
+- change_summary と実際のarticle_htmlが一致していることを返答前に確認する
 - Reviewerが指摘していない良い部分は壊さない
 - 不確かな数値・断定は削除するか一次情報を付ける
 - SEO目的だけの水増しをしない
