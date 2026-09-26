@@ -90,6 +90,27 @@ def article_records() -> list[dict]:
     return rows
 
 
+
+def held_article_records() -> list[dict]:
+    rows = []
+    for p in sorted(ROOT.glob(CONFIG["content_glob"])):
+        html = p.read_text(encoding="utf-8")
+        if not NOINDEX_RE.search(html):
+            continue
+        rel = p.relative_to(ROOT).as_posix()
+        mt = TITLE_RE.search(html)
+        title = unescape(mt.group(1)).strip() if mt else rel
+        rows.append({
+            "path": rel,
+            "title": title,
+            "quality": 0,
+            "chars": len(visible(html)),
+            "official_sources": 0,
+            "held": True,
+        })
+    return rows
+
+
 def load_gsc() -> dict:
     p = PRIVATE_DIR / "search_console_latest.json"
     if not p.exists():
@@ -259,6 +280,7 @@ def build_site_coverage(rows: list[dict]) -> dict:
             "status": "covered" if matches else "gap",
         }
 
+    held = held_article_records()
     dupes = duplicate_hints(rows)
     hub_paths = [
         "area/index.html",
@@ -296,6 +318,9 @@ def build_site_coverage(rows: list[dict]) -> dict:
         "fukuoka_area_duplicates": area_duplicates[:20],
         "kyushu_prefecture_coverage": kyushu,
         "duplicate_title_hints": dupes[:20],
+        "held_noindex_articles": [
+            {"path": r["path"], "title": r["title"]} for r in held
+        ],
         "strategy_rules": [
             "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
             "地域別は未カバー地域を優先し、同一地域の重複記事は原則増やさない",
@@ -1373,10 +1398,18 @@ opportunity_score は需要、独自性、一次情報の強さ、既存記事�
         data["create"] = False
         data["duplicate_existing"] = intent_match
         data["decision_reason"] = (
-            "新規テーマとしては価値があるが、既存記事と検索意図が重なるため、"
+            "新規テーマとしては価値があるが、既存のindex対象記事と検索意図が重なるため、"
             "新規ページを増やさず既存記事の一次情報・実務性を強化する"
         )
         return data
+
+    held_match = find_existing_intent_match(data, held_article_records())
+    if held_match:
+        data["replaces_held"] = held_match
+        data["decision_reason"] = (
+            "同じ検索意図の旧noindex保留記事があるため、"
+            "一次情報・品質審査を通した置換版として新規作成し、合格後に301統合する"
+        )
 
     src = [x.get("url", "") for x in data.get("primary_sources", []) if isinstance(x, dict)]
     if not any(
