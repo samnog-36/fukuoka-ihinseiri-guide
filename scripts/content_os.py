@@ -203,6 +203,101 @@ def extract_area_hub_mapping() -> dict[str, list[str]]:
     return mapping
 
 
+
+HREF_RE = re.compile(r'href=["\']([^"\']+)["\']', re.I)
+
+
+def redirect_map() -> dict[str, str]:
+    p = ROOT / "_redirects"
+    out: dict[str, str] = {}
+    if not p.exists():
+        return out
+    for raw in p.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) >= 3 and parts[-1] in {"301", "302", "307", "308"}:
+            out[parts[0]] = parts[1]
+    return out
+
+
+def internal_href_file(href: str) -> Path | None:
+    href = str(href or "").strip()
+    if not href.startswith("/") or href.startswith("//"):
+        return None
+    path = href.split("#", 1)[0].split("?", 1)[0]
+    if not path or path == "/":
+        p = ROOT / "index.html"
+        return p if p.exists() else None
+    raw = path.lstrip("/")
+    candidates = []
+    if raw.endswith(".html"):
+        candidates.append(ROOT / raw)
+    else:
+        candidates.extend([ROOT / (raw + ".html"), ROOT / raw / "index.html"])
+    for p in candidates:
+        if p.exists() and p.is_file():
+            return p
+    return None
+
+
+def site_link_health(rows: list[dict]) -> dict:
+    redirects = redirect_map()
+    article_paths = {r["path"] for r in rows}
+    inbound = {p: 0 for p in article_paths}
+    broken: list[dict] = []
+    redirect_hits: list[dict] = []
+    html_files = list(ROOT.rglob("*.html"))
+
+    for source in html_files:
+        try:
+            html = source.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        source_rel = source.relative_to(ROOT).as_posix()
+        for href in HREF_RE.findall(html):
+            href = href.strip()
+            if not href.startswith("/") or href.startswith("//"):
+                continue
+            base = href.split("#", 1)[0].split("?", 1)[0]
+            if not base or base.startswith(("/api/", "/images/", "/css/", "/js/", "/manus-storage/")):
+                continue
+
+            if base in redirects:
+                redirect_hits.append({
+                    "source": source_rel,
+                    "href": base,
+                    "final": redirects[base],
+                })
+
+            target = internal_href_file(base)
+            if target is None:
+                # Ignore known dynamic business setup URLs and directory roots that Cloudflare handles.
+                if not base.startswith("/business/setup/"):
+                    broken.append({"source": source_rel, "href": base})
+                continue
+            target_rel = target.relative_to(ROOT).as_posix()
+            if target_rel in inbound and target_rel != source_rel:
+                inbound[target_rel] += 1
+
+    orphans = [
+        {"path": p, "title": next((r["title"] for r in rows if r["path"] == p), p)}
+        for p, count in inbound.items()
+        if count == 0
+    ]
+    return {
+        "html_files_scanned": len(html_files),
+        "active_articles": len(article_paths),
+        "orphan_articles": orphans[:30],
+        "orphan_count": len(orphans),
+        "broken_internal_links": broken[:50],
+        "broken_internal_link_count": len(broken),
+        "redirecting_internal_links": redirect_hits[:50],
+        "redirecting_internal_link_count": len(redirect_hits),
+    }
+
+
 def build_site_coverage(rows: list[dict]) -> dict:
     by_category: dict[str, list[dict]] = {}
     for row in rows:
@@ -321,6 +416,7 @@ def build_site_coverage(rows: list[dict]) -> dict:
         "held_noindex_articles": [
             {"path": r["path"], "title": r["title"]} for r in held
         ],
+        "link_health": site_link_health(rows),
         "strategy_rules": [
             "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
             "地域別は未カバー地域を優先し、同一地域の重複記事は原則増やさない",
