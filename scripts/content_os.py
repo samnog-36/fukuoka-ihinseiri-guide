@@ -260,23 +260,79 @@ def replace_meta(html: str, *, name: str | None = None, prop: str | None = None,
     return html.replace("</head>", f"  {tag}\n</head>", 1)
 
 
+def public_path_for(path: str) -> str:
+    p = "/" + path.lstrip("/")
+    if p.endswith("/index.html"):
+        p = p[:-10] or "/"
+    elif p.endswith(".html"):
+        p = p[:-5]
+    return p
+
+
+def file_url_for(path: str) -> str:
+    return CONFIG["site_url"].rstrip("/") + "/" + path.lstrip("/")
+
+
 def canonical_url_for(path: str) -> str:
-    return CONFIG["site_url"].rstrip("/") + "/" + path
+    return CONFIG["site_url"].rstrip("/") + public_path_for(path)
+
+
+def normalized_url_path(url: str) -> str:
+    try:
+        p = urlparse(url).path or "/"
+    except Exception:
+        p = str(url)
+    if p.endswith("/index.html"):
+        p = p[:-10] or "/"
+    elif p.endswith(".html"):
+        p = p[:-5]
+    return p.rstrip("/") or "/"
+
+
+def replace_canonical(html: str, url: str) -> str:
+    tag = f'<link rel="canonical" href="{escape(url, quote=True)}">'
+    pattern = re.compile(r'<link\b(?=[^>]*\brel=["\']canonical["\'])[^>]*>', re.I)
+    if pattern.search(html):
+        return pattern.sub(tag, html, count=1)
+    return html.replace("</head>", f"  {tag}\n</head>", 1)
+
+
+def sanitize_article_html(article_html: str) -> str:
+    # JSON-LD/head metadata are controlled by the system, never by free-form article output.
+    article_html = re.sub(r"<script\b.*?</script>", "", article_html, flags=re.I | re.S)
+    article_html = re.sub(r'href=["\']/about["\']', 'href="/about.html"', article_html, flags=re.I)
+    return article_html
 
 
 def sync_structured_data(html: str, title: str, description: str, image_url: str | None) -> str:
     modified = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
+    canonical_match = CANONICAL_RE.search(html)
+    canonical = canonical_match.group(1).strip() if canonical_match else ""
+    h1_match = H1_RE.search(html)
+    headline = visible(h1_match.group(1)) if h1_match else re.sub(r"\s*[｜|]\s*福岡遺品整理ガイド.*$", "", title).strip()
 
     def walk(obj):
         if isinstance(obj, dict):
             typ = obj.get("@type")
             types = typ if isinstance(typ, list) else [typ]
             if any(t in {"Article", "BlogPosting", "NewsArticle"} for t in types):
-                obj["headline"] = title
+                obj["headline"] = headline
                 obj["description"] = description
                 obj["dateModified"] = modified
+                if canonical:
+                    obj["mainEntityOfPage"] = canonical
+                    if "@id" in obj and isinstance(obj.get("@id"), str):
+                        obj["@id"] = canonical + "#article"
                 if image_url:
                     obj["image"] = image_url
+            if "BreadcrumbList" in types and isinstance(obj.get("itemListElement"), list):
+                items = obj["itemListElement"]
+                if items:
+                    last = items[-1]
+                    if isinstance(last, dict):
+                        last["name"] = headline
+                        if "item" in last and canonical:
+                            last["item"] = canonical
             for v in obj.values():
                 walk(v)
         elif isinstance(obj, list):
@@ -335,7 +391,8 @@ def update_search_data(path: str, title: str, description: str) -> None:
         data = json.loads(p.read_text(encoding="utf-8"))
     except Exception:
         return
-    target = "/" + path
+    target = public_path_for(path)
+    legacy_target = "/" + path.lstrip("/")
     changed = False
 
     def walk(v):
@@ -344,7 +401,10 @@ def update_search_data(path: str, title: str, description: str) -> None:
             for x in v:
                 walk(x)
         elif isinstance(v, dict):
-            if v.get("url") == target:
+            if v.get("url") in {target, legacy_target}:
+                if v.get("url") != target:
+                    v["url"] = target
+                    changed = True
                 if v.get("title") != title:
                     v["title"] = title
                     changed = True
@@ -362,7 +422,7 @@ def update_search_data(path: str, title: str, description: str) -> None:
 
 def inventory_for_internal_links(rows: list[dict], current_path: str) -> list[dict]:
     return [
-        {"path": "/" + r["path"], "title": r["title"]}
+        {"path": public_path_for(r["path"]), "title": r["title"]}
         for r in rows
         if r["path"] != current_path
     ][:120]
@@ -416,6 +476,8 @@ canonical: {current_canonical}
 - 内部リンクは下記サイト内在庫から本当に関連するものだけ選ぶ。
 - 画像は、既存画像が内容に合っているなら keep。読者理解やCTRに明確な改善が見込める時だけ generate。
 - 画像に文字を焼き込まない。誤解を招くBefore/Afterや架空の人物・事業者・証拠写真風表現は避ける。
+- article_html内にscriptタグやJSON-LDを入れない。canonical、OG URL、構造化データはシステム側で最終URLへ同期する。
+- 内部リンクは可能な限りリダイレクト元の.htmlではなく、最終到達する拡張子なしURLを使う。
 
 サイト内リンク候補:
 {json.dumps(inventory_for_internal_links(rows, candidate["path"]), ensure_ascii=False)}
@@ -453,6 +515,7 @@ canonical: {current_canonical}
         input=prompt,
     )
     data = json.loads(strip_json_fence(resp.output_text))
+    data["article_html"] = sanitize_article_html(str(data.get("article_html", "")))
     data["_original_html"] = html
     return data
 
@@ -480,8 +543,8 @@ def validate_editor_output(candidate: dict, data: dict) -> None:
     canonical_match = CANONICAL_RE.search(data["_original_html"])
     if CONFIG.get("protect_canonical_path") and canonical_match:
         expected = canonical_url_for(candidate["path"])
-        if canonical_match.group(1).rstrip("/") != expected.rstrip("/"):
-            raise RuntimeError("existing canonical path is unexpected; refusing autonomous edit")
+        if normalized_url_path(canonical_match.group(1)) != normalized_url_path(expected):
+            raise RuntimeError("existing canonical points to a different content path; refusing autonomous edit")
 
 
 def build_proposed_html(candidate: dict, data: dict) -> str:
@@ -492,13 +555,17 @@ def build_proposed_html(candidate: dict, data: dict) -> str:
     seo = data["seo"]
     title = str(seo["title"]).strip()
     description = str(seo["description"]).strip()
-    out = original[:article_match.start(1)] + data["article_html"] + original[article_match.end(1):]
+    article_html = sanitize_article_html(str(data["article_html"]))
+    out = original[:article_match.start(1)] + article_html + original[article_match.end(1):]
+    canonical = canonical_url_for(candidate["path"])
     out = replace_title(out, title)
     out = replace_meta(out, name="description", content=description)
     out = replace_meta(out, prop="og:title", content=str(seo.get("og_title") or title))
     out = replace_meta(out, prop="og:description", content=str(seo.get("og_description") or description))
-    out = replace_meta(out, prop="og:url", content=canonical_url_for(candidate["path"]))
+    out = replace_meta(out, prop="og:url", content=canonical)
     out = replace_meta(out, name="twitter:card", content="summary_large_image")
+    out = replace_canonical(out, canonical)
+    out = sync_structured_data(out, title, description, None)
     return out
 
 
@@ -944,7 +1011,9 @@ Reviewer:
 - 不確かな数値・断定は削除するか一次情報を付ける
 - SEO目的だけの水増しをしない
 - editorial-info / reference-links / CTA /広告枠の主要構造は維持
-- canonicalは変えない
+- article_html内にscriptタグ・JSON-LDを入れない
+- canonical、OG URL、head内JSON-LDはシステム側で最終到達URLへ同期するため、本文側で新しく作らない
+- 内部リンクはリダイレクト元ではなく最終到達URLを使う
 - 新規記事の場合も既存記事の場合も、公開基準88点以上を目指す
 
 JSONのみ:
@@ -972,6 +1041,7 @@ JSONのみ:
 """
     resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
     data = json.loads(strip_json_fence(resp.output_text))
+    data["article_html"] = sanitize_article_html(str(data.get("article_html", "")))
     data["_original_html"] = current_html
     return data
 
@@ -1008,7 +1078,7 @@ def add_search_entry(topic: dict, data: dict, path: str, thumbnail: str) -> None
     rows = json.loads(p.read_text(encoding="utf-8"))
     if not isinstance(rows, list):
         return
-    url = "/" + path
+    url = public_path_for(path)
     rows = [r for r in rows if r.get("url") != url]
     rows.insert(0, {
         "title": str(data.get("h1") or topic["title"]),
@@ -1030,7 +1100,7 @@ def article_card_html(topic: dict, data: dict, path: str, thumbnail: str) -> str
     summary = escape(str(data.get("summary") or data["seo"]["description"]))
     date_label = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
     return f"""
-        <a href="/{path}" class="article-card" data-category="{escape(topic['category_slug'], quote=True)}">
+        <a href="{public_path_for(path)}" class="article-card" data-category="{escape(topic['category_slug'], quote=True)}">
           <div class="article-card-img"><img src="{escape(thumbnail, quote=True)}" alt="{title}" loading="lazy" width="800" height="533"></div>
           <div class="article-card-body">
             <span class="article-card-tag">{escape(category_name)}</span>
@@ -1049,7 +1119,7 @@ def add_article_to_indexes(topic: dict, data: dict, path: str, thumbnail: str) -
         if not p.exists():
             continue
         html = p.read_text(encoding="utf-8")
-        if f'href="/{path}"' in html:
+        if f'href="{public_path_for(path)}"' in html or f'href="/{path}"' in html:
             continue
         pattern = re.compile(r'(<div\s+class=["\']article-grid["\'][^>]*>)', re.I)
         if pattern.search(html):
