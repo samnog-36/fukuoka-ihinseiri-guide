@@ -201,6 +201,11 @@ def build_site_coverage(rows: list[dict]) -> dict:
 
         # Primary source of truth: the actual /area/ navigation mapping.
         for url in hub_mapping.get(area, []):
+            # /area/ uses /blog/area/ as a generic fallback when no
+            # dedicated regional article is mapped. Do not count that
+            # fallback as an actual covered article.
+            if "/blog/area/article-" not in url:
+                continue
             normalized = public_path_for(url)
             row = row_by_url.get(url) or row_by_url.get(normalized)
             if row:
