@@ -432,7 +432,7 @@ def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -
 - 事実の正確性
 - SEO title/meta/H1/内部リンクの妥当性
 - AdSense品質
-- 福岡固有情報の有用性
+- 福岡を核に、必要に応じた九州地域情報の有用性
 - HTML構造を壊していないこと
 
 必ずweb検索で重要な法律・制度・自治体情報を再確認してください。
@@ -1094,6 +1094,9 @@ def _write_list_log(path: Path, rows: list[dict], limit: int = 180) -> None:
 
 
 def candidate_selection_reasons(candidate: dict) -> list[str]:
+    if candidate.get("candidate_type") == "new_article":
+        reasons = [str(x).strip() for x in candidate.get("research_reasons", []) if str(x).strip()]
+        return reasons or ["Web・一次情報リサーチで新規記事の価値が高いと判定"]
     reasons = []
     quality = int(candidate.get("quality", 100))
     if quality < 100:
@@ -1112,6 +1115,43 @@ def candidate_selection_reasons(candidate: dict) -> list[str]:
     if not reasons:
         reasons.append("サイト全体の品質・検索データを合算した優先度スコアが最上位")
     return reasons
+
+
+
+def recent_rejection_count(path: str, lookback: int = 6) -> int:
+    rows = _load_list_log(RUN_LOG)[:lookback]
+    return sum(
+        1 for x in rows
+        if (x.get("candidate") or {}).get("path") == path
+        and x.get("status") == "rejected"
+    )
+
+
+def choose_existing_candidate(report: dict) -> dict | None:
+    candidates = report.get("top_improvement_candidates", [])
+    for candidate in candidates:
+        if candidate.get("priority_score", 0) <= 0:
+            continue
+        rejects = recent_rejection_count(candidate["path"])
+        if rejects >= 2:
+            print("Cooldown repeated rejected candidate:", candidate["path"], "rejects=", rejects)
+            continue
+        return candidate
+    return None
+
+
+def should_create_new_article(topic: dict | None, existing: dict | None) -> bool:
+    if not CONFIG.get("allow_scheduled_new_articles"):
+        return False
+    if not topic or not topic.get("create"):
+        return False
+    score = float(topic.get("opportunity_score", 0) or 0)
+    if score < float(CONFIG.get("new_article_minimum_score", 88)):
+        return False
+    if existing is None:
+        return True
+    weekday = datetime.now(ZoneInfo(CONFIG["timezone"])).weekday()
+    return weekday in set(CONFIG.get("new_article_days_jst", [0, 2, 4, 6]))
 
 
 def append_run_log(item: dict) -> None:
@@ -1313,43 +1353,69 @@ def append_activity(candidate: dict, data: dict, review: dict, image_path: str |
     _write_list_log(ACTIVITY_LOG, log, 180)
 
 
-def improve(candidate: dict, rows: list[dict], mode: str = "improve") -> dict:
+def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: dict | None = None) -> dict:
+    original_html = (ROOT / candidate["path"]).read_text(encoding="utf-8")
     data = call_editor(candidate, rows)
     validate_editor_output(candidate, data)
     proposed = build_proposed_html(candidate, data)
-    review = call_reviewer(candidate, data["_original_html"], proposed, data)
-    min_score = int(CONFIG.get("minimum_reviewer_score", 88))
 
-    if not review.get("approve") or int(review.get("score", 0)) < min_score:
-        score = int(review.get("score", 0) or 0)
-        reason = f"Reviewer {score}点で公開基準{min_score}点に未達"
-        result = {
-            "path": candidate["path"],
-            "published": False,
-            "review": review,
-            "change_summary": data.get("change_summary", []),
-        }
-        (PRIVATE_DIR / "last-ai-change.json").write_text(
-            json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        append_run_log(make_run_record(
-            mode=mode,
-            candidate=candidate,
-            status="rejected",
-            outcome="公開見送り",
-            outcome_reason=reason,
-            editor=data,
-            reviewer=review,
-            published=False,
-        ))
-        print("Reviewer rejected change", candidate["path"], review.get("score"))
-        return result
+    attempts = []
+    max_revisions = int(CONFIG.get("max_revision_attempts", 2))
+    min_score = int(CONFIG.get("minimum_reviewer_score", 88))
+    review = {}
+
+    for round_index in range(max_revisions + 1):
+        review = call_reviewer(candidate, original_html, proposed, data)
+        attempts.append({
+            "attempt": round_index + 1,
+            "score": review.get("score"),
+            "approve": review.get("approve"),
+            "issues": review.get("issues", []),
+            "strengths": review.get("strengths", []),
+            "editor_reason": data.get("decision_reason"),
+            "changes": data.get("change_summary", []),
+        })
+        if review_passed(review):
+            break
+
+        if round_index >= max_revisions:
+            score = int(review.get("score", 0) or 0)
+            reason = f"Reviewer指摘で{max_revisions}回再修正したが、最終{score}点で公開基準{min_score}点に未達"
+            result = {
+                "path": candidate["path"],
+                "published": False,
+                "review": review,
+                "change_summary": data.get("change_summary", []),
+                "review_attempts": attempts,
+            }
+            (PRIVATE_DIR / "last-ai-change.json").write_text(
+                json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            record = make_run_record(
+                mode=mode,
+                candidate=candidate,
+                status="rejected",
+                outcome="再修正後も公開見送り",
+                outcome_reason=reason,
+                editor=data,
+                reviewer=review,
+                published=False,
+            )
+            record["review_attempts"] = attempts
+            record["research"] = research
+            record["action_type"] = "improvement"
+            append_run_log(record)
+            print("Reviewer rejected after retries", candidate["path"], score)
+            return result
+
+        data = call_revision_editor(candidate, proposed, data, review, rows, round_index + 1)
+        validate_editor_output(candidate, data)
+        proposed = build_proposed_html(candidate, data)
+        print("Revised after reviewer feedback", candidate["path"], "attempt=", round_index + 2)
 
     proposed, image_path = generate_image_if_needed(candidate, data, proposed)
     seo = data["seo"]
-    image_url = None
-    if image_path:
-        image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path
+    image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path if image_path else None
     proposed = sync_structured_data(proposed, seo["title"], seo["description"], image_url)
 
     path = ROOT / candidate["path"]
@@ -1362,6 +1428,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve") -> dict:
         "path": candidate["path"],
         "published": True,
         "review": review,
+        "review_attempts": attempts,
         "change_summary": data.get("change_summary", []),
         "primary_sources": data.get("primary_sources", []),
         "image_path": image_path,
@@ -1370,18 +1437,22 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve") -> dict:
     (PRIVATE_DIR / "last-ai-change.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    append_run_log(make_run_record(
+    record = make_run_record(
         mode=mode,
         candidate=candidate,
         status="validated",
-        outcome="公開候補として承認",
+        outcome="再修正を含め公開候補として承認",
         outcome_reason=f"Reviewer {review.get('score')}点で基準{min_score}点を通過。品質Gateへ進行",
         editor=data,
         reviewer=review,
         published=True,
         image_path=image_path,
-    ))
-    print("Validated full-page improvement", candidate["path"], "score=", review.get("score"))
+    )
+    record["review_attempts"] = attempts
+    record["research"] = research
+    record["action_type"] = "improvement"
+    append_run_log(record)
+    print("Validated full-page improvement", candidate["path"], "score=", review.get("score"), "attempts=", len(attempts))
     return result
 
 
@@ -1399,53 +1470,74 @@ def main() -> int:
     )
 
     try:
-        if args.mode != "improve":
-            reason = f"mode={args.mode} のため記事編集は実施しない"
+        if args.mode == "audit":
             append_run_log(make_run_record(
                 mode=args.mode,
                 candidate=None,
                 status="analysis_only",
-                outcome="分析のみ",
-                outcome_reason=reason,
+                outcome="監査のみ",
+                outcome_reason="auditモードのため公開変更なし",
                 published=False,
             ))
             print("Analysis complete; no article modified.")
             return 0
 
-        if not rep["top_improvement_candidates"]:
-            reason = "改善候補が見つからなかった"
-            append_run_log(make_run_record(
+        topic = discover_new_topic(rows)
+        (PRIVATE_DIR / "new-topic-latest.json").write_text(
+            json.dumps(topic or {}, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+
+        if args.mode == "discover":
+            reason = (topic or {}).get("decision_reason") or "新規テーマ調査のみ"
+            record = make_run_record(
                 mode=args.mode,
                 candidate=None,
-                status="no_candidate",
-                outcome="変更なし",
+                status="analysis_only",
+                outcome="新規テーマ調査",
                 outcome_reason=reason,
                 published=False,
-            ))
-            print("No candidates.")
+            )
+            record["research"] = topic
+            record["action_type"] = "research"
+            append_run_log(record)
+            print("Discovery complete; no article modified.")
             return 0
 
-        candidate = rep["top_improvement_candidates"][0]
-        if candidate["priority_score"] <= 0:
-            reason = f"最上位候補の優先度スコアが {candidate['priority_score']} で実行条件未達"
-            append_run_log(make_run_record(
-                mode=args.mode,
-                candidate=candidate,
-                status="no_candidate",
-                outcome="変更なし",
-                outcome_reason=reason,
-                published=False,
-            ))
-            print("No positive-priority candidate.")
+        candidate = choose_existing_candidate(rep)
+
+        if should_create_new_article(topic, candidate):
+            print("Action selected: NEW ARTICLE", topic.get("title"), "score=", topic.get("opportunity_score"))
+            create_new_article(topic, rows, args.mode)
             return 0
 
-        improve(candidate, rows, args.mode)
+        if candidate:
+            print("Action selected: IMPROVE", candidate["path"], "priority=", candidate.get("priority_score"))
+            improve(candidate, rows, args.mode, research=topic)
+            return 0
+
+        if topic and topic.get("create") and float(topic.get("opportunity_score", 0) or 0) >= float(CONFIG.get("new_article_minimum_score", 88)):
+            print("No existing candidate; creating researched new article.")
+            create_new_article(topic, rows, args.mode)
+            return 0
+
+        reason = "既存記事の有効な改善候補も、公開基準を満たす新規テーマも見つからなかった"
+        record = make_run_record(
+            mode=args.mode,
+            candidate=None,
+            status="no_candidate",
+            outcome="変更なし",
+            outcome_reason=reason,
+            published=False,
+        )
+        record["research"] = topic
+        record["action_type"] = "none"
+        append_run_log(record)
+        print(reason)
         return 0
+
     except Exception as exc:
-        candidate = None
-        if rep.get("top_improvement_candidates"):
-            candidate = rep["top_improvement_candidates"][0]
-        append_run_log(make_run_record(
+        candidate = choose_existing_candidate(rep)
+        record = make_run_record(
             mode=args.mode,
             candidate=candidate,
             status="error",
@@ -1453,7 +1545,12 @@ def main() -> int:
             outcome_reason=str(exc),
             published=False,
             error=str(exc),
-        ))
+        )
+        try:
+            record["research"] = locals().get("topic")
+        except Exception:
+            pass
+        append_run_log(record)
         raise
 
 
