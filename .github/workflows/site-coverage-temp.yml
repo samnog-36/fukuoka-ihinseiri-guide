@@ -1,0 +1,54 @@
+name: Temporary site coverage snapshot
+
+on:
+  push:
+    paths:
+      - ".github/workflows/site-coverage-temp.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build current site coverage
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import scripts.content_os as c
+          rows=c.article_records()
+          cov=c.build_site_coverage(rows)
+          Path("data/site-coverage.json").write_text(
+              json.dumps(cov,ensure_ascii=False,indent=2)+"\n",
+              encoding="utf-8"
+          )
+          print(json.dumps({
+              "category_counts":cov.get("category_counts"),
+              "fukuoka_area_gaps":cov.get("fukuoka_area_gaps"),
+              "fukuoka_area_duplicates":cov.get("fukuoka_area_duplicates"),
+              "kyushu":{k:v.get("article_count") for k,v in cov.get("kyushu_prefecture_coverage",{}).items()}
+          },ensure_ascii=False,indent=2))
+          PY
+      - name: Commit snapshot
+        shell: bash
+        run: |
+          if git diff --quiet -- data/site-coverage.json; then
+            echo "No coverage change"
+            exit 0
+          fi
+          git config user.name "content-architecture-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/site-coverage.json
+          git commit -m "Update site architecture coverage snapshot"
+          git pull --rebase origin main
+          git push origin main
