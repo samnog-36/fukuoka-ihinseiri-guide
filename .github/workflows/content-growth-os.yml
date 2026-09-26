@@ -3,9 +3,6 @@ name: Autonomous content growth OS
 on:
   schedule:
     - cron: "10 20 * * *"
-  push:
-    paths:
-      - ".github/workflows/content-growth-os.yml"
   workflow_dispatch:
     inputs:
       mode:
@@ -67,51 +64,111 @@ jobs:
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 
-      - name: Analyze, research, edit and independently review
+      - name: Research, choose action, write/edit and independently review
+        id: ai
+        continue-on-error: true
         shell: bash
         run: |
           AI_RUN_STARTED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
             python3 scripts/content_os.py --mode "${{ steps.mode.outputs.mode }}"
 
       - name: Run safety and quality gates
+        id: gate
+        if: steps.mode.outputs.mode == 'improve' && steps.ai.outcome == 'success'
+        continue-on-error: true
+        shell: bash
         run: |
           python3 scripts/verify_adsense_trust_updates.py
           python3 scripts/content_quality_gate.py --strict
-          python3 -m py_compile scripts/content_os.py scripts/search_console_pull.py scripts/content_quality_gate.py
+          python3 -m py_compile \
+            scripts/content_os.py \
+            scripts/search_console_pull.py \
+            scripts/content_quality_gate.py \
+            scripts/finalize_ai_run.py
           git diff --check
 
-      - name: Persist AI run log and auto-publish validated improvement
-        if: steps.mode.outputs.mode == 'improve'
+      - name: Finalize AI decision log
+        if: always()
         shell: bash
         run: |
-          CHANGED="$(git status --porcelain -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json data/ai-run-log.json)"
-          if [ -z "$CHANGED" ]; then
-            echo "No content or run-log changes."
-            exit 0
+          MODE="${{ steps.mode.outputs.mode }}"
+          AI_OUTCOME="${{ steps.ai.outcome }}"
+          GATE_OUTCOME="${{ steps.gate.outcome }}"
+
+          if [ "$AI_OUTCOME" != "success" ]; then
+            python3 scripts/finalize_ai_run.py \
+              --stage ai-error \
+              --reason "AI処理ステップでエラー。GitHub Actions Run #${GITHUB_RUN_ID} を確認"
+          elif [ "$MODE" = "improve" ] && [ "$GATE_OUTCOME" != "success" ]; then
+            python3 scripts/finalize_ai_run.py \
+              --stage gate-fail \
+              --reason "品質・AdSense・HTML Gateに不合格。公開変更は破棄"
+          elif [ "$MODE" = "improve" ]; then
+            python3 scripts/finalize_ai_run.py --stage gate-pass
+          fi
+
+      - name: Persist every run outcome and publish only validated content
+        if: always()
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          MODE="${{ steps.mode.outputs.mode }}"
+          AI_OUTCOME="${{ steps.ai.outcome }}"
+          GATE_OUTCOME="${{ steps.gate.outcome }}"
+          FAILED="false"
+
+          if [ "$AI_OUTCOME" != "success" ]; then
+            FAILED="true"
+          elif [ "$MODE" = "improve" ] && [ "$GATE_OUTCOME" != "success" ]; then
+            FAILED="true"
+          fi
+
+          # A failed AI/gate run may leave draft files in the workspace.
+          # Never publish those drafts; keep only the run-decision log.
+          if [ "$FAILED" = "true" ]; then
+            git restore --worktree --staged -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json 2>/dev/null || true
           fi
 
           ARTICLE_CHANGE="$(git status --porcelain -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
-          BRANCH="ai/content-growth-${GITHUB_RUN_ID}"
+          LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json)"
 
+          if [ -z "$ARTICLE_CHANGE" ] && [ -z "$LOG_CHANGE" ]; then
+            echo "No persistent changes for this run."
+            if [ "$FAILED" = "true" ]; then exit 1; fi
+            exit 0
+          fi
+
+          if [ -n "$ARTICLE_CHANGE" ] && [ "$FAILED" != "true" ]; then
+            python3 scripts/finalize_ai_run.py \
+              --stage published \
+              --reason "Reviewerと品質Gateを通過し、mainへの自動反映処理を実行"
+            COMMIT_MSG="AI: publish verified autonomous content update"
+            PR_TITLE="Content Growth OS: publish verified autonomous update"
+            PR_BODY="This run researched site coverage and current demand, chose either an existing-page improvement or a new article, independently reviewed the result, retried reviewer feedback when needed, and passed static quality gates. Full reasoning is recorded in data/ai-run-log.json."
+          else
+            COMMIT_MSG="AI: record autonomous run outcome"
+            PR_TITLE="Content Growth OS: record autonomous run outcome"
+            PR_BODY="No content was published. The research, selected candidate, Editor decision, Reviewer result, retry history, gate result, and final reason are recorded in data/ai-run-log.json."
+          fi
+
+          BRANCH="ai/content-growth-${GITHUB_RUN_ID}"
           git config user.name "content-growth-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git switch -c "$BRANCH"
-          git add blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json data/ai-run-log.json 2>/dev/null || true
+          git add \
+            blog \
+            images/blog \
+            sitemap.xml \
+            js/search-data.json \
+            data/ai-activity-log.json \
+            data/ai-run-log.json 2>/dev/null || true
 
           if git diff --cached --quiet; then
-            echo "No staged changes."
+            echo "No staged persistent changes."
+            if [ "$FAILED" = "true" ]; then exit 1; fi
             exit 0
-          fi
-
-          if [ -n "$ARTICLE_CHANGE" ]; then
-            COMMIT_MSG="AI: autonomously optimize highest-priority page"
-            PR_TITLE="Content Growth OS: autonomous verified optimization"
-            PR_BODY="Search Console selected the page; Editor AI researched primary sources; Reviewer AI evaluated the proposal; static quality gates passed. Run decision details are recorded in data/ai-run-log.json."
-          else
-            COMMIT_MSG="AI: record autonomous run outcome"
-            PR_TITLE="Content Growth OS: record run outcome"
-            PR_BODY="No article was published in this run. The selected candidate, decision reasons, Reviewer score, and skip/reject outcome are recorded in data/ai-run-log.json."
           fi
 
           git commit -m "$COMMIT_MSG"
@@ -120,20 +177,33 @@ jobs:
           git rebase origin/main
           git push -u origin "$BRANCH"
 
-          PR_URL="$(gh pr create             --base main             --head "$BRANCH"             --title "$PR_TITLE"             --body "$PR_BODY")"
+          PR_URL="$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "$PR_TITLE" \
+            --body "$PR_BODY")"
 
           PR_NUMBER="$(gh pr view "$PR_URL" --json number --jq '.number')"
           echo "Created PR #$PR_NUMBER: $PR_URL"
 
-          MERGE_RESULT="$(gh api             --method PUT             -H "Accept: application/vnd.github+json"             "/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/merge"             -f merge_method=squash)"
+          MERGE_RESULT="$(gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/merge" \
+            -f merge_method=squash)"
 
           echo "$MERGE_RESULT"
-
           MERGED="$(printf '%s' "$MERGE_RESULT" | python3 -c 'import json,sys; print(str(json.load(sys.stdin).get("merged",False)).lower())')"
+
           if [ "$MERGED" != "true" ]; then
             echo "Automatic merge was not accepted by GitHub."
             exit 1
           fi
 
           git push origin --delete "$BRANCH" || true
-          echo "AI run outcome was persisted to main."
+          echo "AI run outcome persisted to main."
+
+          if [ "$FAILED" = "true" ]; then
+            echo "Run log was saved, but the AI/gate stage failed."
+            exit 1
+          fi
