@@ -24,7 +24,7 @@ TAG_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>", re.I |
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
 H1_RE = re.compile(r"<h1\b[^>]*>(.*?)</h1>", re.I | re.S)
 NOINDEX_RE = re.compile(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex', re.I)
-ARTICLE_RE = re.compile(r'(<article\s+class=["\']article-content["\'][^>]*>.*?</article>)', re.I | re.S)
+ARTICLE_RE = re.compile(r'(<article\b[^>]*>.*?</article>)', re.I | re.S)
 URL_RE = re.compile(r'https?://[^"\'<>\s]+')
 DESC_RE = re.compile(r'<meta[^>]+name=["\']description["\'][^>]*>', re.I)
 CANONICAL_RE = re.compile(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', re.I)
@@ -686,8 +686,10 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
 
 
 GENERIC_QUERY_TERMS = {
-    "遺品整理", "福岡", "福岡県", "方法", "やり方", "費用", "相場", "料金",
-    "注意点", "手順", "ガイド", "おすすめ", "比較", "2026", "2026年", "2026年版"
+    "遺品整理", "遺品", "福岡", "福岡県", "方法", "やり方", "費用", "相場", "料金",
+    "注意点", "手順", "ガイド", "おすすめ", "比較", "処分", "手続き", "対応",
+    "見つかった", "どうする", "故人", "親", "親が亡くなった", "亡くなった",
+    "実家", "家財", "整理", "2026", "2026年", "2026年版"
 }
 
 
@@ -728,11 +730,15 @@ def find_existing_intent_match(topic: dict, rows: list[dict]) -> dict | None:
 
     if not best:
         return None
-    if any(len(t) >= 4 for t in best["matched_terms"]):
+
+    specific = [t for t in best["matched_terms"] if t not in GENERIC_QUERY_TERMS]
+    # Route to an existing page only when the actual subject overlaps,
+    # not merely generic estate-cleanup wording.
+    if any(len(t) >= 4 for t in specific):
         return best
-    if len(best["matched_terms"]) >= 2:
+    if len(specific) >= 2:
         return best
-    if best["title_similarity"] >= 0.62:
+    if best["title_similarity"] >= 0.68:
         return best
     return None
 
@@ -822,6 +828,7 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 - areaカテゴリでは fukuoka_area_gaps と既存地域記事の重複を必ず確認する。
 - 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。\n- 福岡県外は地名差替え型の個別市記事を量産せず、九州比較・制度差・遠方実家整理など福岡の読者にも意味がある広域テーマを優先する
 - duplicate_title_hints に近いテーマは新規記事化せず、既存記事統合・改善を優先する。
+- 「遺品」「親が亡くなった」「処分」「手続き」などの一般語が重なるだけでは重複と判定しない。刀剣・銃砲・相続放棄・行政代執行など、検索意図の中心となる主題が一致する場合だけ既存記事改善へ寄せる。
 - 同じ市を複数記事で扱う場合は、検索意図が明確に違う場合だけ許可する。
 - 「費用」「業者選び」など全地域共通の一般論を地域名だけ変えて量産しない。
 
