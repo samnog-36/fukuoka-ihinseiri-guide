@@ -1,5 +1,5 @@
 name: Autonomous content growth OS
-# verification retry after publish-worktree cleanup
+# verification retry after syntax and worktree fixes
 
 on:
   schedule:
