@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "timestamp": "2026-09-26T07:07:50.116997+00:00",
+    "run_id": "36225498122",
+    "path": "blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin.html",
+    "title_before": null,
+    "title_after": "相続放棄を検討中に遺品整理していい？単純承認を避けるための処分・保管ガイド【福岡対応】",
+    "changes": [
+      "民法921条1号の説明を条文どおりに修正し、例外を「保存行為」と「民法602条に定める期間を超えない賃貸」に限定した。一般的な管理行為すべてが例外ではないことを明記した。",
+      "相続放棄の申述前と、申述受理後の局面を分け、放棄後も現に占有する相続財産については保存義務が問題となり得ることを追加した。",
+      "法定根拠のない「72時間」を削除し、法律上の期限ではない初動手順として再構成した。",
+      "福岡県内の故人の最後の住所地に応じた本庁・支部・出張所の確認方法、主な管轄例、手続問合せ先を追加した。",
+      "福岡家庭裁判所の「相続放棄・限定承認の有無についての照会」が、相続放棄の申述とは別の照会手続であることを明確化した。",
+      "重複していた関連記事ブロックを統合し、内部リンクを最終到達URLに統一した。",
+      "記事専用のヒーロー画像パスと画像生成指示を反映し、単純承認該当性など高度な法的判断や紛争性がある場合は弁護士への相談を優先する案内を追加した。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索｜民法",
+        "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+      },
+      {
+        "name": "裁判所｜相続の放棄の申述",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "裁判所｜福岡県内の管轄区域表",
+        "url": "https://www.courts.go.jp/about/sosiki/kankatu/hukuoka/index.html"
+      },
+      {
+        "name": "福岡家庭裁判所｜本庁・支部・出張所の窓口案内",
+        "url": "https://www.courts.go.jp/fukuoka/saiban/madoguti_katei/index.html"
+      },
+      {
+        "name": "福岡家庭裁判所｜相続放棄・限定承認の有無についての照会",
+        "url": "https://www.courts.go.jp/fukuoka/saiban/souzoku/index.html"
+      },
+      {
+        "name": "日本司法書士会連合会｜相続放棄をしたらどうなる？手続と注意点",
+        "url": "https://souzoku.shiho-shoshi.or.jp/column/038/"
+      },
+      {
+        "name": "法務省｜令和8年熊本地震の被災者である相続人の方々へ",
+        "url": "https://www.moj.go.jp/MINJI/minji07_00413.html"
+      }
+    ],
+    "internal_links": [
+      "/guide/",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260926-souzoku-houki-ihinseiri-tansho-shonin-20260926.webp",
+    "review_score": 92,
+    "review_strengths": [
+      "民法921条1号の例外を「保存行為」と「第602条の期間を超えない賃貸」に限定しており、一般的管理行為を一括して例外扱いしていません。重要な法的説明は正確です。([laws.e-gov.go.jp](https://laws.e-gov.go.jp/law/129AC0000000089?occasion_date=20180905&utm_source=openai))",
+      "相続放棄の原則3か月、被相続人の最後の住所地を管轄する家庭裁判所、収入印紙800円、連絡用郵便料という手続情報は裁判所の現行案内と一致しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html))",
+      "福岡家庭裁判所本庁・各支部・甘木出張所の電話番号と管轄例は公式情報と整合しています。甘木出張所が受付事務を扱い、本庁にも申立て可能との説明も正確です。([courts.go.jp](https://www.courts.go.jp/about/sosiki/kankatu/hukuoka/index.html))",
+      "相続放棄・限定承認の有無の照会を、相続放棄の申述そのものと明確に区別しており、制度の取り違えを防いでいます。([courts.go.jp](https://www.courts.go.jp/fukuoka/saiban/souzoku/index.html))",
+      "令和8年熊本地震について、対象となる相続人の熟慮期間が令和9年3月31日まで延長される場合があるとの記載は、2026年9月26日時点の法務省・裁判所情報に一致します。断定せず対象区域・要件の確認を促している点も適切です。([moj.go.jp](https://www.moj.go.jp/MINJI/minji07_00413.html?utm_source=openai))",
+      "売却・廃棄・形見分け・預金利用を一律に違法または単純承認と断定せず、目的や対象、緊急性などによる個別判断として説明しています。YMYL記事として慎重で、専門家相談への誘導も適切です。",
+      "title、description、H1、導入文、本文の検索意図が一致しています。行動判定表、初動手順、賃貸退去、申述先、チェックリストまで含み、「相続放棄を検討中に遺品整理してよいか」という疑問に直接回答しています。",
+      "内部リンクは内容との関連性が高く、確認したリンク先も到達可能です。([fukuoka-ihinseiri-guide.com](https://fukuoka-ihinseiri-guide.com/guide/))",
+      "広告枠は記事上部・中部・下部の3か所で、長文記事に対して過剰とはいえません。本文中の営業CTAもなく、公的情報・専門家相談を優先しています。",
+      "article、header、section、aside、nav、tableなどのHTML構造に重大な入れ子崩れや閉じタグ欠落は見当たりません。外部リンクのrel属性、画像寸法・alt、time要素も適切です。"
+    ],
+    "status": "validated_for_auto_publish",
+    "action_type": "new_article"
+  }
+]
