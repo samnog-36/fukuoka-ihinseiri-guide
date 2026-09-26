@@ -91,7 +91,7 @@ export async function getSearchConsoleDashboard(env) {
   const currentStart = addDays(end, -27);
   const previousEnd = addDays(currentStart, -1);
   const previousStart = addDays(previousEnd, -27);
-  const trendStart = addDays(end, -89);
+  const trendStart = addDays(end, -364);
 
   const currentBody = { startDate: fmtDate(currentStart), endDate: fmtDate(end), dataState: "final" };
   const previousBody = { startDate: fmtDate(previousStart), endDate: fmtDate(previousEnd), dataState: "final" };
