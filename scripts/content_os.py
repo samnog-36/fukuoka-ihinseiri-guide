@@ -417,6 +417,23 @@ def sanitize_article_html(article_html: str) -> str:
     return normalize_generated_text(article_html).strip()
 
 
+def normalize_generated_text(text: str) -> str:
+    # Keep AI-authored HTML deterministic and compatible with git diff --check.
+    lines = [line.rstrip() for line in str(text).replace("\r\n", "\n").replace("\r", "\n").split("\n")]
+    # Collapse runs of 3+ blank lines to at most 2.
+    out = []
+    blank = 0
+    for line in lines:
+        if line == "":
+            blank += 1
+            if blank > 2:
+                continue
+        else:
+            blank = 0
+        out.append(line)
+    return "\n".join(out).rstrip() + "\n"
+
+
 def sync_structured_data(html: str, title: str, description: str, image_url: str | None) -> str:
     modified = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
     canonical_match = CANONICAL_RE.search(html)
@@ -1928,7 +1945,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     dest = ROOT / path
     dest.parent.mkdir(parents=True, exist_ok=True)
     proposed = normalize_generated_text(proposed)
-    dest.write_text(proposed, encoding="utf-8")
+    proposed = normalize_generated_text(proposed)\n    dest.write_text(proposed, encoding="utf-8")
     add_sitemap_url(path)
     thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
     add_search_entry(topic, data, path, thumbnail)
@@ -2322,7 +2339,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
 
     path = ROOT / candidate["path"]
     proposed = normalize_generated_text(proposed)
-    path.write_text(proposed, encoding="utf-8")
+    proposed = normalize_generated_text(proposed)\n    path.write_text(proposed, encoding="utf-8")
     update_sitemap(candidate["path"])
     update_search_data(candidate["path"], seo["title"], seo["description"])
     append_activity(candidate, data, review, image_path)
