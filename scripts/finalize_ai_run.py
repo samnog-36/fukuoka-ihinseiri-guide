@@ -68,8 +68,11 @@ def main() -> int:
         set_step(row, "publish", "skipped", "AI処理エラーのため公開なし")
 
     elif args.stage == "gate-pass":
-        set_step(row, "gate", "done", "品質・AdSense・HTML Gateを通過")
+        # Only a Reviewer-approved content candidate actually advances
+        # through the publish gate. Rejected/no-change runs keep their
+        # original "skipped" flow instead of being rewritten as gate-passed.
         if row.get("published"):
+            set_step(row, "gate", "done", "品質・AdSense・HTML Gateを通過")
             set_step(row, "publish", "pending", "mainへの自動反映待ち")
 
     elif args.stage == "gate-fail":
