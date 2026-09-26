@@ -249,11 +249,38 @@ export async function onRequestGet(context) {
     ? activities.find(a => String(a.run_id || "") === String(latestRun.id))
     : null;
 
+  let liveJob = null;
+  if (latestRun && latestRun.status !== "completed") {
+    try {
+      const jobsData = await gh("/actions/runs/" + latestRun.id + "/jobs?per_page=10", env);
+      const jobs = jobsData.jobs || [];
+      const job = jobs.find(j => j.status === "in_progress") || jobs[0] || null;
+      if (job) {
+        const steps = job.steps || [];
+        const current = steps.find(st => st.status === "in_progress") || null;
+        const completed = steps.filter(st => st.status === "completed").length;
+        liveJob = {
+          name: job.name,
+          status: job.status,
+          currentStep: current?.name || null,
+          completedSteps: completed,
+          totalSteps: steps.length,
+          steps: steps.map(st => ({
+            name: st.name,
+            status: st.status,
+            conclusion: st.conclusion
+          }))
+        };
+      }
+    } catch {}
+  }
+
   output.automation = {
     status: latestRun && latestRun.status !== "completed" ? latestRun.status : "waiting",
     mode: "improve",
     nextRunAt: output.schedule.nextRunAt,
     latestRun,
+    liveJob,
     latestPublished,
     latestRunActivity,
     latestDecision: (output.aiRuns || []).find(x => String(x.run_id || "") === String(latestRun?.id || "")) || (output.aiRuns || [])[0] || null,
