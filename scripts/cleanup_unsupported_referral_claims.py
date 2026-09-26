@@ -29,6 +29,40 @@ PATTERNS = [
     ),
 ]
 
+
+HTML_PATTERNS = [
+    (
+        re.compile(
+            r'<p(?P<attrs>[^>]*)>福岡遺品整理ガイドでは、.*?業者を無料でご紹介しています。.*?</p>',
+            re.I | re.S,
+        ),
+        r'<p\g<attrs>>業者へ依頼する場合は、作業範囲・見積内訳・追加料金・処分方法・必要な許可や自治体委託の有無を確認し、条件をそろえて比較してください。</p>',
+    ),
+    (
+        re.compile(
+            r'<p(?P<attrs>[^>]*)>.*?福岡県内の(?:信頼できる|優良な?|安心して依頼できる).*?業者.*?(?:無料でご紹介|ご紹介します|ご紹介しています).*?</p>',
+            re.I | re.S,
+        ),
+        r'<p\g<attrs>>業者へ依頼する場合は、作業範囲・見積内訳・追加料金・処分方法を確認し、複数社を同じ条件で比較してください。</p>',
+    ),
+]
+
+CLAUSE_REPLACEMENTS = {
+    "お見積もりやご相談は完全無料ですので、お気軽にお問い合わせください。": "",
+    "お見積もりやご相談は完全無料です。": "",
+    "お見積もりは完全無料です。": "",
+    "費用や手続きのご相談も承ります。": "",
+    "エンディングノートの書き方相談も承ります。": "",
+    "お気軽にご相談ください。": "必要に応じて公的情報や複数の見積もりを確認してください。",
+}
+
+HEADING_REPLACEMENTS = {
+    "適正価格の優良業者をお探しですか？": "見積もりを比較するときの確認ポイント",
+    "筑後南部エリアの遺品整理はお任せください": "筑後南部エリアで依頼前に確認したいこと",
+    "福岡市内の遺品整理はお任せください": "福岡市内で依頼前に確認したいこと",
+    "生前整理のご相談はお気軽に": "生前整理を進める前の確認ポイント",
+}
+
 BUTTON_REPLACEMENTS = {
     "無料相談・お見積りはこちら": "お問い合わせはこちら",
     "無料相談・お見積もりはこちら": "お問い合わせはこちら",
@@ -46,6 +80,12 @@ for path in ROOT.rglob("*.html"):
         new = new.replace(src, dst)
     for pattern, dst in PATTERNS:
         new = pattern.sub(dst, new)
+    for pattern, dst in HTML_PATTERNS:
+        new = pattern.sub(dst, new)
+    for src, dst in CLAUSE_REPLACEMENTS.items():
+        new = new.replace(src, dst)
+    for src, dst in HEADING_REPLACEMENTS.items():
+        new = new.replace(src, dst)
 
     # Do not imply that the site itself provides estimates or matching.
     if new != old:
