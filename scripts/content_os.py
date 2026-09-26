@@ -152,6 +152,35 @@ def clean_article_title(title: str) -> str:
     return re.sub(r"\s*[｜|]\s*福岡遺品整理ガイド.*$", "", title).strip()
 
 
+
+def extract_area_hub_mapping() -> dict[str, list[str]]:
+    p = ROOT / "area/index.html"
+    if not p.exists():
+        return {}
+    html = p.read_text(encoding="utf-8")
+    start = html.find("const areaArticles = {")
+    if start < 0:
+        return {}
+    end = html.find("};", start)
+    if end < 0:
+        return {}
+    block = html[start:end + 2]
+
+    mapping: dict[str, list[str]] = {}
+    for area in extract_area_tags():
+        m = re.search(
+            rf'"{re.escape(area)}"\s*:\s*\[(.*?)\]\s*(?:,|\n\s*\}})',
+            block,
+            re.S,
+        )
+        if not m:
+            mapping[area] = []
+            continue
+        urls = re.findall(r'url\s*:\s*["\']([^"\']+)["\']', m.group(1))
+        mapping[area] = list(dict.fromkeys(urls))
+    return mapping
+
+
 def build_site_coverage(rows: list[dict]) -> dict:
     by_category: dict[str, list[dict]] = {}
     for row in rows:
@@ -160,13 +189,43 @@ def build_site_coverage(rows: list[dict]) -> dict:
 
     area_tags = extract_area_tags()
     area_rows = by_category.get("area", [])
+    hub_mapping = extract_area_hub_mapping()
+    row_by_url: dict[str, dict] = {}
+    for r in area_rows:
+        row_by_url[public_path_for(r["path"])] = r
+        row_by_url["/" + r["path"].lstrip("/")] = r
+
     area_coverage = []
     for area in area_tags:
-        matches = [
-            {"path": r["path"], "title": clean_article_title(r["title"])}
-            for r in area_rows
-            if area in clean_article_title(r["title"])
-        ]
+        matches_by_path: dict[str, dict] = {}
+
+        # Primary source of truth: the actual /area/ navigation mapping.
+        for url in hub_mapping.get(area, []):
+            normalized = public_path_for(url)
+            row = row_by_url.get(url) or row_by_url.get(normalized)
+            if row:
+                matches_by_path[row["path"]] = {
+                    "path": row["path"],
+                    "title": clean_article_title(row["title"]),
+                    "source": "area_hub_mapping",
+                }
+            else:
+                matches_by_path[url] = {
+                    "path": url,
+                    "title": url,
+                    "source": "area_hub_mapping",
+                }
+
+        # Secondary evidence: article title explicitly names the area.
+        for r in area_rows:
+            if area in clean_article_title(r["title"]):
+                matches_by_path[r["path"]] = {
+                    "path": r["path"],
+                    "title": clean_article_title(r["title"]),
+                    "source": matches_by_path.get(r["path"], {}).get("source", "title"),
+                }
+
+        matches = list(matches_by_path.values())
         area_coverage.append({
             "area": area,
             "article_count": len(matches),
