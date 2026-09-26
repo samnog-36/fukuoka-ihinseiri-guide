@@ -2267,6 +2267,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     original_for_review = "新規記事のため変更前ページなし"
     attempts = []
     max_revisions = int(CONFIG.get("max_revision_attempts", 2))
+    best_pass = None
 
     for round_index in range(max_revisions + 1):
         review = call_reviewer(candidate, original_for_review, proposed, data)
@@ -2279,12 +2280,30 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         })
         if review_passed(review):
             score = int(review.get("score", 0) or 0)
+            if best_pass is None or score > int(best_pass["review"].get("score", 0) or 0):
+                best_pass = {"data": data, "proposed": proposed, "review": review, "attempt": round_index + 1}
             target_score = int(CONFIG.get("target_reviewer_score", 94))
             issues = review.get("issues", []) or []
             if score >= target_score or not issues or round_index >= max_revisions:
                 break
             print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
+
         if round_index >= max_revisions:
+            if best_pass is not None:
+                data = best_pass["data"]
+                proposed = best_pass["proposed"]
+                review = best_pass["review"]
+                attempts.append({
+                    "attempt": "fallback",
+                    "score": review.get("score"),
+                    "approve": True,
+                    "issues": review.get("issues", []),
+                    "strengths": review.get("strengths", []),
+                    "note": f"最終磨きが悪化したため、合格済みベスト版（attempt {best_pass['attempt']}）へロールバック",
+                })
+                print("Polish regressed; falling back to best passing draft", candidate["path"], "score=", review.get("score"))
+                break
+
             record = make_run_record(
                 mode=mode,
                 candidate=candidate,
@@ -2685,6 +2704,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
     max_revisions = int(CONFIG.get("max_revision_attempts", 2))
     min_score = int(CONFIG.get("minimum_reviewer_score", 88))
     review = {}
+    best_pass = None
 
     for round_index in range(max_revisions + 1):
         review = call_reviewer(candidate, original_html, proposed, data)
@@ -2699,6 +2719,8 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
         })
         if review_passed(review):
             score = int(review.get("score", 0) or 0)
+            if best_pass is None or score > int(best_pass["review"].get("score", 0) or 0):
+                best_pass = {"data": data, "proposed": proposed, "review": review, "attempt": round_index + 1}
             target_score = int(CONFIG.get("target_reviewer_score", 94))
             issues = review.get("issues", []) or []
             if score >= target_score or not issues or round_index >= max_revisions:
@@ -2706,6 +2728,23 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
             print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
 
         if round_index >= max_revisions:
+            if best_pass is not None:
+                data = best_pass["data"]
+                proposed = best_pass["proposed"]
+                review = best_pass["review"]
+                attempts.append({
+                    "attempt": "fallback",
+                    "score": review.get("score"),
+                    "approve": True,
+                    "issues": review.get("issues", []),
+                    "strengths": review.get("strengths", []),
+                    "editor_reason": data.get("decision_reason"),
+                    "changes": data.get("change_summary", []),
+                    "note": f"最終磨きが悪化したため、合格済みベスト版（attempt {best_pass['attempt']}）へロールバック",
+                })
+                print("Polish regressed; falling back to best passing draft", candidate["path"], "score=", review.get("score"))
+                break
+
             score = int(review.get("score", 0) or 0)
             reason = f"Reviewer指摘で{max_revisions}回再修正したが、最終{score}点で公開基準{min_score}点に未達"
             result = {
