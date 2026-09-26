@@ -1,5 +1,5 @@
 name: Autonomous content growth OS
-# verification retry after syntax and worktree fixes
+# final verification with structure-aware scoring
 
 on:
   schedule:
