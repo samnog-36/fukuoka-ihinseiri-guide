@@ -265,17 +265,19 @@ function renderCoverage(o){
   const gaps=c.fukuoka_area_gaps||[];
   const dupes=c.fukuoka_area_duplicates||[];
   const kyushu=c.kyushu_prefecture_coverage||{};
+  const held=c.held_noindex_articles||[];
   const kyushuGaps=Object.entries(kyushu).filter(([,v])=>!Number(v.article_count||0)).map(([k])=>k);
   const weakest=[...entries].sort((a,b)=>Number(a[1]||0)-Number(b[1]||0))[0];
   const priorities=[];
   if(dupes.length)priorities.push('福岡の重複地域を整理：'+dupes.slice(0,3).map(x=>x.area).join('・'));
   if(gaps.length)priorities.push('福岡の未カバー地域：'+gaps.slice(0,5).join('・'));
   if(kyushuGaps.length)priorities.push('九州の未着手県：'+kyushuGaps.slice(0,5).join('・'));
+  if(held.length)priorities.push('noindex保留記事を再審査・置換：'+held.slice(0,3).map(x=>x.title).join(' / '));
   if(weakest)priorities.push('記事数が少ないカテゴリ：'+labels[weakest[0]]+' '+fmt(weakest[1])+'記事（ただし数合わせはしない）');
   $("siteCoverage").innerHTML='<div class="coverage-grid">'+
     '<div class="coverage-box"><h3>カテゴリ別の記事構成</h3><div class="coverage-bars">'+entries.map(([k,v])=>'<div class="coverage-row"><span>'+esc(labels[k])+'</span><div class="coverage-track"><i style="width:'+Math.max(4,Number(v||0)/max*100)+'%"></i></div><b>'+fmt(v)+'</b></div>').join("")+'</div><div class="coverage-note">記事数の少なさだけで量産せず、検索意図と一次情報の価値がある穴だけ埋めます。</div></div>'+
     '<div class="coverage-box"><h3>福岡の地域カバレッジ</h3><div class="coverage-tags">'+(gaps.length?gaps.map(x=>'<span class="coverage-tag gap">未カバー '+esc(x)+'</span>').join(""):'<span class="coverage-tag ok">主要対象はカバー済み</span>')+'</div>'+(dupes.length?'<h3 style="margin-top:12px">重複している地域</h3><div class="coverage-tags">'+dupes.slice(0,10).map(x=>'<span class="coverage-tag dupe">'+esc(x.area)+' '+fmt(x.article_count)+'記事</span>').join("")+'</div>':'')+'<div class="coverage-note">重複地域は新規量産せず、既存記事の役割整理・統合・内部リンク改善を優先します。</div></div>'+
-    '<div class="coverage-box"><h3>九州7県カバレッジ</h3><div class="coverage-tags">'+Object.entries(kyushu).map(([pref,v])=>'<span class="coverage-tag '+(Number(v.article_count||0)?"ok":"gap")+'">'+esc(pref)+' '+fmt(v.article_count||0)+'</span>').join("")+'</div><div class="coverage-note">福岡を核にしつつ、県外は地名差替えではなく制度差・遠方実家整理・九州比較など独自価値のあるテーマから広げます。</div></div>'+
+    '<div class="coverage-box"><h3>九州7県カバレッジ</h3><div class="coverage-tags">'+Object.entries(kyushu).map(([pref,v])=>'<span class="coverage-tag '+(Number(v.article_count||0)?"ok":"gap")+'">'+esc(pref)+' '+fmt(v.article_count||0)+'</span>').join("")+'</div><div class="coverage-note">福岡を核にしつつ、県外は地名差替えではなく制度差・遠方実家整理・九州比較など独自価値のあるテーマから広げます。</div>'+(held.length?'<h3 style="margin-top:12px">noindex保留・置換候補</h3><div class="coverage-tags">'+held.slice(0,8).map(x=>'<span class="coverage-tag dupe">'+esc(x.title)+'</span>').join("")+'</div>':'')+'</div>'+
   '</div><div class="research-box"><h4>構造上の次の優先候補</h4><div class="why-list">'+priorities.map(x=>'<div class="why-item">'+esc(x)+'</div>').join("")+'</div><div class="coverage-note">ここはサイト構造だけを見た候補です。実際の次アクションはSearch Console・Web検索・一次情報の強さを加味してAIが決めます。</div></div>';
 }
 function renderAi(o){
