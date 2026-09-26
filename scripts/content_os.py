@@ -478,7 +478,7 @@ canonical: {current_canonical}
 - 根拠を確認できない数字、料金、割合、順位、実績、口コミ、体験談、専門家、業者情報を作らない。
 - 重要な事実には本文近くに直接確認できる出典リンクを置く。
 - 「地名だけを変えた一般論」を増やさず、福岡固有の判断材料を優先する。
-- 既存のCTA、広告枠、編集情報、公式情報セクション、主要classは維持する。
+- 既存のCTA、広告枠、編集情報、公式情報セクション、主要classは維持する。\n- article要素の開始タグとclassは既存ページから変更しない。
 - 広告目的の水増し文章を作らない。
 - Search Consoleで伸びているページを不用意に全面改変しない。必要な部分だけ改善してよい。
 - title/metaを変えない方が良ければ現状維持を選べる。
@@ -504,7 +504,7 @@ canonical: {current_canonical}
     "og_title": "OG title",
     "og_description": "OG description"
   }},
-  "article_html": "<article class=\\"article-content\\">...</article>",
+  "article_html": "現在のarticle開始タグ（classを含む）を維持した完全な<article>...</article>",
   "change_summary": ["変更点"],
   "primary_sources": [{{"name":"機関名","url":"https://..."}}],
   "internal_links": ["/blog/..."],
@@ -1133,7 +1133,7 @@ Reviewer:
 - Reviewerが指摘していない良い部分は壊さない
 - 不確かな数値・断定は削除するか一次情報を付ける
 - SEO目的だけの水増しをしない
-- editorial-info / reference-links / CTA /広告枠の主要構造は維持
+- editorial-info / reference-links / CTA /広告枠の主要構造は維持\n- article要素の開始タグとclassは現在案から変更しない
 - article_html内にscriptタグ・JSON-LDを入れない
 - canonical、OG URL、head内JSON-LDはシステム側で最終到達URLへ同期するため、本文側で新しく作らない
 - 内部リンクはリダイレクト元ではなく最終到達URLを使う
@@ -1150,7 +1150,7 @@ JSONのみ:
   "h1": "H1",
   "summary": "一覧用要約",
   "keywords": ["検索語"],
-  "article_html": "<article class=\\"article-content\\">...</article>",
+  "article_html": "現在案のarticle開始タグ・classを維持した完全な<article>...</article>",
   "change_summary": ["今回の再修正内容"],
   "primary_sources": [{{"name":"機関名","url":"https://..."}}],
   "internal_links": ["/blog/..."],
