@@ -371,16 +371,25 @@ def update_sitemap(path: str) -> None:
     p = ROOT / "sitemap.xml"
     if not p.exists():
         return
-    url = canonical_url_for(path)
+    canonical = canonical_url_for(path)
+    legacy = file_url_for(path)
     today = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
     xml = p.read_text(encoding="utf-8")
-    block_re = re.compile(
-        rf"(<url>\s*<loc>{re.escape(url)}</loc>.*?<lastmod>)([^<]+)(</lastmod>.*?</url>)",
-        re.S,
-    )
-    if block_re.search(xml):
-        xml = block_re.sub(rf"\g<1>{today}\g<3>", xml, count=1)
-        p.write_text(xml, encoding="utf-8")
+
+    # Match either the old .html URL or the clean final URL.
+    for url in (legacy, canonical):
+        block_re = re.compile(
+            rf"(<url>\s*<loc>){re.escape(url)}(</loc>.*?<lastmod>)([^<]+)(</lastmod>.*?</url>)",
+            re.S,
+        )
+        if block_re.search(xml):
+            xml = block_re.sub(
+                lambda m: m.group(1) + canonical + m.group(2) + today + m.group(4),
+                xml,
+                count=1,
+            )
+            p.write_text(xml, encoding="utf-8")
+            return
 
 
 def update_search_data(path: str, title: str, description: str) -> None:
@@ -524,6 +533,8 @@ def validate_editor_output(candidate: dict, data: dict) -> None:
     article_html = data.get("article_html", "")
     if not article_html.startswith("<article") or "</article>" not in article_html:
         raise RuntimeError("AI response missing complete article")
+    if re.search(r"<script\b", article_html, re.I):
+        raise RuntimeError("AI response must not place script or JSON-LD inside article_html")
     for marker in ('class="editorial-info"', 'class="reference-links"'):
         if marker not in article_html:
             raise RuntimeError("AI response lost required marker: " + marker)
@@ -862,6 +873,7 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 """
     resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
     data = json.loads(strip_json_fence(resp.output_text))
+    data["article_html"] = sanitize_article_html(str(data.get("article_html", "")))
     data["_original_html"] = ""
     return data
 
@@ -870,6 +882,8 @@ def validate_new_article_output(topic: dict, data: dict) -> None:
     article_html = str(data.get("article_html", ""))
     if not article_html.startswith("<article") or "</article>" not in article_html:
         raise RuntimeError("new article missing complete article element")
+    if re.search(r"<script\b", article_html, re.I):
+        raise RuntimeError("new article must not put script or JSON-LD inside article_html")
     if len(H1_RE.findall(article_html)) != 1:
         raise RuntimeError("new article must contain exactly one H1")
     for marker in ('class="editorial-info"', 'class="reference-links"'):
