@@ -13,6 +13,16 @@ NON_CONTENT_PAGES = [
     ROOT / "for-business/index.html",
 ]
 ADSENSE_MARKER = "pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+UNSUPPORTED_SERVICE_RE = re.compile(
+    r"(?:"
+    r"無料でご紹介|"
+    r"優良業者を無料|"
+    r"複数社のお見積もりも手配可能|"
+    r"相見積もりも簡単に取れます|"
+    r"お見積もりやご相談は完全無料|"
+    r"業者のご紹介・お見積もり"
+    r")"
+)
 
 
 def main() -> int:
@@ -67,6 +77,17 @@ def main() -> int:
         issues.append("ads.txtがない、またはPublisher IDが一致しません")
 
     every_html = list(ROOT.rglob("*.html"))
+    unsupported_service_pages: list[str] = []
+    for page in every_html:
+        content = page.read_text(encoding="utf-8")
+        if UNSUPPORTED_SERVICE_RE.search(content):
+            unsupported_service_pages.append(str(page.relative_to(ROOT)))
+    if unsupported_service_pages:
+        issues.append(
+            "未実装の業者紹介・見積手配サービス表現が残っています: "
+            + ", ".join(unsupported_service_pages)
+        )
+
     missing_footer_link: list[str] = []
     for page in every_html:
         page_content = page.read_text(encoding="utf-8")
