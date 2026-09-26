@@ -1,5 +1,152 @@
 [
   {
+    "timestamp": "2026-09-26T03:04:18.067923+00:00",
+    "started_at": "2026-09-26T03:03:42Z",
+    "finished_at": "2026-09-26T03:04:18.067923+00:00",
+    "run_id": "36213614283",
+    "trigger": "push",
+    "mode": "improve",
+    "status": "error",
+    "outcome": "AI処理エラー",
+    "outcome_reason": "AI処理ステップでエラー。GitHub Actions Run #36213614283 を確認",
+    "candidate": {
+      "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+      "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+      "priority_score": 30,
+      "quality": 85,
+      "gsc": null,
+      "selection_reasons": [
+        "記事品質スコアが 85/100 で改善余地あり"
+      ]
+    },
+    "editor": {
+      "status": "error",
+      "decision_reason": "article-content not found: blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null,
+      "title_after": null
+    },
+    "reviewer": {
+      "status": "skipped",
+      "approve": null,
+      "score": null,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "最新の検索パフォーマンスを取得して候補選定に使用"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】 を優先度 30 で選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "error",
+        "detail": "article-content not found: blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "skipped",
+        "detail": "Editor未実行のため未審査"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "AI処理エラーのため品質Gate未実行"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "AI処理エラーのため公開なし"
+      }
+    ],
+    "published": false,
+    "image_generated": false,
+    "image_path": null,
+    "error": "article-content not found: blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html",
+    "research": {
+      "create": false,
+      "opportunity_score": 88,
+      "category_slug": "ihinseiri",
+      "slug": "ihin-katana-jyuho-tetsuzuki-fukuoka",
+      "title": "遺品から刀・銃が見つかったらどうする？福岡の届出先と登録証別の対応",
+      "search_intent": "実家の遺品整理中に刀、日本刀、古式銃、猟銃、軍用拳銃らしき物が見つかり、触れてよいか、どこへ連絡するか、相続・処分の期限や手続きを知りたい。",
+      "why_now": "遺品整理では「登録証が付いた日本刀」と「無登録の刀」「猟銃・空気銃」「軍用拳銃」で初動と届出先が異なるにもかかわらず、一般的な不用品処分記事では安全に扱えない領域です。福岡県は登録済み刀剣類等の相続について所有者変更届の案内と様式を公開しており、福岡県警も銃砲関係の返納届出様式を公開しています。一次情報だけで、期限・窓口・してはいけない行為を明確に示せます。",
+      "missing_value": "既存サイトには貴重品探索、車・バイク処分、家電処分、供養記事はある一方、発見時に事故・法令違反のリスクがある刀剣・銃砲の分岐手順がありません。特に「登録証の有無」「登録証を発行した都道府県」「猟銃と美術刀剣の違い」を整理する実務記事は、既存の一般的な遺品整理・処分記事と検索意図が明確に異なります。",
+      "primary_sources": [
+        {
+          "name": "福岡県",
+          "url": "https://www.pref.fukuoka.lg.jp/contents/toukensyoyusyahennkou.html"
+        },
+        {
+          "name": "文化庁",
+          "url": "https://www.bunka.go.jp/seisaku/bunka_gyosei/shokan_horei/juhotouken/index.html"
+        },
+        {
+          "name": "福岡県警察",
+          "url": "https://www.police.pref.fukuoka.jp/seian/seikan/jyuho/jyuuhouhousiki.html"
+        },
+        {
+          "name": "警察庁",
+          "url": "https://www.npa.go.jp/laws/notification/seian/hoan/hoantsutatu2/ryouzyuukousaunnyouyouryou.pdf"
+        },
+        {
+          "name": "福岡県警察",
+          "url": "https://www.police.pref.fukuoka.jp/boutai/yakuzyuuka/yakujyu/kouhougun-new.html"
+        }
+      ],
+      "research_findings": [
+        "福岡県は、登録済みの刀剣類・古式銃砲を相続した場合、登録証に記載された都道府県教育委員会へ、相続の事実が発生した日から20日以内に所有者変更届を提出するよう案内している。",
+        "届出先は相続人の居住地ではなく、原則として登録証を発行した都道府県教育委員会である。福岡県発行の登録証であれば福岡県教育委員会への届出が対象となる。",
+        "文化庁は、登録証のない刀剣類・銃砲を発見した場合は、まず最寄りの警察署へ速やかに届け出て、その後の手続きは警察の指示を受けるよう案内している。",
+        "猟銃・空気銃の所持許可を受けていた人が死亡した場合、親族、同居人、家主は所持許可証を返納する必要がある。許可失効後は、原則50日以内に新たな許可、適法な者への譲渡、廃棄など、所持しないための措置が必要とされる。",
+        "福岡県警は、遺品などから軍用拳銃を発見した場合は、すぐに警察へ届け出るよう明示している。",
+        "記事では、現物を持ち歩いて鑑定店やリサイクル店へ持ち込む前に連絡先を確認すること、登録証と現物を分けないこと、自己判断で廃棄しないことを初動チェックリストとして扱える。"
+      ],
+      "target_queries": [
+        "遺品 刀 見つかった どうする 福岡",
+        "遺品 日本刀 登録証 相続 福岡",
+        "遺品 銃 見つかった 警察 福岡",
+        "親が亡くなった 猟銃 処分 手続き",
+        "刀剣類 所有者変更届 福岡県",
+        "遺品 軍用拳銃 見つかった"
+      ],
+      "duplicate_risk": "low",
+      "decision_reason": "新規テーマとしては価値があるが、既存記事と検索意図が重なるため、新規ページを増やさず既存記事の一次情報・実務性を強化する",
+      "nearest_existing": {
+        "title": "遺品整理の費用を安くする7つの方法｜福岡の自治体サービスと節約術 - 福岡遺品整理ガイド",
+        "path": "blog/cost/article-20260707-cost-yasuku-suru.html",
+        "similarity": 0.208
+      },
+      "duplicate_existing": {
+        "path": "blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html",
+        "title": "一人暮らしの親が亡くなった時の遺品整理｜遠方からの手順と業者活用法【2026年版】",
+        "matched_terms": [
+          "親が亡くなった",
+          "遺品"
+        ],
+        "title_similarity": 0.162,
+        "intent_score": 9.81
+      }
+    }
+  },
+  {
     "timestamp": "2026-09-26T02:57:25.460911+00:00",
     "started_at": "2026-09-26T02:50:39Z",
     "finished_at": "2026-09-26T02:57:25.460911+00:00",
