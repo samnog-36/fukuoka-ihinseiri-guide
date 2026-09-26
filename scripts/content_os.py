@@ -2278,7 +2278,12 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
             "strengths": review.get("strengths", []),
         })
         if review_passed(review):
-            break
+            score = int(review.get("score", 0) or 0)
+            target_score = int(CONFIG.get("target_reviewer_score", 94))
+            issues = review.get("issues", []) or []
+            if score >= target_score or not issues or round_index >= max_revisions:
+                break
+            print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
         if round_index >= max_revisions:
             record = make_run_record(
                 mode=mode,
@@ -2693,7 +2698,12 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
             "changes": data.get("change_summary", []),
         })
         if review_passed(review):
-            break
+            score = int(review.get("score", 0) or 0)
+            target_score = int(CONFIG.get("target_reviewer_score", 94))
+            issues = review.get("issues", []) or []
+            if score >= target_score or not issues or round_index >= max_revisions:
+                break
+            print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
 
         if round_index >= max_revisions:
             score = int(review.get("score", 0) or 0)
