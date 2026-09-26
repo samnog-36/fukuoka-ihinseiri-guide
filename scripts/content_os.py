@@ -131,6 +131,76 @@ def duplicate_hints(rows: list[dict]) -> list[dict]:
     return sorted(out, key=lambda x: x["title_similarity"], reverse=True)[:30]
 
 
+
+def category_slug_from_path(path: str) -> str:
+    parts = Path(path).parts
+    if len(parts) >= 3 and parts[0] == "blog":
+        return parts[1]
+    return "other"
+
+
+def extract_area_tags() -> list[str]:
+    p = ROOT / "area/index.html"
+    if not p.exists():
+        return []
+    html = p.read_text(encoding="utf-8")
+    tags = re.findall(r'<span[^>]+class=["\']area-tag["\'][^>]*>(.*?)</span>', html, re.I | re.S)
+    return sorted({visible(x) for x in tags if visible(x)})
+
+
+def build_site_coverage(rows: list[dict]) -> dict:
+    by_category: dict[str, list[dict]] = {}
+    for row in rows:
+        slug = category_slug_from_path(row["path"])
+        by_category.setdefault(slug, []).append(row)
+
+    area_tags = extract_area_tags()
+    area_rows = by_category.get("area", [])
+    area_coverage = []
+    for area in area_tags:
+        matches = [
+            {"path": r["path"], "title": r["title"]}
+            for r in area_rows
+            if area in r["title"] or area.replace("市", "") in r["title"]
+        ]
+        area_coverage.append({
+            "area": area,
+            "article_count": len(matches),
+            "articles": matches[:8],
+            "status": "covered" if matches else "gap",
+        })
+
+    kyushu = {}
+    for pref in CONFIG.get("kyushu_prefectures", []):
+        short = pref.removesuffix("県")
+        matches = [
+            {"path": r["path"], "title": r["title"], "category": category_slug_from_path(r["path"])}
+            for r in rows if pref in r["title"] or short in r["title"]
+        ]
+        kyushu[pref] = {
+            "article_count": len(matches),
+            "articles": matches[:12],
+            "status": "covered" if matches else "gap",
+        }
+
+    dupes = duplicate_hints(rows)
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "category_counts": {
+            slug: len(items) for slug, items in sorted(by_category.items())
+        },
+        "category_titles": {
+            slug: [{"path": r["path"], "title": r["title"]} for r in items]
+            for slug, items in sorted(by_category.items())
+        },
+        "fukuoka_area_tags": area_tags,
+        "fukuoka_area_coverage": area_coverage,
+        "fukuoka_area_gaps": [x["area"] for x in area_coverage if x["status"] == "gap"],
+        "kyushu_prefecture_coverage": kyushu,
+        "duplicate_title_hints": dupes[:20],
+    }
+
+
 def make_report(rows: list[dict], gsc_map: dict) -> dict:
     ranked = []
     for r in rows:
@@ -139,11 +209,13 @@ def make_report(rows: list[dict], gsc_map: dict) -> dict:
         x["priority_score"] = candidate_score(r, x["gsc"])
         ranked.append(x)
     ranked.sort(key=lambda x: x["priority_score"], reverse=True)
+    coverage = build_site_coverage(rows)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "site": CONFIG["site_url"],
         "top_improvement_candidates": ranked[:25],
         "duplicate_title_hints": duplicate_hints(rows),
+        "coverage": coverage,
     }
 
 
@@ -534,6 +606,7 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
     client = OpenAI(api_key=key)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     existing = [{"path": r["path"], "title": r["title"]} for r in rows]
+    coverage = build_site_coverage(rows)
 
     prompt = f"""
 あなたは「福岡遺品整理ガイド」の編集長兼SEOリサーチャーです。
@@ -558,8 +631,19 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 - 架空の業者比較・ランキング・口コミ・実績
 - 「九州No.1」等の未検証な自称
 
+現在のサイトカバレッジ:
+{json.dumps(coverage, ensure_ascii=False)}
+
 既存記事:
 {json.dumps(existing, ensure_ascii=False)}
+
+選定ルール:
+- まず既存サイト構造の「穴」を埋める。すでに強いクラスターへ似た記事を増やさない。
+- areaカテゴリでは fukuoka_area_gaps と既存地域記事の重複を必ず確認する。
+- 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。
+- duplicate_title_hints に近いテーマは新規記事化せず、既存記事統合・改善を優先する。
+- 同じ市を複数記事で扱う場合は、検索意図が明確に違う場合だけ許可する。
+- 「費用」「業者選び」など全地域共通の一般論を地域名だけ変えて量産しない。
 
 許可カテゴリ:
 {json.dumps(CONFIG.get("new_article_categories", {}), ensure_ascii=False)}
@@ -1467,6 +1551,9 @@ def main() -> int:
     rep = make_report(rows, gsc)
     (PRIVATE_DIR / "content-os-latest.json").write_text(
         json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    (PRIVATE_DIR / "site-coverage-latest.json").write_text(
+        json.dumps(rep.get("coverage", {}), ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
     try:
