@@ -30,6 +30,32 @@ async function activity() {
   return Array.isArray(data) ? data : [];
 }
 
+async function aiRunHistory() {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/" + REPO + "/main/data/ai-run-log.json",
+    { cf: { cacheTtl: 30 } }
+  );
+  if (!res.ok) return [];
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
+}
+
+function scheduledForRun(createdAt) {
+  if (!createdAt) return null;
+  const actual = new Date(createdAt);
+  const jst = new Date(actual.getTime() + 9 * 60 * 60 * 1000);
+  let planned = new Date(Date.UTC(
+    jst.getUTCFullYear(),
+    jst.getUTCMonth(),
+    jst.getUTCDate(),
+    20,
+    10,
+    0
+  ));
+  if (planned > actual) planned = new Date(planned.getTime() - 24 * 60 * 60 * 1000);
+  return planned.toISOString();
+}
+
 function nextDailyJst(hour = 5, minute = 10) {
   const now = new Date();
   const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
@@ -145,11 +171,12 @@ export async function onRequestGet(context) {
     }
   };
 
-  const [runsResult, pullsResult, commitsResult, activityResult, gscResult] = await Promise.allSettled([
+  const [runsResult, pullsResult, commitsResult, activityResult, aiRunsResult, gscResult] = await Promise.allSettled([
     gh("/actions/workflows/content-growth-os.yml/runs?per_page=20", env),
     gh("/pulls?state=all&sort=updated&direction=desc&per_page=20", env),
     gh("/commits?sha=main&per_page=12", env),
     activity(),
+    aiRunHistory(),
     getSearchConsoleDashboard(env)
   ]);
 
@@ -163,6 +190,10 @@ export async function onRequestGet(context) {
           event: r.event,
           createdAt: r.created_at,
           updatedAt: r.updated_at,
+          scheduledFor: r.event === "schedule" ? scheduledForRun(r.created_at) : null,
+          delayMinutes: r.event === "schedule" && scheduledForRun(r.created_at)
+            ? Math.max(0, Math.round((new Date(r.created_at).getTime() - new Date(scheduledForRun(r.created_at)).getTime()) / 60000))
+            : 0,
           url: r.html_url,
           title: r.display_title,
           sha: r.head_sha
@@ -191,6 +222,7 @@ export async function onRequestGet(context) {
   };
 
   output.activity = activityResult.status === "fulfilled" ? activityResult.value : [];
+  output.aiRuns = aiRunsResult.status === "fulfilled" ? aiRunsResult.value : [];
   output.gsc = gscResult.status === "fulfilled"
     ? gscResult.value
     : { configured: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON), error: String(gscResult.reason || "unknown") };
@@ -212,6 +244,7 @@ export async function onRequestGet(context) {
     latestRun,
     latestPublished,
     latestRunActivity,
+    latestDecision: (output.aiRuns || []).find(x => String(x.run_id || "") === String(latestRun?.id || "")) || (output.aiRuns || [])[0] || null,
     maxPublicationsPerRun: 1,
     minimumReviewerScore: 88,
     pipeline: [
