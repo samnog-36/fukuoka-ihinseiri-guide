@@ -489,20 +489,24 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     image_model = os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-2.5-sunburst")
-    result = client.images.generate(
-        model=image_model,
-        prompt=(
-            "福岡の遺品整理情報サイトの記事用アイキャッチ。"
-            "広告バナーではなく、落ち着いた実用メディアの写真・ビジュアル。"
-            "画像内に文字、ロゴ、透かし、会社名を入れない。"
-            "架空の証拠写真や誤認を招く表現を避ける。"
-            + prompt
-        ),
-        size="1536x1024",
-        quality="medium",
-        output_format="webp",
-    )
-    raw = base64.b64decode(result.data[0].b64_json)
+    try:
+        result = client.images.generate(
+            model=image_model,
+            prompt=(
+                "福岡を核に九州の遺品整理情報サイトで使う記事アイキャッチ。"
+                "広告バナーではなく、落ち着いた実用メディアの写真・ビジュアル。"
+                "画像内に文字、ロゴ、透かし、会社名を入れない。"
+                "架空の証拠写真や誤認を招く表現を避ける。"
+                + prompt
+            ),
+            size="1536x1024",
+            quality="medium",
+            output_format="webp",
+        )
+        raw = base64.b64decode(result.data[0].b64_json)
+    except Exception as exc:
+        print("Image generation skipped:", exc)
+        return html, None
     stem = Path(candidate["path"]).stem.replace("article-", "")
     filename = f"ai-{stem}-{datetime.now(ZoneInfo(CONFIG['timezone'])).strftime('%Y%m%d')}.webp"
     dest = ROOT / "images" / "blog" / filename
@@ -516,6 +520,562 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
     html = html[:article_match.start(1)] + updated_article + html[article_match.end(1):]
     html = replace_meta(html, prop="og:image", content=CONFIG["site_url"].rstrip("/") + f"/images/blog/{filename}")
     return html, f"images/blog/{filename}"
+
+
+
+def discover_new_topic(rows: list[dict]) -> dict | None:
+    if not CONFIG.get("research_new_topics_every_run"):
+        return None
+    key = os.getenv("OPENAI_API_KEY", "").strip()
+    if not key:
+        return None
+
+    from openai import OpenAI
+    client = OpenAI(api_key=key)
+    model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
+    existing = [{"path": r["path"], "title": r["title"]} for r in rows]
+
+    prompt = f"""
+あなたは「福岡遺品整理ガイド」の編集長兼SEOリサーチャーです。
+サイトの目標は次です:
+{CONFIG.get("content_mission")}
+
+記事数を増やすこと自体は目的ではありません。
+毎回web検索を行い、既存サイトに本当に不足している新規テーマを1つだけ調査してください。
+
+調査範囲:
+- 福岡県を最優先
+- 九州7県: {", ".join(CONFIG.get("kyushu_prefectures", []))}
+- 国、自治体、e-Gov、国民生活センター等の一次情報
+- 遺品整理、生前整理、特殊清掃、供養、費用、地域制度、遠方の実家整理、相続・廃棄物手続き等
+- 現在の制度変更・自治体ルール・実務上の困りごと
+- 福岡の読者にも関係がある九州域内の地域差
+
+禁止:
+- 地名だけ差し替えた薄い量産
+- 既存記事と同じ検索意図
+- 一次情報で裏付けられないテーマ
+- 架空の業者比較・ランキング・口コミ・実績
+- 「九州No.1」等の未検証な自称
+
+既存記事:
+{json.dumps(existing, ensure_ascii=False)}
+
+許可カテゴリ:
+{json.dumps(CONFIG.get("new_article_categories", {}), ensure_ascii=False)}
+
+JSONのみ:
+{{
+  "create": true,
+  "opportunity_score": 0,
+  "category_slug": "ihinseiri",
+  "slug": "英小文字数字ハイフンのみ",
+  "title": "記事タイトル",
+  "search_intent": "読者が解決したいこと",
+  "why_now": "今このテーマを扱う理由",
+  "missing_value": "既存サイトに足りない価値",
+  "primary_sources": [{{"name":"一次情報機関","url":"https://..."}}],
+  "research_findings": ["調査で確認した重要事項"],
+  "target_queries": ["想定検索語"],
+  "duplicate_risk": "low",
+  "decision_reason": "新規記事にする/しない判断理由"
+}}
+
+opportunity_score は需要、独自性、一次情報の強さ、既存記事との差分を厳しく採点してください。
+価値が弱ければ create=false にしてください。
+"""
+    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    data = json.loads(strip_json_fence(resp.output_text))
+    if not isinstance(data, dict):
+        return None
+    if not data.get("create"):
+        return data
+
+    slug = str(data.get("slug", "")).strip().lower()
+    category = str(data.get("category_slug", "")).strip()
+    title = str(data.get("title", "")).strip()
+    if category not in CONFIG.get("new_article_categories", {}):
+        data["create"] = False
+        data["decision_reason"] = "許可カテゴリ外"
+        return data
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{2,79}", slug):
+        data["create"] = False
+        data["decision_reason"] = "slug形式が不正"
+        return data
+    if not title:
+        data["create"] = False
+        data["decision_reason"] = "タイトルが空"
+        return data
+
+    highest = 0.0
+    nearest = None
+    for row in rows:
+        ratio = SequenceMatcher(None, title, row["title"]).ratio()
+        if ratio > highest:
+            highest = ratio
+            nearest = row
+    data["nearest_existing"] = {
+        "title": nearest["title"],
+        "path": nearest["path"],
+        "similarity": round(highest, 3),
+    } if nearest else None
+    if highest >= 0.62:
+        data["create"] = False
+        data["decision_reason"] = f"既存記事と検索意図が近すぎる可能性（タイトル類似度 {highest:.3f}）"
+        return data
+
+    src = [x.get("url", "") for x in data.get("primary_sources", []) if isinstance(x, dict)]
+    if not any(
+        u.startswith("http") and any(d in urlparse(u).netloc for d in CONFIG["preferred_source_domains"])
+        for u in src
+    ):
+        data["create"] = False
+        data["decision_reason"] = "優先一次情報を確認できない"
+        return data
+    return data
+
+
+def new_article_path(topic: dict) -> str:
+    today = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y%m%d")
+    return f"blog/{topic['category_slug']}/article-{today}-{topic['slug']}.html"
+
+
+def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
+    from openai import OpenAI
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
+    category_name = CONFIG["new_article_categories"][topic["category_slug"]]
+    path = new_article_path(topic)
+
+    prompt = f"""
+あなたは「福岡遺品整理ガイド」の上級編集者です。
+以下のリサーチ済みテーマから、公開可能な新規記事をゼロから作成してください。
+
+サイト目標:
+{CONFIG.get("content_mission")}
+
+テーマ:
+{json.dumps(topic, ensure_ascii=False)}
+
+公開予定パス: {path}
+カテゴリ: {category_name}
+
+必須:
+- web検索を再度行い、重要な事実を一次情報で検証する
+- 福岡を核に、必要な場合のみ九州7県の制度差を扱う
+- 読者が最終的に何をすればよいかまで具体化する
+- 法律・制度・行政・料金・統計は出典なしで断定しない
+- 架空の業者、口コミ、実績、監修者、体験談を作らない
+- 既存記事の言い換え記事にしない
+- 不自然なキーワード詰め込みをしない
+- editorial-info と reference-links を必ず含める
+- 参考情報は本文近くにもリンクし、末尾にもまとめる
+- H1は1つだけ
+- 記事内に広告コードは書かない（システム側で挿入する）
+- hero画像は最初のfigure内に /images/ogp-default.png を仮指定する
+- about.htmlへの編集方針リンクをeditorial-info内に入れる
+
+返答JSONのみ:
+{{
+  "seo": {{
+    "title": "titleタグ。末尾に｜福岡遺品整理ガイド",
+    "description": "検索結果用説明",
+    "og_title": "OGタイトル",
+    "og_description": "OG説明"
+  }},
+  "h1": "記事H1",
+  "summary": "一覧カード用に80〜130文字",
+  "keywords": ["検索・サイト内検索用語"],
+  "article_html": "<article class=\\"article-content\\">...</article>",
+  "change_summary": ["新規記事で提供した価値"],
+  "primary_sources": [{{"name":"機関名","url":"https://..."}}],
+  "internal_links": ["/blog/..."],
+  "image": {{
+    "action": "generate または keep",
+    "prompt": "文字なしのアイキャッチ生成指示",
+    "alt": "画像alt"
+  }},
+  "decision_reason": "この構成・内容にした理由"
+}}
+"""
+    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    data = json.loads(strip_json_fence(resp.output_text))
+    data["_original_html"] = ""
+    return data
+
+
+def validate_new_article_output(topic: dict, data: dict) -> None:
+    article_html = str(data.get("article_html", ""))
+    if not article_html.startswith("<article") or "</article>" not in article_html:
+        raise RuntimeError("new article missing complete article element")
+    if len(H1_RE.findall(article_html)) != 1:
+        raise RuntimeError("new article must contain exactly one H1")
+    for marker in ('class="editorial-info"', 'class="reference-links"'):
+        if marker not in article_html:
+            raise RuntimeError("new article missing required marker: " + marker)
+    if 'href="/about.html"' not in article_html:
+        raise RuntimeError("new article missing editorial policy link")
+    seo = data.get("seo") or {}
+    if not str(seo.get("title", "")).strip():
+        raise RuntimeError("new article missing SEO title")
+    if len(str(seo.get("description", "")).strip()) < 40:
+        raise RuntimeError("new article description too short")
+    src = [x.get("url", "") for x in data.get("primary_sources", []) if isinstance(x, dict)]
+    if not src:
+        raise RuntimeError("new article has no primary sources")
+    if not any(
+        u.startswith("http") and any(d in urlparse(u).netloc for d in CONFIG["preferred_source_domains"])
+        for u in src
+    ):
+        raise RuntimeError("new article has no preferred primary source")
+    if len(visible(article_html).replace(" ", "")) < 3000:
+        raise RuntimeError("new article is too thin")
+
+
+def inject_middle_ad(article_html: str, genre: str) -> str:
+    closes = [m.end() for m in re.finditer(r"</section>", article_html, re.I)]
+    if not closes:
+        return article_html
+    pos = closes[len(closes) // 2]
+    slot = f'\n<div class="fkg-ad" data-genre="{escape(genre, quote=True)}" data-placement="article_middle"></div>\n'
+    return article_html[:pos] + slot + article_html[pos:]
+
+
+def build_new_article_page(topic: dict, data: dict) -> str:
+    path = new_article_path(topic)
+    seo = data["seo"]
+    h1 = str(data.get("h1") or topic["title"]).strip()
+    category_slug = topic["category_slug"]
+    category_name = CONFIG["new_article_categories"][category_slug]
+    canonical = canonical_url_for(path)
+    today_iso = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
+    today_jp = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
+    article_html = inject_middle_ad(data["article_html"], category_name)
+
+    return f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{escape(str(seo["title"]))}</title>
+  <meta name="description" content="{escape(str(seo["description"]), quote=True)}">
+  <link rel="canonical" href="{escape(canonical, quote=True)}">
+  <meta property="og:title" content="{escape(str(seo.get("og_title") or seo["title"]), quote=True)}">
+  <meta property="og:description" content="{escape(str(seo.get("og_description") or seo["description"]), quote=True)}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{escape(canonical, quote=True)}">
+  <meta property="og:image" content="{CONFIG["site_url"].rstrip("/")}/images/ogp-default.png">
+  <meta property="og:site_name" content="{CONFIG["site_name"]}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/css/style.css?v=20260814a">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1QGZ4ETK0"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-S1QGZ4ETK0');</script>
+  <script type="application/ld+json">
+  {json.dumps({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": h1,
+      "description": str(seo["description"]),
+      "image": CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png",
+      "datePublished": today_iso,
+      "dateModified": today_iso,
+      "author": {"@type": "Organization", "name": "福岡遺品整理ガイド編集部"},
+      "mainEntityOfPage": canonical,
+  }, ensure_ascii=False, indent=2)}
+  </script>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="header-logo">福岡遺品整理ガイド</a>
+    <nav class="header-nav" id="headerNav">
+      <a href="/area/">地域別情報</a><a href="/cost/">費用相場</a><a href="/guide/">お役立ちガイド</a><a href="/blog/">記事を検索</a><a href="/for-business/">業者様向け</a><a href="/contact/" class="header-cta">無料相談する</a>
+    </nav>
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main class="article-page">
+  <div class="list-container">
+    <div class="fkg-ad" data-genre="{escape(category_name, quote=True)}" data-placement="article_top"></div>
+    {article_html}
+    <div class="fkg-ad" data-genre="{escape(category_name, quote=True)}" data-placement="article_bottom"></div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-brand">福岡遺品整理ガイド</div><p class="footer-desc">福岡を核に、九州の遺品整理・特殊清掃・生前整理に役立つ実務情報を提供します。</p></div>
+    <div class="footer-col"><h3>カテゴリ</h3><ul><li><a href="/guide/">遺品整理ガイド</a></li><li><a href="/guide/seizenseiri.html">生前整理</a></li><li><a href="/guide/tokushu-seisou.html">特殊清掃</a></li></ul></div>
+    <div class="footer-col"><h3>お役立ち情報</h3><ul><li><a href="/cost/">費用相場</a></li><li><a href="/area/">地域別情報</a></li><li><a href="/blog/">ブログ記事一覧</a></li></ul></div>
+    <div class="footer-col"><h3>サイト情報</h3><ul><li><a href="/about.html">編集方針・運営情報</a></li><li><a href="/contact/">お問い合わせ</a></li><li><a href="/privacy-policy.html">プライバシーポリシー</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 福岡遺品整理ガイド All Rights Reserved.</div>
+</footer>
+<script src="/ad-widget.js" defer></script>
+<script>document.getElementById('menuBtn').addEventListener('click',function(){{document.getElementById('headerNav').classList.toggle('active');}});</script>
+</body>
+</html>
+"""
+
+
+def call_revision_editor(candidate: dict, current_html: str, prior_editor: dict, review: dict, rows: list[dict], attempt: int) -> dict:
+    from openai import OpenAI
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
+    article_match = ARTICLE_RE.search(current_html)
+    if not article_match:
+        raise RuntimeError("revision source article-content not found")
+
+    prompt = f"""
+あなたは前回案を改善する担当Editorです。
+Reviewerに落ちたから翌日まで放置するのではなく、このRun内ですぐ修正してください。
+
+対象: {candidate["path"]}
+再修正回数: {attempt}
+Reviewer:
+{json.dumps(review, ensure_ascii=False)}
+
+前回Editorの判断:
+{json.dumps({k:v for k,v in prior_editor.items() if not k.startswith("_")}, ensure_ascii=False)}
+
+現在案:
+---BEGIN ARTICLE---
+{article_match.group(1)}
+---END ARTICLE---
+
+必須:
+- Reviewerのissuesを1件ずつ解消する
+- web検索で一次情報を再確認する
+- Reviewerが指摘していない良い部分は壊さない
+- 不確かな数値・断定は削除するか一次情報を付ける
+- SEO目的だけの水増しをしない
+- editorial-info / reference-links / CTA /広告枠の主要構造は維持
+- canonicalは変えない
+- 新規記事の場合も既存記事の場合も、公開基準88点以上を目指す
+
+JSONのみ:
+{{
+  "seo": {{
+    "title": "titleタグ",
+    "description": "meta description",
+    "og_title": "OG title",
+    "og_description": "OG description"
+  }},
+  "h1": "H1",
+  "summary": "一覧用要約",
+  "keywords": ["検索語"],
+  "article_html": "<article class=\\"article-content\\">...</article>",
+  "change_summary": ["今回の再修正内容"],
+  "primary_sources": [{{"name":"機関名","url":"https://..."}}],
+  "internal_links": ["/blog/..."],
+  "image": {{
+    "action": "keep または generate",
+    "prompt": "",
+    "alt": ""
+  }},
+  "decision_reason": "Reviewer指摘をどう解消したか"
+}}
+"""
+    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    data = json.loads(strip_json_fence(resp.output_text))
+    data["_original_html"] = current_html
+    return data
+
+
+def review_passed(review: dict) -> bool:
+    return bool(review.get("approve")) and int(review.get("score", 0) or 0) >= int(CONFIG.get("minimum_reviewer_score", 88))
+
+
+def add_sitemap_url(path: str) -> None:
+    p = ROOT / "sitemap.xml"
+    if not p.exists():
+        return
+    url = canonical_url_for(path)
+    xml = p.read_text(encoding="utf-8")
+    if f"<loc>{url}</loc>" in xml:
+        update_sitemap(path)
+        return
+    today = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
+    block = f"""  <url>
+    <loc>{url}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+"""
+    xml = xml.replace("</urlset>", block + "</urlset>")
+    p.write_text(xml, encoding="utf-8")
+
+
+def add_search_entry(topic: dict, data: dict, path: str, thumbnail: str) -> None:
+    p = ROOT / "js/search-data.json"
+    if not p.exists():
+        return
+    rows = json.loads(p.read_text(encoding="utf-8"))
+    if not isinstance(rows, list):
+        return
+    url = "/" + path
+    rows = [r for r in rows if r.get("url") != url]
+    rows.insert(0, {
+        "title": str(data.get("h1") or topic["title"]),
+        "desc": str(data.get("summary") or data["seo"]["description"]),
+        "url": url,
+        "category": topic["category_slug"],
+        "categorySlug": topic["category_slug"],
+        "date": datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y-%m-%d"),
+        "thumbnail": thumbnail,
+        "keywords": " ".join(str(x) for x in data.get("keywords", [])),
+        "text": visible(data["article_html"]),
+    })
+    p.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def article_card_html(topic: dict, data: dict, path: str, thumbnail: str) -> str:
+    category_name = CONFIG["new_article_categories"][topic["category_slug"]]
+    title = escape(str(data.get("h1") or topic["title"]))
+    summary = escape(str(data.get("summary") or data["seo"]["description"]))
+    date_label = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
+    return f"""
+        <a href="/{path}" class="article-card" data-category="{escape(topic['category_slug'], quote=True)}">
+          <div class="article-card-img"><img src="{escape(thumbnail, quote=True)}" alt="{title}" loading="lazy" width="800" height="533"></div>
+          <div class="article-card-body">
+            <span class="article-card-tag">{escape(category_name)}</span>
+            <h3>{title}</h3>
+            <p>{summary}</p>
+            <span class="article-card-date">{date_label} 更新</span>
+          </div>
+        </a>
+"""
+
+
+def add_article_to_indexes(topic: dict, data: dict, path: str, thumbnail: str) -> None:
+    card = article_card_html(topic, data, path, thumbnail)
+    for rel in ("blog/index.html", f"blog/{topic['category_slug']}/index.html"):
+        p = ROOT / rel
+        if not p.exists():
+            continue
+        html = p.read_text(encoding="utf-8")
+        if f'href="/{path}"' in html:
+            continue
+        pattern = re.compile(r'(<div\s+class=["\']article-grid["\'][^>]*>)', re.I)
+        if pattern.search(html):
+            html = pattern.sub(lambda m: m.group(1) + "\n" + card, html, count=1)
+            p.write_text(html, encoding="utf-8")
+
+
+def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> dict:
+    path = new_article_path(topic)
+    if (ROOT / path).exists():
+        raise RuntimeError("new article path already exists: " + path)
+
+    candidate = {
+        "path": path,
+        "title": topic["title"],
+        "quality": 100,
+        "priority_score": topic.get("opportunity_score"),
+        "gsc": None,
+        "candidate_type": "new_article",
+        "research_reasons": [
+            topic.get("why_now", ""),
+            topic.get("missing_value", ""),
+            topic.get("decision_reason", ""),
+        ],
+    }
+
+    data = call_new_article_writer(topic, rows)
+    validate_new_article_output(topic, data)
+    proposed = build_new_article_page(topic, data)
+    original_for_review = "新規記事のため変更前ページなし"
+    attempts = []
+    max_revisions = int(CONFIG.get("max_revision_attempts", 2))
+
+    for round_index in range(max_revisions + 1):
+        review = call_reviewer(candidate, original_for_review, proposed, data)
+        attempts.append({
+            "attempt": round_index + 1,
+            "score": review.get("score"),
+            "approve": review.get("approve"),
+            "issues": review.get("issues", []),
+            "strengths": review.get("strengths", []),
+        })
+        if review_passed(review):
+            break
+        if round_index >= max_revisions:
+            record = make_run_record(
+                mode=mode,
+                candidate=candidate,
+                status="rejected",
+                outcome="新規記事を公開見送り",
+                outcome_reason=f"最大{max_revisions}回再修正後もReviewer {review.get('score')}点で基準未達",
+                editor=data,
+                reviewer=review,
+                published=False,
+            )
+            record["research"] = topic
+            record["review_attempts"] = attempts
+            record["action_type"] = "new_article"
+            append_run_log(record)
+            return {"path": path, "published": False, "review": review, "research": topic}
+
+        data = call_revision_editor(candidate, proposed, data, review, rows, round_index + 1)
+        validate_new_article_output(topic, data)
+        proposed = build_new_article_page(topic, data)
+
+    proposed, image_path = generate_image_if_needed(candidate, data, proposed)
+    seo = data["seo"]
+    image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path if image_path else CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
+    proposed = sync_structured_data(proposed, seo["title"], seo["description"], image_url)
+
+    dest = ROOT / path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(proposed, encoding="utf-8")
+    add_sitemap_url(path)
+    thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
+    add_search_entry(topic, data, path, thumbnail)
+    add_article_to_indexes(topic, data, path, thumbnail)
+
+    activity = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "run_id": os.getenv("GITHUB_RUN_ID"),
+        "path": path,
+        "title_before": None,
+        "title_after": data.get("h1") or topic["title"],
+        "changes": data.get("change_summary", []),
+        "sources": data.get("primary_sources", []),
+        "internal_links": data.get("internal_links", []),
+        "image_generated": bool(image_path),
+        "image_path": image_path,
+        "review_score": review.get("score"),
+        "review_strengths": review.get("strengths", []),
+        "status": "validated_for_auto_publish",
+        "action_type": "new_article",
+    }
+    act = _load_list_log(ACTIVITY_LOG)
+    act.insert(0, activity)
+    _write_list_log(ACTIVITY_LOG, act, 180)
+
+    record = make_run_record(
+        mode=mode,
+        candidate=candidate,
+        status="validated",
+        outcome="新規記事を公開候補として承認",
+        outcome_reason=f"新規テーマを調査・執筆し、Reviewer {review.get('score')}点で公開基準を通過",
+        editor=data,
+        reviewer=review,
+        published=True,
+        image_path=image_path,
+    )
+    record["research"] = topic
+    record["review_attempts"] = attempts
+    record["action_type"] = "new_article"
+    append_run_log(record)
+
+    return {
+        "path": path,
+        "published": True,
+        "review": review,
+        "research": topic,
+        "change_summary": data.get("change_summary", []),
+    }
 
 
 def _load_list_log(path: Path) -> list[dict]:
