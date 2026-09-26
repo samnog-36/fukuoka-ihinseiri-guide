@@ -1,4 +1,5 @@
 name: Temporary site coverage snapshot
+# retry untracked coverage
 
 on:
   push:
@@ -42,7 +43,7 @@ jobs:
       - name: Commit snapshot
         shell: bash
         run: |
-          if git diff --quiet -- data/site-coverage.json; then
+          if [ -z "$(git status --porcelain -- data/site-coverage.json)" ]; then
             echo "No coverage change"
             exit 0
           fi
