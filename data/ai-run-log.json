@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-26T08:50:30.259424+00:00",
+    "timestamp": "2026-09-26T08:50:36.558385+00:00",
     "started_at": "2026-09-26T08:47:23Z",
-    "finished_at": "2026-09-26T08:50:30.259424+00:00",
+    "finished_at": "2026-09-26T08:50:36.558385+00:00",
     "run_id": "36230821140",
     "trigger": "push",
     "mode": "improve",
-    "status": "validated",
-    "outcome": "再修正を含め公開候補として承認",
-    "outcome_reason": "Reviewer 88点で基準88点を通過。品質Gateへ進行",
+    "status": "published",
+    "outcome": "本番公開完了",
+    "outcome_reason": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了",
     "candidate": {
       "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
       "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
@@ -147,8 +147,8 @@
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "pending",
-        "detail": "PR作成・main自動反映処理中"
+        "status": "done",
+        "detail": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
       }
     ],
     "published": true,
