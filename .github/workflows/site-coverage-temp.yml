@@ -1,5 +1,6 @@
 name: Temporary site coverage snapshot
 # retry untracked coverage
+# rerun with area hub mapping
 
 on:
   push:
