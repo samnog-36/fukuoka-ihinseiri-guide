@@ -2101,6 +2101,51 @@ def add_reverse_internal_links(data: dict, new_path: str, new_title: str, limit:
     return changed
 
 
+
+def add_permanent_redirect(old_path: str, new_path: str) -> None:
+    redirects_path = ROOT / "_redirects"
+    old_public_file = "/" + old_path.lstrip("/")
+    old_public_clean = public_path_for(old_path)
+    new_public = public_path_for(new_path)
+    lines = redirects_path.read_text(encoding="utf-8").splitlines() if redirects_path.exists() else []
+
+    existing_sources = {
+        line.split()[0]
+        for line in lines
+        if line.strip() and not line.lstrip().startswith("#") and len(line.split()) >= 3
+    }
+    for rule in (
+        f"{old_public_file} {new_public} 301",
+        f"{old_public_clean} {new_public} 301",
+    ):
+        src = rule.split()[0]
+        if src not in existing_sources:
+            lines.append(rule)
+            existing_sources.add(src)
+
+    redirects_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def replace_internal_links_to_old_path(old_path: str, new_path: str) -> list[str]:
+    old_file = "/" + old_path.lstrip("/")
+    old_clean = public_path_for(old_path)
+    new_public = public_path_for(new_path)
+    changed = []
+    for p in ROOT.rglob("*.html"):
+        rel = p.relative_to(ROOT).as_posix()
+        if rel == old_path:
+            continue
+        try:
+            html = p.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        updated = html.replace(old_file, new_public).replace(old_clean, new_public)
+        if updated != html:
+            p.write_text(updated, encoding="utf-8")
+            changed.append(rel)
+    return changed
+
+
 def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> dict:
     path = new_article_path(topic)
     if (ROOT / path).exists():
@@ -2183,6 +2228,15 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         limit=3,
     )
 
+    replaced_held = None
+    redirected_links = []
+    if isinstance(topic.get("replaces_held"), dict):
+        old_path = str(topic["replaces_held"].get("path") or "").strip()
+        if old_path:
+            add_permanent_redirect(old_path, path)
+            redirected_links = replace_internal_links_to_old_path(old_path, path)
+            replaced_held = old_path
+
     activity = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "run_id": os.getenv("GITHUB_RUN_ID"),
@@ -2199,6 +2253,8 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         "status": "validated_for_auto_publish",
         "action_type": "new_article",
         "reverse_links_added": reverse_links,
+        "replaced_held_article": replaced_held,
+        "redirected_internal_links": redirected_links,
     }
     act = _load_list_log(ACTIVITY_LOG)
     act.insert(0, activity)
@@ -2217,6 +2273,8 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     )
     record = attach_run_context(record, research=topic, attempts=attempts, action_type="new_article")
     record["reverse_links_added"] = reverse_links
+    record["replaced_held_article"] = replaced_held
+    record["redirected_internal_links"] = redirected_links
     append_run_log(record)
 
     return {
