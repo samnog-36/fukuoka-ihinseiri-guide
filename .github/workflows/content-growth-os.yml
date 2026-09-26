@@ -142,8 +142,8 @@ jobs:
 
           if [ -n "$ARTICLE_CHANGE" ] && [ "$FAILED" != "true" ]; then
             python3 scripts/finalize_ai_run.py \
-              --stage published \
-              --reason "Reviewerと品質Gateを通過し、mainへの自動反映処理を実行"
+              --stage publish-ready \
+              --reason "Reviewerと品質Gateを通過。PR作成・main反映待ち"
             COMMIT_MSG="AI: publish verified autonomous content update"
             PR_TITLE="Content Growth OS: publish verified autonomous update"
             PR_BODY="This run researched site coverage and current demand, chose either an existing-page improvement or a new article, independently reviewed the result, retried reviewer feedback when needed, and passed static quality gates. Full reasoning is recorded in data/ai-run-log.json."
@@ -200,10 +200,41 @@ jobs:
 
           if [ "$MERGED" != "true" ]; then
             echo "Automatic merge was not accepted by GitHub."
+
+            # The content PR was not merged. Persist a truthful failure log
+            # to main without publishing the draft content.
+            python3 scripts/finalize_ai_run.py \
+              --stage publish-fail \
+              --reason "GitHub PRの自動mergeに失敗。記事は本番未反映"
+            cp data/ai-run-log.json /tmp/ai-run-log.json
+            git switch main
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/ai-run-log.json data/ai-run-log.json
+            git add data/ai-run-log.json
+            git commit -m "AI: record publish failure" || true
+            git push origin main || true
             exit 1
           fi
 
           git push origin --delete "$BRANCH" || true
+
+          # Only now is the content actually on main. Update the run log
+          # from pending -> published and persist that final state.
+          if [ -n "$ARTICLE_CHANGE" ] && [ "$FAILED" != "true" ]; then
+            git switch main
+            git fetch origin main
+            git reset --hard origin/main
+            python3 scripts/finalize_ai_run.py \
+              --stage published \
+              --reason "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
+            if ! git diff --quiet -- data/ai-run-log.json; then
+              git add data/ai-run-log.json
+              git commit -m "AI: mark autonomous run published"
+              git push origin main
+            fi
+          fi
+
           echo "AI run outcome persisted to main."
 
           if [ "$FAILED" = "true" ]; then
