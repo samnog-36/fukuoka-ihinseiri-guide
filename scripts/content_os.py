@@ -19,6 +19,7 @@ SOURCES = json.loads((ROOT / "data/source_registry.json").read_text(encoding="ut
 PRIVATE_DIR = ROOT / os.getenv("CONTENT_OS_PRIVATE_DIR", ".content-os-private")
 ACTIVITY_LOG = ROOT / "data/ai-activity-log.json"
 RUN_LOG = ROOT / "data/ai-run-log.json"
+COVERAGE_LOG = ROOT / "data/site-coverage.json"
 
 TAG_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>", re.I | re.S)
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
@@ -1886,19 +1887,118 @@ def add_area_hub_mapping(topic: dict, data: dict, path: str) -> None:
         p.write_text(html, encoding="utf-8")
 
 
+def insert_card_into_grid_file(rel: str, card: str, path: str, *, grid_id: str | None = None) -> bool:
+    p = ROOT / rel
+    if not p.exists():
+        return False
+    html = p.read_text(encoding="utf-8")
+    if f'href="/{path}"' in html:
+        return False
+
+    if grid_id:
+        pattern = re.compile(
+            rf'(<div\s+class=["\']article-grid["\'][^>]*\bid=["\']{re.escape(grid_id)}["\'][^>]*>)',
+            re.I,
+        )
+    else:
+        pattern = re.compile(r'(<div\s+class=["\']article-grid["\'][^>]*>)', re.I)
+
+    if not pattern.search(html):
+        return False
+    html = pattern.sub(lambda m: m.group(1) + "\n" + card, html, count=1)
+    p.write_text(html, encoding="utf-8")
+    return True
+
+
+def insert_card_into_latest_section(rel: str, card: str, path: str) -> bool:
+    p = ROOT / rel
+    if not p.exists():
+        return False
+    html = p.read_text(encoding="utf-8")
+    if f'href="/{path}"' in html:
+        return False
+    pattern = re.compile(
+        r'(<section\s+class=["\']blog-latest-section["\'][^>]*>.*?<div\s+class=["\']blog-latest-header["\'][^>]*>.*?</div>)',
+        re.I | re.S,
+    )
+    if not pattern.search(html):
+        return False
+    html = pattern.sub(lambda m: m.group(1) + "\n" + card, html, count=1)
+    p.write_text(html, encoding="utf-8")
+    return True
+
+
+def update_area_article_mapping(topic: dict, data: dict, path: str) -> None:
+    if topic.get("category_slug") != "area":
+        return
+
+    p = ROOT / "area/index.html"
+    if not p.exists():
+        return
+
+    html = p.read_text(encoding="utf-8")
+    title = str(data.get("h1") or topic["title"])
+    url = "/" + path
+    coverage = build_site_coverage(article_records())
+    known_areas = coverage.get("fukuoka_area_tags", [])
+    matched = [area for area in known_areas if area in title]
+    if not matched:
+        return
+
+    block_match = re.search(
+        r'(const\s+areaArticles\s*=\s*\{)(.*?)(\n\};)',
+        html,
+        flags=re.I | re.S,
+    )
+    if not block_match:
+        return
+
+    body = block_match.group(2)
+    changed = False
+
+    for area in matched:
+        key_pattern = re.compile(
+            rf'("{re.escape(area)}"\s*:\s*\[)(.*?)(\n\s*\])',
+            re.S,
+        )
+        km = key_pattern.search(body)
+        entry = f'    {{ title: {json.dumps(title, ensure_ascii=False)}, url: {json.dumps(url, ensure_ascii=False)} }}'
+        if km:
+            if url in km.group(2):
+                continue
+            inner = km.group(2).rstrip()
+            if inner.strip():
+                replacement = km.group(1) + inner + ",\n" + entry + km.group(3)
+            else:
+                replacement = km.group(1) + "\n" + entry + km.group(3)
+            body = body[:km.start()] + replacement + body[km.end():]
+            changed = True
+        else:
+            prefix = f'\n  {json.dumps(area, ensure_ascii=False)}: [\n{entry}\n  ],'
+            body = prefix + body
+            changed = True
+
+    if changed:
+        html = html[:block_match.start(2)] + body + html[block_match.end(2):]
+        p.write_text(html, encoding="utf-8")
+
+
 def add_article_to_indexes(topic: dict, data: dict, path: str, thumbnail: str) -> None:
     card = article_card_html(topic, data, path, thumbnail)
-    for rel in ("blog/index.html", f"blog/{topic['category_slug']}/index.html"):
-        p = ROOT / rel
-        if not p.exists():
-            continue
-        html = p.read_text(encoding="utf-8")
-        if f'href="{public_path_for(path)}"' in html or f'href="/{path}"' in html:
-            continue
-        pattern = re.compile(r'(<div\s+class=["\']article-grid["\'][^>]*>)', re.I)
-        if pattern.search(html):
-            html = pattern.sub(lambda m: m.group(1) + "\n" + card, html, count=1)
-            p.write_text(html, encoding="utf-8")
+    category = topic["category_slug"]
+
+    # Core discovery surfaces.
+    insert_card_into_grid_file("blog/index.html", card, path)
+    insert_card_into_grid_file(f"blog/{category}/index.html", card, path)
+
+    # Existing parent hubs must also know about the new page.
+    if category == "area":
+        insert_card_into_latest_section("area/index.html", card, path)
+        update_area_article_mapping(topic, data, path)
+    elif category == "cost":
+        insert_card_into_grid_file("cost/index.html", card, path, grid_id="latestArticles")
+    elif category in {"ihinseiri", "tokushu-seisou", "seizenseiri", "kuyo"}:
+        insert_card_into_latest_section("guide/index.html", card, path)
 
 
 def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> dict:
@@ -2419,6 +2519,10 @@ def main() -> int:
     coverage = build_site_coverage(rows)
     (PRIVATE_DIR / "site-coverage-latest.json").write_text(
         json.dumps(coverage, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    COVERAGE_LOG.parent.mkdir(parents=True, exist_ok=True)
+    COVERAGE_LOG.write_text(
+        json.dumps(coverage, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     public_coverage = ROOT / "data/site-coverage.json"
     public_coverage.write_text(
