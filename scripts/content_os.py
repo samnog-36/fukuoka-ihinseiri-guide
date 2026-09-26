@@ -684,6 +684,97 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
 
 
 
+
+GENERIC_QUERY_TERMS = {
+    "遺品整理", "福岡", "福岡県", "方法", "やり方", "費用", "相場", "料金",
+    "注意点", "手順", "ガイド", "おすすめ", "比較", "2026", "2026年", "2026年版"
+}
+
+
+def topic_query_terms(topic: dict) -> list[str]:
+    out = []
+    for raw in topic.get("target_queries", []) or []:
+        for term in re.split(r"[\s　/／・,，]+", str(raw)):
+            term = term.strip()
+            if len(term) >= 2 and term not in GENERIC_QUERY_TERMS:
+                out.append(term)
+    return sorted(set(out), key=len, reverse=True)
+
+
+def find_existing_intent_match(topic: dict, rows: list[dict]) -> dict | None:
+    terms = topic_query_terms(topic)
+    best = None
+    best_score = 0.0
+
+    for row in rows:
+        title = clean_article_title(row["title"])
+        matched = [t for t in terms if t in title]
+        score = 0.0
+        if matched:
+            # A long, specific phrase such as 相続放棄 or 行政代執行 is strong evidence.
+            score += sum(min(8, len(t)) for t in matched)
+        ratio = SequenceMatcher(None, str(topic.get("title", "")), title).ratio()
+        score += ratio * 5
+
+        if score > best_score:
+            best_score = score
+            best = {
+                "path": row["path"],
+                "title": title,
+                "matched_terms": matched,
+                "title_similarity": round(ratio, 3),
+                "intent_score": round(score, 2),
+            }
+
+    if not best:
+        return None
+    if any(len(t) >= 4 for t in best["matched_terms"]):
+        return best
+    if len(best["matched_terms"]) >= 2:
+        return best
+    if best["title_similarity"] >= 0.62:
+        return best
+    return None
+
+
+def attach_run_context(record: dict, *, research: dict | None, attempts: list[dict] | None, action_type: str) -> dict:
+    record["research"] = research
+    record["review_attempts"] = attempts or []
+    record["action_type"] = action_type
+
+    steps = record.setdefault("steps", [])
+    research_detail = "新規テーマ候補なし"
+    research_status = "done"
+    if research:
+        if research.get("duplicate_existing"):
+            d = research["duplicate_existing"]
+            research_detail = f"新規候補「{research.get('title')}」は既存「{d.get('title')}」と検索意図が重なるため、既存改善へ切替"
+        elif research.get("create"):
+            research_detail = f"新規候補「{research.get('title')}」を機会スコア {research.get('opportunity_score')} 点で発見"
+        else:
+            research_detail = str(research.get("decision_reason") or "新規記事化しないと判断")
+    steps.insert(1, {
+        "key": "research",
+        "label": "サイト棚卸し＋Webリサーチ",
+        "status": research_status,
+        "detail": research_detail,
+    })
+
+    attempts = attempts or []
+    if len(attempts) > 1:
+        reviewer_index = next((i for i, st in enumerate(steps) if st.get("key") == "reviewer"), len(steps))
+        retry_steps = []
+        for i, attempt in enumerate(attempts[1:], start=1):
+            retry_steps.append({
+                "key": f"revision_{i}",
+                "label": f"Reviewer指摘で再修正 {i}",
+                "status": "done",
+                "detail": f"前回指摘を反映して再編集 → Reviewer {attempt.get('score')}点",
+            })
+        steps[reviewer_index:reviewer_index] = retry_steps
+    return record
+
+
 def discover_new_topic(rows: list[dict]) -> dict | None:
     if not CONFIG.get("research_new_topics_every_run"):
         return None
@@ -794,7 +885,18 @@ opportunity_score は需要、独自性、一次情報の強さ、既存記事�
     } if nearest else None
     if highest >= 0.62:
         data["create"] = False
-        data["decision_reason"] = f"既存記事と検索意図が近すぎる可能性（タイトル類似度 {highest:.3f}）"
+        data["duplicate_existing"] = data.get("nearest_existing")
+        data["decision_reason"] = f"既存記事と検索意図が近いため新規作成せず既存改善（タイトル類似度 {highest:.3f}）"
+        return data
+
+    intent_match = find_existing_intent_match(data, rows)
+    if intent_match:
+        data["create"] = False
+        data["duplicate_existing"] = intent_match
+        data["decision_reason"] = (
+            "新規テーマとしては価値があるが、既存記事と検索意図が重なるため、"
+            "新規ページを増やさず既存記事の一次情報・実務性を強化する"
+        )
         return data
 
     src = [x.get("url", "") for x in data.get("primary_sources", []) if isinstance(x, dict)]
@@ -1189,9 +1291,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
                 reviewer=review,
                 published=False,
             )
-            record["research"] = topic
-            record["review_attempts"] = attempts
-            record["action_type"] = "new_article"
+            record = attach_run_context(record, research=topic, attempts=attempts, action_type="new_article")
             append_run_log(record)
             return {"path": path, "published": False, "review": review, "research": topic}
 
@@ -1243,9 +1343,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         published=True,
         image_path=image_path,
     )
-    record["research"] = topic
-    record["review_attempts"] = attempts
-    record["action_type"] = "new_article"
+    record = attach_run_context(record, research=topic, attempts=attempts, action_type="new_article")
     append_run_log(record)
 
     return {
@@ -1580,9 +1678,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
                 reviewer=review,
                 published=False,
             )
-            record["review_attempts"] = attempts
-            record["research"] = research
-            record["action_type"] = "improvement"
+            record = attach_run_context(record, research=research, attempts=attempts, action_type="improvement")
             append_run_log(record)
             print("Reviewer rejected after retries", candidate["path"], score)
             return result
@@ -1627,9 +1723,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
         published=True,
         image_path=image_path,
     )
-    record["review_attempts"] = attempts
-    record["research"] = research
-    record["action_type"] = "improvement"
+    record = attach_run_context(record, research=research, attempts=attempts, action_type="improvement")
     append_run_log(record)
     print("Validated full-page improvement", candidate["path"], "score=", review.get("score"), "attempts=", len(attempts))
     return result
@@ -1679,13 +1773,27 @@ def main() -> int:
                 outcome_reason=reason,
                 published=False,
             )
-            record["research"] = topic
-            record["action_type"] = "research"
+            record = attach_run_context(record, research=topic, attempts=[], action_type="research")
             append_run_log(record)
             print("Discovery complete; no article modified.")
             return 0
 
         candidate = choose_existing_candidate(rep)
+
+        duplicate_path = ((topic or {}).get("duplicate_existing") or {}).get("path")
+        if duplicate_path:
+            ranked_by_path = {x["path"]: x for x in rep.get("top_improvement_candidates", [])}
+            duplicate_candidate = ranked_by_path.get(duplicate_path)
+            if not duplicate_candidate:
+                base_row = next((x for x in rows if x["path"] == duplicate_path), None)
+                if base_row:
+                    duplicate_candidate = dict(base_row)
+                    duplicate_candidate["gsc"] = gsc.get(duplicate_path)
+                    duplicate_candidate["priority_score"] = candidate_score(base_row, duplicate_candidate["gsc"])
+            if duplicate_candidate:
+                print("Action selected: IMPROVE RESEARCH-MATCH", duplicate_candidate["path"])
+                improve(duplicate_candidate, rows, args.mode, research=topic)
+                return 0
 
         if should_create_new_article(topic, candidate):
             print("Action selected: NEW ARTICLE", topic.get("title"), "score=", topic.get("opportunity_score"))
@@ -1711,8 +1819,7 @@ def main() -> int:
             outcome_reason=reason,
             published=False,
         )
-        record["research"] = topic
-        record["action_type"] = "none"
+        record = attach_run_context(record, research=topic, attempts=[], action_type="none")
         append_run_log(record)
         print(reason)
         return 0
