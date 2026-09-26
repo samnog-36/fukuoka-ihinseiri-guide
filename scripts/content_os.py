@@ -391,11 +391,30 @@ def replace_canonical(html: str, url: str) -> str:
     return html.replace("</head>", f"  {tag}\n</head>", 1)
 
 
+def normalize_generated_text(text: str) -> str:
+    """Remove formatting-only whitespace that must never block publication."""
+    lines = [
+        line.rstrip()
+        for line in str(text).replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    ]
+    out: list[str] = []
+    blank_count = 0
+    for line in lines:
+        if line == "":
+            blank_count += 1
+            if blank_count > 2:
+                continue
+        else:
+            blank_count = 0
+        out.append(line)
+    return "\n".join(out).rstrip() + "\n"
+
+
 def sanitize_article_html(article_html: str) -> str:
     # JSON-LD/head metadata are controlled by the system, never by free-form article output.
     article_html = re.sub(r"<script\b.*?</script>", "", article_html, flags=re.I | re.S)
     article_html = re.sub(r'href=["\']/about["\']', 'href="/about.html"', article_html, flags=re.I)
-    return article_html
+    return normalize_generated_text(article_html).strip()
 
 
 def sync_structured_data(html: str, title: str, description: str, image_url: str | None) -> str:
@@ -939,7 +958,7 @@ def build_proposed_html(candidate: dict, data: dict) -> str:
         title=title,
         description=description,
     )
-    return out
+    return normalize_generated_text(out)
 
 
 def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -> dict:
@@ -1908,6 +1927,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
 
     dest = ROOT / path
     dest.parent.mkdir(parents=True, exist_ok=True)
+    proposed = normalize_generated_text(proposed)
     dest.write_text(proposed, encoding="utf-8")
     add_sitemap_url(path)
     thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
@@ -2301,6 +2321,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
     proposed = sync_structured_data(proposed, seo["title"], seo["description"], image_url)
 
     path = ROOT / candidate["path"]
+    proposed = normalize_generated_text(proposed)
     path.write_text(proposed, encoding="utf-8")
     update_sitemap(candidate["path"])
     update_search_data(candidate["path"], seo["title"], seo["description"])
