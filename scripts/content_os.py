@@ -1802,6 +1802,10 @@ def main() -> int:
     (PRIVATE_DIR / "site-coverage-latest.json").write_text(
         json.dumps(coverage, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    public_coverage = ROOT / "data/site-coverage.json"
+    public_coverage.write_text(
+        json.dumps(coverage, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     gsc = load_gsc()
     rep = make_report(rows, gsc)
     (PRIVATE_DIR / "content-os-latest.json").write_text(
