@@ -742,20 +742,69 @@ def topic_query_terms(topic: dict) -> list[str]:
     return sorted(set(out), key=len, reverse=True)
 
 
+def core_topic_terms(topic: dict) -> list[str]:
+    explicit = [
+        str(x).strip()
+        for x in (topic.get("core_topic_terms") or [])
+        if len(str(x).strip()) >= 2 and str(x).strip() not in GENERIC_QUERY_TERMS
+    ]
+    if explicit:
+        return sorted(set(explicit), key=len, reverse=True)
+
+    # Infer terms that repeatedly appear across target queries.
+    counts: dict[str, int] = {}
+    queries = [str(x) for x in (topic.get("target_queries") or []) if str(x).strip()]
+    for q in queries:
+        seen = set()
+        for term in re.split(r"[\s　/／・,，]+", q):
+            term = term.strip()
+            if len(term) < 3 or term in GENERIC_QUERY_TERMS:
+                continue
+            if term not in seen:
+                counts[term] = counts.get(term, 0) + 1
+                seen.add(term)
+
+    threshold = max(2, (len(queries) + 1) // 2) if queries else 2
+    inferred = [term for term, count in counts.items() if count >= threshold]
+
+    # Strong legal / administrative subject phrases in the title are also anchors.
+    title = str(topic.get("title") or "")
+    known_subjects = [
+        "相続放棄", "単純承認", "限定承認", "行政代執行", "家電リサイクル",
+        "孤独死", "特殊清掃", "デジタル遺品", "形見分け", "お焚き上げ",
+        "原状回復", "空き家", "成年後見", "相続税", "遺言書",
+    ]
+    inferred.extend(x for x in known_subjects if x in title)
+    return sorted(set(inferred), key=len, reverse=True)
+
+
 def find_existing_intent_match(topic: dict, rows: list[dict]) -> dict | None:
     terms = topic_query_terms(topic)
+    anchors = core_topic_terms(topic)
+
+    # If the research has a clear core subject, an existing page must share
+    # that subject before it can be considered the same search intent.
+    candidate_rows = rows
+    if anchors:
+        anchored = [
+            row for row in rows
+            if any(anchor in clean_article_title(row["title"]) for anchor in anchors)
+        ]
+        if not anchored:
+            return None
+        candidate_rows = anchored
+
     best = None
     best_score = 0.0
-
-    for row in rows:
+    for row in candidate_rows:
         title = clean_article_title(row["title"])
         matched = [t for t in terms if t in title]
-        score = 0.0
-        if matched:
-            # A long, specific phrase such as 相続放棄 or 行政代執行 is strong evidence.
-            score += sum(min(8, len(t)) for t in matched)
+        anchor_matches = [a for a in anchors if a in title]
         ratio = SequenceMatcher(None, str(topic.get("title", "")), title).ratio()
-        score += ratio * 5
+
+        score = ratio * 5
+        score += sum(min(8, len(t)) for t in matched)
+        score += sum(12 for _ in anchor_matches)
 
         if score > best_score:
             best_score = score
@@ -763,6 +812,7 @@ def find_existing_intent_match(topic: dict, rows: list[dict]) -> dict | None:
                 "path": row["path"],
                 "title": title,
                 "matched_terms": matched,
+                "core_topic_matches": anchor_matches,
                 "title_similarity": round(ratio, 3),
                 "intent_score": round(score, 2),
             }
@@ -770,14 +820,21 @@ def find_existing_intent_match(topic: dict, rows: list[dict]) -> dict | None:
     if not best:
         return None
 
+    if anchors:
+        # Anchor match is required and already guaranteed. Require either
+        # meaningful title similarity or at least one additional specific term.
+        additional = [
+            t for t in best["matched_terms"]
+            if t not in GENERIC_QUERY_TERMS and t not in anchors
+        ]
+        if best["title_similarity"] >= 0.42 or additional:
+            return best
+        return None
+
     specific = [t for t in best["matched_terms"] if t not in GENERIC_QUERY_TERMS]
-    # Route to an existing page only when the actual subject overlaps,
-    # not merely generic estate-cleanup wording.
-    if any(len(t) >= 4 for t in specific):
-        return best
     if len(specific) >= 2:
         return best
-    if best["title_similarity"] >= 0.68:
+    if best["title_similarity"] >= 0.72:
         return best
     return None
 
@@ -867,7 +924,9 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 - areaカテゴリでは fukuoka_area_gaps と既存地域記事の重複を必ず確認する。
 - 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。\n- 福岡県外は地名差替え型の個別市記事を量産せず、九州比較・制度差・遠方実家整理など福岡の読者にも意味がある広域テーマを優先する
 - duplicate_title_hints に近いテーマは新規記事化せず、既存記事統合・改善を優先する。
-- 「遺品」「親が亡くなった」「処分」「手続き」などの一般語が重なるだけでは重複と判定しない。刀剣・銃砲・相続放棄・行政代執行など、検索意図の中心となる主題が一致する場合だけ既存記事改善へ寄せる。
+- 「遺品」「親が亡くなった」「処分」「手続き」「家の片付け」などの一般語が重なるだけでは重複と判定しない。
+- core_topic_terms には検索意図の中心語だけを入れる。例: 相続放棄の記事なら「相続放棄」「単純承認」。
+- 新規候補と既存記事を同一検索意図と判断するには、原則としてcore_topic_termsの少なくとも1つが既存記事タイトルにも存在することを要求する。
 - 同じ市を複数記事で扱う場合は、検索意図が明確に違う場合だけ許可する。
 - 「費用」「業者選び」など全地域共通の一般論を地域名だけ変えて量産しない。
 
@@ -887,6 +946,7 @@ JSONのみ:
   "primary_sources": [{{"name":"一次情報機関","url":"https://..."}}],
   "research_findings": ["調査で確認した重要事項"],
   "target_queries": ["想定検索語"],
+  "core_topic_terms": ["検索意図の中心となる固有主題。例: 相続放棄, 単純承認"],
   "duplicate_risk": "low",
   "decision_reason": "新規記事にする/しない判断理由"
 }}
