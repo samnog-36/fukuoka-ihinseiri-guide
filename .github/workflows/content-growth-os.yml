@@ -1,5 +1,5 @@
 name: Autonomous content growth OS
-# verification retry 2
+# verification retry after publish-worktree cleanup
 
 on:
   schedule:
@@ -171,6 +171,19 @@ jobs:
             data/ai-activity-log.json \
             data/ai-run-log.json \
             data/site-coverage.json 2>/dev/null || true
+
+          # Quality checks may update tracked reports such as
+          # docs/growth/quality-gate.json. They are diagnostics, not
+          # publication content. Revert every unstaged tracked change after
+          # staging the explicit publication allow-list so rebase cannot be
+          # blocked by generated artifacts.
+          git restore --worktree . 2>/dev/null || true
+          find scripts -type d -name __pycache__ -prune -exec rm -rf {} + 2>/dev/null || true
+
+          echo "===== PERSISTENT STAGED CHANGES ====="
+          git diff --cached --name-status
+          echo "===== REMAINING UNSTAGED CHANGES ====="
+          git status --short
 
           if git diff --cached --quiet; then
             echo "No staged persistent changes."
