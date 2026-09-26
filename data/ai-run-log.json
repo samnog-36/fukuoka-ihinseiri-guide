@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-26T06:09:14.850831+00:00",
+    "timestamp": "2026-09-26T06:43:03.528773+00:00",
     "started_at": "2026-09-26T06:04:20Z",
-    "finished_at": "2026-09-26T06:09:14.850831+00:00",
+    "finished_at": "2026-09-26T06:43:03.528773+00:00",
     "run_id": "36222635105",
     "trigger": "push",
     "mode": "improve",
-    "status": "gate_failed",
-    "outcome": "品質Gateで公開停止",
-    "outcome_reason": "品質・AdSense・HTML Gateに不合格。公開変更は破棄",
+    "status": "error",
+    "outcome": "AI処理エラー",
+    "outcome_reason": "AI処理ステップでエラー。GitHub Actions Run #36224577308 を確認",
     "candidate": {
       "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
       "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
@@ -148,14 +148,14 @@
       {
         "key": "gate",
         "label": "品質Gate",
-        "status": "error",
-        "detail": "品質・AdSense・HTML Gateに不合格。公開変更は破棄"
+        "status": "skipped",
+        "detail": "AI処理エラーのため品質Gate未実行"
       },
       {
         "key": "publish",
         "label": "本番反映",
         "status": "skipped",
-        "detail": "品質Gate不合格のため公開なし"
+        "detail": "AI処理エラーのため公開なし"
       }
     ],
     "published": false,
