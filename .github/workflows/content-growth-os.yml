@@ -3,6 +3,9 @@ name: Autonomous content growth OS
 on:
   schedule:
     - cron: "10 20 * * *"
+  push:
+    paths:
+      - ".github/workflows/content-growth-os.yml"
   workflow_dispatch:
     inputs:
       mode:
