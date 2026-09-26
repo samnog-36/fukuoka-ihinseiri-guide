@@ -555,7 +555,7 @@ canonical: {current_canonical}
   "decision_reason": "なぜこの変更量にしたか"
 }}
 """
-    client = OpenAI(api_key=key)
+    client = OpenAI(api_key=key, timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     resp = client.responses.create(
         model=model,
@@ -621,7 +621,7 @@ def build_proposed_html(candidate: dict, data: dict) -> str:
 
 def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -> dict:
     from openai import OpenAI
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     reviewer_model = os.getenv("OPENAI_REVIEW_MODEL", "gpt-5.6-sol")
     prompt = f"""
 あなたは公開前の独立レビュアーです。編集AIとは別人格として厳格に判定してください。
@@ -687,7 +687,7 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
         return html, None
 
     from openai import OpenAI
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     image_model = os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-2.5-sunburst")
     try:
         result = client.images.generate(
@@ -828,7 +828,7 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
         return None
 
     from openai import OpenAI
-    client = OpenAI(api_key=key)
+    client = OpenAI(api_key=key, timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     existing = [{"path": r["path"], "title": r["title"]} for r in rows]
     coverage = build_site_coverage(rows)
@@ -964,7 +964,7 @@ def new_article_path(topic: dict) -> str:
 
 def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
     from openai import OpenAI
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     category_name = CONFIG["new_article_categories"][topic["category_slug"]]
     path = new_article_path(topic)
@@ -1158,7 +1158,7 @@ def build_new_article_page(topic: dict, data: dict) -> str:
 
 def call_revision_editor(candidate: dict, current_html: str, prior_editor: dict, review: dict, rows: list[dict], attempt: int) -> dict:
     from openai import OpenAI
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     article_match = ARTICLE_RE.search(current_html)
     if not article_match:
