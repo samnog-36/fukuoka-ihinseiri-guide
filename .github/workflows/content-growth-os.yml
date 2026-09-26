@@ -130,10 +130,10 @@ jobs:
           # A failed AI/gate run may leave draft files in the workspace.
           # Never publish those drafts; keep only the run-decision log.
           if [ "$FAILED" = "true" ]; then
-            git restore --worktree --staged -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json 2>/dev/null || true
+            git restore --worktree --staged -- blog area images/blog sitemap.xml js/search-data.json data/ai-activity-log.json 2>/dev/null || true
           fi
 
-          ARTICLE_CHANGE="$(git status --porcelain -- blog images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
+          ARTICLE_CHANGE="$(git status --porcelain -- blog area images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
           LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json data/site-coverage.json)"
 
           if [ -z "$ARTICLE_CHANGE" ] && [ -z "$LOG_CHANGE" ]; then
@@ -162,6 +162,7 @@ jobs:
           git switch -c "$BRANCH"
           git add \
             blog \
+            area \
             images/blog \
             sitemap.xml \
             js/search-data.json \
