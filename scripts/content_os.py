@@ -1007,6 +1007,8 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 - 記事内に広告コードは書かない（システム側で挿入する）
 - hero画像は最初のfigure内に /images/ogp-default.png を仮指定する
 - about.htmlへの編集方針リンクをeditorial-info内に入れる
+- internal_linksには、既存サイト内から本当に関連する記事を2〜3本選ぶ
+- areaカテゴリでは /area/ と /blog/area/ を親ハブとして扱う
 
 返答JSONのみ:
 {{
@@ -1086,7 +1088,8 @@ def build_new_article_page(topic: dict, data: dict) -> str:
     canonical = canonical_url_for(path)
     today_iso = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
     today_jp = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
-    article_html = inject_middle_ad(data["article_html"], category_name)
+    article_html = ensure_new_article_links(data["article_html"], topic, data)
+    article_html = inject_middle_ad(article_html, category_name)
 
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -1286,6 +1289,103 @@ def article_card_html(topic: dict, data: dict, path: str, thumbnail: str) -> str
 """
 
 
+
+def ensure_new_article_links(article_html: str, topic: dict, data: dict) -> str:
+    slug = topic["category_slug"]
+    parent_hubs = {
+        "ihinseiri": [("/guide/", "遺品整理ガイド"), ("/blog/ihinseiri/", "遺品整理の記事一覧")],
+        "tokushu-seisou": [("/guide/tokushu-seisou", "特殊清掃ガイド"), ("/blog/tokushu-seisou/", "特殊清掃の記事一覧")],
+        "seizenseiri": [("/guide/seizenseiri", "生前整理ガイド"), ("/blog/seizenseiri/", "生前整理の記事一覧")],
+        "kuyo": [("/guide/kuyo", "遺品供養ガイド"), ("/blog/kuyo/", "遺品供養の記事一覧")],
+        "cost": [("/cost/", "遺品整理の費用相場"), ("/blog/cost/", "費用の記事一覧")],
+        "area": [("/area/", "地域別情報"), ("/blog/area/", "地域別の記事一覧")],
+    }
+    links = list(parent_hubs.get(slug, []))
+
+    for raw in data.get("internal_links", []) or []:
+        url = str(raw).strip()
+        if not url.startswith("/") or url.startswith("//"):
+            continue
+        if url.endswith(".html"):
+            url = public_path_for(url)
+        if any(existing[0] == url for existing in links):
+            continue
+        title = next(
+            (
+                clean_article_title(r["title"])
+                for r in article_records()
+                if public_path_for(r["path"]) == url or "/" + r["path"] == url
+            ),
+            "関連する記事",
+        )
+        links.append((url, title))
+        if len(links) >= 5:
+            break
+
+    missing = [(url, label) for url, label in links if f'href="{url}"' not in article_html and f"href='{url}'" not in article_html]
+    if not missing:
+        return article_html
+
+    items = "".join(
+        f'<li><a href="{escape(url, quote=True)}">{escape(label)}</a></li>'
+        for url, label in missing
+    )
+    section = (
+        '\n<section class="related-links ai-parent-links">'
+        '<h2>関連するガイド・記事</h2><ul>' + items + '</ul></section>\n'
+    )
+    return article_html.replace("</article>", section + "</article>", 1)
+
+
+def add_area_hub_mapping(topic: dict, data: dict, path: str) -> None:
+    if topic.get("category_slug") != "area":
+        return
+    p = ROOT / "area/index.html"
+    if not p.exists():
+        return
+
+    html = p.read_text(encoding="utf-8")
+    if "const areaArticles = {" not in html:
+        return
+
+    title = str(data.get("h1") or topic.get("title") or "").strip()
+    public_url = public_path_for(path)
+    area_names = extract_area_tags()
+    matched = [area for area in area_names if area and area in title]
+
+    if not matched:
+        return
+
+    changed = False
+    title_js = json.dumps(title, ensure_ascii=False)
+    url_js = json.dumps(public_url, ensure_ascii=False)
+
+    for area in matched:
+        pattern = re.compile(
+            rf'("{re.escape(area)}"\s*:\s*\[)(.*?)(\n\s*\])',
+            re.S,
+        )
+        m = pattern.search(html)
+        if not m:
+            continue
+        body = m.group(2)
+        if public_url in body or ("/" + path) in body:
+            continue
+        entry = f'    {{ title: {title_js}, url: {url_js} }}'
+        stripped = body.rstrip()
+        if stripped.strip():
+            if not stripped.rstrip().endswith(","):
+                stripped += ","
+            new_body = stripped + "\n" + entry
+        else:
+            new_body = "\n" + entry
+        html = html[:m.start(2)] + new_body + html[m.end(2):]
+        changed = True
+
+    if changed:
+        p.write_text(html, encoding="utf-8")
+
+
 def add_article_to_indexes(topic: dict, data: dict, path: str, thumbnail: str) -> None:
     card = article_card_html(topic, data, path, thumbnail)
     for rel in ("blog/index.html", f"blog/{topic['category_slug']}/index.html"):
@@ -1369,6 +1469,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
     add_search_entry(topic, data, path, thumbnail)
     add_article_to_indexes(topic, data, path, thumbnail)
+    add_area_hub_mapping(topic, data, path)
 
     activity = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
