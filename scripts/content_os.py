@@ -2001,6 +2001,73 @@ def add_article_to_indexes(topic: dict, data: dict, path: str, thumbnail: str) -
         insert_card_into_latest_section("guide/index.html", card, path)
 
 
+
+def resolve_public_link_file(url: str) -> Path | None:
+    raw = str(url or "").strip()
+    if not raw.startswith("/") or raw.startswith("//"):
+        return None
+    path = raw.split("?", 1)[0].split("#", 1)[0].lstrip("/")
+    candidates = []
+    if path.endswith(".html"):
+        candidates.append(ROOT / path)
+    else:
+        candidates.append(ROOT / (path + ".html"))
+        candidates.append(ROOT / path / "index.html")
+    for p in candidates:
+        if p.exists() and p.is_file():
+            return p
+    return None
+
+
+def add_backlink_to_related_article(target: Path, new_path: str, new_title: str) -> bool:
+    html = target.read_text(encoding="utf-8")
+    public_url = public_path_for(new_path)
+    if f'href="{public_url}"' in html or f'href="{public_url}.html"' in html:
+        return False
+
+    link = f'<li><a href="{escape(public_url, quote=True)}">{escape(new_title)}</a></li>'
+
+    aside_re = re.compile(
+        r'(<aside\s+class=["\'][^"\']*related-articles[^"\']*["\'][^>]*>.*?<ul[^>]*>)(.*?)(</ul>.*?</aside>)',
+        re.I | re.S,
+    )
+    m = aside_re.search(html)
+    if m:
+        replacement = m.group(1) + m.group(2) + "\n      " + link + m.group(3)
+        html = html[:m.start()] + replacement + html[m.end():]
+        target.write_text(html, encoding="utf-8")
+        return True
+
+    editorial = re.search(r'<section\s+class=["\'][^"\']*editorial-info[^"\']*["\']', html, re.I)
+    if editorial:
+        block = (
+            '\n  <aside class="related-articles">\n'
+            '    <h2>関連するガイド・記事</h2>\n'
+            f'    <ul>{link}</ul>\n'
+            '  </aside>\n\n'
+        )
+        html = html[:editorial.start()] + block + html[editorial.start():]
+        target.write_text(html, encoding="utf-8")
+        return True
+    return False
+
+
+def add_reverse_internal_links(data: dict, new_path: str, new_title: str, limit: int = 3) -> list[str]:
+    changed = []
+    for url in data.get("internal_links", []) or []:
+        if len(changed) >= limit:
+            break
+        target = resolve_public_link_file(str(url))
+        if not target:
+            continue
+        try:
+            if add_backlink_to_related_article(target, new_path, new_title):
+                changed.append(target.relative_to(ROOT).as_posix())
+        except Exception as exc:
+            print("Backlink update skipped:", target, exc)
+    return changed
+
+
 def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> dict:
     path = new_article_path(topic)
     if (ROOT / path).exists():
@@ -2076,7 +2143,12 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
     add_search_entry(topic, data, path, thumbnail)
     add_article_to_indexes(topic, data, path, thumbnail)
-    add_area_hub_mapping(topic, data, path)
+    reverse_links = add_reverse_internal_links(
+        data,
+        path,
+        str(data.get("h1") or topic["title"]),
+        limit=3,
+    )
 
     activity = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -2093,6 +2165,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         "review_strengths": review.get("strengths", []),
         "status": "validated_for_auto_publish",
         "action_type": "new_article",
+        "reverse_links_added": reverse_links,
     }
     act = _load_list_log(ACTIVITY_LOG)
     act.insert(0, activity)
@@ -2110,6 +2183,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         image_path=image_path,
     )
     record = attach_run_context(record, research=topic, attempts=attempts, action_type="new_article")
+    record["reverse_links_added"] = reverse_links
     append_run_log(record)
 
     return {
