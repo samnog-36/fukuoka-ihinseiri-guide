@@ -18,6 +18,7 @@ CONFIG = json.loads((ROOT / "config/content_os.json").read_text(encoding="utf-8"
 SOURCES = json.loads((ROOT / "data/source_registry.json").read_text(encoding="utf-8"))
 PRIVATE_DIR = ROOT / os.getenv("CONTENT_OS_PRIVATE_DIR", ".content-os-private")
 ACTIVITY_LOG = ROOT / "data/ai-activity-log.json"
+RUN_LOG = ROOT / "data/ai-run-log.json"
 
 TAG_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>", re.I | re.S)
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
@@ -517,15 +518,219 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
     return html, f"images/blog/{filename}"
 
 
+def _load_list_log(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return data if isinstance(data, list) else []
+
+
+def _write_list_log(path: Path, rows: list[dict], limit: int = 180) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rows[:limit], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def candidate_selection_reasons(candidate: dict) -> list[str]:
+    reasons = []
+    quality = int(candidate.get("quality", 100))
+    if quality < 100:
+        reasons.append(f"記事品質スコアが {quality}/100 で改善余地あり")
+    gsc = candidate.get("gsc") or {}
+    if gsc:
+        imp = float(gsc.get("impressions", 0) or 0)
+        pos = float(gsc.get("position", 0) or 0)
+        ctr = float(gsc.get("ctr", 0) or 0)
+        if imp >= CONFIG["min_impressions_for_gsc_priority"]:
+            reasons.append(f"Google検索で {int(imp)} 回表示され、改善判断に使えるデータ量がある")
+        if CONFIG["position_opportunity_min"] <= pos <= CONFIG["position_opportunity_max"]:
+            reasons.append(f"Google平均掲載順位 {pos:.1f} 位で、上位化の余地が大きい")
+        if imp >= 100 and ctr < 0.03:
+            reasons.append(f"表示 {int(imp)} 回に対して検索CTR {ctr*100:.2f}% と低く、クリック改善余地がある")
+    if not reasons:
+        reasons.append("サイト全体の品質・検索データを合算した優先度スコアが最上位")
+    return reasons
+
+
+def append_run_log(item: dict) -> None:
+    log = _load_list_log(RUN_LOG)
+    run_id = str(item.get("run_id") or "")
+    if run_id:
+        log = [x for x in log if str(x.get("run_id") or "") != run_id]
+    log.insert(0, item)
+    _write_list_log(RUN_LOG, log, 240)
+
+
+def make_run_record(
+    *,
+    mode: str,
+    candidate: dict | None,
+    status: str,
+    outcome: str,
+    outcome_reason: str,
+    editor: dict | None = None,
+    reviewer: dict | None = None,
+    published: bool = False,
+    image_path: str | None = None,
+    error: str | None = None,
+) -> dict:
+    now = datetime.now(timezone.utc).isoformat()
+    run_id = os.getenv("GITHUB_RUN_ID")
+    trigger = os.getenv("GITHUB_EVENT_NAME") or "unknown"
+    gsc = (candidate or {}).get("gsc") or {}
+    editor = editor or {}
+    reviewer = reviewer or {}
+    threshold = int(CONFIG.get("minimum_reviewer_score", 88))
+
+    steps = [
+        {
+            "key": "search_console",
+            "label": "Search Console取得",
+            "status": "done",
+            "detail": "最新の検索パフォーマンスを取得して候補選定に使用",
+        }
+    ]
+
+    if candidate:
+        steps.append({
+            "key": "candidate",
+            "label": "改善候補選定",
+            "status": "done",
+            "detail": f"{candidate.get('title') or candidate.get('path')} を優先度 {candidate.get('priority_score')} で選定",
+        })
+    else:
+        steps.append({
+            "key": "candidate",
+            "label": "改善候補選定",
+            "status": "skipped",
+            "detail": outcome_reason,
+        })
+
+    if editor:
+        steps.append({
+            "key": "editor",
+            "label": "Editor AI",
+            "status": "done",
+            "detail": editor.get("decision_reason") or "一次情報を調査し、改善案を作成",
+        })
+    else:
+        steps.append({
+            "key": "editor",
+            "label": "Editor AI",
+            "status": "error" if error else "skipped",
+            "detail": error or "改善候補なしのため未実行",
+        })
+
+    if reviewer:
+        score = int(reviewer.get("score", 0) or 0)
+        approved = bool(reviewer.get("approve")) and score >= threshold
+        steps.append({
+            "key": "reviewer",
+            "label": "Reviewer AI",
+            "status": "done" if approved else "rejected",
+            "detail": f"{score}点 / 公開基準 {threshold}点",
+        })
+    else:
+        steps.append({
+            "key": "reviewer",
+            "label": "Reviewer AI",
+            "status": "skipped",
+            "detail": "Editor未実行のため未審査",
+        })
+
+    if published:
+        steps.extend([
+            {
+                "key": "gate",
+                "label": "品質Gate",
+                "status": "pending",
+                "detail": "Reviewer合格。GitHub Actionsの品質・AdSense・HTML Gateへ進行",
+            },
+            {
+                "key": "publish",
+                "label": "本番反映",
+                "status": "pending",
+                "detail": "Gate合格時のみmainへ自動反映",
+            },
+        ])
+    else:
+        steps.extend([
+            {
+                "key": "gate",
+                "label": "品質Gate",
+                "status": "skipped",
+                "detail": "公開候補がないため本番変更用Gateは不要",
+            },
+            {
+                "key": "publish",
+                "label": "本番反映",
+                "status": "skipped",
+                "detail": outcome_reason,
+            },
+        ])
+
+    return {
+        "timestamp": now,
+        "started_at": os.getenv("AI_RUN_STARTED_AT") or now,
+        "finished_at": now,
+        "run_id": run_id,
+        "trigger": trigger,
+        "mode": mode,
+        "status": status,
+        "outcome": outcome,
+        "outcome_reason": outcome_reason,
+        "candidate": {
+            "path": candidate.get("path"),
+            "title": candidate.get("title"),
+            "priority_score": candidate.get("priority_score"),
+            "quality": candidate.get("quality"),
+            "gsc": {
+                "clicks": gsc.get("clicks"),
+                "impressions": gsc.get("impressions"),
+                "ctr": gsc.get("ctr"),
+                "position": gsc.get("position"),
+            } if gsc else None,
+            "selection_reasons": candidate_selection_reasons(candidate),
+        } if candidate else None,
+        "editor": {
+            "status": "done" if editor else ("error" if error else "skipped"),
+            "decision_reason": editor.get("decision_reason"),
+            "changes": editor.get("change_summary", []),
+            "sources": editor.get("primary_sources", []),
+            "internal_links": editor.get("internal_links", []),
+            "image_action": (editor.get("image") or {}).get("action"),
+            "title_after": (editor.get("seo") or {}).get("title"),
+        } if editor else {
+            "status": "error" if error else "skipped",
+            "decision_reason": error,
+            "changes": [],
+            "sources": [],
+            "internal_links": [],
+            "image_action": None,
+            "title_after": None,
+        },
+        "reviewer": {
+            "status": "approved" if reviewer and reviewer.get("approve") and int(reviewer.get("score", 0) or 0) >= threshold else ("rejected" if reviewer else "skipped"),
+            "approve": reviewer.get("approve") if reviewer else None,
+            "score": reviewer.get("score") if reviewer else None,
+            "threshold": threshold,
+            "issues": reviewer.get("issues", []) if reviewer else [],
+            "strengths": reviewer.get("strengths", []) if reviewer else [],
+            "seo_assessment": reviewer.get("seo_assessment") if reviewer else None,
+            "factual_assessment": reviewer.get("factual_assessment") if reviewer else None,
+        },
+        "steps": steps,
+        "published": published,
+        "image_generated": bool(image_path),
+        "image_path": image_path,
+        "error": error,
+    }
+
+
 def append_activity(candidate: dict, data: dict, review: dict, image_path: str | None) -> None:
-    log = []
-    if ACTIVITY_LOG.exists():
-        try:
-            log = json.loads(ACTIVITY_LOG.read_text(encoding="utf-8"))
-        except Exception:
-            log = []
-    if not isinstance(log, list):
-        log = []
+    log = _load_list_log(ACTIVITY_LOG)
     seo = data.get("seo") or {}
     old_title_match = TITLE_RE.search(data.get("_original_html", ""))
     old_title = unescape(old_title_match.group(1)).strip() if old_title_match else candidate["title"]
@@ -545,17 +750,19 @@ def append_activity(candidate: dict, data: dict, review: dict, image_path: str |
         "status": "validated_for_auto_publish",
     }
     log.insert(0, item)
-    ACTIVITY_LOG.parent.mkdir(parents=True, exist_ok=True)
-    ACTIVITY_LOG.write_text(json.dumps(log[:180], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _write_list_log(ACTIVITY_LOG, log, 180)
 
 
-def improve(candidate: dict, rows: list[dict]) -> dict:
+def improve(candidate: dict, rows: list[dict], mode: str = "improve") -> dict:
     data = call_editor(candidate, rows)
     validate_editor_output(candidate, data)
     proposed = build_proposed_html(candidate, data)
     review = call_reviewer(candidate, data["_original_html"], proposed, data)
     min_score = int(CONFIG.get("minimum_reviewer_score", 88))
+
     if not review.get("approve") or int(review.get("score", 0)) < min_score:
+        score = int(review.get("score", 0) or 0)
+        reason = f"Reviewer {score}点で公開基準{min_score}点に未達"
         result = {
             "path": candidate["path"],
             "published": False,
@@ -565,6 +772,16 @@ def improve(candidate: dict, rows: list[dict]) -> dict:
         (PRIVATE_DIR / "last-ai-change.json").write_text(
             json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
         )
+        append_run_log(make_run_record(
+            mode=mode,
+            candidate=candidate,
+            status="rejected",
+            outcome="公開見送り",
+            outcome_reason=reason,
+            editor=data,
+            reviewer=review,
+            published=False,
+        ))
         print("Reviewer rejected change", candidate["path"], review.get("score"))
         return result
 
@@ -593,6 +810,17 @@ def improve(candidate: dict, rows: list[dict]) -> dict:
     (PRIVATE_DIR / "last-ai-change.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    append_run_log(make_run_record(
+        mode=mode,
+        candidate=candidate,
+        status="validated",
+        outcome="公開候補として承認",
+        outcome_reason=f"Reviewer {review.get('score')}点で基準{min_score}点を通過。品質Gateへ進行",
+        editor=data,
+        reviewer=review,
+        published=True,
+        image_path=image_path,
+    ))
     print("Validated full-page improvement", candidate["path"], "score=", review.get("score"))
     return result
 
@@ -610,21 +838,63 @@ def main() -> int:
         json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    if args.mode != "improve":
-        print("Analysis complete; no article modified.")
-        return 0
+    try:
+        if args.mode != "improve":
+            reason = f"mode={args.mode} のため記事編集は実施しない"
+            append_run_log(make_run_record(
+                mode=args.mode,
+                candidate=None,
+                status="analysis_only",
+                outcome="分析のみ",
+                outcome_reason=reason,
+                published=False,
+            ))
+            print("Analysis complete; no article modified.")
+            return 0
 
-    if not rep["top_improvement_candidates"]:
-        print("No candidates.")
-        return 0
+        if not rep["top_improvement_candidates"]:
+            reason = "改善候補が見つからなかった"
+            append_run_log(make_run_record(
+                mode=args.mode,
+                candidate=None,
+                status="no_candidate",
+                outcome="変更なし",
+                outcome_reason=reason,
+                published=False,
+            ))
+            print("No candidates.")
+            return 0
 
-    candidate = rep["top_improvement_candidates"][0]
-    if candidate["priority_score"] <= 0:
-        print("No positive-priority candidate.")
-        return 0
+        candidate = rep["top_improvement_candidates"][0]
+        if candidate["priority_score"] <= 0:
+            reason = f"最上位候補の優先度スコアが {candidate['priority_score']} で実行条件未達"
+            append_run_log(make_run_record(
+                mode=args.mode,
+                candidate=candidate,
+                status="no_candidate",
+                outcome="変更なし",
+                outcome_reason=reason,
+                published=False,
+            ))
+            print("No positive-priority candidate.")
+            return 0
 
-    improve(candidate, rows)
-    return 0
+        improve(candidate, rows, args.mode)
+        return 0
+    except Exception as exc:
+        candidate = None
+        if rep.get("top_improvement_candidates"):
+            candidate = rep["top_improvement_candidates"][0]
+        append_run_log(make_run_record(
+            mode=args.mode,
+            candidate=candidate,
+            status="error",
+            outcome="実行エラー",
+            outcome_reason=str(exc),
+            published=False,
+            error=str(exc),
+        ))
+        raise
 
 
 if __name__ == "__main__":
