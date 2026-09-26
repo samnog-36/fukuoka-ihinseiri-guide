@@ -1423,8 +1423,12 @@ def should_create_new_article(topic: dict | None, existing: dict | None) -> bool
     if not topic or not topic.get("create"):
         return False
     score = float(topic.get("opportunity_score", 0) or 0)
-    if score < float(CONFIG.get("new_article_minimum_score", 88)):
+    minimum = float(CONFIG.get("new_article_minimum_score", 88))
+    if score < minimum:
         return False
+    # A genuinely strong, non-duplicate opportunity should not wait for a calendar slot.
+    if score >= 92:
+        return True
     if existing is None:
         return True
     weekday = datetime.now(ZoneInfo(CONFIG["timezone"])).weekday()
@@ -1759,6 +1763,16 @@ def main() -> int:
             return 0
 
         topic = discover_new_topic(rows)
+        if topic is not None:
+            coverage = rep.get("coverage", {})
+            topic["coverage_summary"] = {
+                "category_counts": coverage.get("category_counts", {}),
+                "fukuoka_area_gaps": coverage.get("fukuoka_area_gaps", []),
+                "kyushu_prefecture_counts": {
+                    k: v.get("article_count", 0)
+                    for k, v in (coverage.get("kyushu_prefecture_coverage", {}) or {}).items()
+                },
+            }
         (PRIVATE_DIR / "new-topic-latest.json").write_text(
             json.dumps(topic or {}, ensure_ascii=False, indent=2), encoding="utf-8"
         )
