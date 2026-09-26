@@ -65,9 +65,10 @@ jobs:
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 
       - name: Analyze, research, edit and independently review
-        env:
-          AI_RUN_STARTED_AT: ${{ github.event.repository.updated_at }}
-        run: python3 scripts/content_os.py --mode "${{ steps.mode.outputs.mode }}"
+        shell: bash
+        run: |
+          AI_RUN_STARTED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            python3 scripts/content_os.py --mode "${{ steps.mode.outputs.mode }}"
 
       - name: Run safety and quality gates
         run: |
