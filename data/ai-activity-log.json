@@ -1,5 +1,81 @@
 [
   {
+    "timestamp": "2026-09-26T08:50:29.560171+00:00",
+    "run_id": "36230821140",
+    "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+    "title_before": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+    "title_after": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】",
+    "changes": [
+      "確認できない高齢化率、人口、空き家数、地域別の遺品整理需要、民間の費用相場を削除し、自治体の公式ルールを中心とする記事へ修正しました。",
+      "糸島市・宗像市・古賀市の粗大ごみについて、申込方法、シール料金、直接搬入、持ち出し支援などを公式情報に基づいて更新しました。",
+      "家庭ごみの収集運搬には自治体の委託または一般廃棄物処理業の許可が必要である点を、環境省・国民生活センターの案内とともに明記しました。",
+      "料金相場の断定を避け、見積書の内訳、追加料金、処分方法を確認する実務的な判断基準へ変更しました。",
+      "FAQ、自治体処分の比較表、家電リサイクル品の注意点、遺品整理の進行手順を追加しました。",
+      "重複する糸島市・宗像市の記事との役割を分け、本ページは『糸島市・宗像市・古賀市の自治体処分ルールと依頼前の確認事項』に重点化しました。",
+      "URL変更や301統合は実行していませんが、将来的には糸島市・宗像市が重複する地域記事間で検索流入・内容差・重複率を確認し、必要なら統合または明確な役割分担を検討することを提案します。"
+    ],
+    "sources": [
+      {
+        "name": "糸島市｜粗大ごみの出し方、収集日",
+        "url": "https://www.city.itoshima.lg.jp/s011/010/020/020/040/20210319110344.html"
+      },
+      {
+        "name": "糸島市｜クリーンセンターへのごみ個人搬入時の本人確認について",
+        "url": "https://www.city.itoshima.lg.jp/s052/010/020/020/060/010/honninkakunin-ver-5.pdf"
+      },
+      {
+        "name": "宗像市｜粗大ごみの申込方法",
+        "url": "https://www.city.munakata.lg.jp/kiji0031562/index.html"
+      },
+      {
+        "name": "宗像市｜宗像清掃工場の自己搬入案内",
+        "url": "https://www.city.munakata.lg.jp/kiji0039269/3_9269_10183_up_akilu3bp.pdf"
+      },
+      {
+        "name": "古賀市｜粗大ごみ",
+        "url": "https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/003.php"
+      },
+      {
+        "name": "古賀市｜ごみの直接搬入",
+        "url": "https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/006.php"
+      },
+      {
+        "name": "環境省｜無許可の回収業者に関する案内",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/article-20260712-itoshima-fukutsu-munakata",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 88,
+    "review_strengths": [
+      "旧記事にあった根拠不明の人口、高齢化率、需要傾向、地域別費用相場を削除し、自治体制度を中心に再構成した点は大幅な品質改善です。",
+      "糸島市の予約期限、550円シール、重量・寸法による1～2枚という記述は公式情報と一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s011/010/020/020/040/20210319110344.html))",
+      "糸島市の本人・親族による搬入条件と、困難な場合に一般廃棄物収集運搬許可業者へ依頼する説明も一次資料に沿っています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/020/060/010/honninkakunin-ver-5.pdf))",
+      "宗像市の530円、20kg以下は1枚、21～40kgは2枚、集合住宅の排出場所という記述は公式案内と一致しています。([city.munakata.lg.jp](https://www.city.munakata.lg.jp/kiji0031562/index.html?utm_source=openai))",
+      "宗像清掃工場の自己搬入料金10kgごと170円は公式資料で確認できます。([city.munakata.lg.jp](https://www.city.munakata.lg.jp/kiji0039269/3_9269_10183_up_akilu3bp.pdf?utm_source=openai))",
+      "古賀市の粗大ごみシール523円、対象品目、家電4品目とパソコンを出せない旨は公式ページと一致しています。([city.koga.fukuoka.jp](https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/003.php))",
+      "古賀市の直接搬入先が古賀清掃工場と不燃物埋立地に分かれる説明は正確です。公式ページでは古賀清掃工場が10kgごと170円であることも確認できます。([city.koga.fukuoka.jp](https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/006.php))",
+      "家庭廃棄物の回収には市区町村の一般廃棄物処理業許可または委託が必要という説明は、環境省および国民生活センターの案内に適合しています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html))",
+      "相続放棄を検討している場合に売却・廃棄を自己判断で進めないという注意喚起は、相続財産の処分が法定単純承認となり得る制度を踏まえた慎重な表現です。([laws.e-gov.go.jp](https://laws.e-gov.go.jp/law/129AC0000000089?occasion_date=20220527&utm_source=openai))",
+      "糸島市の空き家に関する倒壊、火災、防犯、衛生上のリスク説明は公式ページと一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s004/010/010/030/040/20260501182647.html))",
+      "CTAは1か所で、即時契約や過度な不安訴求を行っておらず、広告・誘導の過剰性はありません。",
+      "article、section、nav、aside、tableなどの主要構造は閉じタグを含めて保たれており、提示HTMLに明白な構造破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-09-26T07:07:50.116997+00:00",
     "run_id": "36225498122",
     "path": "blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin.html",
