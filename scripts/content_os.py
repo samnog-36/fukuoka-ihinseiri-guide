@@ -1004,6 +1004,7 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
 - editorial-info と reference-links を必ず含める
 - 参考情報は本文近くにもリンクし、末尾にもまとめる
 - H1は1つだけ
+- 既存記事と同じく、パンくず・article-meta・article-hero-image・見出し階層を自然に構成する
 - 記事内に広告コードは書かない（システム側で挿入する）
 - hero画像は最初のfigure内に /images/ogp-default.png を仮指定する
 - about.htmlへの編集方針リンクをeditorial-info内に入れる
@@ -1088,7 +1089,8 @@ def build_new_article_page(topic: dict, data: dict) -> str:
     canonical = canonical_url_for(path)
     today_iso = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
     today_jp = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
-    article_html = ensure_new_article_links(data["article_html"], topic, data)
+    article_html = ensure_new_article_shell(data["article_html"], topic, data)
+    article_html = ensure_new_article_links(article_html, topic, data)
     article_html = inject_middle_ad(article_html, category_name)
 
     return f"""<!DOCTYPE html>
@@ -1288,6 +1290,58 @@ def article_card_html(topic: dict, data: dict, path: str, thumbnail: str) -> str
         </a>
 """
 
+
+
+
+def ensure_new_article_shell(article_html: str, topic: dict, data: dict) -> str:
+    category_slug = topic["category_slug"]
+    category_name = CONFIG["new_article_categories"][category_slug]
+    h1 = str(data.get("h1") or topic.get("title") or "").strip()
+    today_jp = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y年%-m月%-d日")
+    category_url = f"/blog/{category_slug}/"
+
+    open_match = re.search(r"<article\b[^>]*>", article_html, re.I)
+    if not open_match:
+        return article_html
+
+    inserts = []
+
+    if 'class="breadcrumb"' not in article_html and 'class="article-breadcrumb"' not in article_html:
+        inserts.append(
+            '<nav class="breadcrumb" aria-label="パンくずリスト">'
+            '<a href="/">ホーム</a> &gt; '
+            '<a href="/blog/">ブログ</a> &gt; '
+            f'<a href="{escape(category_url, quote=True)}">{escape(category_name)}</a> &gt; '
+            f'<span>{escape(h1)}</span>'
+            '</nav>'
+        )
+
+    if inserts:
+        article_html = article_html[:open_match.end()] + "\n" + "\n".join(inserts) + article_html[open_match.end():]
+
+    if 'class="article-meta"' not in article_html:
+        article_html = re.sub(
+            r"(</h1>)",
+            r'\1\n<p class="article-meta">更新日：' + today_jp + ' | カテゴリ：<a href="' + category_url + '">' + category_name + '</a></p>',
+            article_html,
+            count=1,
+            flags=re.I,
+        )
+
+    if 'class="article-hero-image"' not in article_html:
+        hero = (
+            '\n<figure class="article-hero-image">'
+            '<img src="/images/ogp-default.png" alt="' + escape(h1, quote=True) + '" '
+            'width="800" height="450" loading="lazy">'
+            '</figure>\n'
+        )
+        meta_match = re.search(r'<p\s+class=["\']article-meta["\'][^>]*>.*?</p>', article_html, re.I | re.S)
+        if meta_match:
+            article_html = article_html[:meta_match.end()] + hero + article_html[meta_match.end():]
+        else:
+            article_html = re.sub(r"(</h1>)", r"\1" + hero, article_html, count=1, flags=re.I)
+
+    return article_html
 
 
 def ensure_new_article_links(article_html: str, topic: dict, data: dict) -> str:
