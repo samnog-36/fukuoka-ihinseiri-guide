@@ -165,7 +165,8 @@ jobs:
             sitemap.xml \
             js/search-data.json \
             data/ai-activity-log.json \
-            data/ai-run-log.json 2>/dev/null || true
+            data/ai-run-log.json \
+            data/site-coverage.json 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No staged persistent changes."
