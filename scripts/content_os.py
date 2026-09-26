@@ -498,7 +498,7 @@ Search Console信号: {json.dumps(candidate.get("gsc") or {}, ensure_ascii=False
 canonical: {current_canonical}
 優先一次情報: {source_names}
 
-あなたは本文だけでなくページSEO全体を判断できます。
+あなたは本文とSEO文言を判断します。ただし実装上、あなたが直接変更するのはarticle_htmlとSEO文言です。
 必要なら title、meta description、OGP文言、H1、見出し構成、本文、FAQ、内部リンク、画像alt、アイキャッチ画像を更新してください。
 ただし canonicalのURLパスは変えないでください。URL変更・301統合が必要と判断した場合は今回は実行せず change_summary に提案として記録してください。
 
@@ -515,7 +515,8 @@ canonical: {current_canonical}
 - 内部リンクは下記サイト内在庫から本当に関連するものだけ選ぶ。
 - 画像は、既存画像が内容に合っているなら keep。読者理解やCTRに明確な改善が見込める時だけ generate。
 - 画像に文字を焼き込まない。誤解を招くBefore/Afterや架空の人物・事業者・証拠写真風表現は避ける。
-- article_html内にscriptタグやJSON-LDを入れない。canonical、OG URL、構造化データはシステム側で最終URLへ同期する。
+- article_html内にscriptタグやJSON-LDを入れない。canonical、OG/Twitter URL・構造化データ・headメタはシステム側で最終URLへ同期する。
+- ヘッダーやフッター等article外を変更したとchange_summaryやdecision_reasonで申告しない。article外はシステム管理領域。
 - 内部リンクは可能な限りリダイレクト元の.htmlではなく、最終到達する拡張子なしURLを使う。
 
 現在のサイト構造・地域カバレッジ:
@@ -597,25 +598,283 @@ def validate_editor_output(candidate: dict, data: dict) -> None:
             raise RuntimeError("existing canonical points to a different content path; refusing autonomous edit")
 
 
+
+MANAGED_SCHEMA_TYPES = {"Article", "BlogPosting", "NewsArticle", "BreadcrumbList"}
+
+
+def _schema_types(obj: dict) -> set[str]:
+    typ = obj.get("@type")
+    if isinstance(typ, list):
+        return {str(x) for x in typ}
+    if typ is None:
+        return set()
+    return {str(typ)}
+
+
+def _find_first_article_schema(obj):
+    if isinstance(obj, dict):
+        if _schema_types(obj) & {"Article", "BlogPosting", "NewsArticle"}:
+            return obj
+        if isinstance(obj.get("@graph"), list):
+            for child in obj["@graph"]:
+                found = _find_first_article_schema(child)
+                if found:
+                    return found
+        for key, value in obj.items():
+            if key == "@graph":
+                continue
+            found = _find_first_article_schema(value)
+            if found:
+                return found
+    elif isinstance(obj, list):
+        for value in obj:
+            found = _find_first_article_schema(value)
+            if found:
+                return found
+    return None
+
+
+def extract_existing_schema_meta(html: str) -> dict:
+    out = {"datePublished": None, "image": None}
+    for match in JSONLD_RE.finditer(html):
+        try:
+            data = json.loads(match.group(2).strip())
+        except Exception:
+            continue
+        article = _find_first_article_schema(data)
+        if not article:
+            continue
+        if not out["datePublished"] and article.get("datePublished"):
+            out["datePublished"] = article.get("datePublished")
+        if not out["image"] and article.get("image"):
+            image = article.get("image")
+            if isinstance(image, list) and image:
+                image = image[0]
+            if isinstance(image, dict):
+                image = image.get("url")
+            if isinstance(image, str):
+                out["image"] = image
+    return out
+
+
+def _prune_managed_schema(obj):
+    if isinstance(obj, dict):
+        if _schema_types(obj) & MANAGED_SCHEMA_TYPES:
+            return None
+
+        if isinstance(obj.get("@graph"), list):
+            graph = []
+            for child in obj["@graph"]:
+                kept = _prune_managed_schema(child)
+                if kept is not None:
+                    graph.append(kept)
+            obj = dict(obj)
+            if graph:
+                obj["@graph"] = graph
+            else:
+                obj.pop("@graph", None)
+
+        # Preserve unrelated schemas such as FAQPage, but recursively clean
+        # any managed Article/Breadcrumb nodes nested within them.
+        cleaned = {}
+        for key, value in obj.items():
+            if key == "@graph":
+                cleaned[key] = value
+                continue
+            kept = _prune_managed_schema(value)
+            if kept is not None:
+                cleaned[key] = kept
+        if set(cleaned.keys()) <= {"@context"}:
+            return None
+        return cleaned
+
+    if isinstance(obj, list):
+        values = []
+        for value in obj:
+            kept = _prune_managed_schema(value)
+            if kept is not None:
+                values.append(kept)
+        return values or None
+
+    return obj
+
+
+def remove_managed_schema(html: str) -> str:
+    def repl(match: re.Match) -> str:
+        try:
+            data = json.loads(match.group(2).strip())
+        except Exception:
+            return match.group(0)
+        kept = _prune_managed_schema(data)
+        if kept is None:
+            return ""
+        return (
+            match.group(1)
+            + "\n"
+            + json.dumps(kept, ensure_ascii=False, indent=2)
+            + "\n"
+            + match.group(3)
+        )
+
+    return JSONLD_RE.sub(repl, html)
+
+
+def _absolute_image_url(src: str | None) -> str | None:
+    if not src:
+        return None
+    src = str(src).strip()
+    if not src:
+        return None
+    if src.startswith("http://") or src.startswith("https://"):
+        return src
+    if src.startswith("/"):
+        return CONFIG["site_url"].rstrip("/") + src
+    return CONFIG["site_url"].rstrip("/") + "/" + src.lstrip("/")
+
+
+def article_image_url(html: str, fallback: str | None = None) -> str:
+    og = re.search(
+        r'<meta\b(?=[^>]*property=["\']og:image["\'])[^>]*content=["\']([^"\']+)',
+        html,
+        re.I,
+    )
+    if og:
+        return _absolute_image_url(og.group(1)) or CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
+
+    article_match = ARTICLE_RE.search(html)
+    if article_match:
+        img = SRC_RE.search(article_match.group(1))
+        if img:
+            return _absolute_image_url(img.group(1)) or CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
+
+    return _absolute_image_url(fallback) or CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
+
+
+def category_info_for_path(path: str) -> tuple[str, str]:
+    slug = category_slug_from_path(path)
+    label = CONFIG.get("new_article_categories", {}).get(slug, "ブログ")
+    url = f"/blog/{slug}/" if slug in CONFIG.get("new_article_categories", {}) else "/blog/"
+    return label, url
+
+
+def normalize_managed_metadata(
+    html: str,
+    *,
+    path: str,
+    title: str,
+    description: str,
+    image_url: str | None = None,
+) -> str:
+    canonical = canonical_url_for(path)
+    h1_match = H1_RE.search(html)
+    headline = visible(h1_match.group(1)) if h1_match else clean_article_title(title)
+    existing = extract_existing_schema_meta(html)
+
+    published = existing.get("datePublished")
+    if not published:
+        date_match = re.search(
+            r'<time\b[^>]*datetime=["\']([^"\']+)["\']',
+            html,
+            re.I,
+        )
+        published = date_match.group(1) if date_match else None
+    if not published:
+        published = datetime.now(ZoneInfo(CONFIG["timezone"])).date().isoformat()
+
+    now_jst = datetime.now(ZoneInfo(CONFIG["timezone"])).replace(microsecond=0).isoformat()
+    final_image = image_url or article_image_url(html, existing.get("image"))
+
+    html = replace_title(html, title)
+    html = replace_meta(html, name="description", content=description)
+    html = replace_meta(html, prop="og:title", content=title)
+    html = replace_meta(html, prop="og:description", content=description)
+    html = replace_meta(html, prop="og:url", content=canonical)
+    html = replace_meta(html, prop="og:image", content=final_image)
+    html = replace_meta(html, name="twitter:card", content="summary_large_image")
+    html = replace_meta(html, name="twitter:title", content=title)
+    html = replace_meta(html, name="twitter:description", content=description)
+    html = replace_meta(html, name="twitter:image", content=final_image)
+    html = replace_canonical(html, canonical)
+
+    html = remove_managed_schema(html)
+
+    category_label, category_url = category_info_for_path(path)
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Article",
+                "@id": canonical + "#article",
+                "headline": headline,
+                "description": description,
+                "image": final_image,
+                "datePublished": published,
+                "dateModified": now_jst,
+                "author": {
+                    "@type": "Organization",
+                    "name": "福岡遺品整理ガイド編集部",
+                    "url": CONFIG["site_url"].rstrip("/") + "/about",
+                },
+                "mainEntityOfPage": canonical,
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "ホーム",
+                        "item": CONFIG["site_url"].rstrip("/") + "/",
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "ブログ",
+                        "item": CONFIG["site_url"].rstrip("/") + "/blog/",
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": category_label,
+                        "item": CONFIG["site_url"].rstrip("/") + category_url,
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": headline,
+                        "item": canonical,
+                    },
+                ],
+            },
+        ],
+    }
+    tag = (
+        '<script type="application/ld+json">\n'
+        + json.dumps(graph, ensure_ascii=False, indent=2)
+        + '\n</script>'
+    )
+    html = html.replace("</head>", "  " + tag + "\n</head>", 1)
+    return html
+
+
 def build_proposed_html(candidate: dict, data: dict) -> str:
     original = data["_original_html"]
     article_match = ARTICLE_RE.search(original)
     if not article_match:
         raise RuntimeError("article-content not found while applying")
+
     seo = data["seo"]
     title = str(seo["title"]).strip()
     description = str(seo["description"]).strip()
     article_html = sanitize_article_html(str(data["article_html"]))
+
     out = original[:article_match.start(1)] + article_html + original[article_match.end(1):]
-    canonical = canonical_url_for(candidate["path"])
-    out = replace_title(out, title)
-    out = replace_meta(out, name="description", content=description)
-    out = replace_meta(out, prop="og:title", content=str(seo.get("og_title") or title))
-    out = replace_meta(out, prop="og:description", content=str(seo.get("og_description") or description))
-    out = replace_meta(out, prop="og:url", content=canonical)
-    out = replace_meta(out, name="twitter:card", content="summary_large_image")
-    out = replace_canonical(out, canonical)
-    out = sync_structured_data(out, title, description, None)
+    out = normalize_managed_metadata(
+        out,
+        path=candidate["path"],
+        title=title,
+        description=description,
+    )
     return out
 
 
@@ -636,6 +895,7 @@ def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -
 - HTML構造を壊していないこと
 
 必ずweb検索で重要な法律・制度・自治体情報を再確認してください。
+なおcanonical、OG/Twitterメタ、Article/Breadcrumb構造化データはEditorではなくシステムが最終HTMLで正規化します。Editorの申告ではなく、提示されたNEW HTMLそのものを判定してください。
 次のいずれかがあれば reject:
 - 出典で確認できない数字や断定
 - 架空の口コミ、業者、実績、専門家、体験談
@@ -1574,7 +1834,13 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     proposed, image_path = generate_image_if_needed(candidate, data, proposed)
     seo = data["seo"]
     image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path if image_path else CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
-    proposed = sync_structured_data(proposed, seo["title"], seo["description"], image_url)
+    proposed = normalize_managed_metadata(
+        proposed,
+        path=candidate["path"],
+        title=seo["title"],
+        description=seo["description"],
+        image_url=image_url,
+    )
 
     dest = ROOT / path
     dest.parent.mkdir(parents=True, exist_ok=True)
