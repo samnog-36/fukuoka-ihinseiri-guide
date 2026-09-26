@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T08:47:23.634317+00:00",
+  "generated_at": "2026-09-26T08:54:05.651817+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -76,7 +76,7 @@
       },
       {
         "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-        "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】"
+        "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】"
       }
     ],
     "cost": [
@@ -536,7 +536,7 @@
         },
         {
           "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-          "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+          "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】",
           "source": "title"
         }
       ],
@@ -649,7 +649,7 @@
         },
         {
           "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-          "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+          "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】",
           "source": "title"
         }
       ],
@@ -781,7 +781,7 @@
         },
         {
           "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-          "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+          "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】",
           "source": "title"
         }
       ]
@@ -797,7 +797,7 @@
         },
         {
           "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-          "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+          "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】",
           "source": "title"
         }
       ]
@@ -968,11 +968,6 @@
       "title_similarity": 0.725
     },
     {
-      "a": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
-      "b": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
-      "title_similarity": 0.711
-    },
-    {
       "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
       "b": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
       "title_similarity": 0.705
@@ -1110,6 +1105,324 @@
       "title": "特殊清掃現場の害虫駆除｜ウジ虫・ハエが発生する原因と専門業者の対処法【2026年版】"
     }
   ],
+  "link_health": {
+    "html_files_scanned": 139,
+    "active_articles": 80,
+    "orphan_articles": [],
+    "orphan_count": 0,
+    "broken_internal_links": [
+      {
+        "source": "samadminsetup/index.html",
+        "href": "/samadminsetup/api/export"
+      },
+      {
+        "source": "blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html",
+        "href": "/blog/cost/article-20260706-ihinseiri-souba.html"
+      },
+      {
+        "source": "blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html",
+        "href": "/blog/cost/article-20260713-mitsumori-hikaku-point.html"
+      },
+      {
+        "source": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+        "href": "/blog/area/article-20260706-fukuoka-shi-ku-betsu.html"
+      },
+      {
+        "source": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+        "href": "/blog/area/article-20260713-kitakyushu-ihinseiri.html"
+      },
+      {
+        "source": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+        "href": "/blog/area/article-20260720-chikuhou-ihinseiri.html"
+      },
+      {
+        "source": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+        "href": "/blog/area/article-20260719-kitakyushu-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+        "href": "/blog/area/article-20260719-kurume-ogori-tosu.html"
+      },
+      {
+        "source": "blog/seizenseiri/article-20260803-jikka-kataduke-settoku.html",
+        "href": "/blog/seizenseiri/article-20260706-danshari-kotsu.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou.html",
+        "href": "/blog/kuyo/article-20260706-otakiage-fukuoka.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html",
+        "href": "/blog/search.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html",
+        "href": "/business/"
+      },
+      {
+        "source": "blog/kuyo/article-20260809-49nichi-houyo-kuyo.html",
+        "href": "/blog/search.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260809-49nichi-houyo-kuyo.html",
+        "href": "/business/"
+      }
+    ],
+    "broken_internal_link_count": 14,
+    "redirecting_internal_links": [
+      {
+        "source": "guide/kuyo.html",
+        "href": "/blog/kuyo/article-20260712-butsudan-shobun-houhou.html",
+        "final": "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-1k-cost.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-1k-cost.html",
+        "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-1k-cost.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-1k-cost.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-cost-saving-tips.html",
+        "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-cost-saving-tips.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-cost-saving-tips.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-mitsumori-hikaku.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-mitsumori-hikaku.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/cost/article-20260706-mitsumori-hikaku.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260709-kuruma-shobun-hiyo.html",
+        "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260709-kuruma-shobun-hiyo.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260707-cost-yasuku-suru.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/cost/article-20260707-cost-yasuku-suru.html",
+        "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260707-cost-yasuku-suru.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
+        "href": "/blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260708-souzokuzei-koujo.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/cost/article-20260708-souzokuzei-koujo.html",
+        "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/cost/article-20260708-souzokuzei-koujo.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260707-chintai-taijo.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260707-chintai-taijo.html",
+        "href": "/blog/ihinseiri/article-20260719-souzoku-houki-ihinseiri.html",
+        "final": "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260707-chintai-taijo.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
+        "href": "/blog/ihinseiri/article-20260707-chintai-taijo.html",
+        "final": "/blog/ihinseiri/article-20260803-chintai-ihinseiri.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-mitsumori-point.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-mitsumori-point.html",
+        "href": "/blog/ihinseiri/article-20260719-souzoku-houki-ihinseiri.html",
+        "final": "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-mitsumori-point.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260708-itsu-kara.html",
+        "href": "/blog/ihinseiri/article-20260707-chintai-taijo.html",
+        "final": "/blog/ihinseiri/article-20260803-chintai-ihinseiri.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260708-itsu-kara.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+        "href": "/blog/ihinseiri/article-20260706-mitsumori-point.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
+        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/area/article-20260708-hakata-ku-guide.html",
+        "href": "/blog/area/article-20260707-higashi-ku-guide.html",
+        "final": "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html"
+      },
+      {
+        "source": "blog/area/article-20260708-hakata-ku-guide.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260708-hakata-ku-guide.html",
+        "href": "/blog/area/article-20260706-kurume.html",
+        "final": "/blog/area/article-20260713-kurume-ogori-tosu.html"
+      },
+      {
+        "source": "blog/area/article-20260708-hakata-ku-guide.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260708-hakata-ku-guide.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260706-minami-ku.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260706-minami-ku.html",
+        "href": "/blog/area/article-20260706-kurume.html",
+        "final": "/blog/area/article-20260713-kurume-ogori-tosu.html"
+      },
+      {
+        "source": "blog/area/article-20260706-minami-ku.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/area/article-20260706-minami-ku.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260707-higashi-ku-guide.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260707-higashi-ku-guide.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260707-higashi-ku-guide.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260706-kurume.html",
+        "href": "/blog/area/article-20260706-minami-ku.html",
+        "final": "/blog/area/article-20260719-minami-jonan-ku-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260706-kurume.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
+      },
+      {
+        "source": "blog/area/article-20260706-kurume.html",
+        "href": "/blog/cost/article-20260706-cost-saving-tips.html",
+        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      }
+    ],
+    "redirecting_internal_link_count": 92
+  },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
     "地域別は未カバー地域を優先し、同一地域の重複記事は原則増やさない",
