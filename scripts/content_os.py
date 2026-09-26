@@ -148,6 +148,10 @@ def extract_area_tags() -> list[str]:
     return sorted({visible(x) for x in tags if visible(x)})
 
 
+def clean_article_title(title: str) -> str:
+    return re.sub(r"\s*[｜|]\s*福岡遺品整理ガイド.*$", "", title).strip()
+
+
 def build_site_coverage(rows: list[dict]) -> dict:
     by_category: dict[str, list[dict]] = {}
     for row in rows:
@@ -159,9 +163,9 @@ def build_site_coverage(rows: list[dict]) -> dict:
     area_coverage = []
     for area in area_tags:
         matches = [
-            {"path": r["path"], "title": r["title"]}
+            {"path": r["path"], "title": clean_article_title(r["title"])}
             for r in area_rows
-            if area in r["title"] or area.replace("市", "") in r["title"]
+            if area in clean_article_title(r["title"])
         ]
         area_coverage.append({
             "area": area,
@@ -171,12 +175,19 @@ def build_site_coverage(rows: list[dict]) -> dict:
         })
 
     kyushu = {}
+    pref_terms = CONFIG.get("kyushu_prefecture_terms", {})
     for pref in CONFIG.get("kyushu_prefectures", []):
-        short = pref.removesuffix("県")
-        matches = [
-            {"path": r["path"], "title": r["title"], "category": category_slug_from_path(r["path"])}
-            for r in rows if pref in r["title"] or short in r["title"]
-        ]
+        terms = pref_terms.get(pref, [pref])
+        matches = []
+        for r in rows:
+            title = clean_article_title(r["title"])
+            if any(term in title for term in terms):
+                matches.append({
+                    "path": r["path"],
+                    "title": title,
+                    "category": category_slug_from_path(r["path"]),
+                    "matched_terms": [term for term in terms if term in title][:5],
+                })
         kyushu[pref] = {
             "article_count": len(matches),
             "articles": matches[:12],
@@ -640,7 +651,7 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 選定ルール:
 - まず既存サイト構造の「穴」を埋める。すでに強いクラスターへ似た記事を増やさない。
 - areaカテゴリでは fukuoka_area_gaps と既存地域記事の重複を必ず確認する。
-- 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。
+- 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。\n- 福岡県外は地名差替え型の個別市記事を量産せず、九州比較・制度差・遠方実家整理など福岡の読者にも意味がある広域テーマを優先する
 - duplicate_title_hints に近いテーマは新規記事化せず、既存記事統合・改善を優先する。
 - 同じ市を複数記事で扱う場合は、検索意図が明確に違う場合だけ許可する。
 - 「費用」「業者選び」など全地域共通の一般論を地域名だけ変えて量産しない。
