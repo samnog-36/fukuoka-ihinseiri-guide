@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T04:25:17.079696+00:00",
+  "generated_at": "2026-09-26T06:04:21.071847+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -482,13 +482,8 @@
     },
     {
       "area": "大牟田市",
-      "article_count": 2,
+      "article_count": 1,
       "articles": [
-        {
-          "path": "/blog/area/",
-          "title": "/blog/area/",
-          "source": "area_hub_mapping"
-        },
         {
           "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
           "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】",
@@ -694,13 +689,8 @@
     },
     {
       "area": "飯塚市",
-      "article_count": 2,
+      "article_count": 1,
       "articles": [
-        {
-          "path": "/blog/area/",
-          "title": "/blog/area/",
-          "source": "area_hub_mapping"
-        },
         {
           "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
           "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】",
@@ -761,22 +751,6 @@
       ]
     },
     {
-      "area": "大牟田市",
-      "article_count": 2,
-      "articles": [
-        {
-          "path": "/blog/area/",
-          "title": "/blog/area/",
-          "source": "area_hub_mapping"
-        },
-        {
-          "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
-          "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】",
-          "source": "title"
-        }
-      ]
-    },
-    {
       "area": "大野城市",
       "article_count": 2,
       "articles": [
@@ -820,22 +794,6 @@
         {
           "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
           "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
-          "source": "title"
-        }
-      ]
-    },
-    {
-      "area": "飯塚市",
-      "article_count": 2,
-      "articles": [
-        {
-          "path": "/blog/area/",
-          "title": "/blog/area/",
-          "source": "area_hub_mapping"
-        },
-        {
-          "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
-          "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】",
           "source": "title"
         }
       ]

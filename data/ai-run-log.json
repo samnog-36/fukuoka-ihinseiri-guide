@@ -1,5 +1,1363 @@
 [
   {
+    "timestamp": "2026-09-26T06:09:14.850831+00:00",
+    "started_at": "2026-09-26T06:04:20Z",
+    "finished_at": "2026-09-26T06:09:14.850831+00:00",
+    "run_id": "36222635105",
+    "trigger": "push",
+    "mode": "improve",
+    "status": "gate_failed",
+    "outcome": "品質Gateで公開停止",
+    "outcome_reason": "品質・AdSense・HTML Gateに不合格。公開変更は破棄",
+    "candidate": {
+      "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+      "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+      "priority_score": 30,
+      "quality": 85,
+      "gsc": null,
+      "selection_reasons": [
+        "記事品質スコアが 85/100 で改善余地あり"
+      ]
+    },
+    "editor": {
+      "status": "done",
+      "decision_reason": "Reviewerの4件の指摘をすべて即時反映しました。第一に、旧料金を含む兄弟記事への内部リンクを本文・関連記事の両方から外し、読者を矛盾した案内へ誘導しないようにしました。第二に、宗像市の自己搬入情報は旧PDFではなく、現在も公開されている宗像清掃工場（ECOパーク宗像）の施設案内と市公式の自己搬入案内へ変更しました。第三に、公式情報一覧へ本文の重要根拠である糸島市個人搬入、宗像清掃工場、古賀市直接搬入を追加しました。第四に、代理搬入の扱いを市別にFAQへ明記し、宗像市では他人に代わる搬入ができない点を明確にしました。既存案で評価されていた自治体別の実務情報、数値根拠を伴う記述、業者選定の注意、SEO上の主題整合性、CTA・編集情報・参照欄の構造は維持しています。",
+      "changes": [
+        "旧料金が残る兄弟記事「糸島市・福津市・宗像市の遺品整理ガイド」への本文内リンクと関連記事リンクを削除し、本記事から矛盾した自治体料金案内へ誘導しない構成に変更しました。",
+        "宗像市の自己搬入出典を旧PDFから、現行の宗像清掃工場（ECOパーク宗像）施設案内および市公式の自己搬入案内へ差し替えました。",
+        "「制度・公式情報の確認先」に、糸島市クリーンセンターの個人搬入・本人確認、古賀市の直接搬入、宗像清掃工場の現行施設案内と自己搬入案内を追加しました。",
+        "市外在住者の搬入に関するFAQを市別に明確化し、糸島市は親族代理搬入可、宗像市は他人に代わる搬入不可、古賀市不燃物埋立地は代理搬入時に発生場所住所を確認できる公的書類が必要と記載しました。",
+        "既存の自治体別手続き、料金、家電リサイクル、許可・委託に関する注意、CTA、編集情報、公式情報欄の主要構造は維持しました。"
+      ],
+      "sources": [
+        {
+          "name": "糸島市｜粗大ごみの出し方、収集日",
+          "url": "https://www.city.itoshima.lg.jp/s011/010/020/020/040/20210319110344.html"
+        },
+        {
+          "name": "糸島市｜クリーンセンター個人搬入の受付・料金",
+          "url": "https://www.city.itoshima.lg.jp/s052/010/020/020/060/030/kozinhannyu.html"
+        },
+        {
+          "name": "糸島市｜クリーンセンターへのごみ個人搬入時の本人確認について",
+          "url": "https://www.city.itoshima.lg.jp/s052/010/020/030/0315/20210118092131.html"
+        },
+        {
+          "name": "宗像市｜粗大ごみの申込方法",
+          "url": "https://www.city.munakata.lg.jp/kiji0031562/index.html"
+        },
+        {
+          "name": "宗像市｜宗像清掃工場（ECOパーク宗像）",
+          "url": "https://www.city.munakata.lg.jp/dynamic/info/pub/detail.aspx?c_id=83&id=3"
+        },
+        {
+          "name": "宗像市｜分別ごみ（資源ごみ・不燃ごみ）の出し方［資源物受入施設］",
+          "url": "https://www.city.munakata.lg.jp/kiji0031560/index.html"
+        },
+        {
+          "name": "古賀市｜粗大ごみ",
+          "url": "https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/003.php"
+        },
+        {
+          "name": "古賀市｜ごみの直接搬入",
+          "url": "https://www.city.koga.fukuoka.jp/cityhall/work/kankyo/gomi/gomi001/006.php"
+        },
+        {
+          "name": "環境省｜家電リサイクル法",
+          "url": "https://www.env.go.jp/recycle/kaden.html"
+        },
+        {
+          "name": "国民生活センター｜不用品回収サービスのトラブルに関する注意喚起",
+          "url": "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+        }
+      ],
+      "internal_links": [
+        "/blog/cost/article-20260714-kaden-recycle-shobun",
+        "/blog/cost/article-20260803-mitsumorisho-mikata",
+        "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+        "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+        "/blog/ihinseiri/article-20260706-trouble-avoid",
+        "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+        "/blog/ihinseiri/article-20260806-shashin-album-seiri-houhou",
+        "/area/"
+      ],
+      "image_action": "keep",
+      "title_after": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・費用の考え方【2026年版】"
+    },
+    "reviewer": {
+      "status": "approved",
+      "approve": true,
+      "score": 92,
+      "threshold": 88,
+      "issues": [
+        "糸島市の説明にある「住所ではなく行政区によって収集の案内が分かれる」は表現が不正確です。所在地住所から該当行政区と担当業者を確認する趣旨なので、「所在地の行政区によって担当業者・収集日が異なる」と直す方が明確です。",
+        "宗像市の「他人に代わって搬入することはできません」という重要条件は現行のECOパーク宗像公式案内で確認できますが、記事の参照一覧にはその直接ページがありません。宗像清掃工場公式の「ごみの自己搬入」ページを追加すると根拠追跡性が高まります。",
+        "費用欄の「糸島市では物置・倉庫、宗像市では集合住宅、古賀市では戸建てと集合住宅」という市別の振り分けは、統計的根拠が示されず地域名を当てはめた印象があります。「各市とも住宅ごとに物置、搬出経路、階段等を確認する」と一般化した方が自然です。",
+        "内部リンク先の「一軒家の遺品整理費用相場」には、固定相場、福岡県と東京都の価格差、業者数など根拠が明示されていない数値が残っています。本記事自体の事実誤認ではありませんが、サイト全体の信頼性とAdSense品質の観点からリンク先の再審査を推奨します。"
+      ],
+      "strengths": [
+        "旧ページにあった高齢化率、地域需要、費用相場などの根拠不明な数字・断定を削除し、自治体手続き中心の実用的な記事へ改善されています。",
+        "糸島市の自己搬入料金147.4円／10kg、宗像市の粗大ごみシール530円と自己搬入170円／10kg、古賀市の粗大ごみシール523円と午前7時までの排出は、各公式案内と一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/020/060/030/kozinhannyu.html))",
+        "糸島市の親族による代理搬入、宗像市の本人搬入原則、古賀市不燃物埋立地の代理搬入時の書類要件も公式情報で確認できます。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/030/0315/20210118092131.html))",
+        "一般家庭の廃棄物収集運搬には一般廃棄物処理業の許可または自治体からの委託が必要という説明は、国民生活センターの注意喚起と整合しています。([kokusen.go.jp](https://www.kokusen.go.jp/news/data/n-20221102_1.html))",
+        "title、meta description、H1、本文はいずれも「3市の粗大ごみ・自己搬入と費用判断」という検索意図で一致しています。",
+        "CTAは記事末尾の1か所に抑えられ、問い合わせを強要する表現や過剰な広告誘導はありません。",
+        "パンくず、目次、section、見出し、aside、参照情報欄のHTMLは閉じタグを含めて成立しており、重大な構造破損は見当たりません。",
+        "旧ページより自治体別の具体的手順、仕分け順、見積もり確認項目、許可確認、FAQが増えており、読者価値は明確に向上しています。"
+      ],
+      "seo_assessment": "良好です。titleは主要3地域と「遺品整理」「粗大ごみ」「費用」を自然に含み、meta description、H1、本文内容との不一致もありません。同一URLで扱う主題も旧記事の地域別遺品整理から大きく逸脱しておらず、canonical変更を必須とする別意図への転換ではありません。内部リンクの文脈も概ね適切ですが、リンク先記事自体の品質監査は必要です。",
+      "factual_assessment": "主要な自治体料金、申込方法、排出時刻、本人確認、代理搬入、家電4品目、一般廃棄物収集運搬の許可・委託に関する記述は、2026年9月26日時点の自治体・施設運営者・公的機関情報と概ね一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s011/010/020/020/040/20210319110344.html)) 根拠不明の固定費用相場や架空の口コミ・業者・実績・専門家・体験談はNEW HTML内に見当たりません。軽微な表現修正と宗像市自己搬入の直接出典追加は望まれますが、公開を拒否すべき重大な誤りではありません。"
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "最新の検索パフォーマンスを取得して候補選定に使用"
+      },
+      {
+        "key": "research",
+        "label": "サイト棚卸し＋Webリサーチ",
+        "status": "done",
+        "detail": "新規候補「相続放棄するなら遺品整理はしていい？処分で単純承認を避けるための確認手順【福岡】」を機会スコア 89 点で発見"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】 を優先度 30 で選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "done",
+        "detail": "Reviewerの4件の指摘をすべて即時反映しました。第一に、旧料金を含む兄弟記事への内部リンクを本文・関連記事の両方から外し、読者を矛盾した案内へ誘導しないようにしました。第二に、宗像市の自己搬入情報は旧PDFではなく、現在も公開されている宗像清掃工場（ECOパーク宗像）の施設案内と市公式の自己搬入案内へ変更しました。第三に、公式情報一覧へ本文の重要根拠である糸島市個人搬入、宗像清掃工場、古賀市直接搬入を追加しました。第四に、代理搬入の扱いを市別にFAQへ明記し、宗像市では他人に代わる搬入ができない点を明確にしました。既存案で評価されていた自治体別の実務情報、数値根拠を伴う記述、業者選定の注意、SEO上の主題整合性、CTA・編集情報・参照欄の構造は維持しています。"
+      },
+      {
+        "key": "revision_1",
+        "label": "Reviewer指摘で再修正 1",
+        "status": "done",
+        "detail": "前回指摘を反映して再編集 → Reviewer 92点"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "done",
+        "detail": "92点 / 公開基準 88点"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "error",
+        "detail": "品質・AdSense・HTML Gateに不合格。公開変更は破棄"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "品質Gate不合格のため公開なし"
+      }
+    ],
+    "published": false,
+    "image_generated": false,
+    "image_path": null,
+    "error": null,
+    "research": {
+      "create": true,
+      "opportunity_score": 89,
+      "category_slug": "ihinseiri",
+      "slug": "souzokuhouki-ihinseiri-shobun-tanjunshonin",
+      "title": "相続放棄するなら遺品整理はしていい？処分で単純承認を避けるための確認手順【福岡】",
+      "search_intent": "故人に借金があるか分からず相続放棄を検討している人が、遺品の片付け・持ち出し・売却・廃棄をどこまでしてよいか、家庭裁判所への申述までに何を優先すべきかを知りたい。",
+      "why_now": "死亡直後は賃貸退去、遠方の実家の管理、近隣対応などを理由に片付けを急ぎがちです。しかし相続放棄は原則として相続開始を知ってから3か月以内の家庭裁判所への申述が必要であり、相続財産の処分は法定単純承認につながり得ます。遺品整理の実務と相続手続を切り離さず、最初に確認すべき判断順を示す必要があります。",
+      "missing_value": "既存サイトには遠方の遺品整理、賃貸退去、貴重品探索、親族間トラブル、費用負担の記事はありますが、「相続放棄」と「遺品の処分・管理行為」の境界を一次情報ベースで整理した記事がありません。片付けを急ぐ読者に対し、売却・譲渡・解約・廃棄を安易に進めず、財産目録化、写真記録、専門家相談、期間伸長申立ての検討へつなげる実務的価値があります。",
+      "primary_sources": [
+        {
+          "name": "e-Gov法令検索（民法第915条・第921条・第940条）",
+          "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+        },
+        {
+          "name": "裁判所｜相続の放棄の申述",
+          "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+        },
+        {
+          "name": "福岡家庭裁判所｜相続放棄・限定承認の有無についての照会",
+          "url": "https://www.courts.go.jp/fukuoka/saiban/souzoku/index.html"
+        },
+        {
+          "name": "環境省｜遺品整理に伴う一般廃棄物の適正処理に関する整理",
+          "url": "https://www.env.go.jp/content/000064653.pdf"
+        }
+      ],
+      "research_findings": [
+        "民法第921条は、相続人が相続財産の全部または一部を処分した場合、単純承認したものとみなす一方、保存行為および単なる管理行為は除外しています。個別の遺品の処分・売却・持ち出しがどちらに当たるかは事案ごとの判断が必要です。",
+        "相続放棄は、口頭で『相続しない』と伝えるだけでは成立せず、原則として自己のために相続開始があったことを知った時から3か月以内に、被相続人の最後の住所地を管轄する家庭裁判所へ申述します。",
+        "裁判所は、3か月以内に財産調査をしても承認・放棄を判断する資料が得られない場合、承認または放棄の期間伸長を申し立てられると案内しています。",
+        "相続放棄後も、放棄した者が相続財産を現に占有している場合には、次に相続財産を管理できる者へ引き渡すまで保存義務が問題となり得るため、『放棄したから直ちに何もしなくてよい』とは限りません。",
+        "環境省は、家庭で整理した遺品のうち廃棄する物を一般廃棄物として整理しており、敷地外への運搬は排出者による指定収集日への排出または一般廃棄物収集運搬許可業者への直接委託を基本としています。相続放棄の検討中は、そもそも誰が排出者・処分判断者となるかを先に確認する必要があります。",
+        "福岡家庭裁判所は相続放棄・限定承認の申述受理の有無を、利害関係人から書面で照会できる案内を公開しています。共同相続人や後順位相続人に関係する場面では、放棄済みかの確認導線として記事内で案内できます。"
+      ],
+      "target_queries": [
+        "相続放棄 遺品整理 していい",
+        "相続放棄 遺品 処分 単純承認",
+        "相続放棄前 家の片付け",
+        "相続放棄 ゴミ処分 どこまで",
+        "相続放棄 遺品 売却",
+        "相続放棄 福岡 家庭裁判所 3か月",
+        "相続放棄後 遺品 管理"
+      ],
+      "core_topic_terms": [
+        "相続放棄",
+        "法定単純承認",
+        "保存行為"
+      ],
+      "duplicate_risk": "low",
+      "decision_reason": "新規記事にします。既存タイトルに「相続放棄」「法定単純承認」「保存行為」を中心語とする記事はなく、費用・遠方整理・賃貸退去・親族トラブル記事とも検索意図が異なります。地名差し替えではなく、福岡家庭裁判所の手続案内と国の法令・環境省資料を接続し、遺品整理を始める前の重大な判断ミスを防ぐ独自テーマとして成立します。法律判断を断定せず、行為別に『即時処分を避けるべきもの』『記録・保全を優先するもの』『弁護士等へ個別確認すべきもの』を整理する構成に限定します。",
+      "site_coverage": {
+        "generated_at": "2026-09-26T06:04:22.227776+00:00",
+        "hubs": [
+          "area/index.html",
+          "cost/index.html",
+          "guide/index.html",
+          "guide/how-to-choose.html",
+          "guide/seizenseiri.html",
+          "guide/tokushu-seisou.html",
+          "guide/kuyo.html",
+          "blog/index.html",
+          "blog/ihinseiri/index.html",
+          "blog/tokushu-seisou/index.html",
+          "blog/seizenseiri/index.html",
+          "blog/kuyo/index.html",
+          "blog/cost/index.html",
+          "blog/area/index.html"
+        ],
+        "category_counts": {
+          "area": 13,
+          "cost": 12,
+          "ihinseiri": 13,
+          "kuyo": 15,
+          "seizenseiri": 17,
+          "tokushu-seisou": 9
+        },
+        "category_titles": {
+          "area": [
+            {
+              "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+              "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+              "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場"
+            },
+            {
+              "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+              "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+              "title": "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+              "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+              "title": "太宰府市・那珂川市の遺品整理ガイド｜粗大ごみ処分・費用相場・地域の特徴【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
+              "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】"
+            },
+            {
+              "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+              "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+              "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+              "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】"
+            },
+            {
+              "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+              "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】"
+            },
+            {
+              "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+              "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】"
+            },
+            {
+              "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+              "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】"
+            }
+          ],
+          "cost": [
+            {
+              "path": "blog/cost/article-20260706-1k-cost.html",
+              "title": "1K・ワンルームの遺品整理費用相場｜福岡の料金比較と注意点 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260707-cost-yasuku-suru.html",
+              "title": "遺品整理の費用を安くする7つの方法｜福岡の自治体サービスと節約術 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260709-kuruma-shobun-hiyo.html",
+              "title": "故人の車・バイクの処分方法と費用｜名義変更から廃車手続きまで福岡の窓口情報付き - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
+              "title": "遺品整理の追加料金トラブルを防ぐ！見積書の正しい見方と対策 | 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
+              "title": "遠方からの遺品整理の進め方｜立ち会いなしで依頼する方法と費用を解説【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
+              "title": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+              "title": "遺品整理の費用を安く抑える7つの方法｜見積もり比較のコツと注意点｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260719-ihinseiri-hiyo-darega-harau.html",
+              "title": "遺品整理費用は誰が払う？兄弟間の費用分担ルールと相続税控除の真実｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260722-ihinseiri-kakuteishinkoku-zeimu.html",
+              "title": "遺品整理の費用は確定申告で控除できる？税務処理のガイド｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
+              "title": "遺品整理の見積書の見方｜金額より先に確認したい9項目【福岡】"
+            },
+            {
+              "path": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
+              "title": "一軒家の遺品整理費用相場｜間取り別料金と見積もり比較のポイント【2026年版】"
+            },
+            {
+              "path": "blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku.html",
+              "title": "遺品整理の追加料金が発生するケースと防止策｜見積もり時に確認すべき5つのポイント【2026年版】"
+            }
+          ],
+          "ihinseiri": [
+            {
+              "path": "blog/ihinseiri/article-20260706-jibun-vs-gyousha.html",
+              "title": "遺品整理を自分でやる方法と業者に頼むべきケースの判断基準 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260706-trouble-avoid.html",
+              "title": "遺品整理の契約トラブルを避けるチェックリスト｜福岡で確認したい7項目"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
+              "title": "遺品整理はいつから始める？49日前後のベストタイミングと手続き期限を解説 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
+              "title": "遺品整理の形見分けガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+              "title": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260711-digital-ihin-smartphone.html",
+              "title": "デジタル遺品の整理方法｜故人のスマホ・PC・SNSアカウントの対処法【2026年最新】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri.html",
+              "title": "一人暮らしの親が亡くなった時の遺品整理｜遠方からの手順と業者活用法【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260713-kuruma-bike-shobun.html",
+              "title": "遺品整理で出てきた車・バイクの処分方法｜名義変更から廃車手続きまでガイド【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku.html",
+              "title": "賃貸物件の遺品整理と退去手続き｜原状回復の費用負担と期限を解説【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri.html",
+              "title": "空き家になった実家の遺品整理｜放置リスクと実家じまいの進め方【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260722-akutoku-gyousha-trouble.html",
+              "title": "遺品整理業者の悪徳トラブル事例と見分け方｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu.html",
+              "title": "遺品整理で親族間トラブルを防ぐ方法｜もめないための事前準備と法的知識【2026年版】"
+            },
+            {
+              "path": "blog/ihinseiri/article-20260806-shashin-album-seiri-houhou.html",
+              "title": "遺品整理で出てきた写真・アルバムの整理方法｜デジタル化・供養・処分の判断基準【2026年版】"
+            }
+          ],
+          "kuyo": [
+            {
+              "path": "blog/kuyo/article-20260706-suterarenai-taisho.html",
+              "title": "遺品で捨てられないものの対処法｜心の整理と供養の選択肢 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
+              "title": "人形・ぬいぐるみの供養方法｜福岡で依頼できる神社・お寺と料金まとめ - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260710-kamidana-shobun.html",
+              "title": "神棚の処分方法と費用相場｜福岡の神社でのお祓い・神上げ手順 | 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
+              "title": "位牌の処分方法と費用相場｜閉眼供養から永代供養まで正しい手順を解説｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260713-accessory-kikinzoku-kaitori.html",
+              "title": "遺品のアクセサリー・貴金属の買取と供養｜形見分けの判断基準と高く売るコツ【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260714-ningyo-nuigurumi-kuyo.html",
+              "title": "人形・ぬいぐるみの供養方法と費用｜捨てられない遺品を正しく手放す方法【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260715-omamori-ofuda-shobun.html",
+              "title": "御守り・お札の正しい処分方法｜返納先・どんど焼き・郵送対応までガイド【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260719-shashin-album-kuyo.html",
+              "title": "故人の写真・アルバムの整理と供養方法｜デジタル化から処分までガイド｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260722-otakiage-houhou-hiyo.html",
+              "title": "お焚き上げの方法と費用｜福岡で供養できる神社・寺院と郵送対応｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou.html",
+              "title": "遺品供養の方法と費用相場｜お焚き上げ・合同供養・個別供養の違いを解説【2026年版】"
+            },
+            {
+              "path": "blog/kuyo/article-20260804-jitaku-kuyo-houhou.html",
+              "title": "遺品供養を自宅でする方法｜お清め塩・読経・お焚き上げの手順と費用【2026年版】"
+            },
+            {
+              "path": "blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html",
+              "title": "仏壇の処分方法と供養の手順｜罰当たりにならない正しいやり方と費用【2026年版】"
+            },
+            {
+              "path": "blog/kuyo/article-20260806-shashin-tegami-omoide-kuyo.html",
+              "title": "故人の写真・手紙・思い出の品の供養方法｜捨てられない遺品との向き合い方【2026年版】"
+            },
+            {
+              "path": "blog/kuyo/article-20260809-49nichi-houyo-kuyo.html",
+              "title": "遺品整理は49日前にしてもいい？四十九日法要と供養の正しいタイミングを解説"
+            },
+            {
+              "path": "blog/kuyo/article-20260809-otakiage-ryoukin-hikaku.html",
+              "title": "お焚き上げの料金比較｜神社・寺院・郵送サービスの費用相場と選び方【2026年版】"
+            }
+          ],
+          "seizenseiri": [
+            {
+              "path": "blog/seizenseiri/article-20260706-digital-isan.html",
+              "title": "デジタル遺品の整理方法｜スマホ・SNS・サブスクの生前対策 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260706-yarukoto-list.html",
+              "title": "生前整理のやることリスト完全版｜70代から始める物・心・情報の整理 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260707-oya-seizenseiri.html",
+              "title": "親に生前整理を切り出す方法｜嫌がられない伝え方と福岡での進め方 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260708-50dai-hajimekata.html",
+              "title": "50代から始める生前整理と断捨離｜後悔しない進め方5ステップ - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260710-shashin-digital.html",
+              "title": "生前整理で写真・アルバムを整理する方法｜デジタル化のコツと福岡のサービス | 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260711-rouzen-seiri-60dai.html",
+              "title": "60代からの老前整理入門｜ミニマリストに学ぶ暮らしの軽量化と実践ステップ｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260712-oya-mono-suterarenai.html",
+              "title": "親が物を捨てられない時の生前整理｜説得のコツと家族で進める片付け術【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260713-danshari-hajimekata.html",
+              "title": "生前整理の断捨離｜始め方と挫折しないコツを年代別に解説【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260714-digital-shukatsu-hajimekata.html",
+              "title": "デジタル終活の始め方｜パスワード管理・SNS・サブスク整理のガイド【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260715-oya-seizenseiri-tetsudau.html",
+              "title": "親の生前整理を手伝う方法｜嫌がる親を説得するコツと家族の役割分担【2026年版】｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260718-50dai-60dai-danshari.html",
+              "title": "50代60代から始める断捨離と生前整理｜無理なく進める具体的な手順｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260719-digital-ending-note.html",
+              "title": "デジタルエンディングノートの作り方｜スマホ・クラウドで安全に残すガイド｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260722-kichouhin-list-hokan.html",
+              "title": "生前整理で見つけておくべき貴重品リストと保管場所｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260803-jikka-kataduke-settoku.html",
+              "title": "実家の片付けを親に切り出す方法｜説得のコツと生前整理の進め方【2026年版】"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260804-yarukoto-list-70dai.html",
+              "title": "生前整理やることリスト完全版｜70代からでも間に合う具体的な進め方【2026年版】"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260805-ending-note-kakikata-guide.html",
+              "title": "エンディングノートの書き方ガイド｜家族に伝えるべき10項目と保管方法【2026年版】"
+            },
+            {
+              "path": "blog/seizenseiri/article-20260806-juuyou-shorui-seiri-hokan.html",
+              "title": "生前整理で整理すべき重要書類一覧と保管方法｜保険証券・不動産・年金の管理術【2026年版】"
+            }
+          ],
+          "tokushu-seisou": [
+            {
+              "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
+              "title": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないためのガイド - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html",
+              "title": "孤独死を防ぐために家族ができる5つの対策｜福岡の見守りサービス紹介 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260706-reform-genjokaifuku.html",
+              "title": "特殊清掃後のリフォーム費用と原状回復の流れ｜福岡の事例 - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260707-tokushu-seisou-cost.html",
+              "title": "福岡で特殊清掃が必要になったら｜費用相場・作業内容・業者選びのガイド - 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260710-gomiyashiki-hiyo-gyousei.html",
+              "title": "ゴミ屋敷の片付け費用と行政代執行について解説 | 福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260718-kodokushi-hakken-taiou.html",
+              "title": "孤独死を発見したときの対応手順｜警察連絡から特殊清掃までの流れ｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260719-pet-tatougai-seisou.html",
+              "title": "ペット多頭飼育崩壊の特殊清掃｜費用相場・原状回復の流れ・行政支援を解説｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260722-gomiyashiki-gyousei-daishikkou.html",
+              "title": "ゴミ屋敷の行政代執行と特殊清掃｜福岡県の条例と対策｜福岡遺品整理ガイド"
+            },
+            {
+              "path": "blog/tokushu-seisou/article-20260803-tokushu-seisou-hoken.html",
+              "title": "特殊清掃の費用は保険で払える？火災保険・孤独死保険の適用条件と請求方法【2026年版】 | 福岡遺品整理ガイド"
+            }
+          ]
+        },
+        "fukuoka_area_tags": [
+          "中央区",
+          "久留米市",
+          "八幡東区",
+          "八幡西区",
+          "南区",
+          "博多区",
+          "城南区",
+          "大牟田市",
+          "大野城市",
+          "太宰府市",
+          "宗像市",
+          "小倉北区",
+          "小倉南区",
+          "戸畑区",
+          "早良区",
+          "春日市",
+          "東区",
+          "福津市",
+          "筑紫野市",
+          "糸島市",
+          "若松区",
+          "西区",
+          "門司区",
+          "飯塚市"
+        ],
+        "fukuoka_area_coverage": [
+          {
+            "area": "中央区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+                "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "久留米市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+                "title": "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "八幡東区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "八幡西区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "南区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+                "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "博多区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+                "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "城南区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+                "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "大牟田市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+                "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "大野城市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+                "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
+                "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "太宰府市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+                "title": "太宰府市・那珂川市の遺品整理ガイド｜粗大ごみ処分・費用相場・地域の特徴【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "宗像市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+                "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "小倉北区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "小倉南区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "戸畑区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "早良区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+                "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "春日市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+                "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "東区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+                "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "福津市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "筑紫野市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+                "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "糸島市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+                "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "若松区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "西区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+                "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "門司区",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ],
+            "status": "covered"
+          },
+          {
+            "area": "飯塚市",
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+                "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】",
+                "source": "title"
+              }
+            ],
+            "status": "covered"
+          }
+        ],
+        "fukuoka_area_gaps": [],
+        "fukuoka_area_duplicates": [
+          {
+            "area": "中央区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+                "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+                "source": "title"
+              }
+            ]
+          },
+          {
+            "area": "南区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+                "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "title"
+              }
+            ]
+          },
+          {
+            "area": "城南区",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+                "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場",
+                "source": "area_hub_mapping"
+              }
+            ]
+          },
+          {
+            "area": "大野城市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+                "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
+                "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】",
+                "source": "area_hub_mapping"
+              }
+            ]
+          },
+          {
+            "area": "宗像市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+                "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+                "source": "title"
+              }
+            ]
+          },
+          {
+            "area": "糸島市",
+            "article_count": 2,
+            "articles": [
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "source": "area_hub_mapping"
+              },
+              {
+                "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+                "title": "糸島市・宗像市・古賀市の遺品整理事情｜福岡市近郊エリアの費用相場と業者選び【2026年版】",
+                "source": "title"
+              }
+            ]
+          }
+        ],
+        "kyushu_prefecture_coverage": {
+          "福岡県": {
+            "article_count": 14,
+            "articles": [
+              {
+                "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+                "title": "福岡市西区・早良区の遺品整理ガイド｜費用相場・地域特性・業者選びのポイント - 福岡遺品整理ガイド",
+                "category": "area",
+                "matched_terms": [
+                  "福岡市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+                "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+                "category": "area",
+                "matched_terms": [
+                  "福岡市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+                "title": "糸島市・福津市・宗像市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "糸島市",
+                  "宗像市",
+                  "福津市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+                "title": "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "久留米市",
+                  "小郡市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+                "title": "北九州市の遺品整理ガイド｜各区の特徴・費用相場・粗大ごみ処分方法【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "北九州市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+                "title": "太宰府市・那珂川市の遺品整理ガイド｜粗大ごみ処分・費用相場・地域の特徴【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "太宰府市",
+                  "那珂川市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260718-kasuya-onojo-ihinseiri.html",
+                "title": "粕屋町・大野城市の遺品整理｜粗大ゴミ持ち込み方法・費用・業者選びまとめ【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "大野城市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+                "title": "福岡市南区・城南区の遺品整理ガイド｜粗大ごみ処分と地域の特徴・費用相場",
+                "category": "area",
+                "matched_terms": [
+                  "福岡市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+                "title": "筑紫野市・大野城市・春日市の遺品整理ガイド｜費用相場と業者選び",
+                "category": "area",
+                "matched_terms": [
+                  "筑紫野市",
+                  "春日市",
+                  "大野城市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+                "title": "飯塚市・田川市・直方市の遺品整理ガイド｜筑豊エリアの費用相場と業者の選び方【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "飯塚市",
+                  "田川市",
+                  "直方市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260804-omuta-yanagawa-miyama.html",
+                "title": "大牟田市・柳川市・みやま市の遺品整理事情｜地域特有の課題と業者選びのポイント【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "大牟田市",
+                  "柳川市",
+                  "みやま市"
+                ]
+              },
+              {
+                "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+                "title": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "福岡市"
+                ]
+              }
+            ],
+            "status": "covered"
+          },
+          "佐賀県": {
+            "article_count": 1,
+            "articles": [
+              {
+                "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+                "title": "久留米市・小郡市・鳥栖市の遺品整理ガイド｜地域の特徴と費用相場・業者の選び方【2026年版】",
+                "category": "area",
+                "matched_terms": [
+                  "鳥栖市"
+                ]
+              }
+            ],
+            "status": "covered"
+          },
+          "長崎県": {
+            "article_count": 0,
+            "articles": [],
+            "status": "gap"
+          },
+          "熊本県": {
+            "article_count": 0,
+            "articles": [],
+            "status": "gap"
+          },
+          "大分県": {
+            "article_count": 0,
+            "articles": [],
+            "status": "gap"
+          },
+          "宮崎県": {
+            "article_count": 0,
+            "articles": [],
+            "status": "gap"
+          },
+          "鹿児島県": {
+            "article_count": 0,
+            "articles": [],
+            "status": "gap"
+          }
+        },
+        "duplicate_title_hints": [
+          {
+            "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+            "b": "blog/area/article-20260713-kurume-ogori-tosu.html",
+            "title_similarity": 0.883
+          },
+          {
+            "a": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+            "b": "blog/seizenseiri/article-20260722-kichouhin-list-hokan.html",
+            "title_similarity": 0.725
+          },
+          {
+            "a": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+            "b": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
+            "title_similarity": 0.711
+          },
+          {
+            "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+            "b": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+            "title_similarity": 0.705
+          },
+          {
+            "a": "blog/area/article-20260713-kurume-ogori-tosu.html",
+            "b": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+            "title_similarity": 0.698
+          },
+          {
+            "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+            "b": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+            "title_similarity": 0.667
+          },
+          {
+            "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+            "b": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+            "title_similarity": 0.66
+          },
+          {
+            "a": "blog/area/article-20260713-kurume-ogori-tosu.html",
+            "b": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+            "title_similarity": 0.66
+          },
+          {
+            "a": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
+            "b": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+            "title_similarity": 0.66
+          },
+          {
+            "a": "blog/area/article-20260713-kurume-ogori-tosu.html",
+            "b": "blog/area/article-20260803-iizuka-tagawa-nogata.html",
+            "title_similarity": 0.653
+          },
+          {
+            "a": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+            "b": "blog/area/article-20260719-minami-jonan-ku-guide.html",
+            "title_similarity": 0.653
+          },
+          {
+            "a": "blog/cost/article-20260707-cost-yasuku-suru.html",
+            "b": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+            "title_similarity": 0.651
+          },
+          {
+            "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
+            "b": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+            "title_similarity": 0.648
+          },
+          {
+            "a": "blog/area/article-20260713-kurume-ogori-tosu.html",
+            "b": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
+            "title_similarity": 0.642
+          },
+          {
+            "a": "blog/ihinseiri/article-20260711-digital-ihin-smartphone.html",
+            "b": "blog/seizenseiri/article-20260706-digital-isan.html",
+            "title_similarity": 0.638
+          },
+          {
+            "a": "blog/seizenseiri/article-20260712-oya-mono-suterarenai.html",
+            "b": "blog/seizenseiri/article-20260715-oya-seizenseiri-tetsudau.html",
+            "title_similarity": 0.634
+          },
+          {
+            "a": "blog/cost/article-20260709-kuruma-shobun-hiyo.html",
+            "b": "blog/ihinseiri/article-20260713-kuruma-bike-shobun.html",
+            "title_similarity": 0.629
+          },
+          {
+            "a": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+            "b": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
+            "title_similarity": 0.622
+          }
+        ],
+        "strategy_rules": [
+          "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
+          "地域別は未カバー地域を優先し、同一地域の重複記事は原則増やさない",
+          "同じ検索意図が既存にあれば新規記事ではなく統合・改善を優先する",
+          "新規記事は全記事一覧・カテゴリ一覧・サイト内検索・サイトマップへ必ず接続する",
+          "福岡の主要地域カバレッジを厚くした上で、九州7県へ段階的に広げる",
+          "九州展開は地名差替えではなく制度差・広域比較・遠方実家整理など独自価値を優先する"
+        ]
+      },
+      "nearest_existing": {
+        "title": "遺品整理の見積書の見方｜金額より先に確認したい9項目【福岡】",
+        "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
+        "similarity": 0.314
+      },
+      "coverage_summary": {
+        "category_counts": {
+          "area": 13,
+          "cost": 12,
+          "ihinseiri": 13,
+          "kuyo": 15,
+          "seizenseiri": 17,
+          "tokushu-seisou": 9
+        },
+        "fukuoka_area_gaps": [],
+        "kyushu_prefecture_counts": {
+          "福岡県": 14,
+          "佐賀県": 1,
+          "長崎県": 0,
+          "熊本県": 0,
+          "大分県": 0,
+          "宮崎県": 0,
+          "鹿児島県": 0
+        }
+      }
+    },
+    "review_attempts": [
+      {
+        "attempt": 1,
+        "score": 86,
+        "approve": true,
+        "issues": [
+          "内部リンク先「糸島市・福津市・宗像市の遺品整理ガイド」には、糸島市の自己搬入を10kg当たり140円、宗像市を130円とする古い記載が残っています。現行の公式情報は糸島市147.4円、宗像市170円であり、本記事から誘導すると矛盾した案内になります。リンク先を修正するか、修正完了まで内部リンクを外すことを推奨します。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/020/060/020/kojinhannyu.html))",
+          "宗像市の自己搬入情報への出典リンクが「gomi2023.pdf」で、2026年版記事の根拠としては古く見えます。料金自体は現在も10kgごとに170円と確認できますが、現行の施設案内または新しい公式資料への差し替えが望まれます。([city.munakata.lg.jp](https://www.city.munakata.lg.jp/dynamic/info/pub/detail.aspx?c_id=83&id=3&utm_source=openai))",
+          "末尾の「制度・公式情報の確認先」には、本文の中心情報である糸島市・古賀市の直接搬入ページと宗像清掃工場の現行案内がありません。本文中にはリンクがありますが、参照一覧にも追加すると確認性が上がります。",
+          "FAQの市外在住者による搬入説明は概ね適切ですが、宗像市は他人に代わる自己搬入を認めていないため、市別に条件を明示するとさらに安全です。糸島市は親族代理を認め、古賀市不燃物埋立地は代理搬入時の追加書類を案内しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/030/0315/20210118092131.html))"
+        ],
+        "strengths": [
+          "変更前にあった根拠不明の人口、高齢化率、需要動向、地域別費用相場を削除し、自治体の処分手続きという明確な検索意図へ再構成しています。",
+          "糸島市の行政区別予約、自己搬入147.4円、本人確認、宗像市のシール530円と重量区分、持ち出しサービス、古賀市のシール523円と午前7時までの排出など、主要な数値・手順は公式情報と一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s011/010/020/020/040/20210319110344.html))",
+          "家庭廃棄物の収集運搬には一般廃棄物処理業の許可または市区町村からの委託が必要という説明は、廃棄物処理法第7条および国民生活センターの注意喚起に沿っています。定額パックや積み放題の高額請求への注意も適切です。([env.go.jp](https://www.env.go.jp/info/one-stop/11/049.html?utm_source=openai))",
+          "家電4品目の説明は現行制度と整合し、購入店・買い替え先への引取り依頼を案内している点も妥当です。([meti.go.jp](https://www.meti.go.jp/policy/it_policy/kaden_recycle/fukyu_special/index.html?utm_source=openai))",
+          "title、meta description、H1、本文の主題が一致しており、「3市名＋遺品整理＋粗大ごみ＋費用」という検索意図を自然にカバーしています。",
+          "CTAは記事末尾の1か所に抑えられ、煽り、架空の実績、口コミ、専門家コメント、過剰な問い合わせ誘導はありません。",
+          "見出し階層、目次アンカー、article・section・nav・asideの構造に明白な破損はなく、HTML全体も正常に閉じられています。",
+          "対象の.html URLは拡張子なしURLへリダイレクトされるため、NEW HTMLのcanonicalと実際の正規URLの関係に問題は確認できません。([fukuoka-ihinseiri-guide.com](https://fukuoka-ihinseiri-guide.com/blog/area/article-20260806-itoshima-munakata-koga-guide))"
+        ],
+        "editor_reason": "Search Consoleの伸長シグナルがない一方、同じ糸島市・宗像市を扱う兄弟記事がすでに存在するため、全面的な地域一般論の増量は避けました。既存ページは「自治体ごみ処分の具体的手続き、自己搬入、見積もり確認」に役割を絞り、重複を抑えながら一次情報の密度を高めています。料金相場や高齢化率など、確認根拠を本文近くに示せない数値は掲載せず、読者が実際に処分・依頼判断を行う場面で必要な確認手順を優先しました。",
+        "changes": [
+          "未確認の高齢化率・人口・空き家状況・遺品整理費用相場を削除し、自治体の公式情報で確認できる粗大ごみ収集と自己搬入の実務情報へ置き換えました。",
+          "糸島市・宗像市・古賀市の申込方法、手数料、排出・搬入時の注意点を市別に整理し、各説明の近くに自治体公式ページへの直接リンクを追加しました。",
+          "「3市はいずれも福岡市に隣接」とする不正確な表現を修正し、宗像市は福岡市と北九州市の間に位置する地域として記載しました。",
+          "国民生活センターの注意喚起に基づき、一般家庭の廃棄物回収に関する許可・委託の確認、定額パック表示や追加料金への注意を追加しました。",
+          "既存のCTA、編集情報、公式情報セクション、主要classを維持しつつ、関連記事を重複度の低い見積もり・貴重品探索・近接地域記事へ調整しました。",
+          "titleとdescriptionは、既存の近接地域記事との差別化のため、地域一般論ではなく自治体ごみ処分手続きと費用判断に焦点を移しました。"
+        ]
+      },
+      {
+        "attempt": 2,
+        "score": 92,
+        "approve": true,
+        "issues": [
+          "糸島市の説明にある「住所ではなく行政区によって収集の案内が分かれる」は表現が不正確です。所在地住所から該当行政区と担当業者を確認する趣旨なので、「所在地の行政区によって担当業者・収集日が異なる」と直す方が明確です。",
+          "宗像市の「他人に代わって搬入することはできません」という重要条件は現行のECOパーク宗像公式案内で確認できますが、記事の参照一覧にはその直接ページがありません。宗像清掃工場公式の「ごみの自己搬入」ページを追加すると根拠追跡性が高まります。",
+          "費用欄の「糸島市では物置・倉庫、宗像市では集合住宅、古賀市では戸建てと集合住宅」という市別の振り分けは、統計的根拠が示されず地域名を当てはめた印象があります。「各市とも住宅ごとに物置、搬出経路、階段等を確認する」と一般化した方が自然です。",
+          "内部リンク先の「一軒家の遺品整理費用相場」には、固定相場、福岡県と東京都の価格差、業者数など根拠が明示されていない数値が残っています。本記事自体の事実誤認ではありませんが、サイト全体の信頼性とAdSense品質の観点からリンク先の再審査を推奨します。"
+        ],
+        "strengths": [
+          "旧ページにあった高齢化率、地域需要、費用相場などの根拠不明な数字・断定を削除し、自治体手続き中心の実用的な記事へ改善されています。",
+          "糸島市の自己搬入料金147.4円／10kg、宗像市の粗大ごみシール530円と自己搬入170円／10kg、古賀市の粗大ごみシール523円と午前7時までの排出は、各公式案内と一致しています。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/020/060/030/kozinhannyu.html))",
+          "糸島市の親族による代理搬入、宗像市の本人搬入原則、古賀市不燃物埋立地の代理搬入時の書類要件も公式情報で確認できます。([city.itoshima.lg.jp](https://www.city.itoshima.lg.jp/s052/010/020/030/0315/20210118092131.html))",
+          "一般家庭の廃棄物収集運搬には一般廃棄物処理業の許可または自治体からの委託が必要という説明は、国民生活センターの注意喚起と整合しています。([kokusen.go.jp](https://www.kokusen.go.jp/news/data/n-20221102_1.html))",
+          "title、meta description、H1、本文はいずれも「3市の粗大ごみ・自己搬入と費用判断」という検索意図で一致しています。",
+          "CTAは記事末尾の1か所に抑えられ、問い合わせを強要する表現や過剰な広告誘導はありません。",
+          "パンくず、目次、section、見出し、aside、参照情報欄のHTMLは閉じタグを含めて成立しており、重大な構造破損は見当たりません。",
+          "旧ページより自治体別の具体的手順、仕分け順、見積もり確認項目、許可確認、FAQが増えており、読者価値は明確に向上しています。"
+        ],
+        "editor_reason": "Reviewerの4件の指摘をすべて即時反映しました。第一に、旧料金を含む兄弟記事への内部リンクを本文・関連記事の両方から外し、読者を矛盾した案内へ誘導しないようにしました。第二に、宗像市の自己搬入情報は旧PDFではなく、現在も公開されている宗像清掃工場（ECOパーク宗像）の施設案内と市公式の自己搬入案内へ変更しました。第三に、公式情報一覧へ本文の重要根拠である糸島市個人搬入、宗像清掃工場、古賀市直接搬入を追加しました。第四に、代理搬入の扱いを市別にFAQへ明記し、宗像市では他人に代わる搬入ができない点を明確にしました。既存案で評価されていた自治体別の実務情報、数値根拠を伴う記述、業者選定の注意、SEO上の主題整合性、CTA・編集情報・参照欄の構造は維持しています。",
+        "changes": [
+          "旧料金が残る兄弟記事「糸島市・福津市・宗像市の遺品整理ガイド」への本文内リンクと関連記事リンクを削除し、本記事から矛盾した自治体料金案内へ誘導しない構成に変更しました。",
+          "宗像市の自己搬入出典を旧PDFから、現行の宗像清掃工場（ECOパーク宗像）施設案内および市公式の自己搬入案内へ差し替えました。",
+          "「制度・公式情報の確認先」に、糸島市クリーンセンターの個人搬入・本人確認、古賀市の直接搬入、宗像清掃工場の現行施設案内と自己搬入案内を追加しました。",
+          "市外在住者の搬入に関するFAQを市別に明確化し、糸島市は親族代理搬入可、宗像市は他人に代わる搬入不可、古賀市不燃物埋立地は代理搬入時に発生場所住所を確認できる公的書類が必要と記載しました。",
+          "既存の自治体別手続き、料金、家電リサイクル、許可・委託に関する注意、CTA、編集情報、公式情報欄の主要構造は維持しました。"
+        ]
+      }
+    ],
+    "action_type": "improvement"
+  },
+  {
     "timestamp": "2026-09-26T04:13:43.422618+00:00",
     "started_at": "2026-09-26T04:06:50Z",
     "finished_at": "2026-09-26T04:13:43.422618+00:00",
