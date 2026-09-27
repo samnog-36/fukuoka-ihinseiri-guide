@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-09-27",
+  "adsense": {
+    "publisher_id": "ca-pub-4944616437202027",
+    "approval_status": "not_approved",
+    "status_source": "owner_confirmed",
+    "note": "審査中・未承認。既存の審査用コードを維持。広告収益の発生は未確認。"
+  },
+  "affiliate": {
+    "enabled": false,
+    "account_status": "not_registered",
+    "placement": "article_bottom",
+    "offers": []
+  }
+}

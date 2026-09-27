@@ -1725,6 +1725,7 @@ def build_new_article_page(topic: dict, data: dict) -> str:
   <meta property="og:site_name" content="{CONFIG["site_name"]}">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/css/style.css?v=20260814a">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4944616437202027" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1QGZ4ETK0"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-S1QGZ4ETK0');</script>
   <script type="application/ld+json">
@@ -2222,7 +2223,7 @@ def add_backlink_to_related_article(target: Path, new_path: str, new_title: str)
     if m:
         replacement = m.group(1) + m.group(2) + "\n      " + link + m.group(3)
         html = html[:m.start()] + replacement + html[m.end():]
-        target.write_text(html, encoding="utf-8")
+        target.write_text(normalize_generated_text(html), encoding="utf-8")
         return True
 
     editorial = re.search(r'<section\s+class=["\'][^"\']*editorial-info[^"\']*["\']', html, re.I)
@@ -2234,7 +2235,7 @@ def add_backlink_to_related_article(target: Path, new_path: str, new_title: str)
             '  </aside>\n\n'
         )
         html = html[:editorial.start()] + block + html[editorial.start():]
-        target.write_text(html, encoding="utf-8")
+        target.write_text(normalize_generated_text(html), encoding="utf-8")
         return True
     return False
 
