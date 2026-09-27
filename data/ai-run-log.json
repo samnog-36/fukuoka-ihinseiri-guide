@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-27T04:13:54.395221+00:00",
+    "timestamp": "2026-09-27T04:23:04.332149+00:00",
     "started_at": "2026-09-27T04:06:07Z",
-    "finished_at": "2026-09-27T04:13:54.395221+00:00",
+    "finished_at": "2026-09-27T04:23:04.332149+00:00",
     "run_id": "36293314684",
     "trigger": "push",
     "mode": "improve",
-    "status": "rejected",
-    "outcome": "新規記事を公開見送り",
-    "outcome_reason": "最大2回再修正後もReviewer 78点で基準未達",
+    "status": "error",
+    "outcome": "AI処理エラー",
+    "outcome_reason": "AI処理ステップでエラー。GitHub Actions Run #36294130671 を確認",
     "candidate": {
       "path": "blog/ihinseiri/article-20260927-ihin-gun-japanese-sword-disposal-fukuoka.html",
       "title": "遺品で猟銃・日本刀が見つかったら｜福岡での返納・相続・登録証確認の手順",
@@ -139,13 +139,13 @@
         "key": "gate",
         "label": "品質Gate",
         "status": "skipped",
-        "detail": "公開候補がないため本番変更用Gateは不要"
+        "detail": "AI処理エラーのため品質Gate未実行"
       },
       {
         "key": "publish",
         "label": "本番反映",
         "status": "skipped",
-        "detail": "最大2回再修正後もReviewer 78点で基準未達"
+        "detail": "AI処理エラーのため公開なし"
       }
     ],
     "published": false,
