@@ -1,5 +1,95 @@
 [
   {
+    "timestamp": "2026-09-27T19:53:33.445260+00:00",
+    "started_at": "2026-09-27T19:51:51Z",
+    "finished_at": "2026-09-27T19:53:33.445260+00:00",
+    "run_id": "36345885377",
+    "trigger": "schedule",
+    "mode": "improve",
+    "status": "error",
+    "outcome": "AI処理エラー",
+    "outcome_reason": "AI処理ステップでエラー。GitHub Actions Run #36345885377 を確認",
+    "candidate": {
+      "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
+      "title": "熊本市の遺品整理で出る一時多量ごみの処分手順｜大型ごみ5点・自己搬入・許可業者の確認",
+      "priority_score": 89,
+      "strategic_priority_score": null,
+      "base_priority_score": null,
+      "category_repetition_penalty": null,
+      "quality": 100,
+      "gsc": null,
+      "selection_reasons": [
+        "熊本市は2026年4月1日に遺品整理サービスの契約・無許可回収への注意喚起を更新し、廃棄物を運搬する事業者には市町村の委託または一般廃棄物処理業許可が必要であると案内している。熊本市の大型ごみは1回原則5個、屋内からの搬出は不可であり、遺品整理で起きやすい「量が多い・搬出できない・退去日が近い」という判断を、自治体の一次情報で整理する価値が高い。",
+        "既存サイトには福岡市・九州主要市の一般廃棄物収集運搬許可の確認記事はあるが、熊本市固有の「一時多量ごみ」の実行手順、原則5個までの大型ごみ収集、自己搬入先・重量制手数料、植木地区の扱いの違い、家電4品目の別ルートを一つの判断フローにした記事がない。県名だけを差し替えるのではなく、熊本市の処分ルールを起点にする。",
+        "新規記事にする。熊本県はサイト内で未カバーであり、本テーマは単なる「熊本県の遺品整理業者・費用」記事ではない。熊本市の一時多量ごみ、大型ごみ上限、自己搬入、一般廃棄物許可、家電4品目の別処分という地域固有の手続きを、既存の福岡・九州許可確認記事とは異なる検索意図で扱える。検索需要の数値は未計測のため過大評価は避けるが、自治体が遺品整理の注意喚起を更新しており、一次情報の厚みと読者の実行可能性が高い。"
+      ]
+    },
+    "editor": {
+      "status": "error",
+      "decision_reason": "new article has no preferred primary source",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null,
+      "title_after": null
+    },
+    "reviewer": {
+      "status": "skipped",
+      "approve": null,
+      "score": null,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "取得済み検索データを候補選定に使用"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "熊本市の遺品整理で出る一時多量ごみの処分手順｜大型ごみ5点・自己搬入・許可業者の確認 を優先度 89 で選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "error",
+        "detail": "new article has no preferred primary source"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "skipped",
+        "detail": "Editor未実行のため未審査"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "AI処理エラーのため品質Gate未実行"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "AI処理エラーのため公開なし"
+      }
+    ],
+    "published": false,
+    "image_generated": false,
+    "image_path": null,
+    "error": "new article has no preferred primary source",
+    "research": null,
+    "repair_pending": true,
+    "next_action": "保存済み原稿と指摘から次の毎時40分の継続実行で再開"
+  },
+  {
     "timestamp": "2026-09-27T15:53:37.553193+00:00",
     "started_at": "2026-09-27T15:47:27Z",
     "finished_at": "2026-09-27T15:53:37.553193+00:00",
