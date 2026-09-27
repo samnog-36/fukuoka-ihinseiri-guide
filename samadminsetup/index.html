@@ -82,7 +82,7 @@
 
 <div class="grid two">
   <div class="card"><div class="head"><h2>なぜその判断をした？</h2><span class="pill">判断根拠</span></div><div id="aiWhy"></div></div>
-  <div class="card"><div class="head"><h2>次回の予定</h2><span class="pill">05:10・17:10 / 修正継続は毎時40分 JST</span></div><div id="aiNextPlan"></div></div>
+  <div class="card"><div class="head"><h2>次回の予定</h2><span class="pill">毎時40分 JST｜修正・改善・新規調査</span></div><div id="aiNextPlan"></div></div>
 </div>
 
 <div class="card"><div class="head"><h2>サイト構造・カバレッジ</h2><span class="pill">AIが毎回ここを棚卸し</span></div><div id="siteCoverage"></div></div>
@@ -237,6 +237,8 @@ function renderWhy(x){
   if(research&&Object.keys(research).length){
     html+='<div class="research-box"><h4>今回のリサーチ</h4><div class="research-grid"><div class="research-item"><small>テーマ</small><p>'+esc(research.title||"新規テーマ候補なし")+'</p></div><div class="research-item"><small>機会スコア</small><p>'+esc(research.opportunity_score==null?"-":research.opportunity_score+"点")+'</p></div><div class="research-item"><small>なぜ今？</small><p>'+esc(research.why_now||research.decision_reason||"-")+'</p></div><div class="research-item"><small>不足していた価値</small><p>'+esc(research.missing_value||"-")+'</p></div></div></div>';
   }
+  if(research.focus_prefecture||research.demand_evidence)html+='<div class="why-block"><h4>地域と検索需要</h4><p>'+esc(research.focus_prefecture||"")+' / '+esc(research.demand_evidence||"需要データ未記録")+'</p></div>';
+  if(Array.isArray(research.competitor_comparison)&&research.competitor_comparison.length)html+='<div class="why-block"><h4>調査したページとの差をどう埋める？</h4><div class="why-list">'+research.competitor_comparison.map(v=>'<div class="why-item"><b>'+esc(v.url||"")+'</b><br>役立つ点：'+esc(v.strength||"")+'<br>不足点：'+esc(v.gap||"")+'<br>当サイトで追加する価値：'+esc(v.our_added_value||"")+'</div>').join("")+'</div></div>';
   html+='<div class="why-block"><h4>Editor AIは何を考えた？</h4><p>'+esc(e.decision_reason||"旧ログのため詳細未保存")+'</p></div>';
   if((e.changes||[]).length)html+='<div class="why-block"><h4>提案した変更</h4><p>'+(e.changes||[]).map(v=>"・"+esc(v)).join("<br>")+'</p></div>';
   const attempts=x.review_attempts||[];
