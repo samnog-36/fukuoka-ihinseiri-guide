@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T04:23:32.799991+00:00",
+  "generated_at": "2026-09-27T05:26:52.282288+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -19,7 +19,7 @@
   "category_counts": {
     "area": 13,
     "cost": 12,
-    "ihinseiri": 14,
+    "ihinseiri": 15,
     "kuyo": 15,
     "seizenseiri": 17,
     "tokushu-seisou": 9
@@ -185,6 +185,10 @@
       {
         "path": "blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin.html",
         "title": "相続放棄を検討中に遺品整理していい？単純承認を避ける処分・保管ガイド【福岡】｜福岡遺品整理ガイド"
+      },
+      {
+        "path": "blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu.html",
+        "title": "遺品整理業者は家庭ごみを運べる？福岡市・九州主要市の一般廃棄物収集運搬許可を確認する方法｜福岡遺品整理ガイド"
       }
     ],
     "kuyo": [
@@ -805,7 +809,7 @@
   ],
   "kyushu_prefecture_coverage": {
     "福岡県": {
-      "article_count": 14,
+      "article_count": 15,
       "articles": [
         {
           "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
@@ -1106,8 +1110,8 @@
     }
   ],
   "link_health": {
-    "html_files_scanned": 139,
-    "active_articles": 80,
+    "html_files_scanned": 140,
+    "active_articles": 81,
     "orphan_articles": [],
     "orphan_count": 0,
     "broken_internal_links": [
