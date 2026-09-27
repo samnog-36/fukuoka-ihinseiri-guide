@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-27T04:26:37.080051+00:00",
+    "timestamp": "2026-09-27T04:26:45.856942+00:00",
     "started_at": "2026-09-27T04:23:32Z",
-    "finished_at": "2026-09-27T04:26:37.080051+00:00",
+    "finished_at": "2026-09-27T04:26:45.856942+00:00",
     "run_id": "36294145325",
     "trigger": "push",
     "mode": "improve",
-    "status": "validated",
-    "outcome": "新規記事を公開候補として承認",
-    "outcome_reason": "新規テーマを調査・執筆し、Reviewer 94点で公開基準を通過",
+    "status": "published",
+    "outcome": "本番公開完了",
+    "outcome_reason": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了",
     "candidate": {
       "path": "blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu.html",
       "title": "遺品整理業者は家庭ごみを運べる？福岡市・九州主要市の一般廃棄物収集運搬許可を確認する方法",
@@ -139,8 +139,8 @@
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "pending",
-        "detail": "PR作成・main自動反映処理中"
+        "status": "done",
+        "detail": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
       }
     ],
     "published": true,
