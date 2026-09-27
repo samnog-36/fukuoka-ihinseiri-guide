@@ -31,6 +31,7 @@ def find_current(rows: list[dict]) -> dict | None:
         for row in rows:
             if str(row.get("run_id") or "") == run_id:
                 return row
+        return None
     return rows[0] if rows else None
 
 
@@ -82,6 +83,18 @@ def main() -> int:
         row["published"] = False
         set_step(row, "gate", "error", row["outcome_reason"])
         set_step(row, "publish", "skipped", "品質Gate不合格のため公開なし")
+        from content_os import repair_file, save_repair, PRIVATE_DIR
+        checkpoint = repair_file((row.get("candidate") or {}).get("path", ""))
+        if checkpoint.exists():
+            state = json.loads(checkpoint.read_text(encoding="utf-8"))
+            details = PRIVATE_DIR / "gate-output.txt"
+            issue = details.read_text(encoding="utf-8")[-6000:] if details.exists() else row["outcome_reason"]
+            state["review"] = {"approve": False, "score": 0, "issues": ["品質Gateの実行結果を修正: " + issue]}
+            state.pop("published_digest", None)
+            save_repair(state)
+            row["repair_pending"] = True
+            row["next_action"] = "品質Gateの指摘を保存。次の継続実行で本文を再修正・再審査"
+
 
     elif args.stage == "publish-ready":
         set_step(row, "publish", "pending", "PR作成・main自動反映処理中")

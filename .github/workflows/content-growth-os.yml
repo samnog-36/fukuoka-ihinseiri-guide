@@ -6,7 +6,9 @@ on:
   schedule:
     - cron: "10 20 * * *"
     - cron: "10 8 * * *"
+    - cron: "40 * * * *"
   push:
+    branches: [main]
     paths:
       - ".github/workflows/content-growth-os.yml"
   workflow_dispatch:
@@ -24,15 +26,16 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: read
 
 concurrency:
   group: autonomous-content-growth
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   grow:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-terra' }}
@@ -41,6 +44,8 @@ jobs:
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'sc-domain:fukuoka-ihinseiri-guide.com' }}
       CONTENT_OS_PRIVATE_DIR: .content-os-private
+      CONTENT_OS_REPAIR_ONLY: ${{ github.event_name == 'schedule' && github.event.schedule == '40 * * * *' && 'true' || 'false' }}
+      OPENAI_REPAIR_MODEL: ${{ vars.OPENAI_REPAIR_MODEL || vars.OPENAI_REVIEW_MODEL || 'gpt-5.6-sol' }}
       GH_TOKEN: ${{ github.token }}
 
     steps:
@@ -53,8 +58,25 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Restore unfinished drafts and reviewer feedback
+        id: restore_repair
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p .content-os-private/repair
+          REPAIR_RUN="$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=content-repair-state&per_page=100" \
+            --jq '[.artifacts[] | select(.expired == false and .workflow_run.head_branch == "main")] | sort_by(.created_at) | last | .workflow_run.id // empty')"
+          if [ -n "$REPAIR_RUN" ]; then
+            gh run download "$REPAIR_RUN" --name content-repair-state --dir .content-os-private/repair
+          fi
+          # Keep an empty snapshot after completed work to supersede older pending drafts.
+          printf '%s\n' "$GITHUB_RUN_ID" > .content-os-private/repair/snapshot.txt
+
       - name: Install content OS dependencies
         run: pip install -r requirements-content-os.txt
+
+      - name: Test review continuation and checkpoint recovery
+        run: python3 -m unittest discover -s tests -p "test_content_repair.py"
 
       - name: Pull Search Console performance when configured
         run: python3 scripts/search_console_pull.py
@@ -73,6 +95,7 @@ jobs:
 
       - name: Research, choose action, write/edit and independently review
         id: ai
+        timeout-minutes: 35
         continue-on-error: true
         shell: bash
         run: |
@@ -85,8 +108,11 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          python3 scripts/verify_adsense_trust_updates.py
-          python3 scripts/content_quality_gate.py --strict
+          set -o pipefail
+          {
+            python3 scripts/verify_adsense_trust_updates.py &&
+            python3 scripts/content_quality_gate.py --strict
+          } 2>&1 | tee .content-os-private/gate-output.txt
           python3 -m py_compile \
             scripts/content_os.py \
             scripts/search_console_pull.py \
@@ -260,3 +286,13 @@ jobs:
             echo "Run log was saved, but the AI/gate stage failed."
             exit 1
           fi
+
+      - name: Save unfinished drafts for the next continuation
+        if: always() && steps.restore_repair.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-repair-state
+          path: .content-os-private/repair/
+          include-hidden-files: true
+          retention-days: 90
+          if-no-files-found: error
