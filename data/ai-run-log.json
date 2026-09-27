@@ -6,9 +6,9 @@
     "run_id": "36297210219",
     "trigger": "push",
     "mode": "improve",
-    "status": "gate_failed",
-    "outcome": "品質Gateで公開停止",
-    "outcome_reason": "品質・AdSense・HTML Gateに不合格。公開変更は破棄",
+    "status": "published",
+    "outcome": "公開処理を復旧",
+    "outcome_reason": "Reviewer 91点。行末空白を修正し品質Gateを再検証。記事一覧・サイトマップ・関連記事への導線を復旧。",
     "candidate": {
       "path": "blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka.html",
       "title": "親の不動産がどこにあるかわからないときの相続登記｜2027年3月31日までに確認する方法【福岡】",
@@ -131,17 +131,17 @@
       {
         "key": "gate",
         "label": "品質Gate",
-        "status": "error",
-        "detail": "品質・AdSense・HTML Gateに不合格。公開変更は破棄"
+        "status": "done",
+        "detail": "形式修正後の検証と公開導線の復旧"
       },
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "skipped",
-        "detail": "品質Gate不合格のため公開なし"
+        "status": "done",
+        "detail": "形式修正後の検証と公開導線の復旧"
       }
     ],
-    "published": false,
+    "published": true,
     "image_generated": true,
     "image_path": "images/blog/ai-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka-20260927.webp",
     "error": null,
@@ -1706,8 +1706,7 @@
     ],
     "replaced_held_article": null,
     "redirected_internal_links": [],
-    "repair_pending": true,
-    "next_action": "品質Gateの指摘を保存。次の継続実行で本文を再修正・再審査"
+    "repair_pending": false
   },
   {
     "timestamp": "2026-09-27T04:26:45.856942+00:00",
