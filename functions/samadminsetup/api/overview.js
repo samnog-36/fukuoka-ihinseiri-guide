@@ -50,44 +50,29 @@ async function siteCoverage() {
   return data && typeof data === "object" ? data : null;
 }
 
+function scheduleSlots(at) {
+  const slots = [];
+  for (const offset of [-1, 0, 1]) {
+    for (let hour = 0; hour < 24; hour++) {
+      slots.push(Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate() + offset, hour, 40));
+    }
+    for (const hour of [8, 20]) {
+      slots.push(Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate() + offset, hour, 10));
+    }
+  }
+  return slots.sort((a, b) => a - b);
+}
+
 function scheduledForRun(createdAt) {
   if (!createdAt) return null;
   const actual = new Date(createdAt);
-  const jst = new Date(actual.getTime() + 9 * 60 * 60 * 1000);
-  let planned = new Date(Date.UTC(
-    jst.getUTCFullYear(),
-    jst.getUTCMonth(),
-    jst.getUTCDate(),
-    20,
-    10,
-    0
-  ));
-  if (planned > actual) planned = new Date(planned.getTime() - 24 * 60 * 60 * 1000);
-  return planned.toISOString();
+  const previous = scheduleSlots(actual).filter(t => t <= actual.getTime()).pop();
+  return new Date(previous).toISOString();
 }
 
-function nextDailyJst(hour = 5, minute = 10) {
+function nextScheduledRun() {
   const now = new Date();
-  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-  let target = new Date(Date.UTC(
-    jst.getUTCFullYear(),
-    jst.getUTCMonth(),
-    jst.getUTCDate(),
-    hour - 9,
-    minute,
-    0
-  ));
-  if (target <= now) {
-    target = new Date(Date.UTC(
-      jst.getUTCFullYear(),
-      jst.getUTCMonth(),
-      jst.getUTCDate() + 1,
-      hour - 9,
-      minute,
-      0
-    ));
-  }
-  return target.toISOString();
+  return new Date(scheduleSlots(now).find(t => t > now.getTime())).toISOString();
 }
 
 async function getSystemProgress(env) {
@@ -175,9 +160,9 @@ export async function onRequestGet(context) {
     generatedAt: new Date().toISOString(),
     schedule: {
       timezone: "Asia/Tokyo",
-      localTime: "05:10",
-      cadence: "daily",
-      nextRunAt: nextDailyJst(5, 10)
+      localTime: "05:10 / 17:10、修正継続は毎時40分",
+      cadence: "twice_daily_with_hourly_repair",
+      nextRunAt: nextScheduledRun()
     }
   };
 
