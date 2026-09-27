@@ -2562,12 +2562,14 @@ def recent_category_counts(limit: int = 10) -> dict[str, int]:
     return counts
 
 
-def choose_existing_candidate(report: dict) -> dict | None:
+def choose_existing_candidate(report: dict, excluded_paths: set[str] | None = None) -> dict | None:
     candidates = report.get("top_improvement_candidates", [])
     recent_cats = recent_category_counts(8)
     scored = []
 
     for candidate in candidates:
+        if candidate["path"] in (excluded_paths or set()):
+            continue
         base = float(candidate.get("priority_score", 0) or 0)
         if base <= 0:
             continue
@@ -3025,15 +3027,22 @@ def main() -> int:
                     duplicate_candidate = dict(base_row)
                     duplicate_candidate["gsc"] = gsc.get(duplicate_path)
                     duplicate_candidate["priority_score"] = candidate_score(base_row, duplicate_candidate["gsc"])
-            if duplicate_candidate:
+            blocked, reason = path_is_in_cooldown(duplicate_path)
+            if duplicate_candidate and not blocked:
                 print("Action selected: IMPROVE RESEARCH-MATCH", duplicate_candidate["path"])
-                improve(duplicate_candidate, rows, args.mode, research=topic)
-                return 0
+                result = improve(duplicate_candidate, rows, args.mode, research=topic)
+                if result.get("published"):
+                    return 0
+                candidate = choose_existing_candidate(rep, {duplicate_path})
+            elif blocked:
+                print("Research-match in cooldown; trying another candidate:", duplicate_path, reason)
 
         if should_create_new_article(topic, candidate):
             print("Action selected: NEW ARTICLE", topic.get("title"), "score=", topic.get("opportunity_score"))
-            create_new_article(topic, rows, args.mode)
-            return 0
+            result = create_new_article(topic, rows, args.mode)
+            if result.get("published"):
+                return 0
+            print("New article rejected; trying a distinct existing-page improvement.")
 
         if candidate:
             print("Action selected: IMPROVE", candidate["path"], "priority=", candidate.get("priority_score"))
