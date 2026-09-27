@@ -82,7 +82,7 @@
 
 <div class="grid two">
   <div class="card"><div class="head"><h2>なぜその判断をした？</h2><span class="pill">判断根拠</span></div><div id="aiWhy"></div></div>
-  <div class="card"><div class="head"><h2>次回の予定</h2><span class="pill">毎日 05:10 JST 予定</span></div><div id="aiNextPlan"></div></div>
+  <div class="card"><div class="head"><h2>次回の予定</h2><span class="pill">05:10・17:10 / 修正継続は毎時40分 JST</span></div><div id="aiNextPlan"></div></div>
 </div>
 
 <div class="card"><div class="head"><h2>サイト構造・カバレッジ</h2><span class="pill">AIが毎回ここを棚卸し</span></div><div id="siteCoverage"></div></div>
@@ -213,7 +213,7 @@ function delayText(run){
 function outcomeClass(x){
   if(x?.published)return "status-published";
   if(x?.status==="error")return "status-error";
-  if(x?.status==="rejected")return "status-rejected";
+  if(x?.status==="rejected"||x?.repair_pending)return "status-rejected";
   return "";
 }
 function renderDecisionSummary(x,ghRun){
@@ -254,12 +254,12 @@ function renderRunHistory(o){
     const c=x.candidate||{},rv=x.reviewer||{},actual=r.createdAt||x.started_at||x.timestamp;
     const reasons=c.selection_reasons||[],type=x.action_type==="new_article"?"新規記事":x.action_type==="improvement"?"既存改善":x.action_type==="research"?"調査":"判断";
     const attempts=x.review_attempts||[];
-    return '<details class="ai-run-card"><summary><span class="run-date">'+dt(actual)+'</span><span class="run-title"><span class="action-badge">'+esc(type)+'</span> '+esc(c.title||x.research?.title||x.outcome||"AI実行")+'</span><span class="run-score">Reviewer '+esc(rv.score==null?"-":rv.score+"点")+'</span><span class="run-outcome '+outcomeClass(x)+'">'+esc(x.outcome||x.status||"-")+'</span></summary><div class="run-detail"><div class="run-detail-grid"><div class="run-detail-box"><small>なぜこの対象？</small><p>'+esc(reasons.join(" / ")||x.research?.decision_reason||"詳細未保存")+'</p></div><div class="run-detail-box"><small>結果</small><p>'+esc(x.outcome_reason||"")+'</p></div><div class="run-detail-box"><small>Editor AI</small><p>'+esc(x.editor?.decision_reason||"詳細未保存")+'</p></div><div class="run-detail-box"><small>Reviewer</small><p>'+esc(rv.score==null?"未審査":rv.score+"点 / 基準 "+(rv.threshold||88)+"点")+'</p></div></div>'+(attempts.length?'<div class="retry-chain">'+attempts.map((a,i)=>'<span class="retry-node '+(a.approve&&Number(a.score)>=Number(rv.threshold||88)?"pass":"fail")+'">'+(i===0?"初回":"再修正"+i)+' '+esc(a.score==null?"-":a.score+"点")+'</span>'+(i<attempts.length-1?'<span class="retry-arrow">→</span>':'')).join("")+'</div>':'')+'<div class="actual-flow" style="margin-top:10px">'+(x.steps||[]).map((st,i)=>'<div class="actual-step '+esc(st.status||"")+'"><small>STEP '+(i+1)+'</small><b>'+esc(st.label||"")+'</b><p>'+esc(st.detail||"")+'</p></div>').join("")+'</div></div></details>';
+    return '<details class="ai-run-card"><summary><span class="run-date">'+dt(actual)+'</span><span class="run-title"><span class="action-badge">'+esc(type)+'</span> '+esc(c.title||x.research?.title||x.outcome||"AI実行")+'</span><span class="run-score">Reviewer '+esc(rv.score==null?"-":rv.score+"点")+'</span><span class="run-outcome '+outcomeClass(x)+'">'+esc(x.outcome||x.status||"-")+'</span></summary><div class="run-detail"><div class="run-detail-grid"><div class="run-detail-box"><small>なぜこの対象？</small><p>'+esc(reasons.join(" / ")||x.research?.decision_reason||"詳細未保存")+'</p></div><div class="run-detail-box"><small>結果</small><p>'+esc((x.outcome_reason||"")+(x.next_action?" / 次の処理："+x.next_action:""))+'</p></div><div class="run-detail-box"><small>Editor AI</small><p>'+esc(x.editor?.decision_reason||"詳細未保存")+'</p></div><div class="run-detail-box"><small>Reviewer</small><p>'+esc(rv.score==null?"未審査":rv.score+"点 / 基準 "+(rv.threshold||88)+"点")+'</p></div></div>'+(attempts.length?'<div class="retry-chain">'+attempts.map((a,i)=>'<span class="retry-node '+(a.approve&&Number(a.score)>=Number(rv.threshold||88)?"pass":"fail")+'">'+(i===0?"初回":"再修正"+i)+' '+esc(a.score==null?"-":a.score+"点")+'</span>'+(i<attempts.length-1?'<span class="retry-arrow">→</span>':'')).join("")+'</div>':'')+'<div class="actual-flow" style="margin-top:10px">'+(x.steps||[]).map((st,i)=>'<div class="actual-step '+esc(st.status||"")+'"><small>STEP '+(i+1)+'</small><b>'+esc(st.label||"")+'</b><p>'+esc(st.detail||"")+'</p></div>').join("")+'</div></div></details>';
   }).join(""):'<div class="empty-rich"><b>AI行動ログはまだありません</b><p>次回Runから必ず記録されます。</p></div>';
 }
 function renderCoverage(o){
   const c=o.coverage||o.automation?.latestDecision?.research?.site_coverage||{};
-  const counts=c.category_counts||{},labels={ihinseiri:"遺品整理",tokushu-seisou:"特殊清掃",seizenseiri:"生前整理",kuyo:"遺品供養",cost:"費用",area:"地域別"};
+  const counts=c.category_counts||{},labels={ihinseiri:"遺品整理","tokushu-seisou":"特殊清掃",seizenseiri:"生前整理",kuyo:"遺品供養",cost:"費用",area:"地域別"};
   const entries=Object.entries(counts).filter(([k])=>labels[k]);
   const max=Math.max(1,...entries.map(([,v])=>Number(v||0)));
   const gaps=c.fukuoka_area_gaps||[];
