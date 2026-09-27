@@ -61,7 +61,7 @@
     "cost": "費用",
     "area": "地域別"
   },
-  "content_mission": "福岡を核に、九州7県で最も実用的・正確・更新性の高い遺品整理情報メディアを目指す",
+  "content_mission": "九州7県の遺品整理で検索上位と読者からの信頼を獲得する。福岡の既存記事を強化しながら、各県固有の一次情報・費用確認・業者選び・処分手順を継続的に充実させる",
   "kyushu_prefectures": [
     "福岡県",
     "佐賀県",
@@ -157,6 +157,8 @@
       "指宿市"
     ]
   },
-  "kyushu_expansion_rule": "福岡県外は地名差替え型の個別市記事を量産せず、九州比較・制度差・遠方実家整理など福岡の読者にも意味がある広域テーマを優先する",
-  "target_reviewer_score": 94
+  "kyushu_expansion_rule": "九州7県を対象に、自治体固有の手続き・許可業者確認・処分方法など地域の独自情報がある記事を作る。地名差替えと既存記事の同一検索意図の量産を避ける。",
+  "target_reviewer_score": 94,
+  "continuous_growth_enabled": true,
+  "existing_improvements_between_new_articles": 2
 }

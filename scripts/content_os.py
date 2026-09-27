@@ -121,12 +121,28 @@ def load_gsc() -> dict:
     except Exception:
         return {}
     out = {}
-    base = CONFIG["site_url"].rstrip("/")
+    host = urlparse(CONFIG["site_url"]).netloc
     for row in data.get("pages", []):
         url = row.get("page", "")
-        if url.startswith(base):
-            out[url[len(base):].lstrip("/")] = row
+        if urlparse(url).netloc != host:
+            continue
+        key = normalized_url_path(url)
+        current = out.setdefault(key, {"page": CONFIG["site_url"].rstrip("/") + key, "clicks": 0, "impressions": 0, "_weighted_position": 0, "queries": []})
+        impressions = float(row.get("impressions", 0) or 0)
+        current["clicks"] += float(row.get("clicks", 0) or 0)
+        current["impressions"] += impressions
+        current["_weighted_position"] += float(row.get("position", 0) or 0) * impressions
+        current["queries"].extend(row.get("queries", []))
+    for current in out.values():
+        impressions = current["impressions"]
+        current["ctr"] = current["clicks"] / impressions if impressions else 0
+        current["position"] = current.pop("_weighted_position") / impressions if impressions else 0
+        current["queries"] = sorted(current["queries"], key=lambda q: float(q.get("impressions", 0) or 0), reverse=True)[:20]
     return out
+
+
+def gsc_for_path(gsc_map: dict, path: str) -> dict | None:
+    return gsc_map.get(normalized_url_path("/" + path.lstrip("/"))) or gsc_map.get(path)
 
 
 def candidate_score(rec: dict, gsc: dict | None) -> float:
@@ -443,7 +459,7 @@ def make_report(rows: list[dict], gsc_map: dict) -> dict:
     ranked = []
     for r in rows:
         x = dict(r)
-        x["gsc"] = gsc_map.get(r["path"])
+        x["gsc"] = gsc_for_path(gsc_map, r["path"])
         base = candidate_score(r, x["gsc"])
         areas = duplicate_pressure.get(r["path"], [])
         structure_bonus = min(24, 8 * len(areas))
@@ -458,7 +474,7 @@ def make_report(rows: list[dict], gsc_map: dict) -> dict:
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "site": CONFIG["site_url"],
-        "top_improvement_candidates": ranked[:25],
+        "top_improvement_candidates": ranked,
         "duplicate_title_hints": duplicate_hints(rows),
         "coverage": coverage,
     }
@@ -1425,6 +1441,11 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     existing = [{"path": r["path"], "title": r["title"]} for r in rows]
     coverage = build_site_coverage(rows)
+    demand = sorted(load_gsc().values(), key=lambda r: r.get("impressions", 0), reverse=True)[:12]
+    counts = {name: item.get("article_count", 0) for name, item in coverage.get("kyushu_prefecture_coverage", {}).items()}
+    least = min(counts.values()) if counts else 0
+    gaps = sorted(name for name, count in counts.items() if count == least)
+    focus = gaps[int(datetime.now(timezone.utc).timestamp() // 3600) % len(gaps)] if gaps else "九州全域"
 
     prompt = f"""
 あなたは「福岡遺品整理ガイド」の編集長兼SEOリサーチャーです。
@@ -1433,14 +1454,19 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 
 記事数を増やすこと自体は目的ではありません。
 毎回web検索を行い、既存サイトに本当に不足している新規テーマを1つだけ調査してください。
+今回の重点調査県: {focus}（現状の記事数が少ない県を時間帯ごとに交代）
+実測した検索需要（未取得なら空配列。検索回数や順位を推測で作らない）:
+{json.dumps(demand, ensure_ascii=False)}
+検索結果で確認できた同じ検索意図のページを最大3件読み、各URL・読者に役立つ点・不足点・当サイトが追加する独自情報を記録してください。
+検索結果で見つかったページを「Google何位」と断定せず、順位未計測と明記してください。競合の数値や口コミは転載せず一次情報で再確認してください。
 
 調査範囲:
-- 福岡県を最優先
+- 福岡県の既存記事を強化しながら、九州7県の不足を埋める
 - 九州7県: {", ".join(CONFIG.get("kyushu_prefectures", []))}
 - 国、自治体、e-Gov、国民生活センター等の一次情報
 - 遺品整理、生前整理、特殊清掃、供養、費用、地域制度、遠方の実家整理、相続・廃棄物手続き等
 - 現在の制度変更・自治体ルール・実務上の困りごと
-- 福岡の読者にも関係がある九州域内の地域差
+- 各県の読者がその地域で実行できる、自治体固有の手続き・処分先確認・比較軸
 
 禁止:
 - 地名だけ差し替えた薄い量産
@@ -1458,7 +1484,7 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 選定ルール:
 - まず既存サイト構造の「穴」を埋める。すでに強いクラスターへ似た記事を増やさない。
 - areaカテゴリでは fukuoka_area_gaps と既存地域記事の重複を必ず確認する。
-- 九州展開は、福岡の基礎カバレッジを壊さず、九州7県で一次情報に基づく独自価値がある時だけ行う。\n- 福岡県外は地名差替え型の個別市記事を量産せず、九州比較・制度差・遠方実家整理など福岡の読者にも意味がある広域テーマを優先する
+- 九州展開方針: {CONFIG.get("kyushu_expansion_rule")}
 - duplicate_title_hints に近いテーマは新規記事化せず、既存記事統合・改善を優先する。
 - 「遺品」「親が亡くなった」「処分」「手続き」「家の片付け」などの一般語が重なるだけでは重複と判定しない。
 - core_topic_terms には検索意図の中心語だけを入れる。例: 相続放棄の記事なら「相続放棄」「単純承認」。
@@ -1485,6 +1511,9 @@ JSONのみ:
   "primary_sources": [{{"name":"一次情報機関","url":"https://..."}}],
   "research_findings": ["調査で確認した重要事項"],
   "target_queries": ["想定検索語"],
+  "focus_prefecture": "今回の対象県",
+  "demand_evidence": "実測検索語または調査で確認した具体的な困りごと。検索ボリュームは未計測なら未計測",
+  "competitor_comparison": [{{"url":"確認したページURL","strength":"役立つ点","gap":"不足点","our_added_value":"一次情報を使って追加する価値"}}],
   "core_topic_terms": ["検索意図の中心となる固有主題。例: 相続放棄, 単純承認"],
   "duplicate_risk": "low",
   "decision_reason": "新規記事にする/しない判断理由"
@@ -2677,10 +2706,19 @@ def should_create_new_article(topic: dict | None, existing: dict | None) -> bool
     minimum = float(CONFIG.get("new_article_minimum_score", 88))
     if score < minimum:
         return False
-    # A genuinely strong, non-duplicate opportunity should not wait for a calendar slot.
-    if score >= 92:
-        return True
     if existing is None:
+        return True
+    if CONFIG.get("continuous_growth_enabled"):
+        # Strengthen pages already present before spending every hourly run on a new URL.
+        published = [r for r in _load_list_log(RUN_LOG) if r.get("status") == "published"]
+        improvement_count = 0
+        for record in published:
+            if record.get("action_type") == "new_article":
+                break
+            if record.get("action_type") == "improvement":
+                improvement_count += 1
+        return improvement_count >= int(CONFIG.get("existing_improvements_between_new_articles", 2))
+    if score >= 92:
         return True
     weekday = datetime.now(ZoneInfo(CONFIG["timezone"])).weekday()
     return weekday in set(CONFIG.get("new_article_days_jst", [0, 2, 4, 6]))
@@ -2720,8 +2758,8 @@ def make_run_record(
         {
             "key": "search_console",
             "label": "Search Console取得",
-            "status": "done",
-            "detail": "最新の検索パフォーマンスを取得して候補選定に使用",
+            "status": "done" if (PRIVATE_DIR / "search_console_latest.json").exists() else "skipped",
+            "detail": "取得済み検索データを候補選定に使用" if (PRIVATE_DIR / "search_console_latest.json").exists() else "検索データ未取得。サイト内の不足と一次情報リサーチで作業を継続",
         }
     ]
 
@@ -3037,7 +3075,7 @@ def main() -> int:
                 base_row = next((x for x in rows if x["path"] == duplicate_path), None)
                 if base_row:
                     duplicate_candidate = dict(base_row)
-                    duplicate_candidate["gsc"] = gsc.get(duplicate_path)
+                    duplicate_candidate["gsc"] = gsc_for_path(gsc, duplicate_path)
                     duplicate_candidate["priority_score"] = candidate_score(base_row, duplicate_candidate["gsc"])
             blocked, reason = path_is_in_cooldown(duplicate_path)
             if duplicate_candidate and not blocked:

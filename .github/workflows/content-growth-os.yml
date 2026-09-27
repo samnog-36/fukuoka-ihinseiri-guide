@@ -4,8 +4,6 @@ name: Autonomous content growth OS
 
 on:
   schedule:
-    - cron: "10 20 * * *"
-    - cron: "10 8 * * *"
     - cron: "40 * * * *"
   push:
     branches: [main]
@@ -44,7 +42,7 @@ jobs:
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       SEARCH_CONSOLE_SITE_URL: ${{ vars.SEARCH_CONSOLE_SITE_URL || 'sc-domain:fukuoka-ihinseiri-guide.com' }}
       CONTENT_OS_PRIVATE_DIR: .content-os-private
-      CONTENT_OS_REPAIR_ONLY: ${{ github.event_name == 'schedule' && github.event.schedule == '40 * * * *' && 'true' || 'false' }}
+      CONTENT_OS_REPAIR_ONLY: "false"
       OPENAI_REPAIR_MODEL: ${{ vars.OPENAI_REPAIR_MODEL || vars.OPENAI_REVIEW_MODEL || 'gpt-5.6-sol' }}
       GH_TOKEN: ${{ github.token }}
 
@@ -79,6 +77,7 @@ jobs:
         run: python3 -m unittest discover -s tests -p "test_*.py"
 
       - name: Pull Search Console performance when configured
+        continue-on-error: true
         run: python3 scripts/search_console_pull.py
 
       - name: Resolve mode

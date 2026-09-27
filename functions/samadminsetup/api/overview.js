@@ -56,9 +56,6 @@ function scheduleSlots(at) {
     for (let hour = 0; hour < 24; hour++) {
       slots.push(Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate() + offset, hour, 40));
     }
-    for (const hour of [8, 20]) {
-      slots.push(Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate() + offset, hour, 10));
-    }
   }
   return slots.sort((a, b) => a - b);
 }
@@ -160,8 +157,8 @@ export async function onRequestGet(context) {
     generatedAt: new Date().toISOString(),
     schedule: {
       timezone: "Asia/Tokyo",
-      localTime: "05:10 / 17:10、修正継続は毎時40分",
-      cadence: "twice_daily_with_hourly_repair",
+      localTime: "毎時40分：修正継続・記事改善・新規調査",
+      cadence: "hourly_continuous_growth",
       nextRunAt: nextScheduledRun()
     }
   };
