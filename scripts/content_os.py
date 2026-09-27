@@ -1422,6 +1422,9 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
 - 新規候補と既存記事を同一検索意図と判断するには、原則としてcore_topic_termsの少なくとも1つが既存記事タイトルにも存在することを要求する。
 - 同じ市を複数記事で扱う場合は、検索意図が明確に違う場合だけ許可する。
 - 「費用」「業者選び」など全地域共通の一般論を地域名だけ変えて量産しない。
+- 福岡側で未カバー地域が0なら、地域記事を無理に増やさず重複整理・既存ハブ改善・九州広域の独自テーマを優先する。
+- kyushu_prefecture_coverage がgapの県は戦略上の空白として認識する。ただし「県名＋遺品整理」の薄い記事ではなく、自治体制度差、遠方の実家整理、処分ルール比較、島しょ部・山間部など実務差が一次情報で裏付けられる場合だけ新規化する。
+- opportunity_score 88未満でも、85〜87で構造上重要なら research_findings を深掘りし、次回候補として理由を明記する。
 
 許可カテゴリ:
 {json.dumps(CONFIG.get("new_article_categories", {}), ensure_ascii=False)}
@@ -2449,32 +2452,98 @@ def candidate_selection_reasons(candidate: dict) -> list[str]:
             reasons.append(f"Google平均掲載順位 {pos:.1f} 位で、上位化の余地が大きい")
         if imp >= 100 and ctr < 0.03:
             reasons.append(f"表示 {int(imp)} 回に対して検索CTR {ctr*100:.2f}% と低く、クリック改善余地がある")
+    if candidate.get("selection_note"):
+        reasons.append(str(candidate["selection_note"]))
     if not reasons:
-        reasons.append("サイト全体の品質・検索データを合算した優先度スコアが最上位")
+        reasons.append("サイト全体の品質・検索データを合算した戦略優先度が最上位")
     return reasons
 
 
 
-def recent_rejection_count(path: str, lookback: int = 6) -> int:
-    rows = _load_list_log(RUN_LOG)[:lookback]
-    return sum(
-        1 for x in rows
+def _parse_iso(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except Exception:
+        return None
+
+
+def recent_path_history(path: str, limit: int = 30) -> list[dict]:
+    return [
+        x for x in _load_list_log(RUN_LOG)[:limit]
         if (x.get("candidate") or {}).get("path") == path
-        and x.get("status") == "rejected"
-    )
+    ]
+
+
+def path_is_in_cooldown(path: str) -> tuple[bool, str]:
+    now = datetime.now(timezone.utc)
+    history = recent_path_history(path)
+    if not history:
+        return False, ""
+
+    recent_rejects = 0
+    for row in history:
+        ts = _parse_iso(row.get("timestamp") or row.get("finished_at"))
+        age_h = ((now - ts).total_seconds() / 3600) if ts else 9999
+        status = row.get("status")
+        if status == "published" and age_h < 24 * 14:
+            return True, f"直近{age_h/24:.1f}日以内に本番更新済み"
+        if status == "rejected" and age_h < 24 * 7:
+            recent_rejects += 1
+            if age_h < 48:
+                return True, f"直近{age_h:.0f}時間以内にReviewer却下済み"
+        if status == "error" and age_h < 24:
+            return True, f"直近{age_h:.0f}時間以内にエラー済み"
+
+    if recent_rejects >= 2:
+        return True, f"7日以内にReviewer却下が{recent_rejects}回"
+    return False, ""
+
+
+def recent_category_counts(limit: int = 10) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in _load_list_log(RUN_LOG)[:limit]:
+        path = (row.get("candidate") or {}).get("path") or ""
+        slug = category_slug_from_path(path)
+        if slug != "other":
+            counts[slug] = counts.get(slug, 0) + 1
+    return counts
 
 
 def choose_existing_candidate(report: dict) -> dict | None:
     candidates = report.get("top_improvement_candidates", [])
+    recent_cats = recent_category_counts(8)
+    scored = []
+
     for candidate in candidates:
-        if candidate.get("priority_score", 0) <= 0:
+        base = float(candidate.get("priority_score", 0) or 0)
+        if base <= 0:
             continue
-        rejects = recent_rejection_count(candidate["path"])
-        if rejects >= 2:
-            print("Cooldown repeated rejected candidate:", candidate["path"], "rejects=", rejects)
+
+        blocked, reason = path_is_in_cooldown(candidate["path"])
+        if blocked:
+            print("Cooldown candidate:", candidate["path"], reason)
             continue
-        return candidate
-    return None
+
+        slug = category_slug_from_path(candidate["path"])
+        repetition_penalty = min(20, recent_cats.get(slug, 0) * 4)
+        strategic = base - repetition_penalty
+
+        x = dict(candidate)
+        x["base_priority_score"] = base
+        x["category_repetition_penalty"] = repetition_penalty
+        x["strategic_priority_score"] = round(strategic, 2)
+        x["selection_note"] = (
+            f"基礎優先度{base:.1f} - 最近の{slug}カテゴリ集中ペナルティ{repetition_penalty}"
+        )
+        scored.append(x)
+
+    if not scored:
+        return None
+
+    scored.sort(key=lambda x: x["strategic_priority_score"], reverse=True)
+    return scored[0]
 
 
 def should_create_new_article(topic: dict | None, existing: dict | None) -> bool:
@@ -2626,6 +2695,9 @@ def make_run_record(
             "path": candidate.get("path"),
             "title": candidate.get("title"),
             "priority_score": candidate.get("priority_score"),
+            "strategic_priority_score": candidate.get("strategic_priority_score"),
+            "base_priority_score": candidate.get("base_priority_score"),
+            "category_repetition_penalty": candidate.get("category_repetition_penalty"),
             "quality": candidate.get("quality"),
             "gsc": {
                 "clicks": gsc.get("clicks"),
