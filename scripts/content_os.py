@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import os
 import re
@@ -1564,6 +1565,8 @@ opportunity_score は需要、独自性、一次情報の強さ、既存記事�
 
 
 def new_article_path(topic: dict) -> str:
+    if topic.get("_article_path"):
+        return topic["_article_path"]
     today = datetime.now(ZoneInfo(CONFIG["timezone"])).strftime("%Y%m%d")
     return f"blog/{topic['category_slug']}/article-{today}-{topic['slug']}.html"
 
@@ -1778,7 +1781,7 @@ def build_new_article_page(topic: dict, data: dict) -> str:
 def call_revision_editor(candidate: dict, current_html: str, prior_editor: dict, review: dict, rows: list[dict], attempt: int) -> dict:
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
-    model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
+    model = (os.getenv("OPENAI_REPAIR_MODEL") or os.getenv("OPENAI_REVIEW_MODEL", "gpt-5.6-sol")) if attempt >= 2 else os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     article_match = ARTICLE_RE.search(current_html)
     if not article_match:
         raise RuntimeError("revision source article-content not found")
@@ -1814,6 +1817,8 @@ Reviewer:
 - change_summary と実際のarticle_htmlが一致していることを返答前に確認する
 - Reviewerが指摘していない良い部分は壊さない
 - 不確かな数値・断定は削除するか一次情報を付ける
+- 同じ指摘が残る場合は言い換えを繰り返さず、一次情報を再調査し、その節の構成から書き直す
+- 必要な根拠が確認できない場合は扱う範囲を絞り、読者が実行できる確認手順を具体化する
 - SEO目的だけの水増しをしない
 - editorial-info / reference-links / CTA /広告枠の主要構造は維持\n- article要素の開始タグとclassは現在案から変更しない
 - article_html内にscriptタグ・JSON-LDを入れない
@@ -1843,7 +1848,7 @@ JSONのみ:
   }},
   "decision_reason": "Reviewer指摘をどう解消したか",
   "issue_resolution": [
-    {"issue_number": 1, "issue": "指摘内容の要約", "resolution": "確認した一次情報と実HTMLで行った修正"}
+    {{"issue_number": 1, "issue": "指摘内容の要約", "resolution": "確認した一次情報と実HTMLで行った修正"}}
   ]
 }}
 """
@@ -2295,8 +2300,127 @@ def replace_internal_links_to_old_path(old_path: str, new_path: str) -> list[str
     return changed
 
 
-def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> dict:
-    path = new_article_path(topic)
+def repair_file(path: str) -> Path:
+    return PRIVATE_DIR / "repair" / (hashlib.sha256(path.encode()).hexdigest() + ".json")
+
+
+def save_repair(state: dict) -> None:
+    dest = repair_file(state["candidate"]["path"])
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    state["updated_at"] = datetime.now(timezone.utc).isoformat()
+    temp = dest.with_suffix(".tmp")
+    temp.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temp.replace(dest)
+
+
+def pending_repairs() -> list[dict]:
+    pending = []
+    for path in sorted((PRIVATE_DIR / "repair").glob("*.json")):
+        state = json.loads(path.read_text(encoding="utf-8"))
+        target = ROOT / state["candidate"]["path"]
+        digest = hashlib.sha256(target.read_bytes()).hexdigest() if target.exists() else None
+        if state.get("published_digest") and digest == state["published_digest"]:
+            # The checkpoint is cleared only after its exact result reaches main.
+            path.unlink()
+            continue
+        if state["action_type"] == "new_article" and target.exists():
+            # Another change published this URL. Continue as an edit, never overwrite blindly.
+            state["action_type"] = "improvement"
+            state["candidate"]["candidate_type"] = "existing_article"
+            state.pop("data", None)
+            state.pop("review", None)
+            state.pop("published_digest", None)
+            save_repair(state)
+        pending.append(state)
+    return sorted(pending, key=lambda x: x["created_at"])
+
+
+def mark_repair_ready(path: str, html: str) -> None:
+    dest = repair_file(path)
+    if not dest.exists():
+        return
+    state = json.loads(dest.read_text(encoding="utf-8"))
+    state["published_digest"] = hashlib.sha256(html.encode("utf-8")).hexdigest()
+    save_repair(state)
+
+
+def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: dict | None, action_type: str):
+    """Keep the draft and reviewer feedback across runner lifetimes until it passes."""
+    original = (ROOT / candidate["path"]).read_text(encoding="utf-8") if action_type == "improvement" else "新規記事のため変更前ページなし"
+    original_digest = hashlib.sha256(original.encode()).hexdigest()
+    dest = repair_file(candidate["path"])
+    state = json.loads(dest.read_text(encoding="utf-8")) if dest.exists() else {
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "candidate": candidate, "research": research, "action_type": action_type,
+        "attempts": [], "revision_count": 0,
+    }
+    if state.get("original_digest") != original_digest:
+        state.pop("data", None)
+        state.pop("review", None)
+        state.pop("published_digest", None)
+    state["original_digest"] = original_digest
+    save_repair(state)
+
+    def build(data):
+        if action_type == "new_article":
+            validate_new_article_output(research, data)
+            return build_new_article_page(research, data)
+        validate_editor_output(candidate, data)
+        return build_proposed_html(candidate, data)
+
+    data = state.get("data")
+    if data is None:
+        data = call_new_article_writer(research, rows) if action_type == "new_article" else call_editor(candidate, rows)
+        proposed = build(data)
+        state.update(data=data, proposed=proposed, review=None)
+        save_repair(state)
+    proposed = state["proposed"]
+    revisions_this_run = 0
+    max_revisions = int(CONFIG.get("max_revision_attempts", 4))
+    while True:
+        review = state.get("review")
+        if review is None:
+            review = call_reviewer(candidate, original, proposed, data)
+            state["review"] = review
+            state["attempts"].append({
+                "attempt": len(state["attempts"]) + 1,
+                "run_id": os.getenv("GITHUB_RUN_ID"),
+                "score": review.get("score"), "approve": review.get("approve"),
+                "issues": review.get("issues", []), "strengths": review.get("strengths", []),
+                "issue_resolution": data.get("issue_resolution", []),
+                "changes": data.get("change_summary", []),
+            })
+            save_repair(state)
+        if review_passed(review):
+            return data, proposed, review, state["attempts"]
+        if revisions_this_run >= max_revisions:
+            record = make_run_record(
+                mode=mode, candidate=candidate, status="repair_pending",
+                outcome="再修正を継続中",
+                outcome_reason=f"今回{revisions_this_run}回・累計{state['revision_count']}回修正。現在{review.get('score')}点。原稿と未解決の指摘を保存し、次の継続実行で再修正・再審査する",
+                editor=data, reviewer=review, published=False,
+            )
+            record = attach_run_context(record, research=research, attempts=state["attempts"], action_type=action_type)
+            record["repair_pending"] = True
+            record["next_action"] = "毎時40分の継続実行で保存済み原稿の指摘を修正→再審査→合格後に公開"
+            record["steps"].append({"key": "repair", "label": "修正を継続", "status": "pending", "detail": record["next_action"]})
+            append_run_log(record)
+            return None
+        state["revision_count"] += 1
+        save_repair(state)  # Save BEFORE a network call so even a timeout retains the draft.
+        next_data = call_revision_editor(candidate, proposed, data, review, rows, state["revision_count"])
+        next_proposed = build(next_data)
+        data, proposed = next_data, next_proposed
+        state.update(data=data, proposed=proposed, review=None)
+        state.pop("published_digest", None)
+        save_repair(state)
+        revisions_this_run += 1
+        print("Repaired reviewer issues:", candidate["path"], "revision=", state["revision_count"], flush=True)
+
+
+def create_new_article(topic: dict, rows: list[dict], mode: str = "improve", resume_path: str | None = None) -> dict:
+    path = resume_path or new_article_path(topic)
+    topic = {**topic, "_article_path": path}
     if (ROOT / path).exists():
         raise RuntimeError("new article path already exists: " + path)
 
@@ -2314,67 +2438,10 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
         ],
     }
 
-    data = call_new_article_writer(topic, rows)
-    validate_new_article_output(topic, data)
-    proposed = build_new_article_page(topic, data)
-    original_for_review = "新規記事のため変更前ページなし"
-    attempts = []
-    max_revisions = int(CONFIG.get("max_revision_attempts", 2))
-    best_pass = None
-
-    for round_index in range(max_revisions + 1):
-        review = call_reviewer(candidate, original_for_review, proposed, data)
-        attempts.append({
-            "attempt": round_index + 1,
-            "score": review.get("score"),
-            "approve": review.get("approve"),
-            "issues": review.get("issues", []),
-            "strengths": review.get("strengths", []),
-            "issue_resolution": data.get("issue_resolution", []),
-        })
-        if review_passed(review):
-            score = int(review.get("score", 0) or 0)
-            if best_pass is None or score > int(best_pass["review"].get("score", 0) or 0):
-                best_pass = {"data": data, "proposed": proposed, "review": review, "attempt": round_index + 1}
-            target_score = int(CONFIG.get("target_reviewer_score", 94))
-            issues = review.get("issues", []) or []
-            if score >= target_score or not issues or round_index >= max_revisions:
-                break
-            print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
-
-        if round_index >= max_revisions:
-            if best_pass is not None:
-                data = best_pass["data"]
-                proposed = best_pass["proposed"]
-                review = best_pass["review"]
-                attempts.append({
-                    "attempt": "fallback",
-                    "score": review.get("score"),
-                    "approve": True,
-                    "issues": review.get("issues", []),
-                    "strengths": review.get("strengths", []),
-                    "note": f"最終磨きが悪化したため、合格済みベスト版（attempt {best_pass['attempt']}）へロールバック",
-                })
-                print("Polish regressed; falling back to best passing draft", candidate["path"], "score=", review.get("score"))
-                break
-
-            record = make_run_record(
-                mode=mode,
-                candidate=candidate,
-                status="rejected",
-                outcome="新規記事を公開見送り",
-                outcome_reason=f"最大{max_revisions}回再修正後もReviewer {review.get('score')}点で基準未達",
-                editor=data,
-                reviewer=review,
-                published=False,
-            )
-            record = attach_run_context(record, research=topic, attempts=attempts, action_type="new_article")
-            append_run_log(record)
-            return {"path": path, "published": False, "review": review, "research": topic}
-
-        data = call_revision_editor(candidate, proposed, data, review, rows, round_index + 1)
-        validate_new_article_output(topic, data)
-        proposed = build_new_article_page(topic, data)
+    outcome = review_with_repairs(candidate, rows, mode, topic, "new_article")
+    if outcome is None:
+        return {"path": path, "published": False, "repair_pending": True}
+    data, proposed, review, attempts = outcome
 
     proposed, image_path = generate_image_if_needed(candidate, data, proposed)
     seo = data["seo"]
@@ -2450,6 +2517,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
     record["replaced_held_article"] = replaced_held
     record["redirected_internal_links"] = redirected_links
     append_run_log(record)
+    mark_repair_ready(path, proposed)
 
     return {
         "path": path,
@@ -2820,87 +2888,11 @@ def append_activity(candidate: dict, data: dict, review: dict, image_path: str |
 
 
 def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: dict | None = None) -> dict:
-    original_html = (ROOT / candidate["path"]).read_text(encoding="utf-8")
-    data = call_editor(candidate, rows)
-    validate_editor_output(candidate, data)
-    proposed = build_proposed_html(candidate, data)
-
-    attempts = []
-    max_revisions = int(CONFIG.get("max_revision_attempts", 2))
+    outcome = review_with_repairs(candidate, rows, mode, research, "improvement")
+    if outcome is None:
+        return {"path": candidate["path"], "published": False, "repair_pending": True}
+    data, proposed, review, attempts = outcome
     min_score = int(CONFIG.get("minimum_reviewer_score", 88))
-    review = {}
-    best_pass = None
-
-    for round_index in range(max_revisions + 1):
-        review = call_reviewer(candidate, original_html, proposed, data)
-        attempts.append({
-            "attempt": round_index + 1,
-            "score": review.get("score"),
-            "approve": review.get("approve"),
-            "issues": review.get("issues", []),
-            "strengths": review.get("strengths", []),
-            "editor_reason": data.get("decision_reason"),
-            "changes": data.get("change_summary", []),
-        })
-        if review_passed(review):
-            score = int(review.get("score", 0) or 0)
-            if best_pass is None or score > int(best_pass["review"].get("score", 0) or 0):
-                best_pass = {"data": data, "proposed": proposed, "review": review, "attempt": round_index + 1}
-            target_score = int(CONFIG.get("target_reviewer_score", 94))
-            issues = review.get("issues", []) or []
-            if score >= target_score or not issues or round_index >= max_revisions:
-                break
-            print("Reviewer passed minimum but polishing further", candidate["path"], "score=", score, "target=", target_score)
-
-        if round_index >= max_revisions:
-            if best_pass is not None:
-                data = best_pass["data"]
-                proposed = best_pass["proposed"]
-                review = best_pass["review"]
-                attempts.append({
-                    "attempt": "fallback",
-                    "score": review.get("score"),
-                    "approve": True,
-                    "issues": review.get("issues", []),
-                    "strengths": review.get("strengths", []),
-                    "editor_reason": data.get("decision_reason"),
-                    "changes": data.get("change_summary", []),
-                    "note": f"最終磨きが悪化したため、合格済みベスト版（attempt {best_pass['attempt']}）へロールバック",
-                })
-                print("Polish regressed; falling back to best passing draft", candidate["path"], "score=", review.get("score"))
-                break
-
-            score = int(review.get("score", 0) or 0)
-            reason = f"Reviewer指摘で{max_revisions}回再修正したが、最終{score}点で公開基準{min_score}点に未達"
-            result = {
-                "path": candidate["path"],
-                "published": False,
-                "review": review,
-                "change_summary": data.get("change_summary", []),
-                "review_attempts": attempts,
-            }
-            (PRIVATE_DIR / "last-ai-change.json").write_text(
-                json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-            record = make_run_record(
-                mode=mode,
-                candidate=candidate,
-                status="rejected",
-                outcome="再修正後も公開見送り",
-                outcome_reason=reason,
-                editor=data,
-                reviewer=review,
-                published=False,
-            )
-            record = attach_run_context(record, research=research, attempts=attempts, action_type="improvement")
-            append_run_log(record)
-            print("Reviewer rejected after retries", candidate["path"], score)
-            return result
-
-        data = call_revision_editor(candidate, proposed, data, review, rows, round_index + 1)
-        validate_editor_output(candidate, data)
-        proposed = build_proposed_html(candidate, data)
-        print("Revised after reviewer feedback", candidate["path"], "attempt=", round_index + 2)
 
     proposed, image_path = generate_image_if_needed(candidate, data, proposed)
     seo = data["seo"]
@@ -2940,6 +2932,7 @@ def improve(candidate: dict, rows: list[dict], mode: str = "improve", research: 
     )
     record = attach_run_context(record, research=research, attempts=attempts, action_type="improvement")
     append_run_log(record)
+    mark_repair_ready(candidate["path"], proposed)
     print("Validated full-page improvement", candidate["path"], "score=", review.get("score"), "attempts=", len(attempts))
     return result
 
@@ -2950,6 +2943,9 @@ def main() -> int:
     args = ap.parse_args()
 
     PRIVATE_DIR.mkdir(parents=True, exist_ok=True)
+    if args.mode == "improve" and os.getenv("CONTENT_OS_REPAIR_ONLY") == "true" and not pending_repairs():
+        print("No unfinished articles; hourly continuation is idle.")
+        return 0
     rows = article_records()
     coverage = build_site_coverage(rows)
     (PRIVATE_DIR / "site-coverage-latest.json").write_text(
@@ -2984,6 +2980,21 @@ def main() -> int:
             ))
             print("Analysis complete; no article modified.")
             return 0
+
+        if args.mode == "improve":
+            pending = pending_repairs()
+            if pending:
+                state = pending[0]
+                candidate = state["candidate"]
+                print("Resuming unfinished article:", candidate["path"], flush=True)
+                if state["action_type"] == "new_article":
+                    create_new_article(state["research"], rows, args.mode, resume_path=candidate["path"])
+                else:
+                    improve(candidate, rows, args.mode, research=state.get("research"))
+                return 0
+            if os.getenv("CONTENT_OS_REPAIR_ONLY") == "true":
+                print("No unfinished articles; hourly continuation is idle.")
+                return 0
 
         topic = discover_new_topic(rows)
         if topic is not None:
@@ -3031,18 +3042,14 @@ def main() -> int:
             if duplicate_candidate and not blocked:
                 print("Action selected: IMPROVE RESEARCH-MATCH", duplicate_candidate["path"])
                 result = improve(duplicate_candidate, rows, args.mode, research=topic)
-                if result.get("published"):
-                    return 0
-                candidate = choose_existing_candidate(rep, {duplicate_path})
+                return 0
             elif blocked:
                 print("Research-match in cooldown; trying another candidate:", duplicate_path, reason)
 
         if should_create_new_article(topic, candidate):
             print("Action selected: NEW ARTICLE", topic.get("title"), "score=", topic.get("opportunity_score"))
             result = create_new_article(topic, rows, args.mode)
-            if result.get("published"):
-                return 0
-            print("New article rejected; trying a distinct existing-page improvement.")
+            return 0
 
         if candidate:
             print("Action selected: IMPROVE", candidate["path"], "priority=", candidate.get("priority_score"))
@@ -3069,7 +3076,8 @@ def main() -> int:
         return 0
 
     except Exception as exc:
-        candidate = choose_existing_candidate(rep)
+        pending = pending_repairs()
+        candidate = pending[0]["candidate"] if pending else choose_existing_candidate(rep)
         record = make_run_record(
             mode=args.mode,
             candidate=candidate,
@@ -3083,6 +3091,9 @@ def main() -> int:
             record["research"] = locals().get("topic")
         except Exception:
             pass
+        if pending:
+            record["repair_pending"] = True
+            record["next_action"] = "保存済み原稿と指摘から次の毎時40分の継続実行で再開"
         append_run_log(record)
         raise
 
