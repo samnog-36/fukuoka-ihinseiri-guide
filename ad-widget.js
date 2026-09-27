@@ -37,12 +37,35 @@
   function impressionKey(adId,placement){
     return "fkg-ad-imp:"+adId+":"+placement+":"+location.pathname;
   }
+  let monetization;
+  async function renderAffiliate(slot,g){
+    // A single contextual slot, only with an approved, real tracking link.
+    if((slot.dataset.placement||"article_middle")!=="article_bottom")return;
+    try{
+      monetization ||= fetch("/data/monetization.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{});
+      const cfg=(await monetization).affiliate;
+      if(!cfg?.enabled)return;
+      const offer=(cfg.offers||[]).find(o=>o.status==="approved"&&o.enabled===true&&
+        Array.isArray(o.genres)&&o.genres.map(genre).includes(g)&&
+        (!Array.isArray(o.paths)||!o.paths.length||o.paths.includes(location.pathname))&&
+        /^https:\/\//.test(String(o.url||"")));
+      if(!offer)return;
+      slot.innerHTML='<aside class="fkg-ad-card"><div class="fkg-ad-body">'+
+        '<div class="fkg-ad-label">広告・アフィリエイト</div><div class="fkg-ad-company">'+esc(offer.title)+'</div>'+
+        '<p class="fkg-ad-desc">'+esc(offer.description)+'</p>'+
+        '<a class="fkg-ad-btn web" href="'+esc(safeUrl(offer.url))+'" target="_blank" rel="sponsored nofollow noopener">'+esc(offer.buttonLabel||"サービスの詳細を確認する")+'</a>'+
+        '<p class="fkg-ad-foot">このリンクを経由した申込み等により、当サイトに報酬が発生する場合があります。</p></div></aside>';
+      slot.querySelector('a').addEventListener('click',()=>{
+        if(typeof window.gtag==="function")window.gtag('event','affiliate_click',{offer_id:String(offer.id||""),page_path:location.pathname});
+      });
+    }catch{slot.innerHTML="";}
+  }
   async function render(slot){
     injectStyle();
     const placement=slot.dataset.placement||"article_middle",g=genre(slot.dataset.genre);
     try{
       const r=await fetch(API+"/serve?genre="+encodeURIComponent(g)+"&placement="+encodeURIComponent(placement),{cache:"no-store"});
-      const d=await r.json();if(!r.ok||!d.ad){slot.innerHTML="";return}
+      const d=await r.json();if(!r.ok||!d.ad){slot.innerHTML="";await renderAffiliate(slot,g);return}
       const a=d.ad,img=safeUrl(a.bannerUrl||a.photoUrl),web=safeUrl(a.websiteUrl);
       slot.innerHTML='<div class="fkg-ad-card">'+
         (img?'<img class="fkg-ad-media" src="'+esc(img)+'" alt="" loading="lazy">':'')+
