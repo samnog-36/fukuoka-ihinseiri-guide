@@ -1,5 +1,61 @@
 [
   {
+    "timestamp": "2026-09-27T05:46:53.159475+00:00",
+    "run_id": "36298093393",
+    "path": "blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka.html",
+    "title_before": "親の不動産がどこにあるかわからないときの相続登記｜2027年3月31日までに確認する方法【福岡】｜福岡遺品整理ガイド",
+    "title_after": "親の不動産がどこにあるかわからないときの相続登記｜2027年3月31日までに確認する方法【福岡】｜福岡遺品整理ガイド",
+    "changes": [
+      "本文の制度説明を法務省・福岡法務局の一次情報で再確認し、内容は大きく変えずに維持しました。",
+      "所有不動産記録証明制度の開始時期を「2026年2月2日」と明記し、meta descriptionも同じ正確な日付へ更新しました。",
+      "本文中の相続放棄関連記事への内部リンクを、リダイレクト元の.html URLから拡張子なしの最終URLへ修正しました。",
+      "アイキャッチ画像は記事内容と整合しているため継続使用とし、altを内容に即して微修正しました。"
+    ],
+    "sources": [
+      {
+        "name": "法務省｜相続登記の申請義務化について",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00599.html"
+      },
+      {
+        "name": "法務省｜所有不動産記録証明制度について",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00740.html"
+      },
+      {
+        "name": "法務省｜相続人申告登記について",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00602.html"
+      },
+      {
+        "name": "福岡法務局｜相続登記のご案内",
+        "url": "https://houmukyoku.moj.go.jp/fukuoka/page000388.html"
+      },
+      {
+        "name": "福岡法務局｜登記手続案内のご案内",
+        "url": "https://houmukyoku.moj.go.jp/fukuoka/page000001_00508.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 92,
+    "review_strengths": [
+      "相続登記義務化の開始日、3年以内という基本期限、2024年4月1日以前の相続に関する2027年3月31日の経過措置、10万円以下の過料を正確に説明しています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00599.html?utm_source=openai))",
+      "所有不動産記録証明制度の施行日を2026年2月2日とし、書面1,600円、オンライン郵送1,500円、オンライン窓口1,470円という手数料も一次情報と一致しています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00740.html?utm_source=openai))",
+      "全国の法務局での書面・オンライン請求、郵送請求、過去の氏名・住所を検索条件にできること、検索結果に限界があることを実務的に説明しています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00740.html?utm_source=openai))",
+      "相続人申告登記について、単独申出が可能であること、申出人についてのみ義務履行扱いとなること、売却や抵当権設定には別途相続登記が必要であることを正しく区別しています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00565?utm_source=openai))",
+      "福岡法務局の登記手続案内が予約制であり、一般的な記載事項等の説明に限られ、個別の法律判断や事前審査を行わないという説明は公式案内に沿っています。([houmukyoku.moj.go.jp](https://houmukyoku.moj.go.jp/fukuoka/page000001_00508.html?utm_source=openai))",
+      "検索意図に対して、書類保全、住所・氏名履歴の整理、所有不動産記録証明、登記事項証明書、相続人申告登記という行動順序が明確で、チェックリストも実用的です。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて存在しており、拡張子なしの確認済みURLへ統一されています。検索結果への露出状況を理由とした誤判定もありません。",
+      "title、meta description、H1、本文の主題は一致しています。架空の業者、口コミ、実績、専門家コメント、体験談はなく、一次情報へのリンクと免責事項も備えています。",
+      "広告は記事上部と下部に限定され、変更前の本文中広告が削除されています。CTAも過剰ではなく、AdSense品質上の大きな問題はありません。",
+      "HTMLの主要タグは適切に閉じられており、見出し階層、パンくず、article、header、section、figureなどの構造も壊れていません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-09-27T05:41:28.796171+00:00",
     "run_id": "36297210219",
     "path": "blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka.html",
