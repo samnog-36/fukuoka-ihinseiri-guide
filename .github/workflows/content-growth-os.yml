@@ -76,7 +76,7 @@ jobs:
         run: pip install -r requirements-content-os.txt
 
       - name: Test review continuation and checkpoint recovery
-        run: python3 -m unittest discover -s tests -p "test_content_repair.py"
+        run: python3 -m unittest discover -s tests -p "test_*.py"
 
       - name: Pull Search Console performance when configured
         run: python3 scripts/search_console_pull.py
@@ -110,15 +110,12 @@ jobs:
         run: |
           set -o pipefail
           {
+            python3 scripts/publication_workspace.py normalize &&
             python3 scripts/verify_adsense_trust_updates.py &&
-            python3 scripts/content_quality_gate.py --strict
+            python3 scripts/content_quality_gate.py --strict &&
+            python3 -m py_compile scripts/content_os.py scripts/search_console_pull.py scripts/content_quality_gate.py scripts/finalize_ai_run.py scripts/publication_workspace.py &&
+            git diff --check
           } 2>&1 | tee .content-os-private/gate-output.txt
-          python3 -m py_compile \
-            scripts/content_os.py \
-            scripts/search_console_pull.py \
-            scripts/content_quality_gate.py \
-            scripts/finalize_ai_run.py
-          git diff --check
 
       - name: Finalize AI decision log
         if: always()
@@ -160,10 +157,10 @@ jobs:
           # A failed AI/gate run may leave draft files in the workspace.
           # Never publish those drafts; keep only the run-decision log.
           if [ "$FAILED" = "true" ]; then
-            git restore --worktree --staged -- blog area images/blog sitemap.xml js/search-data.json data/ai-activity-log.json 2>/dev/null || true
+            python3 scripts/publication_workspace.py discard
           fi
 
-          ARTICLE_CHANGE="$(git status --porcelain -- blog area images/blog sitemap.xml js/search-data.json data/ai-activity-log.json)"
+          ARTICLE_CHANGE="$(git status --porcelain -- blog area cost guide images/blog sitemap.xml js/search-data.json data/ai-activity-log.json _redirects)"
           LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json data/site-coverage.json)"
 
           if [ -z "$ARTICLE_CHANGE" ] && [ -z "$LOG_CHANGE" ]; then
@@ -193,6 +190,9 @@ jobs:
           git add \
             blog \
             area \
+            cost \
+            guide \
+            _redirects \
             images/blog \
             sitemap.xml \
             js/search-data.json \
