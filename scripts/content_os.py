@@ -1111,10 +1111,39 @@ def build_proposed_html(candidate: dict, data: dict) -> str:
     return normalize_generated_text(out)
 
 
+
+def proposed_internal_link_manifest(html: str) -> list[dict]:
+    redirects = redirect_map()
+    seen = set()
+    out = []
+    for raw in HREF_RE.findall(html):
+        href = str(raw or "").strip()
+        if not href.startswith("/") or href.startswith("//"):
+            continue
+        base = href.split("#", 1)[0].split("?", 1)[0]
+        if not base or base in seen:
+            continue
+        if base.startswith(("/api/", "/images/", "/css/", "/js/", "/manus-storage/")):
+            continue
+        seen.add(base)
+        final = redirects.get(base, base)
+        target = internal_href_file(final)
+        dynamic_ok = base.startswith("/business/setup/")
+        out.append({
+            "href": base,
+            "exists_in_repository": bool(target) or dynamic_ok,
+            "resolved_to": final,
+            "redirected": final != base,
+            "target_file": target.relative_to(ROOT).as_posix() if target else None,
+        })
+    return out
+
+
 def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -> dict:
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     reviewer_model = os.getenv("OPENAI_REVIEW_MODEL", "gpt-5.6-sol")
+    link_manifest = proposed_internal_link_manifest(proposed)
     prompt = f"""
 あなたは公開前の独立レビュアーです。編集AIとは別人格として厳格に判定してください。
 対象: {candidate["path"]}
@@ -1128,6 +1157,19 @@ def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -
 - HTML構造を壊していないこと
 
 必ずweb検索で重要な法律・制度・自治体情報を再確認してください。
+外部の法律・制度・自治体情報はwebで検証してください。
+
+内部リンクだけは、検索エンジンのインデックス状況や公開環境の一時的なデプロイ遅延ではなく、下記「リポジトリ実在確認」を正として判定してください。
+exists_in_repository=true のリンクを「Googleで見つからない」「検索結果に出ない」という理由だけでrejectしてはいけません。
+redirected=true の場合は、必要なら resolved_to の最終URLを使う改善提案は可能です。
+exists_in_repository=false の内部リンクだけをリンク切れ候補として扱ってください。
+
+リポジトリ実在確認:
+{json.dumps(link_manifest, ensure_ascii=False)}
+
+また、新規記事の専用アイキャッチ画像はReviewer合格後にシステムが生成・反映します。
+Editorが image.action="generate" としている場合、レビュー時点で /images/ogp-default.png が残っていることだけを理由に減点・rejectしてはいけません。
+
 なおcanonical、OG/Twitterメタ、Article/Breadcrumb構造化データはEditorではなくシステムが最終HTMLで正規化します。Editorの申告ではなく、提示されたNEW HTMLそのものを判定してください。
 次のいずれかがあれば reject:
 - 出典で確認できない数字や断定
@@ -1750,6 +1792,9 @@ Reviewerに落ちたから翌日まで放置するのではなく、このRun内
 Reviewer:
 {json.dumps(review, ensure_ascii=False)}
 
+検証済みサイト内リンク候補（この一覧にあるURLを優先して使う）:
+{json.dumps(inventory_for_internal_links(rows, candidate["path"]), ensure_ascii=False)}
+
 前回Editorの判断:
 {json.dumps({k:v for k,v in prior_editor.items() if not k.startswith("_")}, ensure_ascii=False)}
 
@@ -1760,6 +1805,8 @@ Reviewer:
 
 必須:
 - Reviewerのissuesを番号順に1件ずつ解消し、返答前に「実HTMLが本当に直っているか」を自己点検する
+- 各issueについて、何を確認し、本文のどこをどう直したかを issue_resolution に1対1で記録する
+- 内部リンクは検索結果ではなく上記の検証済みサイト内リンク候補を使う。存在確認できないURLを新しく作らない
 - web検索で一次情報を再確認する
 - 広告枠はシステム管理。article_htmlに class="fkg-ad" を絶対に含めない。広告を追加・削除・維持したと申告もしない
 - Reviewerが法律の条文・項号・時系列を指摘した場合、放棄前/放棄後などの局面を明確に分け、該当する条・号・ただし書を一次情報で再確認して説明する
@@ -1794,7 +1841,10 @@ JSONのみ:
     "prompt": "",
     "alt": ""
   }},
-  "decision_reason": "Reviewer指摘をどう解消したか"
+  "decision_reason": "Reviewer指摘をどう解消したか",
+  "issue_resolution": [
+    {"issue_number": 1, "issue": "指摘内容の要約", "resolution": "確認した一次情報と実HTMLで行った修正"}
+  ]
 }}
 """
     resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
@@ -2280,6 +2330,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve") -> 
             "approve": review.get("approve"),
             "issues": review.get("issues", []),
             "strengths": review.get("strengths", []),
+            "issue_resolution": data.get("issue_resolution", []),
         })
         if review_passed(review):
             score = int(review.get("score", 0) or 0)
