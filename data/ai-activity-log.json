@@ -1,5 +1,75 @@
 [
   {
+    "timestamp": "2026-09-27T04:26:36.220175+00:00",
+    "run_id": "36294145325",
+    "path": "blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu.html",
+    "title_before": null,
+    "title_after": "遺品整理業者は家庭ごみを運べる？福岡市・九州主要市の一般廃棄物収集運搬許可を確認する方法",
+    "changes": [
+      "遺品整理の「整理作業」と「家庭ごみの収集運搬」を分けて説明し、見積もり前に確認すべき実務ポイントを具体化しました。",
+      "福岡市の遺品整理・引越し時の家庭系ごみに限定した許可制度を中心に、対象条件と確認手順を整理しました。",
+      "産業廃棄物収集運搬業許可、古物商許可、貨物運送に関する許可だけでは家庭ごみの運搬根拠にならない点を明確にしました。",
+      "熊本市・長崎市・鹿児島市について、許可業者利用、自己搬入、取扱品目確認という自治体ごとの実務差を比較しました。",
+      "既存の見積書・追加料金・遠方整理の記事へ内部リンクし、契約前の行動につながる導線を設けました。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索：廃棄物の処理及び清掃に関する法律",
+        "url": "https://laws.e-gov.go.jp/law/345AC0000000137"
+      },
+      {
+        "name": "環境省：廃棄物の適正処理について",
+        "url": "https://www.env.go.jp/content/000064653.pdf"
+      },
+      {
+        "name": "福岡市：遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "国民生活センター：遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      },
+      {
+        "name": "熊本市：遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.city.kumamoto.jp/kiji00368019/index.html"
+      },
+      {
+        "name": "長崎市：廃棄物の自己搬入",
+        "url": "https://www.city.nagasaki.lg.jp/page/4091.html"
+      },
+      {
+        "name": "鹿児島市：一般廃棄物処理業許可業者名簿",
+        "url": "https://www.city.kagoshima.lg.jp/kankyo/seiso/haikibutsu/kurashi/gomi/jigyosha/ippan/mebo.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260803-mitsumorisho-mikata.html",
+      "/blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata.html"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu-20260927.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "家庭から出た遺品が一般廃棄物に当たり、無許可の遺品整理業者が行える範囲、排出者から許可業者へ直接委託する考え方、産業廃棄物収集運搬業許可や事業系一般廃棄物限定許可では代替できない点は、環境省資料の整理と一致しています。",
+      "福岡市の限定許可について、自ら請け負った遺品整理・引越しに伴う家庭系ごみ、福岡市全域、指定施設への搬入、やむを得ない場合、リユース・リサイクル優先という条件を正確に反映しています。福岡市公式ページは2026年6月9日更新です。",
+      "熊本市の注意喚起、長崎市の事前搬入券と本人・親族による搬入原則、鹿児島市の取扱廃棄物欄「ごみ」「ごみ（生ごみを除く）」の確認はいずれも公式情報と整合しています。",
+      "国民生活センターの公表日である2025年10月30日、複数見積もり、契約内容・追加料金、一般廃棄物処理業許可、古物商許可に関する説明は正確です。",
+      "許可証の有無だけでなく、区域、品目、有効期間、実運搬者、搬入先まで確認させる構成で、検索者が契約前に取るべき行動へ具体的に落とし込めています。",
+      "福岡市を中心にしつつ、熊本市・長崎市・鹿児島市は制度差が確認できる範囲に限定しており、地名だけを差し替えた不自然な九州展開になっていません。",
+      "title、description、H1、本文の検索意図は一致しており、「遺品整理業者が家庭ごみを運べるか」「一般廃棄物許可をどう確認するか」という疑問に直接回答しています。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて存在します。.htmlなしの関連リンクもexists_in_repository=trueであり、リンク切れとして扱う理由はありません。",
+      "広告は上・中・下の3枠ですが、本文量が十分あり、強引なCTAや広告誘導、架空の口コミ・実績・専門家表現はありません。",
+      "article、nav、header、section、aside、table、timeなどのHTML要素は適切に閉じられており、主要な文書構造の破損は確認できません。",
+      "image.actionがgenerateであるため、現時点でデフォルトOGP画像が指定されていることは減点対象ではありません。"
+    ],
+    "status": "validated_for_auto_publish",
+    "action_type": "new_article",
+    "reverse_links_added": [],
+    "replaced_held_article": null,
+    "redirected_internal_links": []
+  },
+  {
     "timestamp": "2026-09-26T08:50:29.560171+00:00",
     "run_id": "36230821140",
     "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
