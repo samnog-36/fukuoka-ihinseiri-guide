@@ -1,5 +1,67 @@
 [
   {
+    "timestamp": "2026-09-27T07:29:28.495124+00:00",
+    "run_id": "36303083401",
+    "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
+    "title_before": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
+    "title_after": "福岡市中央区・城南区の遺品整理｜マンションでの準備と粗大ごみの出し方",
+    "changes": [
+      "根拠を確認できない区別の人口・高齢化率・作業傾向・間取り別費用相場を削除し、中央区・城南区で実務上重要な集合住宅の搬出準備へ主題を整理しました。",
+      "福岡市の公式情報に基づき、粗大ごみの申込・処理券・排出時刻、自己搬入の事前予約と手数料、市で扱えない家電リサイクル法対象品の説明を更新しました。",
+      "家庭ごみの収集運搬に関する許可確認の節を追加し、遺品整理の作業依頼と廃棄物運搬の確認を分けて説明しました。",
+      "費用については公定の地域相場を示さず、作業範囲・養生・搬出・駐車・家電処理・追加料金条件を見積書で比較する判断基準に変更しました。",
+      "相続放棄、貴重品探索、見積書、追加料金、契約トラブルに関する関連ページへの内部リンクを追加しました。",
+      "既存の広告枠、編集情報、公式情報セクション、CTA、画像ファイルおよび主要classを維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "福岡市｜家電リサイクル法対象品",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/recyclingLaw"
+      },
+      {
+        "name": "国民生活センター",
+        "url": "https://www.kokusen.go.jp/"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/kuyo/article-20260806-shashin-tegami-omoide-kuyo",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 88,
+    "review_strengths": [
+      "根拠不明だった人口、高齢化率、地域別作業傾向、間取り別料金相場を削除し、未検証の数値や断定を大幅に減らしています。",
+      "粗大ごみの定義、300円・500円・1,000円の処理券、朝8時30分までの排出、電話・インターネット・LINE受付は福岡市公式案内と整合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "自己搬入の事前予約、10kgまでごとに140円、レンタカー使用時の電話確認・審査という説明は、2026年9月8日更新の福岡市公式案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "家電リサイクル法対象品について、市の収集・処理施設での受入不可、対象6品目、リサイクル料金・収集運搬料金の説明が公式情報と一致しています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/recyclingLaw))",
+      "消火器、LPガスボンベ、車、タイヤ、バッテリー、パソコン等を市の通常収集と分ける説明も、福岡市の案内に沿っています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/collect))",
+      "遺品整理作業と家庭系一般廃棄物の収集運搬を分け、許可の関与を確認するよう促している点は重要です。福岡市は限定許可業者と、その他の場合に利用する一般廃棄物収集運搬許可業者について公式に案内しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "相続財産の処分によって単純承認と評価され得る旨を断定しすぎず、個別相談を勧めている点は妥当です。民法921条に関係する慎重な注意喚起として機能しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html?utm_source=openai))",
+      "title、description、H1は本文の中心テーマであるマンション搬出準備、粗大ごみ、自己搬入、許可確認と一致しています。",
+      "提示された内部リンクはすべてリポジトリ実在確認でexists_in_repository=trueであり、リンク切れとして扱うものはありません。",
+      "架空の口コミ、体験談、料金実績、専門家監修、業者ランキングはなく、CTAも1か所に抑えられています。本文量に対して広告・営業導線が過剰ではありません。",
+      "見出し階層、目次アンカー、figure、aside、公式情報section、ArticleおよびBreadcrumbListのJSON-LDは概ね整合し、article内部のHTML閉じタグにも重大な破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-09-27T05:46:53.159475+00:00",
     "run_id": "36298093393",
     "path": "blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka.html",
