@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-27T05:46:54.165897+00:00",
+    "timestamp": "2026-09-27T05:47:01.967456+00:00",
     "started_at": "2026-09-27T05:45:15Z",
-    "finished_at": "2026-09-27T05:46:54.165897+00:00",
+    "finished_at": "2026-09-27T05:47:01.967456+00:00",
     "run_id": "36298093393",
     "trigger": "push",
     "mode": "improve",
-    "status": "validated",
-    "outcome": "再修正を含め公開候補として承認",
-    "outcome_reason": "Reviewer 92点で基準88点を通過。品質Gateへ進行",
+    "status": "published",
+    "outcome": "本番公開完了",
+    "outcome_reason": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了",
     "candidate": {
       "path": "blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka.html",
       "title": "親の不動産がどこにあるかわからないときの相続登記｜2027年3月31日までに確認する方法【福岡】",
@@ -133,8 +133,8 @@
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "pending",
-        "detail": "PR作成・main自動反映処理中"
+        "status": "done",
+        "detail": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
       }
     ],
     "published": true,
