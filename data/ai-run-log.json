@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-27T07:29:29.362877+00:00",
+    "timestamp": "2026-09-27T07:29:36.624042+00:00",
     "started_at": "2026-09-27T07:26:23Z",
-    "finished_at": "2026-09-27T07:29:29.362877+00:00",
+    "finished_at": "2026-09-27T07:29:36.624042+00:00",
     "run_id": "36303083401",
     "trigger": "push",
     "mode": "improve",
-    "status": "validated",
-    "outcome": "再修正を含め公開候補として承認",
-    "outcome_reason": "Reviewer 88点で基準88点を通過。品質Gateへ進行",
+    "status": "published",
+    "outcome": "本番公開完了",
+    "outcome_reason": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了",
     "candidate": {
       "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
       "title": "福岡市中央区・城南区の遺品整理ガイド｜マンション特有の注意点と費用相場",
@@ -137,8 +137,8 @@
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "pending",
-        "detail": "PR作成・main自動反映処理中"
+        "status": "done",
+        "detail": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
       }
     ],
     "published": true,
