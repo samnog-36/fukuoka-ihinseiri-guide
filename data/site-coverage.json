@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T01:57:56.281118+00:00",
+  "generated_at": "2026-09-28T08:56:49.642345+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -17,7 +17,7 @@
     "blog/area/index.html"
   ],
   "category_counts": {
-    "area": 13,
+    "area": 14,
     "cost": 12,
     "ihinseiri": 16,
     "kuyo": 15,
@@ -77,6 +77,10 @@
       {
         "path": "blog/area/article-20260806-itoshima-munakata-koga-guide.html",
         "title": "糸島市・宗像市・古賀市の遺品整理｜粗大ごみの出し方・業者選び【2026年9月更新】"
+      },
+      {
+        "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
+        "title": "熊本市の遺品整理｜一時多量ごみ・大型ごみ・自己搬入"
       }
     ],
     "cost": [
@@ -944,9 +948,18 @@
       "status": "gap"
     },
     "熊本県": {
-      "article_count": 0,
-      "articles": [],
-      "status": "gap"
+      "article_count": 1,
+      "articles": [
+        {
+          "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
+          "title": "熊本市の遺品整理｜一時多量ごみ・大型ごみ・自己搬入",
+          "category": "area",
+          "matched_terms": [
+            "熊本市"
+          ]
+        }
+      ],
+      "status": "covered"
     },
     "大分県": {
       "article_count": 0,
@@ -1114,8 +1127,8 @@
     }
   ],
   "link_health": {
-    "html_files_scanned": 141,
-    "active_articles": 82,
+    "html_files_scanned": 142,
+    "active_articles": 83,
     "orphan_articles": [],
     "orphan_count": 0,
     "broken_internal_links": [
