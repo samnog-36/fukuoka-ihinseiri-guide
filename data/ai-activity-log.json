@@ -1,5 +1,86 @@
 [
   {
+    "timestamp": "2026-09-28T02:03:13.836971+00:00",
+    "run_id": "36367956826",
+    "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
+    "title_before": null,
+    "title_after": "熊本市の遺品整理｜一時多量ごみ・大型ごみは1回の収集日につき原則5個・自己搬入の手順",
+    "changes": [
+      "公開日と更新日について、可視表示およびArticle MicrodataのdatePublished・dateModifiedをすべて2026年9月28日へ統一した。",
+      "article_htmlには本文用のMicrodataだけを残し、scriptタグやJSON-LDを記述しない構成にした。",
+      "災害ごみの公式ページを2026年9月28日に再確認し、特別収集と処理手数料減免が「当面の間」と案内されていることを本文へ反映した。",
+      "災害ごみ節を時限情報として明確化し、利用直前の確認手順と、特例終了時に節を削除または過去情報化する更新方針を追記した。",
+      "一時多量ごみ、大型ごみの原則5個、自己搬入、旧植木町地区、許可業者、家電4品目に関する正確と評価された説明を維持した。"
+    ],
+    "sources": [
+      {
+        "name": "熊本市｜家庭ごみの分け方・出し方（植木地区を除く）",
+        "url": "https://www.city.kumamoto.jp/kankyo/kiji003739/"
+      },
+      {
+        "name": "熊本市｜「大型ごみ」の出し方",
+        "url": "https://www.city.kumamoto.jp/kankyo/kiji003552/index.html"
+      },
+      {
+        "name": "熊本市｜ごみ処理施設への持込について",
+        "url": "https://www.city.kumamoto.jp/kankyo/kiji00322037/"
+      },
+      {
+        "name": "熊本市｜一般廃棄物処理業及び産業廃棄物処理業の許可業者名簿",
+        "url": "https://www.city.kumamoto.jp/kankyo/kiji0031282/index.html"
+      },
+      {
+        "name": "熊本市｜家電4品目の処分について",
+        "url": "https://www.city.kumamoto.jp/kiji003553/index.html"
+      },
+      {
+        "name": "熊本市｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.city.kumamoto.jp/kiji00368019/index.html"
+      },
+      {
+        "name": "熊本市｜地震被害に伴う災害ごみの収集等について",
+        "url": "https://www.city.kumamoto.jp/kankyo/kiji00372079/index.html"
+      },
+      {
+        "name": "熊本市｜令和8年熊本地震で発生した災害ごみの市のごみ処理施設への持込みについて",
+        "url": "https://www.city.kumamoto.jp/kiji00372078/index.html"
+      },
+      {
+        "name": "気象庁｜2026年7月28日・熊本県熊本地方の地震",
+        "url": "https://www.data.jma.go.jp/eqev/data/kyoshin/jishin/2607281627_kumamoto/"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi-20260928.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "一時多量ごみの数量目安、通常のごみステーションへ出せないこと、自己搬入または許可業者への依頼という基本ルートが、熊本市の一次情報に沿って明確に説明されている。",
+      "大型ごみの「1回の収集日につき原則5個」を、遺品整理全体の総数上限と誤解させない構成が優れている。電話番号、申込手順、手数料、排出時刻、通常時と混雑時の所要期間も公式情報と一致する。",
+      "自己搬入の受入日、祝日の扱い、時間、10kgまでごとに150円という手数料、施設住所、旧植木町地区の例外、衣類などリサイクル可能品の扱いが具体的で実用性が高い。",
+      "一般廃棄物収集運搬業の許可と古物商許可を区別し、実際に運搬する会社名と許可範囲まで確認させる説明は、読者保護とAdSense品質の両面で良好。",
+      "家電4品目について、市の大型ごみ・処理施設では扱わないこと、販売店、廃家電回収所、指定引取場所という処分順序を正しく整理している。",
+      "令和8年熊本地震の発生日、災害ごみ特別収集と処理手数料減免が「当面の間」であること、減免前に支払った手数料が返還されないことを一次情報に基づいて区別している。",
+      "title、description、H1、本文の検索意図が一致しており、熊本市で遺品整理時のごみ処分方法を知りたい読者へ直接回答している。キーワードの不自然な反復もない。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、関連性も高い。福岡を核とするサイトから九州主要都市の実務情報へ展開する記事として妥当。",
+      "広告枠は長文記事に対して上部・中部・下部の3か所で、本文を分断する過剰配置とはいえない。架空の口コミ、実績、業者推薦、誇大なCTAもない。",
+      "HTMLの主要タグは適切に閉じられ、ArticleのJSON-LD、Microdataおよび可視日付も2026年9月28日で一致している。image.actionがgenerateであるため、現時点のデフォルト画像も減点対象ではない。"
+    ],
+    "status": "validated_for_auto_publish",
+    "action_type": "new_article",
+    "reverse_links_added": [],
+    "replaced_held_article": null,
+    "redirected_internal_links": []
+  },
+  {
     "timestamp": "2026-09-27T07:29:28.495124+00:00",
     "run_id": "36303083401",
     "path": "blog/area/article-20260710-chuo-jonan-ku-guide.html",
