@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-28T02:03:14.936124+00:00",
+    "timestamp": "2026-09-28T02:03:23.324004+00:00",
     "started_at": "2026-09-28T01:57:55Z",
-    "finished_at": "2026-09-28T02:03:14.936124+00:00",
+    "finished_at": "2026-09-28T02:03:23.324004+00:00",
     "run_id": "36367956826",
     "trigger": "schedule",
     "mode": "improve",
-    "status": "validated",
-    "outcome": "新規記事を公開候補として承認",
-    "outcome_reason": "新規テーマを調査・執筆し、Reviewer 95点で公開基準を通過",
+    "status": "published",
+    "outcome": "本番公開完了",
+    "outcome_reason": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了",
     "candidate": {
       "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
       "title": "熊本市の遺品整理で出る一時多量ごみの処分手順｜大型ごみ5点・自己搬入・許可業者の確認",
@@ -197,8 +197,8 @@
       {
         "key": "publish",
         "label": "本番反映",
-        "status": "pending",
-        "detail": "PR作成・main自動反映処理中"
+        "status": "done",
+        "detail": "Reviewer・品質Gate・PR mergeを通過しmainへ本番反映完了"
       }
     ],
     "published": true,
