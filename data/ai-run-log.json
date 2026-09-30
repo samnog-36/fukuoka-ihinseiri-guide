@@ -1,5 +1,94 @@
 [
   {
+    "timestamp": "2026-09-30T00:45:26.107057+00:00",
+    "started_at": "2026-09-30T00:45:19Z",
+    "finished_at": "2026-09-30T00:45:26.107057+00:00",
+    "run_id": "36651814978",
+    "trigger": "schedule",
+    "mode": "improve",
+    "status": "error",
+    "outcome": "AI処理エラー",
+    "outcome_reason": "AI処理ステップでエラー。GitHub Actions Run #36651814978 を確認",
+    "candidate": {
+      "path": "blog/cost/article-20260803-mitsumorisho-mikata.html",
+      "title": "遺品整理の見積書の見方｜金額より先に確認したい9項目【福岡】",
+      "priority_score": 30,
+      "strategic_priority_score": 30.0,
+      "base_priority_score": 30.0,
+      "category_repetition_penalty": 0,
+      "quality": 85,
+      "gsc": null,
+      "selection_reasons": [
+        "記事品質スコアが 85/100 で改善余地あり",
+        "基礎優先度30.0 - 最近のcostカテゴリ集中ペナルティ0"
+      ]
+    },
+    "editor": {
+      "status": "error",
+      "decision_reason": "Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "changes": [],
+      "sources": [],
+      "internal_links": [],
+      "image_action": null,
+      "title_after": null
+    },
+    "reviewer": {
+      "status": "skipped",
+      "approve": null,
+      "score": null,
+      "threshold": 88,
+      "issues": [],
+      "strengths": [],
+      "seo_assessment": null,
+      "factual_assessment": null
+    },
+    "steps": [
+      {
+        "key": "search_console",
+        "label": "Search Console取得",
+        "status": "done",
+        "detail": "取得済み検索データを候補選定に使用"
+      },
+      {
+        "key": "candidate",
+        "label": "改善候補選定",
+        "status": "done",
+        "detail": "遺品整理の見積書の見方｜金額より先に確認したい9項目【福岡】 を優先度 30 で選定"
+      },
+      {
+        "key": "editor",
+        "label": "Editor AI",
+        "status": "error",
+        "detail": "Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+      },
+      {
+        "key": "reviewer",
+        "label": "Reviewer AI",
+        "status": "skipped",
+        "detail": "Editor未実行のため未審査"
+      },
+      {
+        "key": "gate",
+        "label": "品質Gate",
+        "status": "skipped",
+        "detail": "AI処理エラーのため品質Gate未実行"
+      },
+      {
+        "key": "publish",
+        "label": "本番反映",
+        "status": "skipped",
+        "detail": "AI処理エラーのため公開なし"
+      }
+    ],
+    "published": false,
+    "image_generated": false,
+    "image_path": null,
+    "error": "Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+    "research": null,
+    "repair_pending": true,
+    "next_action": "保存済み原稿と指摘から次の毎時40分の継続実行で再開"
+  },
+  {
     "timestamp": "2026-09-29T21:02:37.497669+00:00",
     "started_at": "2026-09-29T21:02:29Z",
     "finished_at": "2026-09-29T21:02:37.497669+00:00",
