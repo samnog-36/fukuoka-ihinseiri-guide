@@ -2703,6 +2703,10 @@ def _load_list_log(path: Path) -> list[dict]:
 
 def _write_list_log(path: Path, rows: list[dict], limit: int = 180) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path == RUN_LOG:
+        from compact_run_log import write_log
+        write_log(path, rows[:limit])
+        return
     path.write_text(json.dumps(rows[:limit], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
