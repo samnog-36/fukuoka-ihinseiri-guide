@@ -233,7 +233,10 @@ function renderWhy(x){
   if(!x){$("aiWhy").innerHTML='<div class="empty">判断ログなし</div>';return}
   const c=x.candidate||{},e=x.editor||{},rv=x.reviewer||{},research=x.research||{};
   const reasons=c.selection_reasons||[];
+  const usage=x.api_usage||[];
   let html='<div class="why-list">'+(reasons.length?reasons.map(r=>'<div class="why-item">'+esc(r)+'</div>').join(""):'<div class="why-item">候補選定理由の詳細は記録されていません。</div>')+'</div>';
+  if(usage.length)html+='<div class="why-block"><h4>今回のAI使用量（API報告値）</h4>'+usage.map(u=>'<p>'+esc(u.stage)+'：入力 '+esc(u.usage?.input_tokens??"未取得")+' / 出力 '+esc(u.usage?.output_tokens??"未取得")+' token / 検索 '+esc(u.web_search_calls??0)+'回'+(u.error?' / '+esc(u.error):'')+'</p>').join('')+'</div>';
+  if(x.next_action)html+='<div class="why-block"><h4>次の処理</h4><p>'+esc(x.next_action)+'</p></div>';
   if(research&&Object.keys(research).length){
     html+='<div class="research-box"><h4>今回のリサーチ</h4><div class="research-grid"><div class="research-item"><small>テーマ</small><p>'+esc(research.title||"新規テーマ候補なし")+'</p></div><div class="research-item"><small>機会スコア</small><p>'+esc(research.opportunity_score==null?"-":research.opportunity_score+"点")+'</p></div><div class="research-item"><small>なぜ今？</small><p>'+esc(research.why_now||research.decision_reason||"-")+'</p></div><div class="research-item"><small>不足していた価値</small><p>'+esc(research.missing_value||"-")+'</p></div></div></div>';
   }

@@ -76,6 +76,19 @@ class RepairTests(unittest.TestCase):
         self.assertFalse(app.review_passed({'approve': False, 'score': 95}))
         self.assertTrue(app.review_passed({'approve': True, 'score': 88}))
 
+    def test_total_revision_limit_persists_across_runs(self):
+        reject = {'approve': False, 'score': 70, 'issues': ['missing source']}
+        with patch.object(app, 'call_reviewer', side_effect=[reject, {**reject, 'score': 75}]):
+            self.run_review()
+        with patch.object(app, 'call_reviewer', return_value={**reject, 'score': 80}):
+            self.assertIsNone(self.run_review())
+        self.assertEqual(app.call_revision_editor.call_count, 2)
+        self.assertEqual(app.pending_repairs(), [])
+        with patch.object(app, 'call_reviewer') as reviewer:
+            self.assertIsNone(self.run_review())
+            reviewer.assert_not_called()
+        self.assertTrue(app.repair_blocked(self.candidate['path']))
+
     def test_revision_prompt_runs_and_escalates_model(self):
         # Executes the f-string: syntax-only checks missed its invalid format specifier.
         responses = types.SimpleNamespace(create=lambda **kw: self.capture_response(kw))

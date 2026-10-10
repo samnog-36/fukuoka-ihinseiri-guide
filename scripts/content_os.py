@@ -21,6 +21,67 @@ PRIVATE_DIR = ROOT / os.getenv("CONTENT_OS_PRIVATE_DIR", ".content-os-private")
 ACTIVITY_LOG = ROOT / "data/ai-activity-log.json"
 RUN_LOG = ROOT / "data/ai-run-log.json"
 COVERAGE_LOG = ROOT / "data/site-coverage.json"
+REPAIR_POLICY_VERSION = "2026-10-10-bounded-v1"
+API_USAGE = []
+
+
+def record_api_usage(stage, response=None, error=None):
+    usage = getattr(response, "usage", None)
+    usage = usage.model_dump() if hasattr(usage, "model_dump") else (usage if isinstance(usage, dict) else None)
+    item = {"stage": stage, "run_id": os.getenv("GITHUB_RUN_ID"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "model": getattr(response, "model", None), "usage": usage,
+            "error": type(error).__name__ if error else None,
+            "web_search_calls": sum(getattr(x, "type", "") == "web_search_call" for x in (getattr(response, "output", None) or []))}
+    API_USAGE.append(item)
+    dest = PRIVATE_DIR / "repair" / "usage.jsonl"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with dest.open("a", encoding="utf-8") as stream:
+        stream.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+
+def ai_response(client, stage, **kwargs):
+    if len(API_USAGE) >= 8:
+        raise RuntimeError("Per-run API call limit reached; saved draft retained")
+    try:
+        response = client.responses.create(**kwargs)
+    except Exception as exc:
+        record_api_usage(stage, error=exc)
+        raise
+    record_api_usage(stage, response)
+    return response
+
+
+def editor_summary(data):
+    return {k: v for k, v in data.items() if not k.startswith("_") and k != "article_html"}
+
+
+def apply_article_replacements(article, replacements):
+    for change in replacements:
+        old, new = change.get("old", ""), change.get("new", "")
+        if not old or article.count(old) != 1:
+            raise ValueError("Revision patch must match exactly one article fragment")
+        article = article.replace(old, new, 1)
+    return article
+
+
+def review_document(html):
+    # Keep metadata and article; navigation, CSS and footer do not need repeated AI review.
+    article = ARTICLE_RE.search(html)
+    head = re.search(r"<head\b[^>]*>(.*?)</head>", html, re.I | re.S)
+    metadata = "\n".join(re.findall(r"<title>.*?</title>|<meta\b[^>]*>|<link\b[^>]*>|<script[^>]+application/ld\+json.*?</script>", head.group(1) if head else "", re.I | re.S))
+    return metadata + "\n" + (article.group(1) if article else html)
+
+
+def repeated_review_issues(attempts):
+    if len(attempts) < 2:
+        return False
+    old, new = attempts[-2:]
+    if int(new.get("score") or 0) > int(old.get("score") or 0):
+        return False
+    a = " ".join(old.get("issues") or [])
+    b = " ".join(new.get("issues") or [])
+    return bool(a and b) and SequenceMatcher(None, a, b).ratio() >= 0.7
 
 TAG_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>|<[^>]+>", re.I | re.S)
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
@@ -808,7 +869,7 @@ canonical: {current_canonical}
 """
     client = OpenAI(api_key=key, timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
-    resp = client.responses.create(
+    resp = ai_response(client, "editor",
         model=model,
         tools=[{"type": "web_search"}],
         input=prompt,
@@ -1045,6 +1106,9 @@ def normalize_managed_metadata(
     html = replace_meta(html, name="twitter:description", content=description)
     html = replace_meta(html, name="twitter:image", content=final_image)
     html = replace_canonical(html, canonical)
+    html = html.replace('href="/about.html"', 'href="/about"')
+    # This Japanese-only site has no alternate language versions.
+    html = re.sub(r'<link\b(?=[^>]*\bhreflang\s*=)[^>]*>\s*', '', html, flags=re.I)
 
     html = remove_managed_schema(html)
 
@@ -1065,6 +1129,8 @@ def normalize_managed_metadata(
                     "name": "福岡遺品整理ガイド編集部",
                     "url": CONFIG["site_url"].rstrip("/") + "/about",
                 },
+                "publisher": {"@type": "Organization", "name": CONFIG["site_name"],
+                              "url": CONFIG["site_url"].rstrip("/") + "/about"},
                 "mainEntityOfPage": canonical,
             },
             {
@@ -1165,6 +1231,10 @@ def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -
 あなたは公開前の独立レビュアーです。編集AIとは別人格として厳格に判定してください。
 対象: {candidate["path"]}
 
+判定時刻（日本時間、これを日付の基準とする）: {datetime.now(ZoneInfo(CONFIG['timezone'])).isoformat()}
+拡張子なしURLは本サイトの正規URLです。.htmlとの文字列の違いだけで却下しないでください。
+構造化データの任意項目の好みを必須条件にしないでください。
+
 目的:
 - 読者価値と検索意図への適合
 - 事実の正確性
@@ -1199,16 +1269,16 @@ Editorが image.action="generate" としている場合、レビュー時点で 
 - 元ページより明らかに有用性が下がる
 
 編集AIの申告:
-{json.dumps({k:v for k,v in editor.items() if not k.startswith("_")}, ensure_ascii=False)}
+{json.dumps(editor_summary(editor), ensure_ascii=False)}
 
 変更前:
 ---OLD---
-{original}
+{review_document(original)}
 ---END OLD---
 
 変更後:
 ---NEW---
-{proposed}
+{review_document(proposed)}
 ---END NEW---
 
 JSONのみ:
@@ -1221,7 +1291,7 @@ JSONのみ:
   "factual_assessment": "評価"
 }}
 """
-    resp = client.responses.create(
+    resp = ai_response(client, "reviewer",
         model=reviewer_model,
         tools=[{"type": "web_search"}],
         input=prompt,
@@ -1436,6 +1506,16 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
     if not key:
         return None
 
+    cache = PRIVATE_DIR / "repair" / "cache" / "research.json"
+    if cache.exists():
+        saved = json.loads(cache.read_text(encoding="utf-8"))
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(saved["at"])).total_seconds()
+        topic = saved.get("topic")
+        used = any(r.get("published") and (r.get("research") or {}).get("title") == (topic or {}).get("title") for r in _load_list_log(RUN_LOG)[:24])
+        if age < 21600 and not used:
+            print("Reusing research less than six hours old", flush=True)
+            return validate_researched_topic(topic, rows) if topic else None
+
     from openai import OpenAI
     client = OpenAI(api_key=key, timeout=240.0, max_retries=2)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
@@ -1522,11 +1602,17 @@ JSONのみ:
 opportunity_score は需要、独自性、一次情報の強さ、既存記事との差分を厳しく採点してください。
 価値が弱ければ create=false にしてください。
 """
-    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    resp = ai_response(client, "research", model=model, tools=[{"type": "web_search"}], input=prompt)
     data = json.loads(strip_json_fence(resp.output_text))
     if not isinstance(data, dict):
         return None
     data["site_coverage"] = coverage
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps({"at": datetime.now(timezone.utc).isoformat(), "topic": data}, ensure_ascii=False), encoding="utf-8")
+    return validate_researched_topic(data, rows)
+
+
+def validate_researched_topic(data, rows):
     if not data.get("create"):
         return data
 
@@ -1672,7 +1758,7 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
   "decision_reason": "この構成・内容にした理由"
 }}
 """
-    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    resp = ai_response(client, "writer", model=model, tools=[{"type": "web_search"}], input=prompt)
     data = json.loads(strip_json_fence(resp.output_text))
     data["article_html"] = sanitize_article_html(str(data.get("article_html", "")))
     data["_original_html"] = ""
@@ -1829,7 +1915,7 @@ Reviewer:
 {json.dumps(inventory_for_internal_links(rows, candidate["path"]), ensure_ascii=False)}
 
 前回Editorの判断:
-{json.dumps({k:v for k,v in prior_editor.items() if not k.startswith("_")}, ensure_ascii=False)}
+{json.dumps(editor_summary(prior_editor), ensure_ascii=False)}
 
 現在案:
 ---BEGIN ARTICLE---
@@ -1840,7 +1926,9 @@ Reviewer:
 - Reviewerのissuesを番号順に1件ずつ解消し、返答前に「実HTMLが本当に直っているか」を自己点検する
 - 各issueについて、何を確認し、本文のどこをどう直したかを issue_resolution に1対1で記録する
 - 内部リンクは検索結果ではなく上記の検証済みサイト内リンク候補を使う。存在確認できないURLを新しく作らない
-- web検索で一次情報を再確認する
+- 保存済みの一次情報を再利用し、指摘された事実や変更する主張だけをweb検索で再確認する
+- 判定時刻は {datetime.now(ZoneInfo(CONFIG['timezone'])).isoformat()}（日本時間）。日付を推測しない
+- head内の技術設定はシステム担当。本文で修正済みと申告しない
 - 広告枠はシステム管理。article_htmlに class="fkg-ad" を絶対に含めない。広告を追加・削除・維持したと申告もしない
 - Reviewerが法律の条文・項号・時系列を指摘した場合、放棄前/放棄後などの局面を明確に分け、該当する条・号・ただし書を一次情報で再確認して説明する
 - 法律上の効果を一括表現せず、要件が異なる行為を別々に説明する
@@ -1867,7 +1955,7 @@ JSONのみ:
   "h1": "H1",
   "summary": "一覧用要約",
   "keywords": ["検索語"],
-  "article_html": "現在案のarticle開始タグ・classを維持した完全な<article>...</article>",
+  "replacements": [{{"old": "現在案から一意に一致する修正対象HTMLを正確にコピー", "new": "その部分を置換する修正後HTML"}}],
   "change_summary": ["今回の再修正内容"],
   "primary_sources": [{{"name":"機関名","url":"https://..."}}],
   "internal_links": ["/blog/..."],
@@ -1882,8 +1970,10 @@ JSONのみ:
   ]
 }}
 """
-    resp = client.responses.create(model=model, tools=[{"type": "web_search"}], input=prompt)
+    resp = ai_response(client, "revision", model=model, tools=[{"type": "web_search"}], input=prompt)
     data = json.loads(strip_json_fence(resp.output_text))
+    if "replacements" in data:
+        data["article_html"] = apply_article_replacements(article_match.group(1), data.pop("replacements"))
     data["article_html"] = sanitize_article_html(str(data.get("article_html", "")))
     data["_original_html"] = current_html
     return data
@@ -2353,6 +2443,8 @@ def pending_repairs() -> list[dict]:
             # The checkpoint is cleared only after its exact result reaches main.
             path.unlink()
             continue
+        if state.get("repair_policy") == REPAIR_POLICY_VERSION and state.get("blocked_reason"):
+            continue
         if state["action_type"] == "new_article" and target.exists():
             # Another change published this URL. Continue as an edit, never overwrite blindly.
             state["action_type"] = "improvement"
@@ -2363,6 +2455,26 @@ def pending_repairs() -> list[dict]:
             save_repair(state)
         pending.append(state)
     return sorted(pending, key=lambda x: x["created_at"])
+
+
+def repair_blocked(path: str) -> bool:
+    dest = repair_file(path)
+    if not dest.exists():
+        return False
+    state = json.loads(dest.read_text(encoding="utf-8"))
+    return state.get("repair_policy") == REPAIR_POLICY_VERSION and bool(state.get("blocked_reason"))
+
+
+def block_repair(state, mode, reason):
+    state["blocked_reason"] = reason
+    save_repair(state)
+    record = make_run_record(mode=mode, candidate=state["candidate"], status="repair_blocked",
+        outcome="原因修正待ち・他記事へ継続", outcome_reason=reason,
+        editor=state.get("data"), reviewer=state.get("review"), published=False)
+    record = attach_run_context(record, research=state.get("research"), attempts=state["attempts"], action_type=state["action_type"])
+    record["next_action"] = "同じ修正の再課金を停止。他の記事を進め、保存した指摘の原因を解消してから再開"
+    append_run_log(record)
+    print("Repair blocked:", state["candidate"]["path"], reason, flush=True)
 
 
 def mark_repair_ready(path: str, html: str) -> None:
@@ -2389,6 +2501,18 @@ def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: 
         state.pop("review", None)
         state.pop("published_digest", None)
     state["original_digest"] = original_digest
+    if state.get("repair_policy") != REPAIR_POLICY_VERSION:
+        state.update(repair_policy=REPAIR_POLICY_VERSION, policy_revisions=0, policy_cycles=0)
+        state.pop("blocked_reason", None)
+        # Retain expensive article/research work, but rebuild system-owned fields once.
+        state["review"] = None
+        state.pop("published_digest", None)
+    if state.get("blocked_reason"):
+        return None
+    if state.get("policy_cycles", 0) >= 3:
+        block_repair(state, mode, "同一原稿で3実行に到達。通信・出力・公開処理の原因確認が必要")
+        return None
+    state["policy_cycles"] = state.get("policy_cycles", 0) + 1
     save_repair(state)
 
     def build(data):
@@ -2404,7 +2528,9 @@ def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: 
         proposed = build(data)
         state.update(data=data, proposed=proposed, review=None)
         save_repair(state)
-    proposed = state["proposed"]
+    proposed = build(data)
+    state["proposed"] = proposed
+    save_repair(state)
     revisions_this_run = 0
     max_revisions = int(CONFIG.get("max_revision_attempts", 4))
     while True:
@@ -2423,6 +2549,12 @@ def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: 
             save_repair(state)
         if review_passed(review):
             return data, proposed, review, state["attempts"]
+        if state.get("policy_revisions", 0) >= 2:
+            block_repair(state, mode, "初回審査と修正後2回の審査を実施しても未合格。本文再生成ではなく原因解消が必要")
+            return None
+        if state.get("policy_revisions", 0) and repeated_review_issues(state["attempts"]):
+            block_repair(state, mode, "同じ指摘が残りスコアも改善していないため、再生成から原因確認へ切替")
+            return None
         if revisions_this_run >= max_revisions:
             record = make_run_record(
                 mode=mode, candidate=candidate, status="repair_pending",
@@ -2437,6 +2569,7 @@ def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: 
             append_run_log(record)
             return None
         state["revision_count"] += 1
+        state["policy_revisions"] = state.get("policy_revisions", 0) + 1
         save_repair(state)  # Save BEFORE a network call so even a timeout retains the draft.
         next_data = call_revision_editor(candidate, proposed, data, review, rows, state["revision_count"])
         next_proposed = build(next_data)
@@ -2626,6 +2759,8 @@ def recent_path_history(path: str, limit: int = 30) -> list[dict]:
 
 
 def path_is_in_cooldown(path: str) -> tuple[bool, str]:
+    if repair_blocked(path):
+        return True, "再試行上限到達。原因修正待ち"
     now = datetime.now(timezone.utc)
     history = recent_path_history(path)
     if not history:
@@ -2725,6 +2860,7 @@ def should_create_new_article(topic: dict | None, existing: dict | None) -> bool
 
 
 def append_run_log(item: dict) -> None:
+    item["api_usage"] = list(API_USAGE)
     log = _load_list_log(RUN_LOG)
     run_id = str(item.get("run_id") or "")
     if run_id:
