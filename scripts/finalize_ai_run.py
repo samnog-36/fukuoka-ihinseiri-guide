@@ -22,7 +22,8 @@ def load_rows() -> list[dict]:
 
 def save_rows(rows: list[dict]) -> None:
     LOG.parent.mkdir(parents=True, exist_ok=True)
-    LOG.write_text(json.dumps(rows[:240], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    from compact_run_log import write_log
+    write_log(LOG, rows)
 
 
 def find_current(rows: list[dict]) -> dict | None:
