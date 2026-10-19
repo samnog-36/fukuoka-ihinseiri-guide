@@ -2443,7 +2443,7 @@ def pending_repairs() -> list[dict]:
             # The checkpoint is cleared only after its exact result reaches main.
             path.unlink()
             continue
-        if state.get("repair_policy") == REPAIR_POLICY_VERSION and state.get("blocked_reason"):
+        if state.get("repair_policy") == REPAIR_POLICY_VERSION and state.get("blocked_reason") and not review_passed(state.get("review") or {}):
             continue
         if state["action_type"] == "new_article" and target.exists():
             # Another change published this URL. Continue as an edit, never overwrite blindly.
@@ -2454,7 +2454,7 @@ def pending_repairs() -> list[dict]:
             state.pop("published_digest", None)
             save_repair(state)
         pending.append(state)
-    return sorted(pending, key=lambda x: x["created_at"])
+    return sorted(pending, key=lambda x: (not review_passed(x.get("review") or {}), x["created_at"]))
 
 
 def repair_blocked(path: str) -> bool:
@@ -2507,6 +2507,10 @@ def review_with_repairs(candidate: dict, rows: list[dict], mode: str, research: 
         # Retain expensive article/research work, but rebuild system-owned fields once.
         state["review"] = None
         state.pop("published_digest", None)
+    # Resume the exact approved draft after a mechanical publication gate failure.
+    # No regeneration or additional review charge when the source is unchanged.
+    if state.get("proposed") and state.get("data") and review_passed(state.get("review") or {}):
+        return state["data"], state["proposed"], state["review"], state["attempts"]
     if state.get("blocked_reason"):
         return None
     if state.get("policy_cycles", 0) >= 3:
