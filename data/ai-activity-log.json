@@ -1,5 +1,82 @@
 [
   {
+    "timestamp": "2026-10-19T22:40:23.852832+00:00",
+    "run_id": "39336214451",
+    "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
+    "title_before": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないためのガイド - 福岡遺品整理ガイド",
+    "title_after": "ゴミ屋敷の片付け費用と業者選び｜福岡市・北九州市の処分方法も解説 - 福岡遺品整理ガイド",
+    "changes": [
+      "根拠を確認できなかった民間業者の料金相場、作業日数、体積単価、架空のケーススタディを削除し、費用が決まる要因と書面見積もりの比較方法へ置き換えました。",
+      "福岡市の粗大ごみ・自己搬入、北九州市の粗大ごみ・引越ごみ・自己搬入について、公式案内への直接リンクと具体的な手数料・利用条件を追加しました。",
+      "家庭ごみの収集運搬には一般廃棄物収集運搬業の許可または自治体委託の確認が必要であることを、環境省・国民生活センター・北九州市の一次情報に基づき明確化しました。",
+      "産業廃棄物収集運搬許可や古物商許可のみでは家庭ごみの回収確認として不十分である点、追加料金・キャンセル料・貴重品の扱いを契約前に確認する点を強化しました。",
+      "重複しやすい行政代執行・特殊清掃・見積書・許可確認の内容は関連する既存記事へ内部リンクし、このページは片付けの初動判断と自治体処分の使い分けに役割を整理しました。",
+      "関連記事のリンクを最終到達する拡張子なしURLへ更新しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "北九州市｜粗大ごみ・引越ごみ",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/924_10259.html"
+      },
+      {
+        "name": "北九州市｜ごみの自己搬入について",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/924_10279.html"
+      },
+      {
+        "name": "環境省｜一般廃棄物収集運搬業の許可",
+        "url": "https://www.env.go.jp/info/one-stop/11/049.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+      },
+      {
+        "name": "国民生活センター｜不用品回収サービスのトラブル",
+        "url": "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/tokushu-seisou/article-20260707-tokushu-seisou-cost",
+      "/blog/tokushu-seisou/article-20260718-kodokushi-hakken-taiou",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/tokushu-seisou/article-20260710-gomiyashiki-hiyo-gyousei"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 96,
+    "review_strengths": [
+      "出典不明の民間料金相場、作業日数、体積単価、架空のケーススタディを削除し、費用を左右する条件と書面見積もりの比較方法へ置き換えており、事実性とAdSense品質が大きく改善しています。",
+      "福岡市の粗大ごみ処理券300円・500円・1,000円、自己搬入10kg当たり140円、排出者本人または収集運搬許可業者による搬入という説明は公式情報と整合します。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "北九州市の粗大ごみ手数料、条件付き持ち出しサービスの追加500円、引越ごみの申込期限と100kg当たり2,300円という説明は公式案内に一致しています。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/contents/924_10259.html))",
+      "一般家庭の廃棄物収集運搬には市町村の一般廃棄物処理業許可または委託が必要であり、産業廃棄物収集運搬業や古物商の許可だけでは足りないという重要点を正確に説明しています。([env.go.jp](https://www.env.go.jp/info/one-stop/11/049.html))",
+      "高額請求対策として、複数見積もり、追加料金、キャンセル料、作業前の変更拒否、188への相談を案内しており、国民生活センターの助言と整合しています。([kokusen.go.jp](https://www.kokusen.go.jp/news/data/n-20221102_1.html))",
+      "title、meta description、H1、本文の検索意図が一致し、福岡市・北九州市の具体的制度、費用判断、許可確認、契約対策を過不足なく表現しています。",
+      "提示された内部リンクはすべてリポジトリ実在確認上有効で、アンカーテキストもリンク先の内容を自然に説明しています。",
+      "CTAや広告の過剰配置がなく、検索順位操作を目的とした地名の羅列や不自然なキーワード反復もありません。",
+      "見出し階層、目次アンカー、table、ol、ul、aside、reference sectionの閉じ方に明白な破損はなく、HTML構造は維持されています。",
+      "旧ページよりも福岡固有の一次情報、契約安全性、自治体処分の使い分けが明確になり、読者価値は大幅に向上しています。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-19T17:48:13.189543+00:00",
     "run_id": "39296779329",
     "path": "blog/seizenseiri/article-20260706-yarukoto-list.html",
