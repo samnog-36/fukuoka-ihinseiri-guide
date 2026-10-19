@@ -1,5 +1,75 @@
 [
   {
+    "timestamp": "2026-10-19T05:18:42.303538+00:00",
+    "run_id": "39203678121",
+    "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+    "title_before": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "title_after": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "changes": [
+      "根拠を確認できない人口・高齢化率・孤独死件数・民間の料金相場・階段作業の定額追加料金・口コミ比較サイトに関する記述を削除しました。",
+      "福岡市の夜間収集、粗大ごみの事前申込み、LINE申込み、品目別手数料、遺品整理で生じた家庭系ごみの収集運搬許可について、本文直近に福岡市公式ページへのリンクを追加しました。",
+      "博多区・東区・中央区の章を、各区の公式な地域特性と、遺品整理時に実務上確認すべき搬出・管理規約・車両待機・屋外残置物の観点へ整理しました。",
+      "事業者選びの章を、一般廃棄物収集運搬に関する確認、見積書の比較、追加料金条件、古物商許可とごみ収集運搬の違いに重点化しました。",
+      "重複しやすい中央区一般論を抑え、既存の中央区・城南区記事、見積書記事、許可確認記事、賃貸退去記事へ役割に沿った内部リンクを設置しました。",
+      "既存のCTA、編集情報、公式情報セクション、主要class、article開始タグを維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "福岡市｜福岡市のごみ出しルール",
+        "url": "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/0501/0701.html"
+      },
+      {
+        "name": "福岡市｜粗大ごみ収集をLINEで申し込みできます！",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/LINE-sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜東区の概要",
+        "url": "https://www.city.fukuoka.lg.jp/higashiku/higashiku_gaiyo.html"
+      },
+      {
+        "name": "福岡市｜博多区の概要",
+        "url": "https://www.city.fukuoka.lg.jp/hakataku/t-shinko/charm/hakatakunotokushoku/001.html"
+      },
+      {
+        "name": "福岡市｜中央区の概要",
+        "url": "https://www.city.fukuoka.lg.jp/chuoku/kikaku/charm-kankou/chuokugaiyo.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/blog/area/article-20260719-minami-jonan-ku-guide",
+      "/blog/cost/article-20260707-cost-yasuku-suru",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 96,
+    "review_strengths": [
+      "根拠の不明確だった人口、高齢化率、孤独死件数、民間料金相場、階段作業の定額料金などを削除し、未確認の数字や断定を解消しています。",
+      "福岡市の4分別、夜間収集、日没から午前0時までという説明は市公式情報と一致しています。粗大ごみの事前申込みについても正確です。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/0501/0701.html))",
+      "遺品整理で発生する家庭系ごみについて、福岡市の限定許可業者と一般廃棄物収集運搬許可業者の制度を正しく区別しています。掲載業者以外が請け負った場合の扱いも市公式案内に沿っています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "博多区の玄関口と南部住宅地域、東区の7区最大人口・各拠点・丘陵住宅地・志賀島等、中央区の天神を中心とする商業・業務機能という地域説明は各区の公式情報に沿っています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/hakataku/t-shinko/charm/hakatakunotokushoku/001.html))",
+      "家電リサイクル法対象のエアコン、テレビ、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機を福岡市の粗大ごみに出せないという説明は正確です。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/recyclingLaw?utm_source=openai))",
+      "古物商許可と家庭ごみの収集運搬許可を混同しない説明は適切です。古物商許可が古物の売買等に関する制度であることは警察庁資料とも整合します。([npa.go.jp](https://www.npa.go.jp/bureau/safetylife/scrap/meeting_material.pdf?utm_source=openai))",
+      "title、description、H1と本文の検索意図が一致し、地域事情、自治体ルール、マンション対応、許可確認、見積もり比較まで一貫しています。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、関連する詳細記事へ適切に役割分担されています。",
+      "CTAは記事末尾の1か所に抑えられ、契約をあおらず比較・許可確認を促す内容であり、AdSense品質上も問題ありません。",
+      "見出し階層、目次ID、リスト、外部リンクのnoopener設定、JSON-LDの構文に明確な破損はなく、HTML構造は維持されています。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-19T03:41:39.076885+00:00",
     "run_id": "39195769389",
     "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
