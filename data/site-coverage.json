@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T03:40:29.695961+00:00",
+  "generated_at": "2026-10-19T03:50:58.225543+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -1442,7 +1442,7 @@
         "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
       }
     ],
-    "redirecting_internal_link_count": 92
+    "redirecting_internal_link_count": 89
   },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
