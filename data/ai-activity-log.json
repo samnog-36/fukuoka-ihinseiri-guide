@@ -1,5 +1,64 @@
 [
   {
+    "timestamp": "2026-10-19T03:41:39.076885+00:00",
+    "run_id": "39195769389",
+    "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
+    "title_before": "人形・ぬいぐるみの供養方法｜福岡で依頼できる神社・お寺と料金まとめ - 福岡遺品整理ガイド",
+    "title_after": "人形・ぬいぐるみの供養方法｜福岡で依頼できる神社・お寺と料金まとめ - 福岡遺品整理ガイド",
+    "changes": [
+      "編集情報欄のリンク文言を「編集方針・運営情報」から、独立した「編集方針」リンクと「運営情報」リンクへ分離しました。",
+      "既存の編集情報欄の構造、問い合わせリンク、本文の供養先・料金・自治体分別に関する記述は維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "鳥飼八幡宮｜人形供養",
+        "url": "https://hachimansama.jp/prayer/ningyo"
+      },
+      {
+        "name": "福岡県公式観光情報 クロスロードふくおか｜筑前人形感謝祭",
+        "url": "https://www.crossroadfukuoka.jp/event/11226"
+      },
+      {
+        "name": "福島八幡宮｜人形供養・ぬいぐるみ供養",
+        "url": "https://fukushimahachimangu.or.jp/goannai-ningyokuyou"
+      },
+      {
+        "name": "福岡市｜家庭のごみ・資源物",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/genre/01-01.html"
+      },
+      {
+        "name": "福岡市｜燃えないごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/moenaigomi.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/kuyo/article-20260706-suterarenai-taisho",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/kuyo/article-20260719-shashin-album-kuyo",
+      "/blog/kuyo/article-20260722-otakiage-houhou-hiyo",
+      "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun",
+      "/blog/kuyo/article-20260714-ningyo-nuigurumi-kuyo"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 94,
+    "review_strengths": [
+      "旧版にあった未検証の料金相場や受付先を整理し、鳥飼八幡宮、曩祖八幡宮、福島八幡宮、福岡市などの具体的な案内に基づく構成へ改善されています。",
+      "鳥飼八幡宮の受付時間、郵送時の箱サイズ別料金、ケース・ガラス・備品の除外条件は公式案内と一致しています。([hachimansama.jp](https://hachimansama.jp/prayer/ningyo))",
+      "筑前人形感謝祭の2026年5月10日開催、毎年5月第2日曜日という記述は福岡県公式観光情報と一致し、判定日には終了済みであることも明確です。([crossroadfukuoka.jp](https://www.crossroadfukuoka.jp/event/11226))",
+      "福岡市の家庭ごみ4区分、指定袋に入らない大きさ・重さの粗大ごみ扱い、ガラスを厚紙で包み「危険」と表示する説明は自治体一次情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/genre/01-01.html))",
+      "供養を法律上の必須事項として扱わず、心理的な区切りの選択肢として説明しており、宗教的作法を断定していた旧版より中立的です。",
+      "家庭ごみの回収を第三者へ依頼する際に一般廃棄物収集運搬業の許可等を確認する方向性は、福岡市および環境省の案内と整合します。([env.go.jp](https://www.env.go.jp/info/one-stop/11/049.html?utm_source=openai))",
+      "提示された内部リンクはすべてリポジトリ実在確認上有効で、拡張子なしURLも指定された正規URL方針に沿っています。",
+      "title、meta description、H1、本文の検索意図が一致し、福岡市・飯塚市・八女市の地域情報、持ち込み・郵送、料金、ケース処分を一記事で確認できます。",
+      "CTAは記事末尾の1か所だけで、架空の口コミ・実績・専門家推薦や過剰な広告挿入はありません。",
+      "Article・BreadcrumbListのJSON-LD、canonical、OG/Twitterメタ、見出しID、article要素に明白な構文破壊はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-09-28T02:03:13.836971+00:00",
     "run_id": "36367956826",
     "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
