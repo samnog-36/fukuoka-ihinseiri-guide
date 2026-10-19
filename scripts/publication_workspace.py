@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 import subprocess
 
-PATHS = ['blog', 'area', 'cost', 'guide', 'images/blog', 'sitemap.xml', 'js/search-data.json', 'data/ai-activity-log.json', '_redirects']
+PATHS = ['index.html', 'blog', 'area', 'cost', 'guide', 'images/blog', 'sitemap.xml', 'js/search-data.json', 'data/ai-activity-log.json', '_redirects']
 
 
 def git(*args):

@@ -109,6 +109,7 @@ jobs:
         run: |
           set -o pipefail
           {
+            python3 scripts/sync_home_latest.py &&
             python3 scripts/publication_workspace.py normalize &&
             python3 scripts/verify_adsense_trust_updates.py &&
             python3 scripts/content_quality_gate.py --strict &&
@@ -159,7 +160,7 @@ jobs:
             python3 scripts/publication_workspace.py discard
           fi
 
-          ARTICLE_CHANGE="$(git status --porcelain -- blog area cost guide images/blog sitemap.xml js/search-data.json data/ai-activity-log.json _redirects)"
+          ARTICLE_CHANGE="$(git status --porcelain -- index.html blog area cost guide images/blog sitemap.xml js/search-data.json data/ai-activity-log.json _redirects)"
           LOG_CHANGE="$(git status --porcelain -- data/ai-run-log.json data/site-coverage.json)"
 
           if [ -z "$ARTICLE_CHANGE" ] && [ -z "$LOG_CHANGE" ]; then
@@ -187,6 +188,7 @@ jobs:
 
           git switch -c "$BRANCH"
           git add \
+            index.html \
             blog \
             area \
             cost \
