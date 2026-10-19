@@ -8,9 +8,32 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import content_os as app
+import hashlib
+from verify_adsense_trust_updates import has_editorial_link
 
 
 class BoundedRepairTests(unittest.TestCase):
+    def test_editorial_link_accepts_canonical_alias_but_rejects_missing_link(self):
+        for href in ('/about', '/about.html'):
+            self.assertTrue(has_editorial_link(f"<a href='{href}'>編集方針</a>"))
+        for html in ('<!-- <a href="/about">policy</a> -->', '<a href="https://example.com/about">policy</a>', '<p>/about</p>'):
+            self.assertFalse(has_editorial_link(html))
+
+    def test_approved_draft_resumes_without_ai_after_gate_failure(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(app, 'PRIVATE_DIR', Path(tmp)), patch.object(app, 'ROOT', Path(tmp)):
+            candidate = {'path': 'article.html'}
+            (Path(tmp) / 'article.html').write_text('original')
+            state = {'candidate': candidate, 'action_type': 'improvement', 'created_at': '2026-10-19',
+                     'original_digest': hashlib.sha256(b'original').hexdigest(),
+                     'repair_policy': app.REPAIR_POLICY_VERSION, 'policy_cycles': 3,
+                     'blocked_reason': 'publication retry limit', 'data': {'saved': True},
+                     'proposed': '<article>approved</article>', 'review': {'approve': True, 'score': 96}, 'attempts': []}
+            app.save_repair(state)
+            self.assertEqual(len(app.pending_repairs()), 1)
+            with patch.object(app, 'call_editor', side_effect=AssertionError('No AI regeneration')), patch.object(app, 'call_reviewer', side_effect=AssertionError('No AI review')):
+                result = app.review_with_repairs(candidate, [], 'improve', None, 'improvement')
+            self.assertEqual(result[1], state['proposed'])
+
     def test_patch_is_local_and_ambiguous_patch_rejected(self):
         self.assertEqual(app.apply_article_replacements('<article>A B</article>', [{'old': 'B', 'new': 'C'}]), '<article>A C</article>')
         with self.assertRaises(ValueError):
