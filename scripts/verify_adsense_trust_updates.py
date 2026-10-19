@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from html.parser import HTMLParser
 import re
 
 
@@ -25,6 +26,19 @@ UNSUPPORTED_SERVICE_RE = re.compile(
 )
 
 
+def has_editorial_link(content: str) -> bool:
+    class Links(HTMLParser):
+        found = False
+
+        def handle_starttag(self, tag, attrs):
+            if tag == "a" and dict(attrs).get("href") in ("/about", "/about.html"):
+                self.found = True
+
+    parser = Links()
+    parser.feed(content)
+    return parser.found
+
+
 def main() -> int:
     issues: list[str] = []
     if not ARTICLES:
@@ -33,7 +47,7 @@ def main() -> int:
     for article in ARTICLES:
         content = article.read_text(encoding="utf-8")
         relative = article.relative_to(ROOT)
-        if 'href="/about.html"' not in content:
+        if not has_editorial_link(content):
             issues.append(f"{relative}: 編集方針リンクがありません")
         if "福岡遺品整理ガイド編集部" not in content:
             issues.append(f"{relative}: 編集主体の表示がありません")
@@ -92,7 +106,7 @@ def main() -> int:
     for page in every_html:
         page_content = page.read_text(encoding="utf-8")
         footer_start = page_content.rfind("<footer")
-        if footer_start != -1 and 'href="/about.html"' not in page_content[footer_start:]:
+        if footer_start != -1 and not has_editorial_link(page_content[footer_start:]):
             missing_footer_link.append(str(page.relative_to(ROOT)))
     if missing_footer_link:
         issues.append("編集方針リンクのないHTML: " + ", ".join(missing_footer_link))
