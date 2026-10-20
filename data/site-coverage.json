@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T22:37:30.211031+00:00",
+  "generated_at": "2026-10-20T01:15:57.422282+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -334,7 +334,7 @@
     "tokushu-seisou": [
       {
         "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
-        "title": "ゴミ屋敷の片付け費用と業者選び｜福岡で失敗しないためのガイド - 福岡遺品整理ガイド"
+        "title": "ゴミ屋敷の片付け費用と業者選び｜福岡市・北九州市の処分方法も解説 - 福岡遺品整理ガイド"
       },
       {
         "path": "blog/tokushu-seisou/article-20260706-kodokushi-taisaku.html",
@@ -817,7 +817,7 @@
   ],
   "kyushu_prefecture_coverage": {
     "福岡県": {
-      "article_count": 15,
+      "article_count": 16,
       "articles": [
         {
           "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
@@ -1442,7 +1442,7 @@
         "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
       }
     ],
-    "redirecting_internal_link_count": 87
+    "redirecting_internal_link_count": 86
   },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",

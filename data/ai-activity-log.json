@@ -1,5 +1,61 @@
 [
   {
+    "timestamp": "2026-10-20T01:18:08.504345+00:00",
+    "run_id": "39352427808",
+    "path": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
+    "title_before": "遺品整理の追加料金トラブルを防ぐ！見積書の正しい見方と対策 | 福岡遺品整理ガイド",
+    "title_after": "遺品整理の追加料金トラブルを防ぐ！見積書の正しい見方と対策 | 福岡遺品整理ガイド",
+    "changes": [
+      "根拠が古く追跡しにくい相談件数の記述を削除し、国民生活センターの遺品整理サービスに関する注意喚起へ直接リンクする構成に更新しました。",
+      "見積書チェックを、作業範囲・内訳・追加条件・処分方法・キャンセル条件など、実際に書面で照合できる7項目へ整理しました。",
+      "作業当日に追加請求を受けた場合の確認手順と、記録として残すべき資料を追加しました。",
+      "福岡市の遺品整理に伴う家庭系ごみ収集運搬の公式案内を追加し、一般廃棄物処理業の許可等を確認する地域固有の判断材料を強化しました。",
+      "遺品整理士資格を優良業者の判断材料として断定する記述を削除し、契約内容・処分体制・書面確認を重視する内容へ改めました。",
+      "リダイレクトしていた見積書関連記事の内部リンクを、最終到達する拡張子なしURLへ修正しました。"
+    ],
+    "sources": [
+      {
+        "name": "国民生活センター｜こんなはずじゃなかった！遺品整理サービスでの契約トラブル",
+        "url": "https://www.kokusen.go.jp/pdf/n-20180719_1.pdf"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "環境省｜廃棄物の処分に「無許可」の回収業者を利用しないでください！",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+      },
+      {
+        "name": "消費者庁｜消費者ホットライン",
+        "url": "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 92,
+    "review_strengths": [
+      "古い相談件数や「増加傾向」といった時点依存の記述を削除し、確認可能な国民生活センターの具体的事例と注意事項に置き換えており、事実精度が大きく改善しています。国民生活センター資料には、トラック追加等による当日請求、見積書で作業内容と追加料金を明確にすること、複数社比較などが実際に記載されています。([kokusen.go.jp](https://www.kokusen.go.jp/pdf/n-20180719_1.pdf))",
+      "追加料金がすべて不当とは限らないと説明したうえで、作業範囲、内訳、増額条件、処分方法、搬出条件、キャンセル条件、事業者情報を確認させる構成は、公平で実務的です。",
+      "作業当日に追加請求された場合の確認手順と、見積書・契約書・請求書・メッセージ・写真などの保存項目が具体的で、トラブル発生後の検索意図にも応えています。",
+      "家庭ごみの回収には市区町村の一般廃棄物処理業許可または委託が必要で、産業廃棄物処理業許可や古物商許可だけでは回収できないという説明は、環境省の案内と一致しています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html))",
+      "福岡市の限定許可事業者と、限定許可事業者以外が請け負う場合の一般廃棄物収集運搬許可業者への依頼に関する説明は、2026年6月9日更新の福岡市公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "188が地域の消費生活センター等を案内する仕組みであり、一部のIP電話等では地域の窓口へ直接連絡する必要があるという説明も、消費者庁の現行案内に沿っています。([caa.go.jp](https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/))",
+      "title、meta description、H1、本文が「追加料金防止・見積書確認・福岡市の許可・188相談」という同じ意図で統一されています。",
+      "提示された内部リンクはすべてリポジトリ実在確認上有効で、関連する貴重品、見積書、許可、契約トラブル、追加料金防止の記事へ文脈的に接続されています。",
+      "広告スロットが実体として挿入されておらず、CTAも1区画に限定されているため、本文閲覧を妨げる過剰な広告・誘導はありません。",
+      "JSON-LD、パンくず、見出しID、画像属性、外部リンクのnoopener設定を含め、提示されたHTMLに公開を妨げる構造破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-19T22:40:23.852832+00:00",
     "run_id": "39336214451",
     "path": "blog/tokushu-seisou/article-20260706-gomiyashiki-kataduke.html",
