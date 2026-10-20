@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T01:15:57.422282+00:00",
+  "generated_at": "2026-10-20T06:34:07.197651+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -1217,11 +1217,6 @@
         "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
       },
       {
-        "source": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
-        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
-        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
-      },
-      {
         "source": "blog/cost/article-20260706-cost-saving-tips.html",
         "href": "/blog/cost/article-20260706-mitsumori-hikaku.html",
         "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
@@ -1440,9 +1435,14 @@
         "source": "blog/area/article-20260706-kurume.html",
         "href": "/blog/cost/article-20260706-cost-saving-tips.html",
         "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
+      },
+      {
+        "source": "blog/area/article-20260706-kurume.html",
+        "href": "/blog/area/article-20260706-kitakyushu-guide.html",
+        "final": "/blog/area/article-20260714-kitakyushu-ihinseiri-guide.html"
       }
     ],
-    "redirecting_internal_link_count": 86
+    "redirecting_internal_link_count": 85
   },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",

@@ -1,5 +1,79 @@
 [
   {
+    "timestamp": "2026-10-20T06:36:35.069264+00:00",
+    "run_id": "39381084093",
+    "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
+    "title_before": "遺品整理はいつから始める？49日前後のベストタイミングと手続き期限を解説 - 福岡遺品整理ガイド",
+    "title_after": "遺品整理はいつから始める？49日前後の目安と相続・退去の期限を解説 - 福岡遺品整理ガイド",
+    "changes": [
+      "title・descriptionは主題を維持しながら、「49日前後がベスト」と断定しない表現へ調整しました。",
+      "相続放棄の原則3か月、相続税の申告・納付が必要な場合の原則10か月について、裁判所・e-Gov・国税庁への直接リンクを本文近くに追加しました。",
+      "相続放棄の可能性がある場合の遺品処分について、断定的な可否ではなく、売却・譲渡・換金を先行しない注意と個別相談の必要性を明確化しました。",
+      "根拠確認が難しい公営住宅の一律の退去期限の記述を削除し、賃貸借契約・管理会社への確認を優先する内容へ修正しました。",
+      "福岡市固有の粗大ごみ事前申込、処理券区分、自己搬入、家電リサイクル対象品のルールを福岡市公式情報に基づいて更新しました。",
+      "既存のリダイレクト先リンクを、関連性の高い現行の拡張子なしURLへ置換しました。",
+      "FAQ、状況別判断表、着手前の準備を追加し、読者が『今すぐ捨てるべきか』『先に確認すべきことは何か』を判断しやすくしました。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索｜民法",
+        "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+      },
+      {
+        "name": "裁判所｜相続の放棄の申述",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "国税庁｜No.4205 相続税の申告と納税",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm"
+      },
+      {
+        "name": "国税庁｜No.4208 相続財産が分割されていないときの申告",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4208.htm"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri",
+      "/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu",
+      "/blog/ihinseiri/article-20260706-jibun-vs-gyousha",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260719-ihinseiri-hiyo-darega-harau",
+      "/blog/kuyo/article-20260809-49nichi-houyo-kuyo"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 94,
+    "review_strengths": [
+      "「四十九日前後がベスト」という不確かな断定を撤回し、検索意図である開始時期への回答を冒頭で明示しています。",
+      "相続放棄の原則3か月、家庭裁判所への申述、熟慮期間伸長の可能性は裁判所の公式案内と整合しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html))",
+      "相続税の申告・納付が必要な場合の原則10か月という説明と、未分割でも期限が自動延長されないという説明は国税庁情報と整合しています。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm))",
+      "相続放棄を検討している場合の遺品処分について、単純承認を断定せず、売却・譲渡・換金を先行しないことと個別相談を促しており、法的リスクの伝え方が慎重です。",
+      "旧版の根拠不明な公営住宅の一律14日退去という記述を削除し、契約内容、管理会社、明渡し条件を優先する構成へ改善しています。",
+      "福岡市の粗大ごみについて、最短約1週間後、300円・500円・1,000円の処理券、朝8時30分までの搬出という記述は公式案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "福岡市の自己搬入に事前予約が必要で、市外ごみ、家電リサイクル対象品、パソコン、バッテリー、タイヤなどが搬入禁止という説明も公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "エアコン、テレビ、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機を市の通常収集へ出せないという説明は福岡市公式情報と整合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/moenaigomi.html))",
+      "状況別判断表、着手前の5項目、FAQが追加され、読者が「今すぐ捨ててよいか」「何を先に確認するか」を判断しやすくなっています。",
+      "title、meta description、H1、本文の主題が一致しており、「いつから」「四十九日」「相続放棄」「相続税」「賃貸退去」「福岡市」という主要な検索意図を自然に網羅しています。",
+      "提示された内部リンクはすべてリポジトリ実在確認でexists_in_repository=trueであり、リンク切れを理由とする問題はありません。",
+      "CTAは記事末尾の1か所に限られ、架空の実績、口コミ、専門家監修、過度な業者誘導もありません。",
+      "HTMLの見出し階層、目次ID、article、section、aside、figure、tableなどに明白な破損や閉じタグ不足は見当たりません。",
+      "canonicalの拡張子なしURLへの変更は指定条件上許容され、構造化データやOG URLとも統一されています。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-20T01:18:08.504345+00:00",
     "run_id": "39352427808",
     "path": "blog/cost/article-20260710-tsuika-ryoukin-trouble.html",
