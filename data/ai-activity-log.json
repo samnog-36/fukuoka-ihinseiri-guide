@@ -1,5 +1,85 @@
 [
   {
+    "timestamp": "2026-10-20T17:38:45.217938+00:00",
+    "run_id": "39466613621",
+    "path": "blog/ihinseiri/article-20260709-katamiwake-manner.html",
+    "title_before": "遺品整理の形見分けガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド",
+    "title_after": "遺品整理の形見分けガイド｜正しい時期・マナー・トラブル回避法を解説 - 福岡遺品整理ガイド",
+    "changes": [
+      "相続開始直後の遺品を「相続人全員の共有」とする説明を、民法896条ではなく遺産共有に関する民法898条の趣旨に沿う内容へ修正し、法務省・e-Govへの直接リンクを追加しました。",
+      "「形見分け＝贈与税」と読める従来表現を改め、相続人が相続として取得する場合と、相続後に第三者等へ渡す場合の区別を明確化しました。贈与税の110万円基礎控除は国税庁の現行案内に直接リンクしています。",
+      "宗教別の時期を断定していた記述を、法要後を目安にする家庭もあるが宗派・地域・家族で異なるという実態に合わせて修正しました。",
+      "形見分け前の遺言書・相続人確認、写真付き遺品リスト、保留判断、決定記録という実務的な手順を追加しました。",
+      "福岡固有の相談先として、福岡県弁護士会、法テラス福岡、福岡家庭裁判所を公式ページへ直接リンクして整理しました。",
+      "国民生活センターの注意喚起に基づき、遺品整理事業者へ依頼する際の追加料金・誤処分対策を追加しました。",
+      "リダイレクト先が存在する関連記事リンクを、最終到達する拡張子なしURLへ更新しました。",
+      "既存の広告枠、CTA、編集情報、公式情報セクション、主要class、既存画像は維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索｜民法",
+        "url": "https://elaws.e-gov.go.jp/document?lawid=129AC0000000089"
+      },
+      {
+        "name": "法務省｜不動産を相続した方へ（相続登記・遺産分割）",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00435.html"
+      },
+      {
+        "name": "国税庁｜贈与税がかかる場合",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4402.htm"
+      },
+      {
+        "name": "福岡家庭裁判所｜遺産分割調停",
+        "url": "https://www.courts.go.jp/fukuoka/saiban/isanbunkatu/index.html"
+      },
+      {
+        "name": "法テラス福岡",
+        "url": "https://www.houterasu.or.jp/site/chihoujimusho-fukuoka/index.html"
+      },
+      {
+        "name": "福岡県弁護士会｜法律相談センター",
+        "url": "https://www.fben.jp/center/"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu",
+      "/blog/ihinseiri/article-20260806-shashin-album-seiri-houhou",
+      "/blog/kuyo/article-20260706-suterarenai-taisho",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260708-itsu-kara",
+      "/blog/ihinseiri/article-20260706-jibun-vs-gyousha",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/cost/article-20260719-ihinseiri-hiyo-darega-harau"
+    ],
+    "image_generated": false,
+    "image_path": null,
+    "review_score": 89,
+    "review_strengths": [
+      "民法898条の趣旨に沿って、共同相続の場合に相続財産が共有となる点を説明しており、旧版の民法896条を根拠とする不正確な説明が改善されています。([laws.e-gov.go.jp](https://laws.e-gov.go.jp/law/129AC0000000089?occasion_date=20190601&utm_source=openai))",
+      "相続として取得する場合と、相続後に第三者へ贈る場合を区別しており、旧版の「高額な形見分けは直ちに贈与税」という誤解を招く説明が解消されています。暦年課税の年間110万円の基礎控除についても国税庁の現行案内と一致します。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4402.htm))",
+      "遺贈により相続人以外が取得した財産について、相続税の論点が生じ得るという説明も適切です。国税庁は、相続または遺贈により取得した経済的価値のある財産を相続税の対象として案内しています。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4105.htm?utm_source=openai))",
+      "遺言書確認、写真付き遺品リスト、価値不明品の保留、希望と決定の分離、決定記録という手順が具体的で、検索意図に対する実務的な読者価値が高い構成です。",
+      "自筆証書遺言を自己判断で開封せず手続を確認するという注意は安全側の案内です。裁判所も、検認対象の遺言書について家庭裁判所への提出と、封印された遺言書を自分で開封しないことを案内しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html?utm_source=openai))",
+      "福岡家庭裁判所のリンクは実在し、福岡県内で遺産分割調停を申し立てる際の書類・書式を案内する公式ページへ直接つながっています。([courts.go.jp](https://www.courts.go.jp/fukuoka/saiban/isanbunkatu/index.html))",
+      "福岡県弁護士会について、県内各地域に法律相談センターがあるという説明は公式情報と一致します。([fben.jp](https://www.fben.jp/center/))",
+      "法テラス福岡について、相続を含む一般相談、収入・資産要件付きの無料法律相談、事前予約制という説明はいずれも公式情報と一致します。([houterasu.or.jp](https://www.houterasu.or.jp/site/chihoujimusho-fukuoka/index.html))",
+      "消費者ホットライン188が地域の消費生活相談窓口につなぐ番号であるとの記述は正確です。([caa.go.jp](https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/?utm_source=openai))",
+      "宗教別の時期を絶対的なマナーとして断定せず、宗派・地域・家庭差を明示した点は、旧版より慎重で有用です。",
+      "title、meta description、H1、本文の中心テーマが一致しており、「形見分けの時期・マナー・相続税務・トラブル回避」という検索意図を過不足なくカバーしています。",
+      "提示された内部リンクはすべてリポジトリ実在確認でexists_in_repository=trueであり、拡張子なしURLへの変更も問題ありません。",
+      "CTAは記事末尾の1か所だけで、強い営業断定や過剰な誘導はありません。架空の口コミ、専門家、実績、体験談も確認されません。",
+      "主要な見出しID、画像、figure、関連記事、編集情報、参考情報セクションは適切に閉じられており、提示範囲ではHTML構造を壊す不整合は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-20T12:11:10.542833+00:00",
     "run_id": "39419761189",
     "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
