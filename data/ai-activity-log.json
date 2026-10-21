@@ -1,5 +1,73 @@
 [
   {
+    "timestamp": "2026-10-21T19:36:14.414044+00:00",
+    "run_id": "39662791471",
+    "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
+    "title_before": "福岡市西区・早良区の遺品整理ガイド｜粗大ごみ・搬出条件・業者選びのポイント - 福岡遺品整理ガイド",
+    "title_after": "福岡市西区・早良区の遺品整理ガイド｜粗大ごみ・搬出条件・業者選びのポイント - 福岡遺品整理ガイド",
+    "changes": [
+      "西区の島しょ部（能古島・玄界島・小呂島）について、港までの運搬、船便、港での受け渡し、横持ち費用を見積書で確認する具体的な判断項目を追加しました。",
+      "自治体の粗大ごみ・持ち出しサービス・自己搬入を比較する表について、対象条件・費用・福岡市の直接出典・確認日を明示しました。",
+      "福岡市の限定一般廃棄物収集運搬許可について、利用が想定される条件と、許可確認時に見るべき見積書項目を整理しました。",
+      "粗大ごみ受付、自己搬入、区の生活環境課の受付情報を福岡市公式情報で再確認し、公式情報セクションに市営渡船の確認先を追加しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/coarseDust"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "福岡市｜ごみに関するお問い合わせ先",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/toiawasesaki.html"
+      },
+      {
+        "name": "福岡市｜市営渡船 時刻表・運賃表",
+        "url": "https://www.city.fukuoka.lg.jp/kowan/kyakusen/hakata-port/hyo.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理サービスでの契約トラブル",
+        "url": "https://www.kokusen.go.jp/news/data/n-20180719_1.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/area/#fukuoka",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/blog/area/article-20260719-minami-jonan-ku-guide",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/nishi-sawara-ku-guide.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "西区固有の能古島・玄界島・小呂島について、港までの運搬、船便、受け渡し範囲、横持ち、悪天候時の追加費用という具体的な見積確認項目を追加しており、単なる言い換えではない明確な追加価値があります。",
+      "粗大ごみの300円・500円・1,000円、持ち出しサービスの対象・5個上限・追加手数料、電話番号・受付時間・年末年始休止、朝8時30分までの排出は福岡市公式案内と一致しています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/coarseDust))",
+      "自己搬入の電話番号、受付時間、1月1日から3日の休止、10kgまでごとに140円という記載は福岡市公式案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "限定一般廃棄物収集運搬業許可について、「市の定期収集・粗大ごみで出しにくい場合または自己搬入しにくい場合等のやむを得ない場合」という説明は公式の許可条件を正確に反映しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "古物商許可や産業廃棄物処理業許可だけでは家庭ごみを収集運搬できないという説明は、環境省の公式案内と整合しています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY&utm_source=openai))",
+      "早良区生活環境課、西区生活環境課、西部出張所の電話番号は福岡市公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/toiawasesaki.html))",
+      "自治体の処分手数料と民間の室内搬出・仕分け・運搬等の料金を明確に分離し、根拠のない民間料金相場を掲載していません。",
+      "title、meta description、H1、本文の中心内容が一致し、西区・早良区の地域条件、自治体制度、許可確認という検索意図を維持しています。",
+      "福岡県名・福岡市西区・早良区を明示し、/area/および/area/#fukuokaへの導線があります。重点ページへの内部リンクも文脈に沿っており、提示されたリンクはすべてリポジトリ実在確認上有効です。",
+      "CTAは記事末尾の1か所に限定され、煽りや過度な広告誘導がなく、AdSense品質上の問題は見当たりません。",
+      "canonicalは同一URLのまま検索意図も維持され、JSON-LD、見出しID、目次リンク、article要素の対応に破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-21T15:37:01.768284+00:00",
     "run_id": "39626980276",
     "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
