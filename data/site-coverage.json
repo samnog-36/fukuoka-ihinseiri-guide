@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T20:51:15.666297+00:00",
+  "generated_at": "2026-10-21T00:07:16.754115+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -17,7 +17,7 @@
     "blog/area/index.html"
   ],
   "category_counts": {
-    "area": 14,
+    "area": 15,
     "cost": 12,
     "ihinseiri": 16,
     "kuyo": 15,
@@ -81,6 +81,10 @@
       {
         "path": "blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html",
         "title": "熊本市の遺品整理｜一時多量ごみ・大型ごみ・自己搬入"
+      },
+      {
+        "path": "blog/area/article-20261021-saiki-ihinseiri-katei-taryo-gomi-kyoka.html",
+        "title": "佐伯市の遺品整理で家の中からごみを運び出すには｜家庭多量ごみ許可業者の確認と市の戸別収集｜福岡遺品整理ガイド"
       }
     ],
     "cost": [
@@ -962,9 +966,18 @@
       "status": "covered"
     },
     "大分県": {
-      "article_count": 0,
-      "articles": [],
-      "status": "gap"
+      "article_count": 1,
+      "articles": [
+        {
+          "path": "blog/area/article-20261021-saiki-ihinseiri-katei-taryo-gomi-kyoka.html",
+          "title": "佐伯市の遺品整理で家の中からごみを運び出すには｜家庭多量ごみ許可業者の確認と市の戸別収集",
+          "category": "area",
+          "matched_terms": [
+            "佐伯市"
+          ]
+        }
+      ],
+      "status": "covered"
     },
     "宮崎県": {
       "article_count": 0,
@@ -1127,8 +1140,8 @@
     }
   ],
   "link_health": {
-    "html_files_scanned": 142,
-    "active_articles": 83,
+    "html_files_scanned": 143,
+    "active_articles": 84,
     "orphan_articles": [],
     "orphan_count": 0,
     "broken_internal_links": [
