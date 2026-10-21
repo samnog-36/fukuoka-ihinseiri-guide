@@ -299,3 +299,16 @@ jobs:
           include-hidden-files: true
           retention-days: 90
           if-no-files-found: error
+
+      - name: Preserve measured SEO results and candidate decisions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-growth-evidence
+          path: |
+            .content-os-private/seo-growth-metrics.json
+            .content-os-private/search_console_latest.json
+            .content-os-private/content-os-latest.json
+          include-hidden-files: true
+          retention-days: 90
+          if-no-files-found: warn

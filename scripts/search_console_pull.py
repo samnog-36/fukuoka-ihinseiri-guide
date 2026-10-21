@@ -33,6 +33,12 @@ def main():
             "dataState":"final"
         }
         rows=svc.searchanalytics().query(siteUrl=site,body=body).execute().get("rows",[])
+        previous_end=start-timedelta(days=1); previous_start=previous_end-timedelta(days=27)
+        def totals(begin,finish):
+            result=svc.searchanalytics().query(siteUrl=site,body={"startDate":begin.isoformat(),"endDate":finish.isoformat(),"dataState":"final"}).execute().get("rows",[])
+            return result[0] if result else None
+        current_totals=totals(start,end)
+        previous_totals=totals(previous_start,previous_end)
     except Exception as exc:
         print("Search Console pull failed:",exc,file=sys.stderr); return 3
     normalized=[]
@@ -64,7 +70,7 @@ def main():
             "queries":sorted(v["queries"],key=lambda x:x["impressions"],reverse=True)
         })
     pages.sort(key=lambda x:x["impressions"],reverse=True)
-    payload={"site":site,"start_date":start.isoformat(),"end_date":end.isoformat(),"pages":pages}
+    payload={"site":site,"start_date":start.isoformat(),"end_date":end.isoformat(),"pages":pages,"current_totals":current_totals,"previous_totals":previous_totals,"previous_start_date":previous_start.isoformat(),"previous_end_date":previous_end.isoformat(),"page_query_row_limit":25000,"note":"Page-query details may omit anonymized queries and are capped; site totals are queried separately."}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
     print("Wrote private Search Console snapshot. pages=",len(pages)); return 0
