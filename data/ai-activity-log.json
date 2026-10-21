@@ -1,5 +1,68 @@
 [
   {
+    "timestamp": "2026-10-21T03:56:20.145428+00:00",
+    "run_id": "39541107318",
+    "path": "blog/kuyo/article-20260710-kamidana-shobun.html",
+    "title_before": "神棚の処分方法｜福岡で神上げ・お札返納・粗大ごみ処分を確認する手順 | 福岡遺品整理ガイド",
+    "title_after": "神棚の処分方法｜福岡で神上げ・お札返納・粗大ごみ処分を確認する手順 | 福岡遺品整理ガイド",
+    "changes": [
+      "福岡市・北九州市の粗大ごみについて、対象条件・手数料区分・神棚を申し込む際の確認点・公式出典・確認日を1表に整理し、神社への祈祷・お焚き上げ費用と自治体手数料を混同しない判断材料を追加。",
+      "福岡県神社庁、神社本庁、福岡市、北九州市、環境省、国民生活センターの一次情報に合わせて、忌中、お札返納、粗大ごみ、業者の一般廃棄物収集運搬に関する説明を確認・補強。",
+      "福岡市・北九州市の地域別記事と /area/ ハブへの内部導線を追加し、住所地ごとに制度を確認する流れを明確化。",
+      "既存のタイトル、検索意図、画像、CTA、広告スロット、編集情報、公式情報セクションおよび主要classは維持。"
+    ],
+    "sources": [
+      {
+        "name": "福岡県神社庁｜よくある質問",
+        "url": "https://fukuoka-jinjacho.or.jp/faq/"
+      },
+      {
+        "name": "神社本庁｜お神札のまつり方",
+        "url": "https://www.jinjahoncho.or.jp/omatsuri/ofuda/"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "北九州市｜粗大ごみ・引越ごみ",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/924_10259.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/kuyo/article-20260715-omamori-ofuda-shobun",
+      "/blog/kuyo/article-20260722-otakiage-houhou-hiyo",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kamidana-shobun.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "神社での祈祷・お焚き上げ費用と自治体の粗大ごみ手数料を明確に分離し、対象条件・出典・確認日付きの比較表を追加しており、旧ページより具体的な判断材料が増えています。",
+      "福岡市の粗大ごみの定義、300円・500円・1,000円の処理券、持ち出しサービスの追加料金と対象外条件は公式案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "北九州市の事前申込制、300円・500円・700円・1,000円の手数料区分、一覧にない品目を受付センターへ確認する説明は公式情報と一致しています。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/contents/924_10259.html))",
+      "忌中をおよそ50日とし、神棚の扉を閉めるか白い紙を貼って日々のおまつりを中断する説明は福岡県神社庁の案内に沿っています。([fukuoka-jinjacho.or.jp](https://fukuoka-jinjacho.or.jp/worship/))",
+      "古いお神札を受けた神社へ納め、遠方の場合は近隣神社へ事前確認する説明は神社本庁の公式案内と一致しています。([jinjahoncho.or.jp](https://www.jinjahoncho.or.jp/omatsuri/ofuda/))",
+      "家庭ごみの収集運搬には一般廃棄物処理業の許可または自治体の委託が必要で、産業廃棄物処理業・古物商の許可だけでは足りないという説明は正確です。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html))",
+      "title、meta description、H1と本文の検索意図が一致し、福岡で神棚を処分したい読者に必要な神社相談、自治体処分、業者依頼の判断手順を網羅しています。",
+      "提示された内部リンクはすべてリポジトリ実在確認済みで、リンク切れ候補はありません。CTAも記事末尾の1か所に限定され、広告・営業誘導は過剰ではありません。",
+      "HTMLの見出し階層、目次ID、表、figure、aside、section、articleの閉じ方に公開を妨げる構造破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-21T03:30:28.675074+00:00",
     "run_id": "39538756068",
     "path": "blog/kuyo/article-20260710-kamidana-shobun.html",
