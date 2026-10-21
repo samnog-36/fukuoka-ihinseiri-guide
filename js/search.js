@@ -11,7 +11,7 @@
   // 検索データの読み込み
   function loadSearchData() {
     if (searchLoaded) return Promise.resolve();
-    return fetch('/js/search-data.json')
+    return fetch('/js/search-data.json?v=20261021-integrity', { cache: 'no-cache' })
       .then(function(res) { return res.json(); })
       .then(function(data) {
         articles = data;

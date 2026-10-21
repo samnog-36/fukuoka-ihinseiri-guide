@@ -178,6 +178,12 @@ def synchronize(root=ROOT):
             if row:
                 card.replace_with(BeautifulSoup(render_card(row), 'html.parser').find('a'))
         path.write_text(serialize(soup))
+    # Bust legacy year-long immutable URLs; subsequent requests revalidate.
+    for path in root.rglob('*.html'):
+        original = path.read_text()
+        updated = re.sub(r'(/css/style\.css)(?:\?[^"\s<>]*)?', r'\1?v=20261021-integrity', original)
+        updated = re.sub(r'(/js/search\.js)(?:\?[^"\s<>]*)?', r'\1?v=20261021-integrity', updated)
+        if updated != original: path.write_text(updated)
     records = []
     for a in articles:
         article = BeautifulSoup((root / a['path']).read_text(), 'html.parser').find('article')
