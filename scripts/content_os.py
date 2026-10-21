@@ -218,6 +218,8 @@ def candidate_score(rec: dict, gsc: dict | None) -> float:
             score += 35
         if imp >= 100 and ctr < 0.03:
             score += 15
+    from seo_growth import signals
+    score += signals(rec["path"], gsc)["bonus"]
     return round(score, 2)
 
 
@@ -240,12 +242,8 @@ def category_slug_from_path(path: str) -> str:
 
 
 def extract_area_tags() -> list[str]:
-    p = ROOT / "area/index.html"
-    if not p.exists():
-        return []
-    html = p.read_text(encoding="utf-8")
-    tags = re.findall(r'<span[^>]+class=["\']area-tag["\'][^>]*>(.*?)</span>', html, re.I | re.S)
-    return sorted({visible(x) for x in tags if visible(x)})
+    from regional_navigation import regional_rows
+    return sorted({city for rows in regional_rows(ROOT).values() for _,cities in rows for city in cities})
 
 
 def clean_article_title(title: str) -> str:
@@ -254,30 +252,12 @@ def clean_article_title(title: str) -> str:
 
 
 def extract_area_hub_mapping() -> dict[str, list[str]]:
-    p = ROOT / "area/index.html"
-    if not p.exists():
-        return {}
-    html = p.read_text(encoding="utf-8")
-    start = html.find("const areaArticles = {")
-    if start < 0:
-        return {}
-    end = html.find("};", start)
-    if end < 0:
-        return {}
-    block = html[start:end + 2]
-
-    mapping: dict[str, list[str]] = {}
-    for area in extract_area_tags():
-        m = re.search(
-            rf'"{re.escape(area)}"\s*:\s*\[(.*?)\]\s*(?:,|\n\s*\}})',
-            block,
-            re.S,
-        )
-        if not m:
-            mapping[area] = []
-            continue
-        urls = re.findall(r'url\s*:\s*["\']([^"\']+)["\']', m.group(1))
-        mapping[area] = list(dict.fromkeys(urls))
+    from regional_navigation import regional_rows
+    mapping = {}
+    for rows in regional_rows(ROOT).values():
+        for article,cities in rows:
+            for city in cities:
+                mapping.setdefault(city,[]).append('/'+article['path'][:-5])
     return mapping
 
 
@@ -521,6 +501,8 @@ def make_report(rows: list[dict], gsc_map: dict) -> dict:
     for r in rows:
         x = dict(r)
         x["gsc"] = gsc_for_path(gsc_map, r["path"])
+        from seo_growth import signals
+        x["growth_strategy"] = signals(r["path"], x["gsc"])
         base = candidate_score(r, x["gsc"])
         areas = duplicate_pressure.get(r["path"], [])
         structure_bonus = min(24, 8 * len(areas))
@@ -800,7 +782,11 @@ def call_editor(candidate: dict, rows: list[dict]) -> dict:
     current_canonical = canonical_match.group(1).strip() if canonical_match else canonical_url_for(candidate["path"])
     source_names = ", ".join(s["name"] for s in SOURCES["sources"])
 
+    from seo_growth import context as growth_context
     prompt = f"""
+重点検索意図と追加価値の必須方針:
+{growth_context()}
+
 あなたは「福岡遺品整理ガイド」の自律サイト運営AIです。
 目的は検索エンジンを欺くことではなく、読者価値・一次情報の正確性・検索意図への適合・サイト全体の品質を継続的に高めることです。
 
@@ -1230,7 +1216,11 @@ def call_reviewer(candidate: dict, original: str, proposed: str, editor: dict) -
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
     reviewer_model = os.getenv("OPENAI_REVIEW_MODEL", "gpt-5.6-sol")
     link_manifest = proposed_internal_link_manifest(proposed)
+    from seo_growth import context as growth_context
     prompt = f"""
+重点検索意図と追加価値の必須方針:
+{growth_context()}
+
 あなたは公開前の独立レビュアーです。編集AIとは別人格として厳格に判定してください。
 対象: {candidate["path"]}
 
@@ -1548,7 +1538,11 @@ def discover_new_topic(rows: list[dict]) -> dict | None:
     gaps = sorted(name for name, count in counts.items() if count == least)
     focus = gaps[int(datetime.now(timezone.utc).timestamp() // 3600) % len(gaps)] if gaps else "九州全域"
 
+    from seo_growth import context as growth_context
     prompt = f"""
+重点検索意図と追加価値の必須方針:
+{growth_context()}
+
 あなたは「福岡遺品整理ガイド」の編集長兼SEOリサーチャーです。
 サイトの目標は次です:
 {CONFIG.get("content_mission")}
@@ -1714,7 +1708,11 @@ def call_new_article_writer(topic: dict, rows: list[dict]) -> dict:
     category_name = CONFIG["new_article_categories"][topic["category_slug"]]
     path = new_article_path(topic)
 
+    from seo_growth import context as growth_context
     prompt = f"""
+重点検索意図と追加価値の必須方針:
+{growth_context()}
+
 あなたは「福岡遺品整理ガイド」の上級編集者です。
 以下のリサーチ済みテーマから、公開可能な新規記事をゼロから作成してください。
 
@@ -1923,7 +1921,11 @@ def call_revision_editor(candidate: dict, current_html: str, prior_editor: dict,
     if not article_match:
         raise RuntimeError("revision source article-content not found")
 
+    from seo_growth import context as growth_context
     prompt = f"""
+重点検索意図と追加価値の必須方針:
+{growth_context()}
+
 あなたは前回案を改善する担当Editorです。
 Reviewerに落ちたから翌日まで放置するのではなく、このRun内ですぐ修正してください。
 
@@ -2874,6 +2876,8 @@ def should_create_new_article(topic: dict | None, existing: dict | None) -> bool
         return False
     if existing is None:
         return True
+    if existing and (existing.get("gsc") or {}).get("impressions",0) >= 30 and 4 <= (existing.get("gsc") or {}).get("position",0) <= 20:
+        return False  # Improve measured opportunities before adding another URL.
     if CONFIG.get("continuous_growth_enabled"):
         # Strengthen pages already present before spending every hourly run on a new URL.
         published = [r for r in _load_list_log(RUN_LOG) if r.get("status") == "published"]
@@ -3166,6 +3170,8 @@ def main() -> int:
         json.dumps(coverage, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     gsc = load_gsc()
+    from seo_growth import report as growth_report
+    (PRIVATE_DIR / "seo-growth-metrics.json").write_text(json.dumps(growth_report(gsc), ensure_ascii=False, indent=2))
     rep = make_report(rows, gsc)
     (PRIVATE_DIR / "content-os-latest.json").write_text(
         json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8"

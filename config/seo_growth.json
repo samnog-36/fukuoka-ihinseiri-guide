@@ -1,0 +1,19 @@
+{
+ "objective":"九州7県の読者が地域・費用・依頼条件から判断できる情報サイトを育てる",
+ "priority_pages":[
+  {"query":"福岡 遺品整理 一軒家 費用","path":"blog/cost/article-20260805-ikkenya-hiyou-souba.html","value":"作業範囲・物量・階段・搬出条件ごとの比較。根拠のある料金のみ掲載"},
+  {"query":"熊本市 遺品整理","path":"blog/area/article-20260927-kumamoto-city-ihinseiri-ichiji-taryou-gomi.html","value":"自治体収集・持込・室内搬出の条件比較"},
+  {"query":"福岡 遺品整理 業者 選び方","path":"blog/ihinseiri/article-20260706-trouble-avoid.html","value":"実在確認・許可確認・追加費用の判断手順。未確認業者ランキングは禁止"},
+  {"query":"遺品整理 見積書 比較","path":"blog/cost/article-20260803-mitsumorisho-mikata.html","value":"読者が実際の見積書を比較できる項目と事例。架空の実績は禁止"},
+  {"query":"遠方 実家 遺品整理","path":"blog/cost/article-20260713-enpo-ihinseiri-susumekata.html","value":"鍵・立会い・写真報告・保管品・見積条件の確認"}
+ ],
+ "editorial_rules":[
+  "重点検索意図は指定の既存ページを育てる。同じ意図の別記事を作らない",
+  "既存ページの変更には具体的な追加価値を1つ以上記録する。言い換え・日付更新のみで成果としない",
+  "比較表には対象条件・出典・確認日を付ける。公的手続きと業者サービスの費用を混同しない",
+  "取材・見積書・現場写真・口コミ・監修は実在し利用許可を確認した素材だけ使用。入手していなければ作らない",
+  "検索データ未取得を順位0や流入0と扱わない。推測の検索回数を付けない",
+  "運営者情報はユーザーの次の指示まで変更しない",
+  "地域記事では県名・市名を明示し、/area/と該当県アンカーへ導線を付ける"
+ ]
+}

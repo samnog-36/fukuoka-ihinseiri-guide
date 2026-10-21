@@ -178,6 +178,8 @@ def synchronize(root=ROOT):
             if row:
                 card.replace_with(BeautifulSoup(render_card(row), 'html.parser').find('a'))
         path.write_text(serialize(soup))
+    from regional_navigation import sync as sync_regions
+    sync_regions(root)
     # Bust legacy year-long immutable URLs; subsequent requests revalidate.
     for path in root.rglob('*.html'):
         original = path.read_text()
@@ -210,6 +212,14 @@ def validate(root=ROOT):
     cards(root / 'index.html', urls[:8]); cards(root / 'blog/index.html', urls)
     for c in {a['category'] for a in articles}:
         cards(root / f'blog/{c}/index.html', ['/' + a['path'][:-5] for a in articles if a['category'] == c])
+    if (root/'data/municipalities.json').exists():
+        from regional_navigation import render_regions
+        area_soup=BeautifulSoup((root/'area/index.html').read_text(),'html.parser')
+        directory=area_soup.select_one('[data-region-directory]')
+        if directory is not None:
+            expected_region=BeautifulSoup(render_regions(root),'html.parser')
+            if directory.get_text(' ',strip=True)!=expected_region.get_text(' ',strip=True) or [a.get('href') for a in directory.find_all('a')]!=[a.get('href') for a in expected_region.find_all('a')]:
+                errors.append('Regional directory differs from published inventory')
     search = json.loads((root / 'js/search-data.json').read_text())
     if [r['url'] for r in search] != urls: errors.append('Search article set/order mismatch')
     for a in articles:
