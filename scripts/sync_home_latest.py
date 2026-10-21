@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -21,7 +22,7 @@ class Metadata(HTMLParser):
             self.meta[attrs.get('name') or attrs.get('property')] = attrs.get('content', '')
 
 
-def latest_articles(root=ROOT):
+def latest_articles(root=ROOT, limit=8):
     redirects = {line.split()[0] for line in (root / '_redirects').read_text().splitlines()
                  if line.strip() and not line.lstrip().startswith('#')}
     categories = json.loads((root / 'config/content_os.json').read_text())['new_article_categories']
@@ -48,12 +49,13 @@ def latest_articles(root=ROOT):
         articles.append(dict(path=rel, date=date, title=title, category=path.parent.name,
                              label=categories[path.parent.name], image=meta.get('og:image', ''),
                              description=meta.get('description', '')))
-    return sorted(articles, key=lambda a: (a['date'], a['path']), reverse=True)[:8]
+    return sorted(articles, key=lambda a: (a['date'], a['path']), reverse=True)[:limit]
 
 
 def render_card(a):
     e = lambda value: escape(str(value), quote=True)
-    image = f'<div class="article-card-img"><img src="{e(a["image"])}" alt="{e(a["title"])}" loading="lazy" width="800" height="533"></div>' if a['image'] else ''
+    image_url = urlparse(a["image"]).path if a["image"].startswith("https://fukuoka-ihinseiri-guide.com/") else a["image"]
+    image = f'<div class="article-card-img"><img src="{e(image_url)}" alt="{e(a["title"])}" loading="lazy" width="800" height="533"></div>' if a['image'] else ''
     date = a['date'].strftime('%Y年%-m月%-d日')
     return f'''<a href="/{e(a['path'][:-5])}" class="article-card" data-category="{e(a['category'])}">
       {image}
@@ -64,18 +66,8 @@ def render_card(a):
 
 
 def sync(root=ROOT):
-    path = root / 'index.html'
-    html = path.read_text()
-    start, end = '<!-- HOME_LATEST_START -->', '<!-- HOME_LATEST_END -->'
-    if html.count(start) != 1 or html.count(end) != 1:
-        raise ValueError('Homepage latest article markers missing or duplicated')
-    articles = latest_articles(root)
-    if not articles:
-        raise ValueError('No public articles available; refusing to erase homepage cards')
-    cards = '\n'.join(render_card(a) for a in articles)
-    html = html[:html.index(start) + len(start)] + '\n' + cards + '\n' + html[html.index(end):]
-    path.write_text(html)
-    print('Homepage latest:', ', '.join(a['path'] for a in articles))
+    from publication_contract import synchronize
+    synchronize(root)
 
 
 if __name__ == '__main__':

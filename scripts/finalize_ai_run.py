@@ -90,11 +90,11 @@ def main() -> int:
             state = json.loads(checkpoint.read_text(encoding="utf-8"))
             details = PRIVATE_DIR / "gate-output.txt"
             issue = details.read_text(encoding="utf-8")[-6000:] if details.exists() else row["outcome_reason"]
-            state["review"] = {"approve": False, "score": 0, "issues": ["品質Gateの実行結果を修正: " + issue]}
+            state["gate_failure"] = issue
             state.pop("published_digest", None)
             save_repair(state)
             row["repair_pending"] = True
-            row["next_action"] = "品質Gateの指摘を保存。次の継続実行で本文を再修正・再審査"
+            row["next_action"] = "本文の審査結果を維持。機械検査の原因を修正して公開検査を再実行"
 
 
     elif args.stage == "publish-ready":
