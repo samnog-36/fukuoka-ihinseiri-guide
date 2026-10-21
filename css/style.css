@@ -579,6 +579,25 @@ img {
  border-radius: var(--radius-md);
  margin-bottom: 32px;
 }
+/* Publication contract: figure owns its real height; prose cannot overlap images. */
+figure.article-hero-image[data-publication-hero] {
+ display: block;
+ position: relative;
+ height: auto !important;
+ margin: 24px 0 32px;
+ overflow: hidden;
+ clear: both;
+}
+figure.article-hero-image[data-publication-hero] > img {
+ display: block;
+ position: static;
+ width: 100%;
+ height: auto;
+ max-height: 520px;
+ object-fit: cover;
+}
+.toc .toc-title { font-weight: 700; font-size: 1.1rem; margin-top: 0; }
+[data-publication-toc] ~ h2, .article-content h2[id] { scroll-margin-top: 100px; }
 .article-container h1 {
  font-size: 1.7rem;
  font-weight: 700;

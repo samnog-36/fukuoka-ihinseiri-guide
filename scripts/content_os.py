@@ -695,7 +695,10 @@ def sync_structured_data(html: str, title: str, description: str, image_url: str
 def update_first_image(article_html: str, src: str, alt: str) -> str:
     m = IMG_RE.search(article_html)
     if not m:
-        return article_html
+        hero = f'<figure class="article-hero-image"><img src="{escape(src, quote=True)}" alt="{escape(alt, quote=True)}" width="1536" height="1024" loading="eager"></figure>'
+        if not H1_RE.search(article_html):
+            raise ValueError('Cannot insert hero without article H1')
+        return H1_RE.sub(lambda match: match.group(0) + hero, article_html, count=1)
     tag = m.group(0)
     if SRC_RE.search(tag):
         tag = SRC_RE.sub(f'src="{escape(src, quote=True)}"', tag, count=1)
@@ -1300,13 +1303,23 @@ JSONのみ:
 
 
 def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[str, str | None]:
+    from publication_contract import image_path, image_approved, save_image_approval
+    from bs4 import BeautifulSoup
     image = data.get("image") or {}
-    if image.get("action") != "generate" or not CONFIG.get("allow_image_generation"):
-        return html, None
-    prompt = str(image.get("prompt", "")).strip()
-    alt = str(image.get("alt", "")).strip()
-    if not prompt or not alt:
-        return html, None
+    soup = BeautifulSoup(html, 'html.parser')
+    article = soup.find('article')
+    existing = article.find('img') if article else None
+    if existing and image.get('action') != 'generate':
+        try:
+            asset = image_path(existing.get('src', ''), ROOT)
+            if image_approved(asset, ROOT):
+                return html, asset.relative_to(ROOT).as_posix()
+        except ValueError:
+            pass
+    if not CONFIG.get('allow_image_generation'):
+        raise ValueError('A reviewed article-specific image is required before publication')
+    prompt = str(image.get('prompt') or 'この記事の主題に合う、文字を使わない説明用の写真: ' + candidate.get('title', '')).strip()
+    alt = str(image.get('alt') or candidate.get('title', '') + 'のイメージ').strip()
 
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], timeout=240.0, max_retries=2)
@@ -1327,17 +1340,25 @@ def generate_image_if_needed(candidate: dict, data: dict, html: str) -> tuple[st
         )
         raw = base64.b64decode(result.data[0].b64_json)
     except Exception as exc:
-        print("Image generation skipped:", exc)
-        return html, None
+        raise RuntimeError('Required article image generation failed; publication stopped') from exc
+    verification = ai_response(client, 'image_review', model=os.getenv('OPENAI_REVIEW_MODEL', 'gpt-5.6-sol'),
+        input=[{'role': 'user', 'content': [
+            {'type': 'input_text', 'text': 'Inspect this article hero. Return JSON only: {"approved": boolean, "reason": string}. Approve only if it is a relevant editorial illustration/photo, has NO readable text, title, labels, lettering, logos or watermark, and is NOT a generic site-title placeholder. Article: ' + candidate.get('title', '')},
+            {'type': 'input_image', 'image_url': 'data:image/webp;base64,' + base64.b64encode(raw).decode()}
+        ]}])
+    verdict = json.loads(strip_json_fence(verification.output_text))
+    if verdict.get('approved') is not True:
+        raise ValueError('Hero image rejected: ' + str(verdict.get('reason', 'text or placeholder detected')))
     stem = Path(candidate["path"]).stem.replace("article-", "")
     filename = f"ai-{stem}-{datetime.now(ZoneInfo(CONFIG['timezone'])).strftime('%Y%m%d')}.webp"
     dest = ROOT / "images" / "blog" / filename
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(raw)
+    save_image_approval(dest, 'vision-review', ROOT)
 
     article_match = ARTICLE_RE.search(html)
     if not article_match:
-        return html, None
+        raise ValueError('Cannot install required image: article missing')
     updated_article = update_first_image(article_match.group(1), f"/images/blog/{filename}", alt)
     html = html[:article_match.start(1)] + updated_article + html[article_match.end(1):]
     html = replace_meta(html, prop="og:image", content=CONFIG["site_url"].rstrip("/") + f"/images/blog/{filename}")
@@ -2612,7 +2633,9 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve", res
 
     proposed, image_path = generate_image_if_needed(candidate, data, proposed)
     seo = data["seo"]
-    image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path if image_path else CONFIG["site_url"].rstrip("/") + "/images/ogp-default.png"
+    if not image_path:
+        raise ValueError('New article cannot publish without its reviewed hero image')
+    image_url = CONFIG["site_url"].rstrip("/") + "/" + image_path
     proposed = normalize_managed_metadata(
         proposed,
         path=candidate["path"],
@@ -2626,7 +2649,7 @@ def create_new_article(topic: dict, rows: list[dict], mode: str = "improve", res
     proposed = normalize_generated_text(proposed)
     dest.write_text(proposed, encoding="utf-8")
     add_sitemap_url(path)
-    thumbnail = "/" + image_path if image_path else "/images/ogp-default.png"
+    thumbnail = "/" + image_path
     add_search_entry(topic, data, path, thumbnail)
     add_article_to_indexes(topic, data, path, thumbnail)
     reverse_links = add_reverse_internal_links(
