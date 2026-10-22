@@ -1,5 +1,68 @@
 [
   {
+    "timestamp": "2026-10-22T22:47:49.986074+00:00",
+    "run_id": "39867031365",
+    "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+    "title_before": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "title_after": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "changes": [
+      "相続登記の基本的義務について、期限の起算点を「相続開始を知った日」ではなく、「自己のために相続開始があったことを知り、かつ、対象不動産の所有権を相続で取得したことを知った日」に修正した。",
+      "相続登記の基本的義務と、遺産分割が成立した場合に生じる追加的義務を別段落内で区別し、それぞれの期限と不動産登記法第76条の2の該当項を明記した。",
+      "2024年4月1日より前の相続に関する経過措置を、「取得を知った時期」によって2027年3月31日または知った日から3年以内となる形に修正した。",
+      "提供主体、対応範囲、資格、無料条件を確認できない商業的なCTA表現を削除し、複数事業者への確認事項と、法律・税務手続きの相談先を示す中立的な案内へ変更した。"
+    ],
+    "sources": [
+      {
+        "name": "法務省｜相続登記の申請義務化について",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00599.html"
+      },
+      {
+        "name": "法務省｜相続登記の申請義務化に関する概要資料",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00600.html"
+      },
+      {
+        "name": "裁判所｜遺言書の検認",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html"
+      },
+      {
+        "name": "国税庁｜相続税の申告と納税",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205_qa.htm"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/area/"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kichouhin-sagashi-1.webp",
+    "review_score": 93,
+    "review_strengths": [
+      "旧ページの一般論中心の構成から、確保対象、確認場所、作業順、発見品台帳、保管・引渡しまで実行可能な手順へ改善されており、具体的な追加価値があります。",
+      "相続登記の起算点を「自己のために相続開始があったこと」と「対象不動産の所有権を取得したこと」の双方を知った日としており、法務省の説明と一致します。2027年3月31日の経過措置と、遺産分割成立後3年以内の追加的義務も適切に区別されています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00599.html?utm_source=openai))",
+      "遺言書について、公正証書遺言と法務局保管の自筆証書遺言が検認不要であること、検認が有効・無効の判断手続ではないこと、申立先が最後の住所地を管轄する家庭裁判所であることは、裁判所の案内と整合しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html))",
+      "福岡市の粗大ごみについて、事前申込み、中身をすべて空にすること、有料の持ち出しサービスに利用条件があることを、公的情報に沿って区別しています。([sodaigomi-kankyo.city.fukuoka.lg.jp](https://sodaigomi-kankyo.city.fukuoka.lg.jp/mobile/m_after.html))",
+      "家庭の不用品を収集・運搬する事業者について、市町村の委託または一般廃棄物処理業の許可を確認するという記述は、国民生活センターの注意喚起と一致します。複数見積もりや追加料金条件の確認も適切です。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/pdf/shinsen525.pdf))",
+      "未確認の業者ランキング、架空の実績・口コミ・専門家コメント、根拠不明の料金や検索回数は掲載されていません。",
+      "根拠未確認だった専門性・手続き支援・無料見積もりの商業的断定が削除され、CTAは比較時の確認事項を示す中立的な内容になっています。",
+      "title、description、H1、本文はいずれも「遺品整理時の貴重品の探し方と発見後の対応」という検索意図で一致しています。",
+      "指定された内部リンクはすべてリポジトリ実在確認上有効で、重点ページである見積書比較・業者選びページへの文脈的な導線も適切です。福岡市情報から地域別ガイドと/area/への導線もあります。",
+      "拡張子なしcanonicalは提示条件上問題なく、HTMLにも重大な閉じ忘れ、不正な見出し階層、壊れた表構造は見当たりません。広告やCTAの過剰配置もありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-22T14:06:55.136541+00:00",
     "run_id": "39792555607",
     "path": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
