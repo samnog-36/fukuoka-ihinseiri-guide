@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T01:49:03.097058+00:00",
+  "generated_at": "2026-10-22T07:56:17.248203+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -130,7 +130,7 @@
       },
       {
         "path": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
-        "title": "一軒家の遺品整理費用相場｜間取り別料金と見積もり比較のポイント【2026年版】"
+        "title": "福岡の一軒家の遺品整理費用｜間取りだけで決めない見積もり比較と処分費"
       },
       {
         "path": "blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku.html",
@@ -1185,16 +1185,6 @@
         "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
       },
       {
-        "source": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
-        "href": "/blog/cost/article-20260804-hiyou-yasuku-suru-houhou.html",
-        "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
-      },
-      {
-        "source": "blog/cost/article-20260805-ikkenya-hiyou-souba.html",
-        "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
-        "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
-      },
-      {
         "source": "blog/cost/article-20260707-cost-yasuku-suru.html",
         "href": "/blog/cost/article-20260706-cost-saving-tips.html",
         "final": "/blog/cost/article-20260707-cost-yasuku-suru.html"
@@ -1413,9 +1403,19 @@
         "source": "blog/ihinseiri/article-20260706-mitsumori-point.html",
         "href": "/blog/ihinseiri/article-20260718-mitsumori-hikaku-checklist.html",
         "final": "/blog/cost/article-20260803-mitsumorisho-mikata.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260718-butsudan-shobun-heigan.html",
+        "href": "/blog/kuyo/article-20260712-butsudan-shobun-houhou.html",
+        "final": "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html"
+      },
+      {
+        "source": "blog/kuyo/article-20260712-butsudan-shobun-houhou.html",
+        "href": "/blog/kuyo/article-20260718-butsudan-shobun-heigan.html",
+        "final": "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html"
       }
     ],
-    "redirecting_internal_link_count": 76
+    "redirecting_internal_link_count": 74
   },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
