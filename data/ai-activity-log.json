@@ -1,5 +1,66 @@
 [
   {
+    "timestamp": "2026-10-23T01:55:59.007334+00:00",
+    "run_id": "39886560840",
+    "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+    "title_before": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "title_after": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "changes": [
+      "title・meta descriptionは品質スコア92の既存ページを不用意に変えず維持しました。",
+      "発見直後に実行する「撮影・記録・保管・共有」の4手順を追加し、処分前の実務判断を具体化しました。",
+      "発見品台帳の記録項目と記入例を追加し、現金・書類・鍵類を家族間で共有しやすくしました。",
+      "相続税の申告期限、相続登記の期限、遺言書検認、福岡市の粗大ごみ・持ち出しサービスの案内を公式情報で再確認して更新しました。",
+      "不動産所在確認、見積書比較、契約トラブル、地域別ガイドへの関連内部リンクを維持・補強しました。"
+    ],
+    "sources": [
+      {
+        "name": "裁判所｜遺言書の検認",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html"
+      },
+      {
+        "name": "法務省｜相続登記の申請義務化に関するQ&A",
+        "url": "https://www.moj.go.jp/MINJI/minji05_00565.html"
+      },
+      {
+        "name": "国税庁｜申告と納税",
+        "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/06_1.htm?P5=Z28"
+      },
+      {
+        "name": "福岡市ごみと資源の分け方・出し方情報サイト｜粗大ごみ",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/coarseDust"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/area/"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kichouhin-sagashi-1.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "検索意図である「遺品整理時に何を、どこで、どの順番で探し、発見後どう扱うか」に正面から回答しています。title、meta description、H1と本文内容にも不一致がありません。",
+      "「撮影・記録・保管・共有」の4手順と発見品台帳の項目・記入例は、単なる言い換えではない具体的な追加価値です。元ページより実作業で使いやすくなっています。",
+      "相続税の10か月期限、相続登記の3年期限と2027年3月31日の経過措置、相続人申告登記の説明は公的情報と整合しています。([nta.go.jp](https://www.nta.go.jp/publication/pamph/koho/kurashi/html/06_1.htm?P5=Z28&utm_source=openai))",
+      "遺言書について、遅滞のない検認請求、封印された遺言書を家庭裁判所以外で開封しないこと、公正証書遺言および法務局保管制度の対象が検認不要であること、検認が有効性判断ではないことを正確に説明しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html?utm_source=openai))",
+      "福岡市の粗大ごみの事前申込み、家電リサイクル法対象品・パソコンの収集対象外、持ち出しサービスの対象者と別料金の説明は公式情報と一致しています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/coarseDust?utm_source=openai))",
+      "一般廃棄物の収集運搬に関する市町村の委託・許可確認と、残す物と処分する物を分けて可能な限り立ち会うという案内は、国民生活センターの注意喚起を正しく反映しています。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html?utm_source=openai))",
+      "架空の業者、口コミ、専門家、実績、体験談は使われていません。発見品台帳の内容も明確に記入例として示されています。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて存在し、見積書比較、契約トラブル、相続放棄、デジタル遺品、不動産確認、福岡市地域記事、地域一覧への導線も文脈に沿っています。",
+      "CTAは記事末尾の1か所に限定され、複数事業者の比較や専門家・関係機関への確認を促す中立的な内容です。広告・問い合わせ誘導の過剰化はありません。",
+      "見出し階層、目次アンカー、FAQセクション、表、figure、aside、外部リンク属性に明白なHTML破損はありません。canonicalも既存検索意図とURLを維持しています。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-22T22:47:49.986074+00:00",
     "run_id": "39867031365",
     "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
