@@ -1,5 +1,92 @@
 [
   {
+    "timestamp": "2026-10-23T18:48:49.821592+00:00",
+    "run_id": "40005366890",
+    "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+    "title_before": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "title_after": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "changes": [
+      "鳥栖市の本文と比較表から、表紙に「（案）」と記載された旧添付PDFへのリンクを削除しました。520円の料金、予約期限、シールの貼付単位を、現行の鳥栖市「粗大ごみ」ページを直接参照する記述へ差し替えました。",
+      "鳥栖市が2026年4月1日に公開した正式版の一般廃棄物（ごみ）処理基本計画について、旧案PDFとは別の正式版PDFであることを再確認し、primary_sourcesを正式版へ更新しました。",
+      "「制度・公式情報の確認先」にある小郡市「ごみの出し方」のリンクを、本文と同じ正規URLへ統一しました。",
+      "家電4品目の説明を、買替え店、過去の購入店、市区町村の案内、指定引取場所への直接持ち込みという処分手順を直接示す経済産業省の案内へ差し替えました。",
+      "表示上のパンくず末尾を旧題名から「久留米市・小郡市・鳥栖市の遺品整理」へ変更し、H1の主題とそろえました。",
+      "置換後の実HTMLを自己点検し、旧鳥栖市案PDFのURL、取得不能だった小郡市別ホストURL、旧家電Q&AのURLがarticle内に残らないことを確認しました。"
+    ],
+    "sources": [
+      {
+        "name": "久留米市｜粗大ごみ・特別収集の申し込み",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html"
+      },
+      {
+        "name": "久留米市｜宮ノ陣クリーンセンター",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3050sisetsu/4020dplant/2019-0630-1547-58.html"
+      },
+      {
+        "name": "小郡市｜一般廃棄物（ごみ）処理基本計画",
+        "url": "https://www.city.ogori.fukuoka.jp/download_file/view/39097/3214"
+      },
+      {
+        "name": "小郡市｜ごみの出し方",
+        "url": "https://www.city.ogori.fukuoka.jp/197/700/707"
+      },
+      {
+        "name": "鳥栖市｜粗大ごみ",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1250.html"
+      },
+      {
+        "name": "鳥栖市｜臨時収集",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1252.html"
+      },
+      {
+        "name": "鳥栖市｜一般廃棄物（ごみ）処理基本計画掲載ページ",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1343.html"
+      },
+      {
+        "name": "鳥栖市｜一般廃棄物（ごみ）処理基本計画正式版",
+        "url": "https://www.city.tosu.lg.jp/uploaded/attachment/40071.pdf"
+      },
+      {
+        "name": "経済産業省｜家電4品目の正しい処分方法",
+        "url": "https://www.meti.go.jp/policy/it_policy/kaden_recycle/fukyu_special/index.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY"
+      },
+      {
+        "name": "国民生活センター｜不用品回収サービスのトラブル",
+        "url": "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+      }
+    ],
+    "internal_links": [
+      "/area/#fukuoka",
+      "/area/#saga",
+      "/blog/area/",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kurume-ogori-tosu.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "旧版にあった根拠不明の地域相場、業者実績、寺社の供養料金などを削除し、自治体制度と依頼条件を中心とした検証可能な記事へ改善しています。",
+      "比較表に対象条件、料金、出典、確認日があり、自治体の処分・収集料金と民間業者の搬出・分別サービス費を明確に区別しています。",
+      "久留米市の10kgまでごと150円、資源物無料、Web・LINE申込停止中という記述は現行の市公式案内と一致します。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html))",
+      "鳥栖市の粗大ごみシール520円、原則1点1枚、収集日の7日前までの電話予約、および臨時収集7,330円という数値は市公式情報と一致します。([city.tosu.lg.jp](https://www.city.tosu.lg.jp/soshiki/17/1250.html))",
+      "小郡市・クリーンヒル宝満の家庭系一般廃棄物10kg当たり150円という記述は、市の計画および施設案内と整合しています。([city.ogori.fukuoka.jp](https://www.city.ogori.fukuoka.jp/download_file/view/39097/3214?utm_source=openai))",
+      "家電4品目の買替え店、購入店、市区町村案内、指定引取場所という処分手順は経済産業省の案内に沿っています。([meti.go.jp](https://www.meti.go.jp/policy/it_policy/kaden_recycle/fukyu_special/index.html?utm_source=openai))",
+      "一般廃棄物処理業の許可・委託、複数見積もり、追加料金確認に関する説明は、環境省および国民生活センターの注意喚起と一致します。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY))",
+      "地域記事として福岡県・佐賀県を明示し、/area/の各県アンカーと地域記事一覧への導線を設置しています。提示された内部リンクはすべてリポジトリ実在確認上有効です。",
+      "title、meta description、H1、本文の主題が一致し、CTAも相談前の確認事項を案内する穏当な内容です。広告枠や誇張した営業訴求も過剰ではありません。",
+      "記事、目次、表、画像、aside、参照先セクション、CTAのタグ構造に明白な破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-23T07:59:25.802134+00:00",
     "run_id": "39920934054",
     "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
