@@ -1,5 +1,70 @@
 [
   {
+    "timestamp": "2026-10-23T22:38:36.234015+00:00",
+    "run_id": "40034679625",
+    "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+    "title_before": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "title_after": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "changes": [
+      "久留米市の公式更新内容を確認し、Web申込停止の記載を2026年10月22日現在の公式案内に合わせ、根拠のないLINE申込停止の記載を削除しました。",
+      "久留米市の特別申込み収集について、2トンダンプ1台8,530円、分別・立会いが必要という公式条件を追加し、自治体収集料金と遺品整理サービス料金を区別しました。",
+      "久留米市の粗大ごみ持ち出しサービスについて、対象条件と1品当たり630円の別途手数料を追加し、玄関まで搬出できない大型家具の判断材料を補強しました。",
+      "自治体比較表に久留米市の特別申込み収集を追加し、全行の確認日を2026年10月23日に統一しました。",
+      "久留米市の宮ノ陣クリーンセンターについて、本人・親族による持込が原則で、荷下ろしも原則として持込者が行うという実務条件を明記しました。",
+      "鳥栖市の臨時収集について、分別未実施時には別途分別作業費が必要となる公式注意点を追加しました。"
+    ],
+    "sources": [
+      {
+        "name": "久留米市｜粗大ごみ・特別収集の申し込み",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html"
+      },
+      {
+        "name": "久留米市｜宮ノ陣クリーンセンター",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3050sisetsu/4020dplant/2026-1013-1533-58.html"
+      },
+      {
+        "name": "小郡市｜一般廃棄物（ごみ）処理基本計画",
+        "url": "https://www.city.ogori.fukuoka.jp/application/files/4515/5313/8024/2019-03-21_12-13_694.pdf"
+      },
+      {
+        "name": "鳥栖市｜粗大ごみ",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1250.html"
+      },
+      {
+        "name": "鳥栖市｜臨時収集",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1252.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kurume-ogori-tosu.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "久留米市の特別申込み収集について、2トンダンプ1台8,530円、事前申込み、分別、立会いという条件を正確に整理し、民間の遺品整理料金と明確に区別しています。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html?utm_source=openai))",
+      "粗大ごみ持ち出しサービスの1品630円、大人2人で運べること、玄関口まで容易に運び出せることなど、依頼可否を判断する具体的条件が追加されています。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html))",
+      "宮ノ陣クリーンセンターの10kgまでごとに150円、資源物無料、本人・親族による持込みと自己荷下ろしの原則は公式情報と整合しています。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3050sisetsu/4020dplant/2026-1013-1533-58.html))",
+      "鳥栖市の粗大ごみシール520円、7日前までの予約、梱包時の容積・重量条件が正確です。([city.tosu.lg.jp](https://www.city.tosu.lg.jp/soshiki/17/1250.html))",
+      "鳥栖市の臨時収集について、2トントラック1台7,330円、平日収集、立会い、事前分別、未分別時の追加作業費を正しく反映しています。([city.tosu.lg.jp](https://www.city.tosu.lg.jp/soshiki/17/1252.html))",
+      "自治体の収集・処分費と、室内搬出・仕分け・探索・清掃などの民間サービス費を混同しない構成になっており、地域・費用・依頼条件から判断するというサイト方針に適合しています。",
+      "比較表には対象条件、出典、確認日があり、県名・市名も明示されています。/area/の福岡県・佐賀県アンカーと地域記事一覧への導線も設置されています。",
+      "一般廃棄物収集運搬の許可・委託確認、複数見積もり、追加料金確認に関する説明は、環境省と国民生活センターの案内に沿っています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY))",
+      "家電4品目の対象と処分方法は経済産業省の案内と整合しています。([meti.go.jp](https://www.meti.go.jp/policy/it_policy/kaden_recycle/fukyu_special/index.html?utm_source=openai))",
+      "指定された内部リンクはすべてリポジトリ上に存在し、CTAは末尾の1か所のみで過剰ではありません。架空の業者、口コミ、実績、専門家、料金事例もありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-23T18:48:49.821592+00:00",
     "run_id": "40005366890",
     "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
