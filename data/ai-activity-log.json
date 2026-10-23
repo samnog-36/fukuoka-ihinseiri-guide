@@ -1,5 +1,67 @@
 [
   {
+    "timestamp": "2026-10-23T07:59:25.802134+00:00",
+    "run_id": "39920934054",
+    "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
+    "title_before": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "title_after": "遺品整理で見つけるべき貴重品リストと効率的な探し方｜福岡遺品整理ガイド",
+    "changes": [
+      "相続税の申告要否について、財産の単純合計ではなく、各人の課税価格の合計額と基礎控除額で判断する説明へ修正しました。非課税財産、債務、葬式費用を控除し、相続時精算課税適用財産や加算対象の贈与財産を反映することも本文に明記しました。",
+      "「捜索や処分をいったん止めるべき場面」の表に根拠・確認先の列を追加し、相続放棄に関する行を申述前・受理前と受理後に分けました。民法921条1号・3号の対象行為と、それぞれのただし書・例外を表の後で説明しました。",
+      "福岡市の粗大ごみ持ち出しサービスについて、対象者を65歳以上の高齢者、障がい者、妊婦など特に必要がある人で搬出できない人と具体化しました。人力3人・玄関口から搬出可能という条件も追記しました。",
+      "福岡市の持ち出し手数料が通常の粗大ごみ処理手数料とは別であること、1回5個まで、電話受付のみ、搬出時の立会いが必要であることを実HTMLの本文に明記しました。",
+      "制度・公式情報の確認先を、修正後の本文で使用する国税庁の相続税説明とe-Gov法令検索の民法921条へ更新しました。"
+    ],
+    "sources": [
+      {
+        "name": "国税庁｜相続税がかかる場合",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4102.htm"
+      },
+      {
+        "name": "e-Gov法令検索｜民法921条",
+        "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方・持ち出しサービス",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "裁判所｜遺言書の検認",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260927-souzoku-toki-shoyu-fudosan-kiroku-fukuoka",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/area/"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kichouhin-sagashi-1.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "検索意図である「遺品整理で探すべき貴重品」と「効率的な探し方」に対し、対象物、確認場所、作業順、発見品台帳、発見後の対応まで具体的に答えています。",
+      "相続税の説明は、単純な財産総額ではなく、非課税財産、債務、葬式費用、相続時精算課税適用財産、加算対象の贈与財産を反映する内容に修正され、国税庁の案内と整合しています。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4102.htm))",
+      "遺言書について、封印のあるものの開封、検認の目的、申立先、公正証書遺言・法務局保管遺言の扱いが裁判所の案内に沿っています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_17/index.html))",
+      "福岡市の持ち出しサービスについて、対象者、1回5個まで、3人で搬出可能な重量、玄関口から搬出可能な大きさ、電話受付、立会い、屋内500円・玄関前300円を正確に掲載しています。通常の粗大ごみ手数料とは別料金である点も公式案内と一致します。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "相続登記の3年以内という期限と、2024年4月1日以前の相続について原則2027年3月31日までという説明は法務省情報と整合しています。([moj.go.jp](https://www.moj.go.jp/MINJI/minji05_00565.html?campaign=sbi&utm_source=openai))",
+      "一般廃棄物処理業の許可確認、複数見積もり、残す物と処分品の区分、立会いの推奨は国民生活センターの注意喚起に沿っています。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html))",
+      "title、meta description、H1と本文内容が一致しており、相続放棄や福岡市の条件をmetaだけに追加した状態にはなっていません。",
+      "指定された内部リンクはすべてリポジトリ実在確認で存在し、重点ページへの文脈に沿った導線と、福岡市・地域別ページへの導線があります。",
+      "架空の業者、口コミ、実績、専門家監修、体験談、推測の料金相場は掲載されていません。",
+      "CTAは記事末尾の1か所だけで、複数社比較と専門家への確認を促す中立的な内容です。広告・問い合わせ誘導の過剰化はありません。",
+      "目次のアンカー、見出しID、JSON-LD、表、FAQ、article要素に明白な破損はなく、HTML構造上の重大な問題はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-23T01:55:59.007334+00:00",
     "run_id": "39886560840",
     "path": "blog/ihinseiri/article-20260710-kichouhin-sagashi.html",
