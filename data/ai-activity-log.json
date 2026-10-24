@@ -1,5 +1,74 @@
 [
   {
+    "timestamp": "2026-10-24T18:22:30.572666+00:00",
+    "run_id": "40120241271",
+    "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
+    "title_before": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "title_after": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "changes": [
+      "本文の大枠、既存CTA、編集情報、公式情報セクション、画像、主要classを維持し、品質スコア92のページを全面改変しませんでした。",
+      "追加価値として、家電4品目を依頼する前に事業者へ伝えるべき「メーカー・型番・搬出経路・室外機・残水」などの具体的な確認項目を追加しました。",
+      "費用表の根拠を経済産業省FAQと家電リサイクル券センターに明確化し、リサイクル料金・収集運搬料金・搬出作業費を混同しない構成を維持しました。",
+      "福岡市・北九州市の家電4品目の行政収集対象外という地域固有情報、および福岡市の遺品整理ごみ限定許可制度に関する案内を維持しました。",
+      "自己搬入手順について、家電製品協会の公式手順ページへの直接リンクを追加しました。"
+    ],
+    "sources": [
+      {
+        "name": "環境省｜家電リサイクル法Q&A",
+        "url": "https://www.env.go.jp/recycle/kaden/qa/q03.html"
+      },
+      {
+        "name": "経済産業省｜家電リサイクル制度FAQ",
+        "url": "https://www.meti.go.jp/policy/it_policy/kaden_recycle/faq/faq.html"
+      },
+      {
+        "name": "家電リサイクル券センター",
+        "url": "https://www.rkc.aeha.or.jp/"
+      },
+      {
+        "name": "福岡市｜市が収集しないごみ",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html"
+      },
+      {
+        "name": "北九州市｜家電4品目の処分方法について",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/01100018.html"
+      },
+      {
+        "name": "パソコン3R推進協会",
+        "url": "https://www.pc3r.jp/"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/area/",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260714-kaden-recycle-shobun-20261024.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "家電4品目、その他の家電、パソコンを最初に分ける構成で、遺品整理時の実務的な検索意図に適合しています。",
+      "追加された「メーカー・型番・搬出経路・室外機・残水」等の確認項目は、単なる言い換えではなく、見積条件の漏れや当日の追加作業を減らす具体的な追加価値です。",
+      "リサイクル料金、収集運搬料金、搬出・付帯作業費を明確に分離しており、公的制度上の費用と民間作業費を混同していません。自己搬入時に収集運搬料金がかからないという説明も経済産業省FAQと整合します。([meti.go.jp](https://www.meti.go.jp/policy/it_policy/kaden_recycle/faq/faq.html?utm_source=openai))",
+      "指定引取場所への自己搬入について、メーカー名、テレビの画面サイズ、冷蔵庫・冷凍庫の内容積を確認して郵便局で手続きする流れは公式案内と一致しています。追加された家電製品協会への直接リンクも有用です。([aeha-kadenrecycle.com](https://aeha-kadenrecycle.com/select/procedure/))",
+      "福岡市が家電4品目を収集・処理施設で受け入れず、回収協力店、協定事業者、指定引取場所への自己搬入を案内している点は正確です。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html))",
+      "北九州市が家電4品目を行政回収・処分の対象外としていること、販売店や協力店への依頼を案内していることは公式情報と一致しています。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/contents/01100018.html))",
+      "福岡市の小型家電回収ボックスの投入口「横25cm×縦8.5cm」、充電式電池の分別、無理に分解しないという説明は公式案内に沿っています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/raremetals.html))",
+      "PCリサイクルマーク付き家庭用パソコンの原則無償回収と、利用者自身によるデータ消去を基本とする説明はパソコン3R推進協会の案内と整合しています。([pc3r.jp](https://www.pc3r.jp/home/faq.html?utm_source=openai))",
+      "無許可回収業者に関する注意喚起は、家庭廃棄物の回収には一般廃棄物収集運搬業の許可または市町村の委託が必要という環境省の説明に沿っています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tvrecycle.html?utm_source=openai))",
+      "比較表には対象条件、出典、確認日が付されており、提示された編集方針を満たしています。",
+      "title、meta description、H1、本文の意図は一致しています。内部リンクはリポジトリ実在確認上すべて有効で、重点ページへの自然な導線も確保されています。",
+      "CTAは記事末尾の1か所に限定され、誇大表現や不自然なランキング、架空の口コミ・実績・専門家はありません。AdSense品質上の大きな問題は認められません。",
+      "HTMLの見出し階層、目次アンカー、表、画像、aside、参考情報セクションに重大な構造破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-24T14:53:23.766238+00:00",
     "run_id": "40104351539",
     "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
