@@ -1,5 +1,79 @@
 [
   {
+    "timestamp": "2026-10-24T14:53:23.766238+00:00",
+    "run_id": "40104351539",
+    "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
+    "title_before": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "title_after": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "changes": [
+      "福岡市の家電4品目・小型家電に関する参照先を、現行の福岡市公式ページへ更新しました。",
+      "料金を「リサイクル料金」「収集運搬料金」「搬出・付帯作業費」に分け、金額が変わる条件と確認先を表で明確化しました。",
+      "福岡市の遺品整理ごみ限定許可制度について、室内整理事業者と家庭ごみを運搬する事業者が別の場合がある点を公式情報に沿って補足しました。",
+      "福岡市の小型充電式電池・充電式製品について、燃えないごみに出せないことと、取り外せない製品を無理に分解しない判断を追加しました。",
+      "無許可回収業者について、古物商許可や産業廃棄物処理業許可だけでは家庭廃棄物を回収できないという環境省の注意点を追加しました。",
+      "既存の検索意図、CTA、編集情報、公式情報セクション、画像、記事構造を維持しつつ、制度確認に必要な箇所のみを更新しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜市が収集しないごみ",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html"
+      },
+      {
+        "name": "福岡市｜小型電子機器と小型充電式電池を回収しています！",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/raremetals.html"
+      },
+      {
+        "name": "北九州市｜家電4品目の処分方法について",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/01100018.html"
+      },
+      {
+        "name": "環境省｜家電リサイクル法Q&A",
+        "url": "https://www.env.go.jp/recycle/kaden/qa/q05.html"
+      },
+      {
+        "name": "環境省｜廃棄物の処分に「無許可」の回収業者を利用しないでください！",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+      },
+      {
+        "name": "家電リサイクル券センター",
+        "url": "https://www.rkc.aeha.or.jp/"
+      },
+      {
+        "name": "パソコン3R推進協会",
+        "url": "https://www.pc3r.jp/"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/area/",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260714-kaden-recycle-shobun-20261024.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "家電4品目、その他の家電、パソコンを最初に区分し、読者が処分ルートを判断しやすい構成です。",
+      "リサイクル料金、収集運搬料金、搬出・付帯作業費を分離し、金額が変わる条件と確認先まで示しています。具体的な追加価値があり、単なる言い換えや日付更新ではありません。",
+      "各比較表に対象条件、一次情報の出典、確認日が付いており、編集方針に適合しています。",
+      "福岡市の家電4品目について、市収集・市処理施設への持込みができないこと、購入店・回収協力店・協定事業者・指定引取場所という選択肢を正しく整理しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html?utm_source=openai))",
+      "福岡市の遺品整理ごみ限定許可制度について、限定許可事業者以外へ整理を依頼する場合には、許可された収集運搬業者への別途依頼が必要という一次情報を正しく反映しています。([100.city.fukuoka.lg.jp](https://100.city.fukuoka.lg.jp/actions/2322))",
+      "北九州市について、行政回収の対象外、協力店制度、自己搬入時の若松区の指定引取場所、自己搬入では収集運搬料金が不要という案内と整合しています。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/contents/01100018.html))",
+      "小型充電式電池を燃えないごみに出せないこと、取り外せない場合に無理に分解しないことは福岡市の現行案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/moenaigomi.html?utm_source=openai))",
+      "産業廃棄物処理業許可や古物商許可だけでは家庭廃棄物を回収できないという説明は、環境省の注意喚起を正確に反映しています。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html))",
+      "PCリサイクルマーク付き家庭用パソコンの原則無償回収と、メーカー不存在時などの例外を含ませた表現は妥当です。利用者自身による事前のデータ消去を促す内容も公式情報と整合しています。([pc3r.jp](https://www.pc3r.jp/home/faq.html?utm_source=openai))",
+      "title、meta description、H1、本文の主題が一致しており、「遺品整理で出た家電の処分方法・費用・依頼条件」という検索意図を満たしています。",
+      "指定された重点ページへの内部リンクは文脈に沿って配置され、リポジトリ実在確認上もリンク切れはありません。",
+      "CTAは記事末尾の1か所のみで、広告・営業訴求の過剰化はありません。架空の口コミ、事業者評価、実績、専門家監修、推測料金も含まれていません。",
+      "HTMLの見出し階層、目次アンカー、表、画像、編集情報、参考情報、CTAに明らかな構造破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-24T11:37:57.887080+00:00",
     "run_id": "40090458152",
     "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
