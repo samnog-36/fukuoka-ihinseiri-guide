@@ -1,5 +1,77 @@
 [
   {
+    "timestamp": "2026-10-24T11:37:57.887080+00:00",
+    "run_id": "40090458152",
+    "path": "blog/cost/article-20260714-kaden-recycle-shobun.html",
+    "title_before": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "title_after": "遺品整理の家電処分ガイド｜家電リサイクル法の対象品目と費用・手続きの流れ【2026年版】｜福岡遺品整理ガイド",
+    "changes": [
+      "メーカーや依頼先によって変わる料金を固定の相場として掲載していた箇所を削除し、リサイクル料金・収集運搬料金・追加作業費を分けて確認する実務的な表へ変更しました。",
+      "福岡市の家電4品目の処分ルートを、購入店・協力店等・連携事業者・指定引取場所への自己搬入という公式案内に合わせて更新しました。",
+      "北九州市の公式手順を追加し、福岡市との比較表に対象条件・出典・確認日を明記しました。",
+      "小型家電について、福岡市の回収ボックス投入口サイズ、宅配回収、リチウムイオン電池の注意点を公式情報に基づき補強しました。",
+      "パソコンはPCリサイクルマークの一律無料断定を避け、データ消去とメーカー・パソコン3R推進協会での事前確認を中心に改めました。",
+      "遺品整理業者に依頼する際、家電リサイクル券、費用内訳、一般廃棄物収集運搬の確認事項を追加し、見積書記事・許可確認記事へ内部導線を設置しました。",
+      "内容と一致しない既存のアイキャッチ画像を、家電の仕分け・適正処分を主題とする画像へ差し替える提案にしました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜家電リサイクル法対象品",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/recyclingLaw"
+      },
+      {
+        "name": "福岡市｜使用済小型電子機器（小型家電）",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/consumerElectronics"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "北九州市｜家電4品目の処分方法について",
+        "url": "https://ssl.city.kitakyushu.lg.jp/contents/01100018.html"
+      },
+      {
+        "name": "環境省｜家電リサイクル法",
+        "url": "https://www.env.go.jp/recycle/kaden/"
+      },
+      {
+        "name": "一般財団法人家電製品協会 家電リサイクル券センター",
+        "url": "https://www.rkc.aeha.or.jp/"
+      },
+      {
+        "name": "一般社団法人パソコン3R推進協会",
+        "url": "https://www.pc3r.jp/"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/area/",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20260714-kaden-recycle-shobun-20261024.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "旧ページにあった根拠の弱い料金相場、買取価格、エアコン取外し費用などを削除し、リサイクル料金・収集運搬料金・追加作業費を分離して確認する構成へ改善しています。",
+      "福岡市の購入店・買替店、回収協力店、市との連携事業者、指定引取場所への自己搬入という処分ルートは公式案内と一致しています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/recyclingLaw))",
+      "北九州市について、行政回収を行わないこと、協力店制度、若松区の指定引取場所、郵便局またはゆうちょ銀行での手続きが公式情報に沿って記載されています。([ssl.city.kitakyushu.lg.jp](https://ssl.city.kitakyushu.lg.jp/contents/01100018.html))",
+      "福岡市の小型家電回収ボックスの投入口25cm×8.5cm、宅配回収、充電式電池を燃えないごみに出せないという説明は公式情報と整合しています。([kateigomi-bunbetsu.city.fukuoka.lg.jp](https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/consumerElectronics))",
+      "PCリサイクルマーク付き製品の無償回収について例外を明示し、データ消去も初期化だけでは不十分な場合があると説明しており、パソコン3R推進協会の案内を正確に反映しています。([pc3r.jp](https://www.pc3r.jp/home/pcrecycle_mark.html))",
+      "福岡市の遺品整理・引越時の家庭系ごみに関する限定許可制度を過度に一般化せず、作業者と運搬者が異なる可能性を示している点が実務的です。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "比較表には対象条件・出典・確認日が入り、公的なリサイクル料金と事業者が設定する収集運搬・搬出費を混同していません。",
+      "title、description、H1、本文の検索意図が一致し、既存の重点ページへ自然な内部リンクを設けています。提示された内部リンクはすべてリポジトリ実在確認上有効です。",
+      "架空の業者、口コミ、実績、専門家、体験談はなく、CTAも末尾の1か所だけで過剰ではありません。",
+      "見出し階層、目次ID、表、画像、aside、参考情報、CTAのHTML構造に明らかな破損はありません。専用アイキャッチはgenerate申告済みのため、公開前レビュー上の問題には当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-24T01:04:53.358856+00:00",
     "run_id": "40047955861",
     "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
