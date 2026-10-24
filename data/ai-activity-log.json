@@ -1,5 +1,75 @@
 [
   {
+    "timestamp": "2026-10-24T01:04:53.358856+00:00",
+    "run_id": "40047955861",
+    "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
+    "title_before": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "title_after": "久留米市・小郡市・鳥栖市の遺品整理｜粗大ごみ・一時多量ごみと見積もりの確認点｜福岡遺品整理ガイド",
+    "changes": [
+      "久留米市の公式案内を2026年10月24日に再確認し、Web申込だけでなくLINE申込も2026年10月22日時点で利用不可とされている点を更新しました。",
+      "自治体料金と遺品整理サービス料金の混同を避けるため、比較表に「搬出の境界」列を追加しました。久留米市の特別申込み収集は家屋内・倉庫・車庫内からの搬出を行わず、収集車が横付けできる場所まで出す必要があることを明示しました。",
+      "久留米市・小郡市・鳥栖市の料金、申込条件、分別・立会い条件、公式リンク、確認日を最新確認日に統一しました。",
+      "既存のタイトル、検索意図、CTA、編集情報、公式情報セクション、画像、主要class、地域導線は維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "久留米市｜粗大ごみ・特別収集の申し込み",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html"
+      },
+      {
+        "name": "久留米市｜宮ノ陣クリーンセンター",
+        "url": "https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3050sisetsu/4020dplant/2026-1013-1533-58.html"
+      },
+      {
+        "name": "小郡市｜ごみの出し方",
+        "url": "https://www.city.ogori.fukuoka.jp/197/700/707"
+      },
+      {
+        "name": "鳥栖市｜粗大ごみ",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1250.html"
+      },
+      {
+        "name": "鳥栖市｜臨時収集",
+        "url": "https://www.city.tosu.lg.jp/soshiki/17/1252.html"
+      },
+      {
+        "name": "環境省｜廃棄物の処分に「無許可」の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY"
+      },
+      {
+        "name": "国民生活センター｜不用品回収サービスのトラブル",
+        "url": "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/kurume-ogori-tosu.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "久留米市のWeb申込・LINE申込が2026年10月22日現在利用できないこと、特別申込み収集が2トンダンプ1台8,530円であること、家屋・倉庫・車庫内からの運び出しを行わず横付け可能な場所まで出す必要があることは公式情報と一致しています。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3010dashikata/2019-0924-1123-200.html))",
+      "宮ノ陣クリーンセンターの家庭系ごみについて、指定袋以外の燃やせるごみ・燃やせないごみが10kgまでごとに150円、資源物が無料という記載は公式情報と一致しています。([city.kurume.fukuoka.jp](https://www.city.kurume.fukuoka.jp/1050kurashi/2030kankyougomi/3050sisetsu/4020dplant/2026-1013-1533-58.html?utm_source=openai))",
+      "小郡市のクリーンヒル宝満への家庭系一般廃棄物の直接搬入料金10kg当たり150円、および10kg未満を10kgとして扱う記載は公表資料で確認できます。([city.ogori.fukuoka.jp](https://www.city.ogori.fukuoka.jp/application/files/4515/5313/8024/2019-03-21_12-13_694.pdf?utm_source=openai))",
+      "鳥栖市の粗大ごみシール1枚520円、収集日の7日前までの予約、1点につき1枚、朝8時までに家の前へ出す条件は公式情報と一致しています。([city.tosu.lg.jp](https://www.city.tosu.lg.jp/soshiki/17/1250.html))",
+      "鳥栖市の臨時収集について、2トントラック1台7,330円、平日収集、立会い、事前分別、未分別時の別途分別作業費という説明は公式情報と一致しています。([city.tosu.lg.jp](https://www.city.tosu.lg.jp/soshiki/17/1252.html))",
+      "一般家庭の廃棄物回収には市区町村の一般廃棄物処理業許可または委託が必要で、産業廃棄物処理業や古物商の許可だけでは回収できないという説明は環境省の案内に忠実です。([env.go.jp](https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html?_fsi=ExHcYEVY))",
+      "国民生活センターの注意喚起を踏まえ、自治体で許可業者を確認し、複数見積もり、追加料金、作業内容、キャンセル料を確認する手順が具体化されています。([kokusen.go.jp](https://www.kokusen.go.jp/news/data/n-20221102_1.html))",
+      "今回追加された「搬出の境界」列は、自治体の収集・処分料金と室内搬出を含む民間サービス料金の混同を防ぐ明確な追加価値です。",
+      "福岡県久留米市・小郡市と佐賀県鳥栖市を明示し、/area/の福岡県・佐賀県アンカーおよび地域記事一覧へ導線を設けています。",
+      "指定された内部リンクはすべてリポジトリ実在確認上有効で、重点ページへの自然な導線も確保されています。",
+      "title、description、H1、本文の検索意図が一致しており、既存URLの意図を変えずに地域制度と見積もり判断を扱っています。",
+      "CTAは記事末尾に1か所だけで、誇大表現、架空実績、未確認業者ランキング、過剰な広告誘導はありません。",
+      "HTMLの見出し階層、目次ID、表、画像、内部リンク、構造化データに公開を妨げる破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-23T22:38:36.234015+00:00",
     "run_id": "40034679625",
     "path": "blog/area/article-20260713-kurume-ogori-tosu.html",
