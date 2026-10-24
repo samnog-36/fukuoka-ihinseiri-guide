@@ -263,5 +263,10 @@
     "sha256": "d5dcc6d2aa5f862b0f4c5384d38a3db53a45c31e579509bbdef9ef5e1e324c36",
     "review": "visual-review-2026-10-21",
     "text_free": true
+  },
+  "images/blog/ai-20260714-kaden-recycle-shobun-20261024.webp": {
+    "sha256": "6eaee580b6351c086210bf5217a2b43ccf74a58672965196961103674c7603a7",
+    "review": "vision-review",
+    "text_free": true
   }
 }
