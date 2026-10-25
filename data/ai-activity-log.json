@@ -1,5 +1,82 @@
 [
   {
+    "timestamp": "2026-10-25T23:33:39.678491+00:00",
+    "run_id": "40245143747",
+    "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+    "title_before": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "title_after": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "changes": [
+      "更新日を、現在日より未来だった2026年10月26日から2026年10月25日に修正しました。",
+      "福岡市の自己搬入について、排出者本人・他人のごみの搬入不可・事前受付の原則を公式情報に基づいて整理し、故人宅由来のごみは遺族が当然に搬入できるものではない点を明確化しました。",
+      "自己搬入の公的手数料（10kgまでごとに140円）を、適用条件付きで追加し、自治体手数料と民間の室内搬出・整理サービス費用を混同しない判断材料を追加しました。",
+      "粗大ごみ持ち出しサービスについて、対象条件、1回5個まで、屋内からの持ち出し500円・玄関前300円という福岡市の公表条件を追記しました。",
+      "博多区・東区・中央区の都市部物件で比較しやすいよう、建物条件・作業範囲・追加料金・家庭ごみ運搬体制をそろえる見積もり前確認表を追加しました。",
+      "中央区のご遺族サポート窓口は、全市共通案内ではなく中央区の公式案内へ直接リンクするよう改善しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜福岡市自己搬入ごみ事前受付HPのメンテナンスについて",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kojoseibi/hp/jikohan_kinkyuu.html"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "福岡市｜全区役所に「ご遺族サポート窓口」を開設しています",
+        "url": "https://www.city.fukuoka.lg.jp/shimin/kusei/life/goizoku_support.html"
+      },
+      {
+        "name": "福岡市｜プラスチック分別が始まります",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/keikaku/hp/pura_bunnbetsu_kaishi.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/content/900534097.pdf"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/area/",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/blog/area/article-20260709-nishi-sawara-ku-guide",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/cost/article-20260707-cost-yasuku-suru",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/fukuokashi-hakata-higashi-chuo.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "自己搬入について、他人のごみは搬入できず、排出者本人または収集運搬許可業者が搬入するという福岡市の公式条件を踏まえ、故人宅由来のごみを遺族が当然に搬入できると断定していません。重要な誤処分リスクを適切に回避しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "自己搬入手数料の「10kgまでごとに140円」は公式情報と一致し、民間事業者の室内搬出・人員・車両等の料金とは別であることも明確です。公的手数料と民間サービス費用を混同させない編集方針に適合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "粗大ごみ持ち出しサービスの対象条件、1回5個まで、屋内500円・玄関前300円、電話受付という説明は福岡市の公表内容と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "自己搬入予約サイトのメンテナンス、再開時期未定、電話番号、受付時間の記載は2026年10月23日更新の福岡市公式案内と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kojoseibi/hp/jikohan_kinkyuu.html))",
+      "家庭系ごみの限定許可業者と、それ以外の遺品整理事業者が一般廃棄物収集運搬許可業者へ依頼する仕組みを正しく説明しています。古物商・産業廃棄物の許可だけでは家庭ごみを回収できないという環境省の注意喚起とも整合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "2027年2月1日のプラスチック分別開始予定、家電リサイクル法対象品を市が収集・自己搬入とも受け付けない点、ご遺族サポート窓口の設置について、いずれも一次情報と整合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/keikaku/hp/pura_bunnbetsu_kaishi.html))",
+      "title・meta description・H1・本文の検索意図が一致し、博多区・東区・中央区という対象地域も明示されています。地域別ガイドと福岡県アンカーへの導線もあり、地域記事の編集ルールを満たしています。",
+      "リポジトリ実在確認で提示された内部リンクはすべて実在する対象で、拡張子なしURLも正規URLとして適切です。リンク切れを理由とする却下要素はありません。",
+      "架空の業者ランキング、口コミ、実績、監修者、料金相場を作成しておらず、CTAも記事末尾の1か所だけです。AdSense品質上の誇張・誘導過多は見られません。",
+      "追加された自己搬入費用、持ち出しサービス、見積条件比較表は具体的な追加価値であり、単なる言い換えや日付更新ではありません。元ページより判断材料が増えています。",
+      "HTMLの見出し階層、目次アンカー、表、aside、内部・外部リンク、JSON-LDはいずれも大きな構造破損がなく、公開を妨げるマークアップ上の問題は確認できません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-25T21:17:04.525464+00:00",
     "run_id": "40234385047",
     "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
