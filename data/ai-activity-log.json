@@ -1,5 +1,71 @@
 [
   {
+    "timestamp": "2026-10-25T05:16:54.422532+00:00",
+    "run_id": "40164834574",
+    "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
+    "title_before": "福岡の人形・ぬいぐるみ供養｜持ち込み・郵送の受付先と料金・ケース処分 - 福岡遺品整理ガイド",
+    "title_after": "福岡の人形・ぬいぐるみ供養｜持ち込み・郵送の受付先と料金・ケース処分 - 福岡遺品整理ガイド",
+    "changes": [
+      "鳥飼八幡宮の公式ページとFAQで持ち込み受付終了時刻の表記が異なる点（9時〜17時／9時〜16時30分）を明記し、夕方の持ち込み時は事前確認するという具体的な判断材料を追加しました。",
+      "鳥飼八幡宮・福島八幡宮について、郵送供養の料金、箱サイズ、送料負担、供養証、ケース・付属品の条件を公式案内に基づいて再確認し、比較表を更新しました。",
+      "福岡市のケース類処分について、指定袋に入らない物は粗大ごみ、割れたガラスは厚紙と「危険」表示、充電式電池内蔵品は燃えないごみに出せない点を市の公式案内に基づいて追加しました。",
+      "供養料と自治体処分費、遺品整理業者へ依頼する場合の運搬・処分費を分けて比較する確認項目を追加しました。",
+      "既存のタイトル、主要class、CTA、編集情報、公式情報セクション、既存画像は維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "鳥飼八幡宮｜人形供養",
+        "url": "https://hachimansama.jp/prayer/ningyo"
+      },
+      {
+        "name": "鳥飼八幡宮｜よくある質問",
+        "url": "https://hachimansama.jp/contact/faq"
+      },
+      {
+        "name": "福島八幡宮｜人形供養・ぬいぐるみ供養",
+        "url": "https://fukushimahachimangu.or.jp/goannai-ningyokuyou"
+      },
+      {
+        "name": "福岡市｜燃えないごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/moenaigomi.html"
+      },
+      {
+        "name": "福岡県公式観光情報｜筑前人形感謝祭",
+        "url": "https://www.crossroadfukuoka.jp/event/11226"
+      }
+    ],
+    "internal_links": [
+      "/blog/kuyo/article-20260706-suterarenai-taisho",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/kuyo/article-20260714-ningyo-nuigurumi-kuyo",
+      "/blog/kuyo/article-20260722-otakiage-houhou-hiyo",
+      "/blog/kuyo/article-20260719-shashin-album-kuyo",
+      "/blog/area/",
+      "/area/#fukuoka",
+      "/blog/kuyo/"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ningyo-kuyo-fukuoka.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "鳥飼八幡宮の人形供養ページが社頭受付を9時～17時、FAQが9時～16時30分としている不一致を正確に把握し、夕方の持ち込み前に確認するという実用的な判断材料へ変換しています。([hachimansama.jp](https://hachimansama.jp/prayer/ningyo))",
+      "鳥飼八幡宮の郵送供養料は、3辺合計100cm未満5,000円、100cm以上150cm未満8,000円、150cm以上200cm未満10,000円と公式案内に一致しています。供養証の送付やケース類の除外条件も正確です。([hachimansama.jp](https://hachimansama.jp/prayer/ningyo))",
+      "福島八幡宮について、事前申込不要、1箱10,000円、送料・振込手数料は依頼者負担、供養証送付、ケース・飾り台・金属製備品は不可という主要条件が公式情報と一致しています。([fukushimahachimangu.or.jp](https://fukushimahachimangu.or.jp/goannai-ningyokuyou))",
+      "筑前人形感謝祭の2026年5月10日開催、例年5月第2日曜日という記載は福岡県公式観光情報と一致し、判定時点で開催済みであることも適切に示しています。([crossroadfukuoka.jp](https://www.crossroadfukuoka.jp/event/11226))",
+      "祥勝院について、福岡市博多区の所在地、毎年12月第2土曜日、人形・ぬいぐるみの供養、大きなぬいぐるみ・ガラスケースを遠慮する条件が掲載元と一致しています。([hakataningyou.com](https://www.hakataningyou.com/service/kuyou.html))",
+      "福岡市の燃えないごみについて、指定袋に入らない大きさ・重さは粗大ごみ、割れた物・割れやすいガラスは厚紙で包んで「危険」と表示、小型充電式電池内蔵製品はそのまま燃えないごみに出せない、という説明が市の公式案内に一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/moenaigomi.html))",
+      "供養料、送料・手数料、ケース類の自治体処分、業者の運搬・処分費を分離しており、公的処分と寺社・業者サービスの費用を混同していません。",
+      "title、meta description、H1、本文が「福岡の人形・ぬいぐるみ供養」「持ち込み・郵送」「料金」「ケース処分」という同一の検索意図で整合しています。",
+      "比較表に対象条件、出典、確認日があり、料金を掲載する受付先と個別確認が必要な受付先を区別しています。",
+      "地域記事として福岡市中央区・博多区、飯塚市、八女市を明示し、/blog/area/、/area/、/area/#fukuoka への導線も設置されています。提示された内部リンクはすべてリポジトリ実在確認上有効です。",
+      "旧版から、受付時間の公式表記差、充電式電池、費用区分、追加FAQなど具体的な読者価値が増えており、単なる言い換えや日付更新ではありません。",
+      "CTAは1か所で過剰ではなく、架空の口コミ・実績・専門家・ランキングもありません。HTMLの見出しID、目次リンク、表、記事セクションにも重大な構造破損は認められません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-24T23:44:41.015790+00:00",
     "run_id": "40143715354",
     "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
