@@ -1,5 +1,79 @@
 [
   {
+    "timestamp": "2026-10-25T17:54:29.650833+00:00",
+    "run_id": "40218359508",
+    "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+    "title_before": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "title_after": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "changes": [
+      "導入文の地域導線に、/area/内の福岡県セクションへ直接移動するアンカー付きリンク「福岡県」を追加した。",
+      "記事本文に表示する更新日を、判定時刻が属する2026年10月26日に更新した。",
+      "既存の自治体制度の説明、比較表、公式情報リンク、関連記事、編集情報、参照先、CTAの構造と内容は維持した。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜福岡市のごみ出しルール",
+        "url": "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/0501/0701.html"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "福岡市｜プラスチック分別が始まります",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/keikaku/hp/pura_bunnbetsu_kaishi.html"
+      },
+      {
+        "name": "福岡市｜全区役所に「ご遺族サポート窓口」を開設しています",
+        "url": "https://www.city.fukuoka.lg.jp/shimin/kusei/life/goizoku_support.html"
+      },
+      {
+        "name": "環境省｜廃家電や粗大ごみなど、廃棄物の処分に「無許可」の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/content/900534097.pdf"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/area/#fukuoka",
+      "/blog/area/",
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/blog/area/article-20260709-nishi-sawara-ku-guide",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260707-cost-yasuku-suru",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/fukuokashi-hakata-higashi-chuo.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "福岡県福岡市、博多区・東区・中央区を明記し、/area/と福岡県アンカー、地域別記事一覧への導線を設けており、地域記事の編集方針に適合しています。",
+      "自治体収集、粗大ごみ、自己搬入、民間事業者への依頼を条件別に比較し、公的手数料と民間事業者の作業費を混同しないよう明示しています。",
+      "比較表に対象条件、一次情報への出典、確認日が付いており、読者が処分方法を判断しやすい構成です。",
+      "福岡市の限定許可と一般廃棄物収集運搬許可業者との連携を区別し、古物商許可・産業廃棄物収集運搬業許可だけでは家庭ごみを回収できないことを適切に説明しています。",
+      "2027年2月1日のプラスチック分別開始予定を将来変更として明示し、作業時点の最新情報を再確認するよう案内しています。",
+      "博多区・東区・中央区ごとの搬出条件や区役所手続きが追加され、単なる市共通情報ではなく地域別記事としての有用性が高まっています。",
+      "title、meta description、H1と本文の内容が一致し、自己搬入・許可確認・ご遺族サポート窓口というdescription上の主要項目が本文に存在します。",
+      "CTAは記事末尾の1か所だけで、契約を直接あおらず確認・比較を促す内容です。架空の業者、口コミ、実績、専門家コメント、料金相場は掲載されていません。",
+      "提示されたリポジトリ実在確認上、NEW HTMLに掲載された主要な内部リンクは実在しており、旧HTMLにあった未確認リンクも実在確認済みリンクへ置き換えられています。",
+      "見出し、目次ID、表、リスト、aside、参照情報、CTAのHTML構造に明白な破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-25T05:16:54.422532+00:00",
     "run_id": "40164834574",
     "path": "blog/kuyo/article-20260709-ningyo-kuyo-fukuoka.html",
