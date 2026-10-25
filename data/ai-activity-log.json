@@ -1,5 +1,64 @@
 [
   {
+    "timestamp": "2026-10-25T21:17:04.525464+00:00",
+    "run_id": "40234385047",
+    "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
+    "title_before": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "title_after": "福岡市博多区・東区・中央区の遺品整理事情｜都市部ならではの注意点と業者選び【2026年版】",
+    "changes": [
+      "自己搬入の比較表を修正し、市外で発生したごみ・他人のごみは搬入できず、排出者本人または収集運搬許可業者による搬入が原則であることを明記しました。",
+      "故人が排出者となる遺品由来のごみについて、遺族が自己搬入できると判断しないよう注意欄を追加し、運び出す前の個別確認手順と、認められない場合の市収集・許可業者という選択肢を具体化しました。",
+      "よくある質問にも故人宅のごみを遺族が自己搬入する場合の判断を追加し、インターネット予約の停止と搬入資格の確認を別事項として説明しました。",
+      "粗大ごみの朝8時30分までの搬出と有料持ち出しサービスの出典を、福岡市の「粗大ごみの出し方」へ直接変更しました。",
+      "福岡市の粗大ごみ収集ルールと、集合住宅ごとの管理規約・管理会社の搬出ルールを分けて説明しました。",
+      "article-metaに表示する更新日を、判定日である2026年10月26日に変更しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜福岡市自己搬入ごみ事前受付HPのメンテナンスについて",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kojoseibi/hp/jikohan_kinkyuu.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/article-20260710-chuo-jonan-ku-guide",
+      "/blog/area/article-20260709-nishi-sawara-ku-guide",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260707-cost-yasuku-suru",
+      "/blog/cost/article-20260714-kaden-recycle-shobun",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/fukuokashi-hakata-higashi-chuo.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "福岡市公式情報を再確認した結果、自己搬入について、市外で発生したごみ・他人のごみは搬入不可、搬入できるのは排出者本人または収集運搬許可業者、事前受付は排出者本人が行うという重要条件と本文の説明が整合しています。",
+      "故人宅のごみを遺族が搬入できると断定せず、運び出す前に事前受付センターへ個別確認するよう案内しており、重要な制度上の不確実性を安全側に処理しています。",
+      "自己搬入予約サイトのメンテナンス、再開時期未定、電話番号092-433-8234、受付時間8時30分から16時、日曜を除くという案内は、2026年10月23日更新の福岡市公式情報と一致しています。",
+      "粗大ごみの事前申込み、収集日の朝8時30分までの搬出、有料持ち出しサービスの条件を、市の収集ルールと集合住宅独自の管理ルールに分けて説明できています。",
+      "家電リサイクル法対象品が福岡市の収集対象外で、市処理施設への自己搬入もできないという説明は公式情報と一致しています。",
+      "2027年2月1日からのプラスチック分別開始予定、東区が福岡市7区で最大人口であること、博多区ご遺族サポート窓口の受付時間と予約案内も公式情報と整合しています。",
+      "自治体サービスの費用と民間事業者の作業費を明確に分離し、比較表に対象条件・出典・確認日を付けているため、編集方針に適合しています。",
+      "title、meta description、H1、本文の主題が一致し、福岡市、博多区、東区、中央区、マンション搬出、自治体処分、許可確認という検索意図を過不足なく扱っています。",
+      "指定された地域導線として「/area/」と「/area/#fukuoka」が設置され、提示された内部リンクはすべてリポジトリ実在確認上有効です。",
+      "架空の口コミ、業者ランキング、実績、専門家監修、料金相場を使用しておらず、CTAも末尾の1か所に限定されているため、AdSense品質上の重大な問題はありません。",
+      "見出し階層、目次アンカー、表、aside、関連記事、参考情報、JSON-LDはいずれも構文上の重大な破損が見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-25T17:54:29.650833+00:00",
     "run_id": "40218359508",
     "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
