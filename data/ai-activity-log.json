@@ -1,5 +1,67 @@
 [
   {
+    "timestamp": "2026-10-26T07:04:47.402934+00:00",
+    "run_id": "40282998929",
+    "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
+    "title_before": "遠方からの遺品整理の進め方｜立ち会いなしで依頼する方法と費用を解説【2026年版】｜福岡遺品整理ガイド",
+    "title_after": "遠方からの遺品整理の進め方｜立ち会いなしの依頼手順と見積条件【2026年版】｜福岡遺品整理ガイド",
+    "changes": [
+      "比較表から、具体的な自治体・公式出典・実確認日を示せていなかった「福岡市外の実家」の行を削除しました。",
+      "比較表直後に、表の対象が福岡市内の物件のみであることを明記し、福岡市外では収集運搬事業者、戸別収集、自己搬入の3点を物件所在地の自治体へ確認する手順を追加しました。",
+      "title、OG title、H1の「費用を解説」を、本文の中心である依頼手順と見積書の確認内容に合わせて「依頼手順と見積条件」へ変更しました。",
+      "実HTMLを自己点検し、対象外となった比較表の第三行が削除され、表には具体的な公式出典と2026年10月26日の確認日がある福岡市内の2行だけが残る置換内容になっていることを確認しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜遺品整理及び引越時に発生する家庭系ごみに限定した一般廃棄物収集運搬業許可について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "環境省｜廃棄物の適正処理について",
+        "url": "https://www.env.go.jp/content/000064653.pdf"
+      },
+      {
+        "name": "裁判所｜相続の放棄の申述",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      },
+      {
+        "name": "国土交通省｜原状回復をめぐるトラブルとガイドライン Q&A",
+        "url": "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/enpo-ihinseiri-susumekata-1.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "重点検索意図である「遠方の実家の遺品整理」に対し、鍵の受け渡し、立ち会いなしの進行、写真報告、貴重品・保留品、見積条件、追加料金の承認手順を具体的に網羅しています。",
+      "福岡市の限定許可について、「自ら請け負った遺品整理等で発生する家庭系ごみ」「収集区域は福岡市全域」「やむを得ない場合に限る」「限定許可業者以外が請け負った場合の運搬先」という重要条件を正しく反映しています。福岡市公式情報とも一致します。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "比較表には対象条件、公式出典、確認日があり、対象を福岡市内に限定していることも明示されています。根拠のない福岡市外の比較行を削除した変更は、編集方針に沿った明確な追加価値です。",
+      "環境省資料に基づく「排出者が指定日に出すか、排出者から直接、一般廃棄物収集運搬許可業者へ委託する」という説明は一次情報と一致しています。([env.go.jp](https://www.env.go.jp/content/000064653.pdf?utm_source=openai))",
+      "相続放棄について、原則3か月以内、被相続人の最後の住所地を管轄する家庭裁判所という手続情報が正確です。また、個別行為が単純承認に当たるかは専門家へ相談するよう区別しており、家庭裁判所に個別法律判断を求めるような誤誘導も避けています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html?campaign=sbi&utm_source=openai))",
+      "国民生活センターが示す追加料金、誤処分、契約・解約条件などの注意点を、遠方依頼に必要な実務へ適切に落とし込んでいます。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html))",
+      "原状回復について、通常使用による損耗や経年変化を一律に借主負担としない説明は、国土交通省のガイドラインと整合しています。([mlit.go.jp](https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html?utm_source=openai))",
+      "title、meta description、H1、本文の中心テーマが「立ち会いなしの依頼手順と見積条件」で一致しています。具体的な相場を掲載していない本文から「費用を解説」を外した判断は適切です。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、見積書、貴重品、デジタル遺品、相続放棄、賃貸退去、地域情報へ自然に接続されています。",
+      "架空の口コミ、業者評価、実績、専門家監修、料金事例はなく、CTAも関連記事への1か所に抑えられています。AdSense品質上の問題や過剰な商業誘導は認められません。",
+      "JSON-LDは構文上成立し、見出しID、目次リンク、表、画像属性、article要素の構造にも公開を妨げる破損は認められません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-25T23:33:39.678491+00:00",
     "run_id": "40245143747",
     "path": "blog/area/article-20260805-fukuokashi-hakata-higashi-chuo.html",
