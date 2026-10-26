@@ -1,5 +1,64 @@
 [
   {
+    "timestamp": "2026-10-26T14:34:22.218876+00:00",
+    "run_id": "40340483107",
+    "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
+    "title_before": "遠方からの遺品整理の進め方｜立ち会いなしの依頼手順と見積条件【2026年版】｜福岡遺品整理ガイド",
+    "title_after": "遠方からの遺品整理の進め方｜立ち会いなしの依頼手順と見積条件【2026年版】｜福岡遺品整理ガイド",
+    "changes": [
+      "Search Console信号が未取得で品質スコアも高いため、title・description・既存の主要構成は維持した。",
+      "福岡市公式ページを再確認し、限定許可の対象、福岡市全域の収集区域、やむを得ない場合という条件、限定許可以外の整理で出たごみの依頼先を本文と比較表で明確化した。",
+      "立ち会いなしの読者が実際に使える追加価値として、「残す物・鍵・追加作業・完了報告」ごとの記録を残すチェック表を追加した。",
+      "国民生活センター、裁判所、国土交通省の一次情報に合わせ、契約条件・相続放棄・賃貸退去時の写真記録に関する説明を整理した。",
+      "福岡市外では自治体ルールを流用できないことを明記し、/area/と福岡市の地域記事への導線を維持・強化した。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html"
+      },
+      {
+        "name": "国民生活センター",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      },
+      {
+        "name": "裁判所",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "国土交通省",
+        "url": "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260711-digital-ihin-smartphone",
+      "/blog/ihinseiri/article-20260712-hitorigurashi-oya-ihinseiri",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/enpo-ihinseiri-susumekata-1.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "重点検索意図である「遠方の実家の遺品整理」に対し、鍵、立ち会い、見積条件、保留品、写真報告、貴重品配送を一つの実務フローとして整理できています。",
+      "今回追加された確認記録表は、残す物・鍵・追加作業・完了報告について、依頼先へ伝える事項と依頼者側に残す記録を対応させており、単なる言い換えではない具体的な追加価値があります。",
+      "福岡市の限定許可について、自ら請け負った遺品整理等で生じる家庭系ごみが対象であること、やむを得ない場合という条件、限定許可業者以外が請け負った場合の依頼先を正確に区別しています。福岡市公式案内の許可内容・条件・注記と整合しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/genteikyoka2_2_2.html))",
+      "国民生活センターが案内する複数見積もり、契約内容・追加料金の事前確認、一般廃棄物処理業許可の確認、残す遺品の明確化を適切に反映しています。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html))",
+      "相続放棄の原則3か月という期間と管轄家庭裁判所の説明は、裁判所の一次情報と一致しています。処分行為について断定せず、個別判断を専門家へ確認するよう促している点も適切です。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html))",
+      "賃貸物件の写真記録について、国土交通省が示す入退去時の状況確認・写真撮影によるトラブル防止の趣旨を正しく要約しています。([mlit.go.jp](https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html))",
+      "料金相場や業者評価を創作せず、見積書の比較条件に焦点を当てています。架空の実績、口コミ、専門家監修、未確認業者ランキングもありません。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、関連する見積書、貴重品、デジタル遺品、相続放棄、賃貸退去の記事へ自然に接続しています。",
+      "CTAは記事末尾の関連解説への1件のみで、広告・問い合わせ誘導の過剰化はありません。",
+      "title、meta description、H1、本文はいずれも遠方から福岡の実家を整理する手順と見積条件を扱っており、検索意図の不一致や別意図への変更はありません。",
+      "見出しID、目次リンク、表のcaption・thead・scope、外部リンク属性、Article要素の対応に明確な破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-26T07:04:47.402934+00:00",
     "run_id": "40282998929",
     "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
