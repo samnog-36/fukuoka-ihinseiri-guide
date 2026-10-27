@@ -1,5 +1,77 @@
 [
   {
+    "timestamp": "2026-10-27T05:37:22.255859+00:00",
+    "run_id": "40455968118",
+    "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
+    "title_before": "遺品整理はいつから始める？49日前後の目安と相続・退去の期限を解説 - 福岡遺品整理ガイド",
+    "title_after": "遺品整理はいつから始める？49日前後の目安と相続・退去の期限を解説 - 福岡遺品整理ガイド",
+    "changes": [
+      "「状況別：いつから始めるかの判断表」の直下に、対象条件・出典・確認日（2026年10月27日）を明記した注記を追加した。",
+      "福岡市の自己搬入について、故人宅のごみを相続人・親族が搬入するケースは「他人のごみ」扱いとの関係を予約前に自己搬入ごみ事前受付センターへ個別確認するよう、具体的な確認手順を追記した。",
+      "福岡市の処分情報を扱う導入部に、地域別ガイドに加え、福岡県内・福岡市の地域記事への導線を追加した。",
+      "家電リサイクル法対象品の外部リンクを、購入店・買替え先・回収協力店・指定引取場所まで案内する福岡市「市が収集しないごみ」へ差し替えた。",
+      "制度・公式情報の確認先にも福岡市「市が収集しないごみ」を追加し、本文中の案内先と統一した。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索｜民法",
+        "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+      },
+      {
+        "name": "裁判所｜相続の放棄の申述",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "裁判所｜相続の承認又は放棄の期間の伸長",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_25/index.html"
+      },
+      {
+        "name": "国税庁｜No.4205 相続税の申告と納税",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜市が収集しないごみ",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/kuyo/article-20260809-49nichi-houyo-kuyo"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/itsu-kara.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "「遺品整理はいつから」という検索意図に対し、四十九日だけでなく、相続放棄、相続税、賃貸退去、空き家管理という実際の優先順位を示しており、判断支援として有用です。",
+      "相続放棄の期間を「自己のために相続の開始があったことを知った時から3か月以内」とし、家庭裁判所への申述および熟慮期間伸長の可能性まで案内しており、裁判所の一次情報と整合しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html))",
+      "相続税の申告・納付期限を原則10か月とし、未分割でも期限が自動延長されない点を明示しており、国税庁の案内と一致しています。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm))",
+      "福岡市の粗大ごみについて、最短で申込日の1週間程度後、地域ごとに週2回、処理券300円・500円・1,000円、朝8時30分までという数字が公式情報で確認できます。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "家電リサイクル法対象品を市収集・自己搬入の対象外とし、購入店、回収協力店、指定引取場所という処分方法へ誘導しており、福岡市の案内を正確に反映しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/syushusinai-gomi.html))",
+      "比較表に対象条件・出典・確認日を追加し、単なる言い換えではない具体的な追加価値が確認できます。",
+      "リポジトリ実在確認上、変更後の主要な内部リンクはいずれも実在しており、重点ページである見積書比較記事と遠方整理記事への文脈的な導線も適切です。",
+      "title、meta description、H1、本文の主題が一致しています。既存URLの検索意図も維持され、別意図への不自然な転換はありません。",
+      "架空の業者、口コミ、実績、専門家、体験談はなく、CTAも1か所に抑えられているため、AdSense品質上の重大な問題はありません。",
+      "HTMLの見出し階層、目次ID、表、内部リンク、構造化データに公開を妨げる破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-26T20:09:46.696763+00:00",
     "run_id": "40392842402",
     "path": "blog/cost/article-20260713-enpo-ihinseiri-susumekata.html",
