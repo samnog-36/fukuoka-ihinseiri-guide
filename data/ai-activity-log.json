@@ -1,5 +1,74 @@
 [
   {
+    "timestamp": "2026-10-27T16:53:09.374699+00:00",
+    "run_id": "40544822864",
+    "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
+    "title_before": "遺品整理はいつから始める？49日前後の目安と相続・退去の期限を解説 - 福岡遺品整理ガイド",
+    "title_after": "遺品整理はいつから始める？49日前後の目安と相続・退去の期限を解説 - 福岡遺品整理ガイド",
+    "changes": [
+      "福岡市の自己搬入について、相続人・親族であっても故人宅のごみを当然に搬入できるとは限らない点を、福岡市の「排出者本人または許可業者」という公式案内に沿って明確化しました。",
+      "自己搬入前に確認すべき排出場所・搬入予定者・予約者・品目を整理した注意ボックスを追加し、誤った持込みを防ぐ実用的な判断材料を追加しました。",
+      "福岡市の自己搬入に関するFAQを、親族搬入を一律に可能と読めない表現へ修正し、事前受付センターへの確認と許可業者利用の判断導線を補強しました。",
+      "titleは検索意図との適合性が高く、Search Console信号もないため維持しました。"
+    ],
+    "sources": [
+      {
+        "name": "e-Gov法令検索｜民法",
+        "url": "https://laws.e-gov.go.jp/law/129AC0000000089"
+      },
+      {
+        "name": "裁判所｜相続の放棄の申述",
+        "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+      },
+      {
+        "name": "国税庁｜No.4205 相続税の申告と納税",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜廃棄物（ごみ）受入基準",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/kijun.html"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/ihinseiri/article-20260706-jibun-vs-gyousha",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260714-chintai-taikyo-genjoukaifuku",
+      "/blog/ihinseiri/article-20260715-akiya-jikka-ihinseiri",
+      "/blog/ihinseiri/article-20260804-shinzoku-trouble-fusegu",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/kuyo/article-20260809-49nichi-houyo-kuyo"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/itsu-kara.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "「いつ始めるか」という検索意図に対し、四十九日だけで判断せず、相続放棄、相続税、賃貸退去、重要書類の確保という実際の優先順位を提示しています。",
+      "相続放棄の期間を「自己のために相続の開始があったことを知った時から3か月以内」と正確に説明し、家庭裁判所への申述が必要であることも一次情報と一致しています。([courts.go.jp](https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html))",
+      "相続税の申告・納付期限を、必要な場合に「死亡を知った日の翌日から10か月以内」としており、国税庁の案内と一致しています。([nta.go.jp](https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm))",
+      "福岡市の粗大ごみ処理券の300円・500円・1,000円区分と、収集日の朝8時30分までに出すという記載は公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "市外発生ごみ、他人のごみ、レンタカー利用、家電リサイクル法対象品について、福岡市の自己搬入条件を具体的に整理しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html))",
+      "変更前よりも、相続人・親族による自己搬入を当然に可能と誤認させにくくなっており、実務上の事故を防ぐ追加価値があります。",
+      "比較表には対象条件、出典、確認日が付され、公的手続きと業者サービスの費用も混同していません。",
+      "title、meta description、H1、本文の主題が一致し、既存URLの検索意図を維持しています。",
+      "提示された内部リンクはリポジトリ実在確認上すべて有効で、遠方整理、見積書、相続放棄、賃貸退去、地域情報への文脈的な導線があります。",
+      "架空の業者、口コミ、実績、専門家、体験談はなく、CTAも1か所に抑えられています。HTMLの主要な見出し階層、目次ID、article要素の対応にも破損は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-27T10:58:13.041712+00:00",
     "run_id": "40492297903",
     "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
