@@ -1,5 +1,65 @@
 [
   {
+    "timestamp": "2026-10-28T07:26:19.028242+00:00",
+    "run_id": "40649558716",
+    "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
+    "title_before": "位牌の処分方法と費用の確認方法｜閉眼供養・永代供養・福岡での相談手順｜福岡遺品整理ガイド",
+    "title_after": "位牌の処分方法と費用の確認方法｜閉眼供養・永代供養・福岡での相談手順｜福岡遺品整理ガイド",
+    "changes": [
+      "福岡県の相談事例は、事前に「2万円程度」と案内され当日に10万円を請求された内容へ正確化し、一次情報にない「無料回収」の表現を削除した。",
+      "費用確認表の出典を、個別の寺院・サービスの料金表や見積書を使用していない実態に合わせて「公的情報等を踏まえ編集部作成」とし、表の用途と根拠の範囲を明示した。",
+      "提供体制や無料見積もりを裏付けなく示すCTA文を削除し、菩提寺・受入先への確認と複数見積もりの比較を促す中立的な案内へ変更した。"
+    ],
+    "sources": [
+      {
+        "name": "福岡県｜ホットな消費者ニュース 2026年3月号",
+        "url": "https://www.pref.fukuoka.lg.jp/contents/hotnews202603.html"
+      },
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "北九州市｜粗大ごみ分類例（自己搬入）",
+        "url": "https://www.city.kitakyushu.lg.jp/files/000959295.pdf"
+      },
+      {
+        "name": "国民生活センター",
+        "url": "https://www.kokusen.go.jp/"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun",
+      "/blog/kuyo/article-20260722-otakiage-houhou-hiyo",
+      "/blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou",
+      "/blog/kuyo/article-20260710-kamidana-shobun",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/shashin-tegami-omoide-kuyo.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "旧記事にあった根拠不明の費用相場、宗派横断的な断定、未確認の寺院対応情報を削除し、確認手順を中心とする安全で実用的な内容へ改善されています。",
+      "福岡市の粗大ごみ処理券300円・500円・1,000円という記述は公式案内と一致し、位牌自体の受入れを保証する制度ではないことも明確に区別しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "北九州市の資料が可燃粗大ごみの例として木製仏壇を掲載していることを正確に扱い、位牌単体の受入れまで拡大解釈していません。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/files/000959295.pdf?utm_source=openai))",
+      "福岡県の相談事例は、事前案内が2万円程度、当日の請求が10万円という一次情報どおりに修正されています。追加料金、作業内容、キャンセル条件を確認するという案内も公式情報と整合します。([pref.fukuoka.lg.jp](https://www.pref.fukuoka.lg.jp/contents/hotnews202603.html))",
+      "一般家庭の廃棄物の収集運搬には、一般廃棄物処理業の許可または市区町村からの委託が必要という説明は福岡県の公式案内と一致しています。([pref.fukuoka.lg.jp](https://www.pref.fukuoka.lg.jp/contents/hotnews202603.html))",
+      "浄土真宗について断定しすぎず「位牌ではなく法名軸・過去帳を用いることがある」とした表現は、宗派公式情報とも整合しています。([hongwanji.or.jp](https://www.hongwanji.or.jp/faq/list.html?utm_source=openai))",
+      "宗教的な供養費用と自治体のごみ処理手数料を混同せず、閉眼供養、お焚き上げ、永代供養、物としての処分を分けて説明しています。",
+      "title、description、H1、本文の検索意図が一致しており、「位牌の処分方法」「費用の確認」「福岡での相談手順」を本文で具体的に回収しています。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、見積書、契約トラブル、遠方整理、相続放棄、一般廃棄物許可など、読者の次の判断に沿って配置されています。",
+      "福岡市・北九州市を明示し、/area/への地域導線も設置されているため、福岡を核とする地域情報として有用です。",
+      "未確認の専門体制、無料見積もり、架空の実績・口コミ・寺院ランキングがなく、CTAも中立的で過剰ではありません。",
+      "見出し階層、目次アンカー、表、figure、aside、公式情報セクション、articleの閉じタグに重大なHTML構造上の破損は認められません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-27T16:53:09.374699+00:00",
     "run_id": "40544822864",
     "path": "blog/ihinseiri/article-20260708-itsu-kara.html",
