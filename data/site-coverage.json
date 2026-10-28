@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T07:22:03.905539+00:00",
+  "generated_at": "2026-10-28T14:28:33.080957+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -218,7 +218,7 @@
       },
       {
         "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
-        "title": "位牌の処分方法と費用相場｜閉眼供養から永代供養まで正しい手順を解説｜福岡遺品整理ガイド"
+        "title": "位牌の処分方法と費用の確認方法｜閉眼供養・永代供養・福岡での相談手順｜福岡遺品整理ガイド"
       },
       {
         "path": "blog/kuyo/article-20260713-accessory-kikinzoku-kaitori.html",
@@ -1390,7 +1390,7 @@
         "final": "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun.html"
       }
     ],
-    "redirecting_internal_link_count": 74
+    "redirecting_internal_link_count": 73
   },
   "strategy_rules": [
     "既存のarea/・guide/・cost/・各blogカテゴリを親ハブとして扱う",
