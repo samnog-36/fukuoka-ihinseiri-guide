@@ -1,5 +1,75 @@
 [
   {
+    "timestamp": "2026-10-28T19:53:34.899109+00:00",
+    "run_id": "40758012682",
+    "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
+    "title_before": "位牌の処分方法と費用の確認方法｜閉眼供養・永代供養・福岡での相談手順｜福岡遺品整理ガイド",
+    "title_after": "位牌の処分方法と費用の確認方法｜閉眼供養・永代供養・福岡での相談手順｜福岡遺品整理ガイド",
+    "changes": [
+      "福岡市の粗大ごみ収集と北九州市の自己搬入について、制度の違い、対象条件、公式に確認できる費用、位牌を出す前の確認事項を比較表で追加しました。",
+      "北九州市の自己搬入手数料を2026年10月28日時点の10kgごと150円とし、2027年9月1日から10kgごと230円へ改定予定である点を公式案内に基づき明記しました。",
+      "家庭ごみの収集運搬に関する説明へe-Gov法令検索への直接リンクを追加し、許可確認の根拠を明確化しました。",
+      "寺院等の料金を根拠なく相場化しない方針を維持し、供養費用と自治体処理手数料を混同しないよう表注を改善しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "北九州市｜ごみの自己搬入について",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/924_10279.html"
+      },
+      {
+        "name": "北九州市｜ごみの受入基準について",
+        "url": "https://www.city.kitakyushu.lg.jp/contents/924_10283.html"
+      },
+      {
+        "name": "e-Gov法令検索｜廃棄物の処理及び清掃に関する法律",
+        "url": "https://laws.e-gov.go.jp/law/345AC0000000137"
+      },
+      {
+        "name": "福岡県｜市町村から許可を受けずに不用品回収を行う業者に注意",
+        "url": "https://www.pref.fukuoka.lg.jp/contents/hotnews202603.html"
+      },
+      {
+        "name": "国民生活センター｜不用品回収サービスのトラブル",
+        "url": "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260926-souzoku-houki-ihinseiri-tansho-shonin",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/kuyo/article-20260710-kamidana-shobun",
+      "/blog/kuyo/article-20260722-otakiage-houhou-hiyo",
+      "/blog/kuyo/article-20260803-ihin-kuyo-houhou-hiyou",
+      "/blog/kuyo/article-20260805-butsudan-shobun-kuyo-tejun"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/shashin-tegami-omoide-kuyo.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "福岡市の粗大ごみ処理券300円・500円・1,000円、事前申込みが必要という記載は公式案内と一致しています。位牌の受入れを断定せず、品目・材質・寸法を伝えて確認する構成も適切です。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "北九州市の焼却工場への自己搬入手数料10kgごと150円、2027年9月1日から230円への改定、搬入者自身による荷降ろし・荷解きという記載は公式情報と一致しています。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/contents/924_10279.html))",
+      "北九州市の分類例では木製仏壇が可燃粗大ごみとして示されています。記事はこれを位牌単体の受入保証へ拡大解釈せず、事前確認を求めており、一次情報の扱いが慎重です。([city.kitakyushu.lg.jp](https://www.city.kitakyushu.lg.jp/files/000959295.pdf))",
+      "一般家庭の廃棄物収集・運搬には一般廃棄物処理業の許可または自治体からの委託が必要という説明は、公的な注意喚起と整合しています。産業廃棄物処理業の許可だけでは足りないとの注意も妥当です。([kokusen.go.jp](https://www.kokusen.go.jp/news/data/n-20221102_1.html))",
+      "福岡県掲載の『2万円程度との説明から当日10万円を請求された』相談事例を正確に反映しています。架空の口コミや体験談ではありません。([pref.fukuoka.lg.jp](https://www.pref.fukuoka.lg.jp/contents/hotnews202603.html))",
+      "供養費用と自治体の処理手数料を明確に分離し、比較表に対象条件・出典・確認日を付けています。",
+      "title、meta description、H1と本文内容が一致し、既存URLの検索意図を変更していません。",
+      "内部リンクは提示されたリポジトリ実在確認上すべて有効で、関連する費用・遠方対応・業者選び・相続放棄・地域情報へ自然に接続しています。",
+      "CTAは記事末尾の1か所に限定され、強引な営業表現や過剰な広告誘導がありません。",
+      "変更前より自治体制度の比較可能性と根拠の明確さが向上しており、具体的な追加価値があります。",
+      "HTML断片には、判定可能な範囲で重大なタグ欠落、重複ID、目次リンク不整合、構造破壊は見当たりません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-28T14:30:26.517583+00:00",
     "run_id": "40706213473",
     "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
