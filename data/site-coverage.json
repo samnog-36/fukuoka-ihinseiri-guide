@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T13:41:15.832861+00:00",
+  "generated_at": "2026-10-29T19:49:32.626705+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -114,7 +114,7 @@
       },
       {
         "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
-        "title": "遺品整理の費用を安く抑える7つの方法｜福岡市の処分ルール・見積もり比較｜福岡遺品整理ガイド"
+        "title": "福岡市で遺品整理の費用を安く抑える7つの方法｜粗大ごみ・自己搬入・見積比較｜福岡遺品整理ガイド"
       },
       {
         "path": "blog/cost/article-20260719-ihinseiri-hiyo-darega-harau.html",
@@ -965,11 +965,6 @@
       "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
       "b": "blog/area/article-20260714-kitakyushu-ihinseiri-guide.html",
       "title_similarity": 0.705
-    },
-    {
-      "a": "blog/cost/article-20260707-cost-yasuku-suru.html",
-      "b": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
-      "title_similarity": 0.674
     },
     {
       "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
