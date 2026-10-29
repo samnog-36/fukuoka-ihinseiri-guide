@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T06:25:28.809289+00:00",
+  "generated_at": "2026-10-29T13:41:15.832861+00:00",
   "hubs": [
     "area/index.html",
     "cost/index.html",
@@ -114,7 +114,7 @@
       },
       {
         "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
-        "title": "遺品整理の費用を安く抑える7つの方法｜見積もり比較のコツと注意点｜福岡遺品整理ガイド"
+        "title": "遺品整理の費用を安く抑える7つの方法｜福岡市の処分ルール・見積もり比較｜福岡遺品整理ガイド"
       },
       {
         "path": "blog/cost/article-20260719-ihinseiri-hiyo-darega-harau.html",
@@ -786,7 +786,7 @@
   ],
   "kyushu_prefecture_coverage": {
     "福岡県": {
-      "article_count": 16,
+      "article_count": 17,
       "articles": [
         {
           "path": "blog/area/article-20260709-nishi-sawara-ku-guide.html",
@@ -967,6 +967,11 @@
       "title_similarity": 0.705
     },
     {
+      "a": "blog/cost/article-20260707-cost-yasuku-suru.html",
+      "b": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+      "title_similarity": 0.674
+    },
+    {
       "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
       "b": "blog/area/article-20260722-chikushino-onojo-kasuga-guide.html",
       "title_similarity": 0.667
@@ -985,11 +990,6 @@
       "a": "blog/area/article-20260715-dazaifu-nakagawa-ihinseiri.html",
       "b": "blog/area/article-20260719-minami-jonan-ku-guide.html",
       "title_similarity": 0.653
-    },
-    {
-      "a": "blog/cost/article-20260707-cost-yasuku-suru.html",
-      "b": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
-      "title_similarity": 0.651
     },
     {
       "a": "blog/area/article-20260712-itoshima-fukutsu-munakata.html",
