@@ -1,5 +1,72 @@
 [
   {
+    "timestamp": "2026-10-29T06:29:42.520809+00:00",
+    "run_id": "40829075910",
+    "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+    "title_before": "遺品整理の費用を安く抑える7つの方法｜福岡市の処分ルール・見積もり比較｜福岡遺品整理ガイド",
+    "title_after": "遺品整理の費用を安く抑える7つの方法｜福岡市の処分ルール・見積もり比較｜福岡遺品整理ガイド",
+    "changes": [
+      "福岡市の粗大ごみ収集について、「室内からの取り出しサービスではない」という断定を削除し、原則として指定場所まで出す仕組みである一方、所定の対象者には有料の粗大ごみ持ち出しサービスがあることを追加しました。",
+      "比較表に、持ち出しサービスの対象者、1回5個までの上限、屋内からは1個500円・玄関前からは1個300円、電話申込み・立会いが必要という条件を明記しました。",
+      "粗大ごみ収集の本文を、通常の指定場所収集と対象者限定の持ち出しサービスに分けて書き直し、人力3人で持ち出せる重さ、玄関口から持ち出せる大きさ、取り外し工事が必要な物は対象外という判断条件を追加しました。",
+      "H1をSEO titleと同じ福岡市特化の表現へ変更し、本文の地域特化内容とページの役割が一致するようにしました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜ごみ（不用品）の処分（不用品回収）に無許可の回収業者を利用しないでください",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/mukyokanogyousyawosiyousinaide.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      },
+      {
+        "name": "福岡市｜消費生活相談ご利用案内",
+        "url": "https://www.city.fukuoka.lg.jp/shimin/shohiseikatsu/life/syouhiseikatusentauhoumupeiji/soudanannai.html"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/",
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/kuyo/article-20260713-accessory-kikinzoku-kaitori",
+      "/blog/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/area/article-20260713-kurume-ogori-tosu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/hiyo-yasuku-osaeru.webp",
+    "review_score": 96,
+    "review_strengths": [
+      "変更前にあった根拠不明の間取り別相場、金・プラチナ価格、繁忙期の値引き傾向、補助金による遺品整理費軽減などを削除し、福岡市の一次情報に基づく実用的な内容へ改善しています。",
+      "福岡市の通常収集、粗大ごみ、対象者限定の持ち出しサービス、自己搬入、民間事業者への依頼を、料金だけでなく搬出・人手・期限の条件で比較しています。",
+      "粗大ごみ持ち出しサービスについて、対象者、1回5個まで、屋内500円・玄関前300円、電話受付、立会い、人力3人、玄関口から搬出可能、取り外し工事対象外という条件が公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html))",
+      "通常収集の45L指定袋10袋まで、自己搬入の10kgまでごとに140円、市外発生ごみ・他人のごみ・家電リサイクル法対象品等の搬入不可という記載も公式情報と一致しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/kateigomi-dasikata.html))",
+      "一般廃棄物収集運搬業許可、産業廃棄物許可や古物商許可だけでは家庭ごみを回収できない点を正確に区別しています。([city.fukuoka.lg.jp](https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/mukyokanogyousyawosiyousinaide.html))",
+      "複数見積もり、契約内容、追加料金、古物商許可、残す遺品の区別に関する国民生活センターの注意喚起を正しく反映しています。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html))",
+      "比較表に対象条件、出典、確認日を付け、自治体処分費と民間サービス料金を単純比較しない旨も明示しており、編集方針に適合しています。",
+      "重点ページである一軒家費用、見積書比較、追加料金、業者選びへ役割を分けて内部リンクしており、同一意図の記事を重複して作る構成になっていません。",
+      "title、meta description、H1、本文が福岡市における費用削減と処分方法の使い分けという同じ検索意図で統一されています。",
+      "提示された内部リンクはすべてリポジトリ実在確認上有効です。拡張子なしURLも正規URLとして問題ありません。",
+      "広告挿入はなく、CTAも記事末尾の1か所のみで、本文の判断情報を妨げていません。",
+      "article、見出し、表、リスト、aside、参照先セクションのHTML構造に明白な破損はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-28T19:53:34.899109+00:00",
     "run_id": "40758012682",
     "path": "blog/kuyo/article-20260711-ihai-shobun-kuyo.html",
