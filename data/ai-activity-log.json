@@ -1,5 +1,73 @@
 [
   {
+    "timestamp": "2026-10-29T13:43:24.867715+00:00",
+    "run_id": "40884137063",
+    "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
+    "title_before": "遺品整理の費用を安く抑える7つの方法｜福岡市の処分ルール・見積もり比較｜福岡遺品整理ガイド",
+    "title_after": "福岡市で遺品整理の費用を安く抑える7つの方法｜粗大ごみ・自己搬入・見積比較｜福岡遺品整理ガイド",
+    "changes": [
+      "福岡市向けページとしての役割を明確にするため、title・H1・OGPを「粗大ごみ・自己搬入・見積比較」に寄せ、類似する一般的な節約記事との検索意図の重複を抑えました。",
+      "粗大ごみ持ち出しサービスについて、通常の粗大ごみ手数料とは別に屋内500円・玄関前300円が加算されることを明記し、費用の誤認を防ぎました。",
+      "自治体処分の手数料と民間サービスの搬出・仕分け等の作業料金を単純比較しない判断順序を追加し、読者が依頼範囲を切り分けられるようにしました。",
+      "福岡市の粗大ごみ、自己搬入、無許可回収、消費生活相談のリンクを現行の一次情報ページへ更新しました。"
+    ],
+    "sources": [
+      {
+        "name": "福岡市｜粗大ごみ",
+        "url": "https://kateigomi-bunbetsu.city.fukuoka.lg.jp/rule/coarseDust"
+      },
+      {
+        "name": "福岡市｜ごみの自己搬入について",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html"
+      },
+      {
+        "name": "福岡市｜家庭ごみの出し方",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/jigyokeigomi/life/katei-bunbetsu/kateigomi-dasikata.html"
+      },
+      {
+        "name": "福岡市｜無許可の回収業者を利用しないでください",
+        "url": "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/mukyokanogyousyawosiyousinaide.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      },
+      {
+        "name": "環境省｜無許可の回収業者を利用しないでください",
+        "url": "https://www.env.go.jp/content/900534097.pdf"
+      }
+    ],
+    "internal_links": [
+      "/blog/cost/article-20260805-ikkenya-hiyou-souba",
+      "/blog/ihinseiri/article-20260710-kichouhin-sagashi",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260806-tsuika-ryoukin-boshi-taisaku",
+      "/blog/kuyo/article-20260713-accessory-kikinzoku-kaitori",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/ihinseiri/article-20260706-trouble-avoid",
+      "/blog/area/",
+      "/blog/area/article-20260805-fukuokashi-hakata-higashi-chuo",
+      "/blog/area/article-20260714-kitakyushu-ihinseiri-guide",
+      "/blog/area/article-20260713-kurume-ogori-tosu"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/hiyo-yasuku-osaeru.webp",
+    "review_score": 95,
+    "review_strengths": [
+      "変更前より福岡市固有の検索意図が明確になり、title、meta description、H1、本文が「粗大ごみ・自己搬入・見積比較」で一致しています。",
+      "粗大ごみ持ち出しサービスについて、通常の粗大ごみ手数料とは別に屋内500円、玄関前300円が加算される点を明示し、旧版で起こり得た料金誤認を解消しています。",
+      "自治体の処分手数料と、民間事業者の仕分け・搬出・車両・処分手配などの作業料金を分離して説明しており、比較表にも対象条件、出典、確認日があります。",
+      "福岡市の通常収集、粗大ごみ、自己搬入、一般廃棄物収集運搬業許可、消費生活相談について、一次情報への導線が本文中と参考情報欄の双方にあります。",
+      "「残す物の確定→自治体で処分できる物の分離→自力では難しい作業だけを見積対象にする」という判断順序が追加され、単なる言い換えや日付更新ではない具体的な追加価値があります。",
+      "重点ページである一軒家費用、見積書比較、業者選びに適切に内部リンクし、このページ自体は福岡市の制度を使った費用抑制という別の役割を維持しています。",
+      "提示された内部リンクはすべてリポジトリ実在確認上有効で、拡張子なしURLも問題ありません。",
+      "架空の業者、口コミ、実績、専門家、見積事例はなく、断定的な業者ランキングもありません。",
+      "CTAは記事末尾の1か所だけで、本文の閲覧を妨げる広告・誘導の過剰配置はありません。",
+      "見出し階層、目次アンカー、表、リスト、画像属性、JSON-LDは大きく破綻しておらず、提示範囲ではHTML構造上の重大な問題はありません。"
+    ],
+    "status": "validated_for_auto_publish"
+  },
+  {
     "timestamp": "2026-10-29T06:29:42.520809+00:00",
     "run_id": "40829075910",
     "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
