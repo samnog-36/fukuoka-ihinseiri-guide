@@ -675,4 +675,10 @@
     <priority>0.7</priority>
   </url>
 <url><loc>https://fukuoka-ihinseiri-guide.com/guide/preparation-checklist</loc><lastmod>2026-10-21</lastmod></url>
+  <url>
+    <loc>https://fukuoka-ihinseiri-guide.com/blog/area/article-20261030-miyazaki-city-ihinseiri-taryo-gomi-kyoka-hannyu</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
