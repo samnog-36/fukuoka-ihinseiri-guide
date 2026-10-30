@@ -268,5 +268,10 @@
     "sha256": "6eaee580b6351c086210bf5217a2b43ccf74a58672965196961103674c7603a7",
     "review": "vision-review",
     "text_free": true
+  },
+  "images/blog/ai-20261030-miyazaki-city-ihinseiri-taryo-gomi-kyoka-hannyu-20261030.webp": {
+    "sha256": "f0a92231482df66d8eed10f979b8fe8fefb467600410659e21dbe0fd3fc343c6",
+    "review": "vision-review",
+    "text_free": true
   }
 }

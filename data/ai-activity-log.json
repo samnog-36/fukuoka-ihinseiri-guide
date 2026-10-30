@@ -1,5 +1,68 @@
 [
   {
+    "timestamp": "2026-10-30T06:28:32.302057+00:00",
+    "run_id": "41013856841",
+    "path": "blog/area/article-20261030-miyazaki-city-ihinseiri-taryo-gomi-kyoka-hannyu.html",
+    "title_before": null,
+    "title_after": "宮崎市の遺品整理で出る多量ごみ｜許可業者・自己搬入・粗大ごみは1回3点までの使い分け",
+    "changes": [
+      "本文中に残っていたMarkdown形式の出典表記を、すべて通常のHTMLリンク付き出典表記へ置換し、utm_source=openaiの付いたURLを削除した。",
+      "パンくずと記事末尾に、地域別親ハブ内の宮崎県アンカー「/area/#miyazaki」への直接導線を追加した。",
+      "title・H1・一覧用要約・本文の表現を「粗大ごみは1回3点まで」に統一し、3点が申込上限であることを明確化した。",
+      "粗大ごみ収集の搬出条件を、収集日当日の朝8時30分までに申込み時の指定場所へ出す手順として明記し、室内搬出の可能性を示す曖昧な表現を削除した。",
+      "本文で使用していない宮崎市「おくやみハンドブック」を参考情報から削除し、参考情報と本文の根拠関係を整理した。"
+    ],
+    "sources": [
+      {
+        "name": "宮崎市｜一般廃棄物収集運搬業者一覧",
+        "url": "https://www.city.miyazaki.miyazaki.jp/life/trash/business/1794.html"
+      },
+      {
+        "name": "宮崎市｜生活系廃棄物（家庭ごみ）の持ち込みについて",
+        "url": "https://www.city.miyazaki.miyazaki.jp/life/trash/bring/405845.html"
+      },
+      {
+        "name": "宮崎市｜粗大ごみの出し方",
+        "url": "https://www.city.miyazaki.miyazaki.jp/life/trash/fractionation/34204.html"
+      },
+      {
+        "name": "宮崎市｜市が収集しないごみ",
+        "url": "https://www.city.miyazaki.miyazaki.jp/life/trash/fractionation/645.html"
+      },
+      {
+        "name": "国民生活センター｜遺品整理を頼むときは、事業者選びは慎重に",
+        "url": "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+      }
+    ],
+    "internal_links": [
+      "/area/",
+      "/area/#miyazaki",
+      "/blog/area/",
+      "/blog/ihinseiri/article-20260927-ippan-haikibutsu-kyoka-ihinseiri-fukuoka-kyushu",
+      "/blog/cost/article-20260803-mitsumorisho-mikata",
+      "/blog/cost/article-20260713-enpo-ihinseiri-susumekata"
+    ],
+    "image_generated": true,
+    "image_path": "images/blog/ai-20261030-miyazaki-city-ihinseiri-taryo-gomi-kyoka-hannyu-20261030.webp",
+    "review_score": 94,
+    "review_strengths": [
+      "宮崎市の通常収集は一度に5袋までで、6袋以上の多量ごみは直接搬入または市の許可業者へ依頼するという一次情報を正確に反映しています。([city.miyazaki.miyazaki.jp](https://www.city.miyazaki.miyazaki.jp/life/trash/fractionation/645.html))",
+      "一般廃棄物収集運搬業者一覧の「多量ごみ」欄が○の事業者を確認する手順は、宮崎市の説明と一致しています。未確認業者のランキングや架空の料金・実績もありません。([city.miyazaki.miyazaki.jp](https://www.city.miyazaki.miyazaki.jp/life/trash/business/1794.html))",
+      "自己搬入できる人、対象地域、本人死亡時の事前連絡、分別、本人による荷降ろし、無許可運搬への注意が一次情報に沿って具体的に整理されています。([city.miyazaki.miyazaki.jp](https://www.city.miyazaki.miyazaki.jp/life/trash/bring/405845.html))",
+      "粗大ごみの1回3点まで、受付から7～14日後、日時指定不可、臨時多量ごみ不可、当日朝8時30分までの排出という条件が正確です。([city.miyazaki.miyazaki.jp](https://www.city.miyazaki.miyazaki.jp/life/trash/fractionation/34204.html))",
+      "直接搬入手数料の100kgごと440円と、2027年4月1日から660円への改定予定を、公的処理手数料として業者サービス費用と明確に分離しています。([city.miyazaki.miyazaki.jp](https://www.city.miyazaki.miyazaki.jp/life/trash/fractionation/34204.html))",
+      "見積書未交付後の追加請求や残す品の誤処分について、国民生活センターの実在する事例を過度に脚色せず利用しています。([kokusen.go.jp](https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html))",
+      "比較表に対象条件・出典・確認日があり、地域記事に必要な「/area/」および「/area/#miyazaki」への導線も設置されています。提示されたリポジトリ実在確認上、内部リンク切れはありません。",
+      "広告は記事中盤の1枠にとどまり、営業CTA、ランキング、過剰な問い合わせ誘導がなく、AdSense向け情報記事として良好です。",
+      "title・meta description・H1・本文はいずれも「宮崎市の遺品整理で生じる多量ごみの処分方法」という検索意図で一致しています。"
+    ],
+    "status": "validated_for_auto_publish",
+    "action_type": "new_article",
+    "reverse_links_added": [],
+    "replaced_held_article": null,
+    "redirected_internal_links": []
+  },
+  {
     "timestamp": "2026-10-29T19:51:12.781261+00:00",
     "run_id": "40943474607",
     "path": "blog/cost/article-20260718-hiyo-yasuku-osaeru.html",
